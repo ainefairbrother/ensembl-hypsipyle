@@ -121,13 +121,13 @@ DEFAULT_QUERY = """
 #
 #    Auto Complete: Ctrl - Space(or just start typing)
 #
-query  {
-  version 
-  {
-    api
-    { 
-    patch
-    }
+query variant_example {
+  variant(
+    by_id: {genome_id: "a7335667-93e7-11ec-a39d-005056b38ce3", variant_id: "1:925952:G:1019396"}
+  ) {
+    
+    name
+    
   }
 }
 """
