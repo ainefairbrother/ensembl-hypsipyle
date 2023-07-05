@@ -123,7 +123,7 @@ DEFAULT_QUERY = """
 #
 query variant_example {
   variant(
-    by_id: {genome_id: "a7335667-93e7-11ec-a39d-005056b38ce3", variant_id: "1:925952:G:1019396"}
+    by_id: {genome_id: "a7335667-93e7-11ec-a39d-005056b38ce3", variant_id: "1:925952:G:1019397"}
   ) {
     
     name
