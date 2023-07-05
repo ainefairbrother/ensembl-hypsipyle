@@ -1,1 +1,1 @@
-# ensembl-hypsipyle
+# GraphQL for Ensembl Variation
