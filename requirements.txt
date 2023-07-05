@@ -6,3 +6,5 @@ ariadne==0.19.1
 python-dotenv==0.20.0
 uvicorn==0.18.1
 pysam==0.21.0
+PyVCF==0.6.8
+

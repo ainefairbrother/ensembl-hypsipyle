@@ -11,7 +11,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 """
-from pysam import VariantFile
+import vcf
    
 class FileClient:
     """
@@ -19,7 +19,7 @@ class FileClient:
     """
     def __init__(self, config, datafile=None):
         datafile = config.get("datafile")
-        self.collection = VariantFile(datafile)
+        self.collection = vcf.Reader(filename=datafile)
     
     def get_variant_record(self, variant_id: str):
         """
@@ -34,7 +34,9 @@ class FileClient:
             print("Something wrong")
         data = {}
         for rec in self.collection.fetch('1', pos-1, pos):
-            data["name"] = rec.ref
+            if rec.ID == id:
+                data['name'] = rec.ID
+                break
         return data
         
         
