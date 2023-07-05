@@ -58,7 +58,7 @@ TODO
 
 Build the image using `./Dockerfile.dev`:
 
-`docker build -t $NAME:$VERSION -f ./Dockerfile.dev`
+`docker build -t $NAME:$VERSION -f ./Dockerfile.dev .`
 
 Run a container with the image (`--publish` below is exposing the container's ports to the host network):
 

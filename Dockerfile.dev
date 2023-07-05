@@ -3,6 +3,7 @@ FROM python:3.8
 LABEL maintainer="ensembl-applications@ebi.ac.uk"
 
 COPY ./requirements.txt /app/requirements.txt
+COPY ./requirements-dev.txt /app/requirements-dev.txt
 COPY ./setup.py /app/setup.py
 COPY ./LICENSE /app/LICENSE
 
