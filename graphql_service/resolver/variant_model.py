@@ -53,31 +53,21 @@ async def resolve_variant(
         raise VariantNotFoundError(by_id["variant_id"])
     return result
 
+# @VARIANT_TYPE.field("primary_source")
+# def resolve_variant_primary_source(
+#     variant: Dict,
+#     info: GraphQLResolveInfo,
 
+# ) -> Dict:
+#     return variant["primary_source"]
 
-@VARIANT_TYPE.field("alleles")
-async def resolve_variant_allele(
-        _,
-        info: GraphQLResolveInfo,
-        byId: Optional[Dict[str, str]] = None,
-        by_id: Optional[Dict[str, str]] = None,
+@VARIANT_TYPE.field("allele_type")
+def resolve_variant_allele_type(
+    variant: Dict,
+    info: GraphQLResolveInfo,
+
 ) -> Dict:
-    "Load variant alleles via variant id"
-
-    if by_id is None:
-        by_id = byId
-    assert by_id
-    
-    query = {
-        "type": "Variant",
-        "variant__id": by_id["variant_id"],
-        
-    }
-    result = json.loads('{"name": "hello"}')
-    if not result:
-        raise VariantNotFoundError(by_id=by_id)
-    return result
-
+    return variant.allele_type
 
 @QUERY_TYPE.field("version")
 def resolve_api(

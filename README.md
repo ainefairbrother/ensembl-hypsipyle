@@ -34,26 +34,6 @@ configuration so that you can use the debugger.  Create a run configuration that
 looks like this:
 
 
-## Development
-
-### Testing
-
-TODO
-
-### Linting
-
-TODO
-
-### Type checking
-
-TODO
-
-### Formatting
-
-`black . --check --diff` previews the formatting.
-
-`black .` applies the formatting in-place.
-
 ## Containerisation for dev
 
 Build the image using `./Dockerfile.dev`:

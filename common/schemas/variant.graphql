@@ -6,7 +6,7 @@ type Variant {
   alternative_names: [ExternalReference]
   primary_source: ExternalReference
   type: String
-  allele_type: OntologyTerm
+  allele_type: OntologyTermMetadata
   slice: Slice
   alleles: [VariantAllele]
 }

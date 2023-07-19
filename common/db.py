@@ -11,7 +11,8 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 """
-import vcf
+import vcfpy
+from common.file_model.variant import Variant
    
 class FileClient:
     """
@@ -19,25 +20,27 @@ class FileClient:
     """
     def __init__(self, config, datafile=None):
         datafile = config.get("datafile")
-        self.collection = vcf.Reader(filename=datafile)
+        self.collection = vcfpy.Reader.from_path(datafile)
     
     def get_variant_record(self, variant_id: str):
         """
         Get a variant entry from variant_id
         """
         try: 
-            [contig,pos,ref,id] = self.split_variant_id(variant_id)
-            pos=int(pos)
+            [contig,pos,id] = self.split_variant_id(variant_id)
+            pos = int(pos)
         except:
             #TODO: This needs to go to thoas logger
             #TODO: Exception needs to be caught appropriately
             print("Something wrong")
         data = {}
-        for rec in self.collection.fetch('1', pos-1, pos):
-            if rec.ID == id:
-                data['name'] = rec.ID
+        variant = None
+        for rec in self.collection.fetch(contig, pos-1, pos):
+            print(rec.ID)
+            if rec.ID[0] == id:
+                variant = Variant(rec)
                 break
-        return data
+        return variant
         
         
     def split_variant_id(self, variant_id: str):

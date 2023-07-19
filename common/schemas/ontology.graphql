@@ -10,3 +10,4 @@ interface OntologySource {
   url: String!
   description: String!
 }
+

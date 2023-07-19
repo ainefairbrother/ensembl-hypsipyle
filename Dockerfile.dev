@@ -1,6 +1,6 @@
-FROM python:3.8
+FROM python:3.10
 # Contains relevant basics for Python, like GCC and similar by default
-LABEL maintainer="ensembl-applications@ebi.ac.uk"
+LABEL maintainer="ensembl-variation@ebi.ac.uk"
 
 COPY ./requirements.txt /app/requirements.txt
 COPY ./requirements-dev.txt /app/requirements-dev.txt
