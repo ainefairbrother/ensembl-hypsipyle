@@ -21,6 +21,7 @@ class FileClient:
     def __init__(self, config, datafile=None):
         datafile = config.get("datafile")
         self.collection = vcfpy.Reader.from_path(datafile)
+        self.header = self.collection.header
     
     def get_variant_record(self, variant_id: str):
         """
@@ -36,9 +37,8 @@ class FileClient:
         data = {}
         variant = None
         for rec in self.collection.fetch(contig, pos-1, pos):
-            print(rec.ID)
             if rec.ID[0] == id:
-                variant = Variant(rec)
+                variant = Variant(rec,self.header)
                 break
         return variant
         

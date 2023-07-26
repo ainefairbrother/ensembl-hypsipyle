@@ -53,6 +53,33 @@ async def resolve_variant(
         raise VariantNotFoundError(by_id["variant_id"])
     return result
 
+@VARIANT_TYPE.field("primary_source")
+def primary_source(variant: Dict, info: GraphQLResolveInfo) -> Dict:
+    """
+    Load primary source for variant
+    """
+    return variant.get_primary_source()
+
+@VARIANT_TYPE.field("allele_type")
+def allele_type(variant: Dict, info: GraphQLResolveInfo) -> Dict:
+    """
+    Load allele_type for variant
+    """
+    return variant.get_allele_type()
+
+@VARIANT_TYPE.field("slice")
+def slice(variant: Dict, info: GraphQLResolveInfo) -> Dict:
+    """
+    Load slice for variant
+    """
+    return variant.get_slice()
+
+@VARIANT_TYPE.field("alleles")
+def alleles(variant: Dict, info: GraphQLResolveInfo) -> Dict:
+    """
+    Load alleles for variant
+    """
+    return variant.get_alleles()
 
 @QUERY_TYPE.field("version")
 def resolve_api(

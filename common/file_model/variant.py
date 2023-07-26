@@ -10,35 +10,39 @@ def reduce_allele_length(acc,alt):
     return len(acc.value) == len(alt.value)
 
 class Variant ():
-    def __init__(self, record: Any) -> None:
+    def __init__(self, record: Any, header: Any) -> None:
         self.name = record.ID[0]
         self.record = record 
+        self.header = header
         self.chromosome = record.CHROM         ###TODO: convert to numerical if not
         self.position = record.POS
         self.alts = record.ALT
         self.ref = record.REF
         self.info = record.INFO
-        self.primary_source = self.get_primary_source()
         self.type = "Variant"
-        self.allele_type = self.get_allele_type()
-        self.slice = self.get_slice()
-        self.alleles = self.get_alleles()
     
     def get_primary_source(self) -> Mapping:
-        if re.search("^rs", self.name):
+        source = self.header.get_lines("source")[0].value
+        if re.search("^dbSNP", source):
             source_id = "dbSNP"
             source_name = "dnSNP"
             source_description = "NCBI db of human variants"
             source_url = "https://www.ncbi.nlm.nih.gov/snp/"
             source_release =154
             
-        else:
+        elif re.search("^ClinVar", source):
             source_id = "ClinVar"
             source_name = "ClinVar"
             source_description = "ClinVar db of human variants"
-            source_url = "https://clinvar-url"
+            source_url = "https://www.ncbi.nlm.nih.gov/clinvar/variation/"
             source_release = ""
 
+        else:
+            source_id = "test"
+            source_name = "etst"
+            source_description = "test db of human variants"
+            source_url = "https://www.ncbi.nlm.nih.gov/test/variation/"
+            source_release = ""
         ### TODO: This is not elegant, need to serialise?
         return {
             "accession_id": self.name,
@@ -103,13 +107,17 @@ class Variant ():
     
     
     def get_slice(self) -> Mapping :
+        allele_type = self.get_allele_type()
         start = self.position
-        end = self.position
+        end = self.position + len(self.ref)
+        length = end - start + 1
+        if allele_type == "insertion":
+            length = 0
         return {
             "location": {
                 "start": start,
                 "end": end,
-                "length": end - start
+                "length": length
             },
             "region": {
                 "name": self.chromosome,
