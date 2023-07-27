@@ -44,9 +44,15 @@ Run a container with the image (`--publish` below is exposing the container's po
 
 `docker container run --publish 0.0.0.0:80:80/tcp --publish 0.0.0.0:8000:8000/tcp -ti -v <ensembl-hysipile-dir>:/app $NAME:$VERSION`
 
-The connection configuration is assumed to exist in the repo as the file `./connections.conf` and gets built into the Docker 
-image. 
-
 
 ## Containerisation for prod
-TODO
+Build the image using `./Dockerfile`:
+
+`docker build -t $NAME:$VERSION  .`
+
+Run a container with the image (`--publish` below is exposing the container's ports to the host network):
+
+`docker container run --publish 0.0.0.0:80:80/tcp --publish 0.0.0.0:8000:8000/tcp -ti $NAME:$VERSION`
+
+The connection configuration is assumed to exist in the repo as the file `./connections.conf` and gets built into the Docker 
+image. 
