@@ -1,4 +1,4 @@
-from typing import Any, Mapping, List
+from typing import Any, Mapping, List, Union
 import re
 import operator
 from functools import reduce
@@ -86,11 +86,11 @@ class Variant ():
                 
         return allele_type, SO_term
     
-    def get_allele_type(self, allele: str = None) -> Mapping :
-        if allele:
+    def get_allele_type(self, allele: Union[str, List]) -> Mapping :
+        if isinstance(allele, str) :
             allele_type, SO_term = self.set_allele_type(len(allele)<2, len(self.ref)<2, len(allele) == len(self.ref))
-        else:
-            allele_type, SO_term = self.set_allele_type(reduce(reduce_allele,self.alts), len(self.ref)<2, reduce(reduce_allele_length,self.alts) == len(self.ref))
+        elif isinstance(allele, list):
+            allele_type, SO_term = self.set_allele_type(reduce(reduce_allele,allele), len(self.ref)<2, reduce(reduce_allele_length,allele) == len(self.ref))
         return {
             "accession_id": allele_type,
             "value": allele_type,
@@ -107,7 +107,7 @@ class Variant ():
     
     
     def get_slice(self) -> Mapping :
-        allele_type = self.get_allele_type()
+        allele_type = self.get_allele_type(self.alts)
         start = self.position
         length = len(self.ref)
         end = start + length -1
@@ -140,7 +140,7 @@ class Variant ():
         return variant_allele_list
 
     def create_variant_allele(self, alt: str) -> Mapping:
-        name = f"{self.chromosome}:{self.position}:{self.ref}:{alt.value}"
+        name = f"{self.chromosome}:{self.position}:{self.ref}:{alt}"
         return {
             "name": name,
             "allele_sequence": alt,

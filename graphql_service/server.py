@@ -28,7 +28,7 @@ from starlette.middleware.cors import CORSMiddleware
 
 from common.logger import CommandLogger
 # from common.crossrefs import XrefResolver
-from common import db
+from common.file_client import FileClient
 from common.extensions import QueryExecutionTimeExtension
 from graphql_service.ariadne_app import (
     prepare_executable_schema,
@@ -60,7 +60,7 @@ if DEBUG_MODE:
     # https://ariadnegraphql.org/docs/apollo-tracing
     EXTENSIONS.append(ApolloTracingExtension)
 
-FILE_CLIENT = db.FileClient(os.environ)
+FILE_CLIENT = FileClient(os.environ)
 CONTEXT_PROVIDER = prepare_context_provider(
     {
         "file_client": FILE_CLIENT
