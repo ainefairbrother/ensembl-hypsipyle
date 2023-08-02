@@ -109,10 +109,11 @@ class Variant ():
     def get_slice(self) -> Mapping :
         allele_type = self.get_allele_type()
         start = self.position
-        end = self.position + len(self.ref)
-        length = end - start + 1
+        length = len(self.ref)
+        end = start + length -1
         if allele_type == "insertion":
             length = 0
+            end = start + 1
         return {
             "location": {
                 "start": start,
