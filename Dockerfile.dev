@@ -15,5 +15,5 @@ EXPOSE 8000
 
 WORKDIR /app
 
-ENV WORKER_COUNT=2
+ENV WORKER_COUNT=1
 CMD uvicorn --workers $WORKER_COUNT --host=0.0.0.0 graphql_service.server:APP

@@ -1,12 +1,12 @@
-from typing import Any, Mapping
+from typing import Any, Mapping, List
 import re
 import operator
 from functools import reduce
 
-def reduce_allele(acc,alt):
+def reduce_allele(acc, alt):
     return (len(acc.value) < 2) & (len(alt.value) < 2)    
 
-def reduce_allele_length(acc,alt):
+def reduce_allele_length(acc, alt):
     return len(acc.value) == len(alt.value)
 
 class Variant ():
@@ -14,7 +14,7 @@ class Variant ():
         self.name = record.ID[0]
         self.record = record 
         self.header = header
-        self.chromosome = record.CHROM         ###TODO: convert to numerical if not
+        self.chromosome = record.CHROM         ###TODO: convert the contig name in the file to match the chromosome id given in the payload 
         self.position = record.POS
         self.alts = record.ALT
         self.ref = record.REF
@@ -39,7 +39,7 @@ class Variant ():
 
         else:
             source_id = "test"
-            source_name = "etst"
+            source_name = "test"
             source_description = "test db of human variants"
             source_url = "https://www.ncbi.nlm.nih.gov/test/variation/"
             source_release = ""
@@ -62,8 +62,8 @@ class Variant ():
                         }
         }
 
-    def set_allele_type(self, condition1, condition2, condition3):         
-        match [condition1,condition2,condition3 ]:
+    def set_allele_type(self, alt_one_bp: bool, ref_one_bp: bool, ref_alt_equal_bp: bool):         
+        match [alt_one_bp, ref_one_bp, ref_alt_equal_bp]:
             case [True, True, True]: 
                 allele_type = "SNV" 
                 SO_term = "SO:0001483"
@@ -86,7 +86,7 @@ class Variant ():
                 
         return allele_type, SO_term
     
-    def get_allele_type(self, allele=None) -> Mapping :
+    def get_allele_type(self, allele: str = None) -> Mapping :
         if allele:
             allele_type, SO_term = self.set_allele_type(len(allele)<2, len(self.ref)<2, len(allele) == len(self.ref))
         else:
@@ -94,7 +94,7 @@ class Variant ():
         return {
             "accession_id": allele_type,
             "value": allele_type,
-            "url": f"https://sequenceontology.org/browser/current_release/term/{SO_term}",
+            "url": f"http://sequenceontology.org/browser/current_release/term/{SO_term}",
             "source": {
                     "id": "",
                     "name": "Sequence Ontology",
@@ -131,21 +131,21 @@ class Variant ():
             }
         }
     
-    def get_alleles(self):
+    def get_alleles(self) -> List:
         variant_allele_list = []
         for alt in self.alts:
-            variant_allele = self.create_variant_allele(alt)
+            variant_allele = self.create_variant_allele(alt.value)
             variant_allele_list.append(variant_allele)
         return variant_allele_list
 
-    def create_variant_allele(self, alt):
+    def create_variant_allele(self, alt: str) -> Mapping:
         name = f"{self.chromosome}:{self.position}:{self.ref}:{alt.value}"
         return {
             "name": name,
-            "allele_sequence": alt.value,
+            "allele_sequence": alt,
             "reference_sequence": self.ref,
             "type": "VariantAllele",
-            "allele_type": self.get_allele_type(alt.value),
+            "allele_type": self.get_allele_type(alt),
             "slice": self.get_slice()
         }
         

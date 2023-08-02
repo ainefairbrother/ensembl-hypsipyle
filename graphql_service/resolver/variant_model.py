@@ -33,14 +33,9 @@ VARIANT_ALLELE_TYPE = ObjectType("VariantAllele")
 async def resolve_variant(
         _,
         info: GraphQLResolveInfo,
-        byId: Optional[Dict[str, str]] = None,
-        by_id: Optional[Dict[str, str]] = None,
+        by_id: Dict[str, str] = None,
 ) -> Dict:
     "Load variants via variant id"
-
-    if by_id is None:
-        by_id = byId
-    assert by_id
     
     query = {
         "type": "Variant",

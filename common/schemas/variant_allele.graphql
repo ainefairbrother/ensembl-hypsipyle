@@ -6,8 +6,8 @@ type VariantAllele {
   allele_sequence: String!
   reference_sequence: String!
   alternative_names: [ExternalReference]
-  type: String
-  allele_type: OntologyTerm
-  slice: Slice
+  type: String!
+  allele_type: OntologyTerm!
+  slice: Slice!
 
 }
