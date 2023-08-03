@@ -67,7 +67,7 @@ def slice(variant: Dict, info: GraphQLResolveInfo) -> Dict:
     """
     Load slice for variant
     """
-    return variant.get_slice()
+    return variant.get_slice(variant.alts)
 
 @VARIANT_TYPE.field("alleles")
 def alleles(variant: Dict, info: GraphQLResolveInfo) -> Dict:

@@ -88,7 +88,10 @@ class Variant ():
     
     def get_allele_type(self, allele: Union[str, List]) -> Mapping :
         if isinstance(allele, str) :
-            allele_type, SO_term = self.set_allele_type(len(allele)<2, len(self.ref)<2, len(allele) == len(self.ref))
+            if allele == self.ref:
+                allele_type, SO_term = "biological_region","SO:0001411"
+            else:
+                allele_type, SO_term = self.set_allele_type(len(allele)<2, len(self.ref)<2, len(allele) == len(self.ref))
         elif isinstance(allele, list):
             allele_type, SO_term = self.set_allele_type(reduce(reduce_allele,allele), len(self.ref)<2, reduce(reduce_allele_length,allele) == len(self.ref))
         return {
@@ -102,12 +105,13 @@ class Variant ():
                     "description": "The Sequence Ontology..."
                     }
 
-        }
+        }  
     
-    
-    
-    def get_slice(self) -> Mapping :
-        allele_type = self.get_allele_type(self.alts)
+    def get_slice(self, allele: Union[str, List] ) -> Mapping :
+        if allele != self.ref:
+            allele_type = self.get_allele_type(allele)
+        else:
+            allele_type = self.get_allele_type(self.alts)
         start = self.position
         length = len(self.ref)
         end = start + length -1
@@ -137,6 +141,8 @@ class Variant ():
         for alt in self.alts:
             variant_allele = self.create_variant_allele(alt.value)
             variant_allele_list.append(variant_allele)
+        reference_allele = self.create_variant_allele(self.ref)
+        variant_allele_list.append(reference_allele)
         return variant_allele_list
 
     def create_variant_allele(self, alt: str) -> Mapping:
@@ -147,7 +153,7 @@ class Variant ():
             "reference_sequence": self.ref,
             "type": "VariantAllele",
             "allele_type": self.get_allele_type(alt),
-            "slice": self.get_slice()
+            "slice": self.get_slice(alt)
         }
         
 
