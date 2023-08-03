@@ -1,0 +1,13 @@
+type VariantAllele {
+  """
+  Variant Allele
+  """
+  name: String!
+  allele_sequence: String!
+  reference_sequence: String!
+  alternative_names: [ExternalReference]
+  type: String!
+  allele_type: OntologyTermMetadata!
+  slice: Slice!
+
+}

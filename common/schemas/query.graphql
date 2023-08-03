@@ -1,0 +1,9 @@
+type Query {
+  version: Version
+  variant(by_id: IdInput): Variant
+}
+
+input IdInput {
+  genome_id: String!
+  variant_id: String!
+}

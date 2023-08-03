@@ -1,0 +1,12 @@
+type Variant {
+  """
+  Variant
+  """
+  name: String!
+  alternative_names: [ExternalReference]
+  primary_source: ExternalReference!
+  type: String!
+  allele_type: OntologyTermMetadata!
+  slice: Slice!
+  alleles: [VariantAllele]!
+}
