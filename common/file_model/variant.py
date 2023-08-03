@@ -3,8 +3,6 @@ import re
 import operator
 from functools import reduce
 
-def reduce_allele(acc, alt):
-    return (len(acc.value) < 2) & (len(alt.value) < 2)    
 
 def reduce_allele_length(acc, alt):
     return len(acc.value) == len(alt.value)
@@ -82,8 +80,7 @@ class Variant ():
 
             case [False, False, True]: 
                 allele_type = "substitution"
-                SO_term = "SO:1000002"
-                
+                SO_term = "SO:1000002"   
         return allele_type, SO_term
     
     def get_allele_type(self, allele: Union[str, List]) -> Mapping :
@@ -93,7 +90,11 @@ class Variant ():
             else:
                 allele_type, SO_term = self.set_allele_type(len(allele)<2, len(self.ref)<2, len(allele) == len(self.ref))
         elif isinstance(allele, list):
-            allele_type, SO_term = self.set_allele_type(reduce(reduce_allele,allele), len(self.ref)<2, reduce(reduce_allele_length,allele) == len(self.ref))
+            alt_length = reduce(reduce_allele_length, allele )
+            if not isinstance(alt_length, bool):
+                alt_length = len(allele[0].value)
+            allele_type, SO_term = self.set_allele_type(alt_length < 2 , len(self.ref)<2, alt_length == len(self.ref))
+
         return {
             "accession_id": allele_type,
             "value": allele_type,
@@ -115,7 +116,7 @@ class Variant ():
         start = self.position
         length = len(self.ref)
         end = start + length -1
-        if allele_type == "insertion":
+        if allele_type["accession_id"] == "insertion":
             length = 0
             end = start + 1
         return {
