@@ -17,11 +17,15 @@ To install dependencies, run:
 `pip install -r requirements-dev.txt` installs everything including dev dependencies like pytest, mypy etc.
 
 ## Running the API locally
-Add MongoDB and GRPC configuration `./connections.conf`
+Add path to the datafile in `./connections.conf`
 
 The file follows the following template:
 ```
 datafile=DATAFILE
+```
+Quick setup of API can be done using some test files available
+```
+datafile=/app/data/test_dbsnp.vcf.gz
 ```
 
 This command will start the server:
