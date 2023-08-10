@@ -4,7 +4,7 @@ metadata:
   name: variation-graphql-ingress
 spec:
   rules:
-  - host: alpha.ensembl.org
+  - host: <HOST>
     http:
       paths:
       - backend:
