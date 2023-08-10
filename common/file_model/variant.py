@@ -3,9 +3,12 @@ import re
 import operator
 from functools import reduce
 
-
-def reduce_allele_length(acc, alt):
-    return len(acc.value) == len(alt.value)
+def reduce_allele_length(allele_list: List):
+    allele_length = -1
+    for allele in allele_list:
+        if len(allele.value) > allele_length:
+            allele_length = len(allele.value)
+    return allele_length
 
 class Variant ():
     def __init__(self, record: Any, header: Any) -> None:
@@ -84,15 +87,13 @@ class Variant ():
         return allele_type, SO_term
     
     def get_allele_type(self, allele: Union[str, List]) -> Mapping :
-        if isinstance(allele, str) :
+        if isinstance(allele, str):
             if allele == self.ref:
                 allele_type, SO_term = "biological_region","SO:0001411"
             else:
                 allele_type, SO_term = self.set_allele_type(len(allele)<2, len(self.ref)<2, len(allele) == len(self.ref))
         elif isinstance(allele, list):
-            alt_length = reduce(reduce_allele_length, allele )
-            if not isinstance(alt_length, bool):
-                alt_length = len(allele[0].value)
+            alt_length = reduce_allele_length(allele)
             allele_type, SO_term = self.set_allele_type(alt_length < 2 , len(self.ref)<2, alt_length == len(self.ref))
 
         return {
