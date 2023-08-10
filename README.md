@@ -17,7 +17,7 @@ To install dependencies, run:
 `pip install -r requirements-dev.txt` installs everything including dev dependencies like pytest, mypy etc.
 
 ## Running the API locally
-Add path to the datafile in `./connections.conf`
+Add path to the datafile in `./connections.conf`. This setup currently can only handle a single species
 
 The file follows the following template:
 ```
