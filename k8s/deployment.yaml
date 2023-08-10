@@ -6,14 +6,14 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      ensembl.web.api.name: variation-graphql
+      ensembl.variation.api.name: variation-graphql
   template:
     metadata:
       labels:
-        ensembl.web.api.name: variation-graphql
+        ensembl.variation.api.name: variation-graphql
     spec:
       imagePullSecrets:
-        - name: ensemblweb-pull-secret
+        - name: <IMAGE_PULL_SECRET>
       containers:
       - name: variation-graphql
         image: DOCKER_IMAGE
