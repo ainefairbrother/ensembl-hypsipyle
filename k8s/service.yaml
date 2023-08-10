@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: variation-graphql-svc
+  labels:
+     ensembl.web.api.name: variation-graphql
+spec:
+  selector:
+     ensembl.web.api.name: variation-graphql
+  type: ClusterIP
+  ports:
+    - port: 8000
+      protocol: TCP
+      targetPort: 8000
