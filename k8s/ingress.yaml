@@ -12,5 +12,5 @@ spec:
             name: variation-graphql-svc
             port:
               number: 8000
-        path: /api/graphql/variation($|/)(.*)
+        path: /api/graphql/variation
         pathType: Prefix 
