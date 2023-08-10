@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: variation-graphql-svc
   labels:
-     ensembl.web.api.name: variation-graphql
+     ensembl.variation.api.name: variation-graphql
 spec:
   selector:
-     ensembl.web.api.name: variation-graphql
+     ensembl.variation.api.name: variation-graphql
   type: ClusterIP
   ports:
     - port: 8000
