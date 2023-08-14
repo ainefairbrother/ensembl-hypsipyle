@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: variation-graphql-ingress
+spec:
+  rules:
+  - host: <HOST>
+    http:
+      paths:
+      - backend:
+          service: 
+            name: variation-graphql-svc
+            port:
+              number: 8000
+        path: /api/graphql/variation
+        pathType: Prefix 

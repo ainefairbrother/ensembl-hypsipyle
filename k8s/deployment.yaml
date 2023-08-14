@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: ensembl-variation-graphql-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      ensembl.variation.api.name: variation-graphql
+  template:
+    metadata:
+      labels:
+        ensembl.variation.api.name: variation-graphql
+    spec:
+      imagePullSecrets:
+        - name: <IMAGE_PULL_SECRET>
+      containers:
+      - name: variation-graphql
+        image: DOCKER_IMAGE
+        command: ["uvicorn" ]
+        args: ["--workers=2", "--host=0.0.0.0", "graphql_service.server:APP"]
+        ports:
+        - containerPort: 8000
+        imagePullPolicy: Always
+        envFrom:
+        - configMapRef:
+            name: variation-graphql-configmap
+        volumeMounts:
+        - mountPath: /usr/data
+          name: variation-data-vol
+      volumes:
+        - name: variation-data-vol
+          nfs:
+            path: NFS_PATH
+            server: NFS_SERVER
