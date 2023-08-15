@@ -1,0 +1,45 @@
+
+# stages for the pipeline
+stages:
+  - build_docker
+  - deploy
+
+# When to deploy
+.rules: &branch-rules
+  rules:
+    - if: '$CI_COMMIT_BRANCH != "deploy-pipeline"'
+      when: always
+
+# Deploy to webteam k8s cluster
+.web-rules: &web-team-rules
+  rules:
+    - if: '$CI_DEPLOY_FREEZE == null && $CI_PROJECT_NAMESPACE== "ensembl-web"'
+
+# Deploy to variation team k8s cluster
+.variation-rules:  &variation-team-rules
+  rules:
+    - if: '$CI_PROJECT_NAMESPACE== "ensembl-variation"'
+
+# Template for building Docker image
+.build:
+  stage: build_docker
+  image: docker
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker build -t ${DOCKER_IMAGE} --no-cache -f k8s/Dockerfile .
+    - docker push ${DOCKER_IMAGE}
+    # remove local image from shared runner
+    - docker rmi ${DOCKER_IMAGE}
+    - docker logout $CI_REGISTRY
+
+# Template for dpeloying to k8s
+.deploy:
+  stage: deploy
+  image: dockerhub.ebi.ac.uk/${CI_PROJECT_NAMESPACE}/deploy-tools:latest
+  script:
+    - echo "Deploying to  ${CI_PROJECT_NAMESPACE}"
+
+

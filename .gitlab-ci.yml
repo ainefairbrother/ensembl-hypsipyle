@@ -1,0 +1,3 @@
+include:
+  - local: '/gitlab-ci-templates/.templates.yml'
+  - local: '/gitlab-ci-templates/.web-gitlab-ci.yml'

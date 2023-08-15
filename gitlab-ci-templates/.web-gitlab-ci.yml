@@ -1,0 +1,10 @@
+# Job to build docker image
+Build:Docker-Image:
+  extends: .dbuild
+
+
+# Job to deploy to staging (web)
+Staging:Web:
+  <<: *branch-rules
+  <<: *web-team-rules
+  extends: .deploy
