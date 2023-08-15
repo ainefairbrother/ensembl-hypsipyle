@@ -110,16 +110,16 @@ class Variant ():
         }  
     
     def get_slice(self, allele: Union[str, List] ) -> Mapping :
-        if allele != self.ref:
-            allele_type = self.get_allele_type(allele)
-        else:
-            allele_type = self.get_allele_type(self.alts)
+
         start = self.position
         length = len(self.ref)
         end = start + length -1
-        if allele_type["accession_id"] == "insertion":
-            length = 0
-            end = start + 1
+        if allele != self.ref:
+            allele_type = self.get_allele_type(allele)
+            if allele_type["accession_id"] == "insertion":
+                length = 0
+                end = start + 1
+        
         return {
             "location": {
                 "start": start,

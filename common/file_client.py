@@ -12,6 +12,9 @@
    limitations under the License.
 """
 import vcfpy
+import json
+import os
+import glob
 from common.file_model.variant import Variant
    
 class FileClient:
@@ -19,28 +22,40 @@ class FileClient:
     Client to load file in-memory
     """
     def __init__(self, config, datafile=None):
-        datafile = config.get("datafile")
-        self.collection = vcfpy.Reader.from_path(datafile)
-        self.header = self.collection.header
+        file = config.get("mapping_file")
+        with open(file) as f:
+            self.mapping = json.load(f)
     
-    def get_variant_record(self, variant_id: str):
+    def get_variant_record(self, genome_uuid: str, variant_id: str):
         """
         Get a variant entry from variant_id
         """
+        genome_metadata = next(d for d in self.mapping if d['genome_uuid'] == genome_uuid)
+        datafile = glob.glob(os.path.join(genome_metadata["data_folder"],"*.vcf.gz"))[0]
+        if datafile:
+            self.collection = vcfpy.Reader.from_path(datafile)
+            self.header = self.collection.header
+        else:
+            print("Please check the directory path for the given genome uuid")
+
         try: 
-            [contig,pos,id] = self.split_variant_id(variant_id)
+            [contig, pos, id] = self.split_variant_id(variant_id)
             pos = int(pos)
         except:
             #TODO: This needs to go to thoas logger
             #TODO: Exception needs to be caught appropriately
-            print("Something wrong")
+            print("Please check that the variant_id is in the format: contig:position:identifier")
         data = {}
         variant = None
-        for rec in self.collection.fetch(contig, pos-1, pos):
-            if rec.ID[0] == id:
-                variant = Variant(rec,self.header)
-                break
-        return variant
+        try:
+            for rec in self.collection.fetch(contig, pos-1, pos):
+                if rec.ID[0] == id:
+                    variant = Variant(rec, self.header)
+                    break
+            return variant
+        except:
+            # Return None when variant cannot be fetched
+            return
         
         
     def split_variant_id(self, variant_id: str):
