@@ -1,10 +1,32 @@
+include: '/gitlab-ci-templates/.templates.yml'
+
+# Below are the jobs for webteam deployments
+
+
 # Job to build docker image
 Build:Docker-Image:
-  extends: .dbuild
+  extends: .build
 
+
+# Job to deploy to the live environment
+Live:Web:
+  extends: .deploy
+  rules:
+    - !reference [.web-rules]
+  environment:
+    name: wp40-hl-prod
 
 # Job to deploy to staging (web)
 Staging:Web:
-  <<: *branch-rules
-  <<: *web-team-rules
   extends: .deploy
+  rules:
+    - !reference [.web-rules]
+  environment:
+    name: wp40-hl-staging
+
+Internal:Web:
+  extends: .deploy
+  rules:
+    - !reference [.web-rules]
+  environment:
+    name: wp40-hl-internal
