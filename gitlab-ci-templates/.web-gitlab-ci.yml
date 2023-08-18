@@ -15,6 +15,7 @@ Live:Web:HL:
     BASE: k8s/overlays/webteam/hl
   rules:
     - !reference [.web-rules]
+
   environment:
     name: wp40-hl-prod
 
@@ -35,6 +36,7 @@ Staging:Web:HL:
     BASE: k8s/overlays/webteam/hl
   rules:
     - !reference [.web-rules]
+    - !reference [.rules]
   environment:
     name: wp40-hl-staging
 

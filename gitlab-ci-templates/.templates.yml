@@ -13,9 +13,8 @@ variables:
 
 # When to deploy
 .rules:
-  rules:
-    - if: '$CI_COMMIT_BRANCH != "main"'
-      when: always
+  - if: '$CI_COMMIT_BRANCH != "deploy-pipeline"'
+    when: always
 
 # Deploy to webteam k8s cluster
 .web-rules:

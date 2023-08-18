@@ -6,3 +6,6 @@ patches:
   - target:
       kind: Deployment
     path: 'nfs.patch.yaml'
+  - target:
+      kind: Deployment
+    path: 'pull.patch.yaml'
