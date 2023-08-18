@@ -9,6 +9,7 @@ variables:
   # to fix the error "docker: Cannot connect to the Docker daemon at tcp://docker:2375. Is the docker daemon running?"
   DOCKER_TLS_CERTDIR: ""
   DOCKER_IMAGE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}
+  BASE: k8s/overlays/webteam
 
 # When to deploy
 .rules:
@@ -46,8 +47,8 @@ variables:
   image: dockerhub.ebi.ac.uk/${CI_PROJECT_NAMESPACE}/deploy-tools:latest
   script:
     - echo "Deploying to ${CI_PROJECT_NAMESPACE}"
-    - cd k8s/overlays/webteam
+    - cd ${BASE}
     - kustomize edit set image DOCKER_IMAGE=${DOCKER_IMAGE}
-    - kustomize build . | kubectl apply -f -
+    - kustomize build . #| kubectl apply -f -
 
 
