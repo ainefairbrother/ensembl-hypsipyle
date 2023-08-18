@@ -15,7 +15,7 @@ Live:Web:HL:
     BASE: k8s/overlays/webteam/hl
   rules:
     - !reference [.web-rules]
-
+    - !reference [.rules]
   environment:
     name: wp40-hl-prod
 
@@ -26,6 +26,7 @@ Live:Web:HX:
     BASE: k8s/overlays/webteam/hx
   rules:
     - !reference [.web-rules]
+    - !reference [.rules]
   environment:
     name: wp41-hx-prod
 
@@ -46,6 +47,7 @@ Internal:Web:HL:
     BASE: k8s/overlays/webteam/hl
   rules:
     - !reference [.web-rules]
+    - !reference [.rules]
   environment:
     name: wp40-hl-internal
 
@@ -55,6 +57,7 @@ Dev:Web:HL:
     BASE: k8s/overlays/webteam/hl
   rules:
     - !reference [.web-rules]
+    - !reference [.rules]
   environment:
     name: wp40-hl-development
 
@@ -64,5 +67,6 @@ Dev:Web:HX:
     BASE: k8s/overlays/webteam/hx
   rules:
     - !reference [.web-rules]
+    - !reference [.rules]
   environment:
     name: wp41-hx-development
