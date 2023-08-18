@@ -1,3 +1,0 @@
-- op: replace
-  path: /spec/template/spec/imagePullSecrets/0/name
-  value: ensemblweb-pull-secret
