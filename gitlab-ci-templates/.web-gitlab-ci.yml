@@ -46,3 +46,21 @@ Internal:Web:HL:
     - !reference [.web-rules]
   environment:
     name: wp40-hl-internal
+
+Dev:Web:HL:
+  extends: .deploy
+  variables:
+    BASE: k8s/overlays/webteam/hl
+  rules:
+    - !reference [.web-rules]
+  environment:
+    name: wp40-hl-development
+
+Dev:Web:HX:
+  extends: .deploy
+  variables:
+    BASE: k8s/overlays/webteam/hx
+  rules:
+    - !reference [.web-rules]
+  environment:
+    name: wp41-hx-development
