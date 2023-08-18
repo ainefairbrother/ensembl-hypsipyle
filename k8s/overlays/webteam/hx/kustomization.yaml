@@ -3,8 +3,5 @@ kind: Kustomization
 resources:
     - ../../../base
 components:
-  - ../components/pull-secret
-patches:
-  - target:
-      kind: Deployment
-    path: 'nfs.patch.yaml'
+  - ../components/web-pull-secret
+  - ../components/hx-nfs
