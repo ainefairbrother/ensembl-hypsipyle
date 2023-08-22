@@ -1,0 +1,72 @@
+include: '/gitlab-ci-templates/.templates.yml'
+
+# Below are the jobs for webteam deployments
+
+
+# Job to build docker image
+Build:Docker-Image:
+  extends: .build
+
+
+# Job to deploy to the live environment
+Live:Web:HL:
+  extends: .deploy
+  variables:
+    BASE: k8s/overlays/webteam/hl
+  rules:
+    - !reference [.web-rules]
+    - !reference [.rules]
+  environment:
+    name: wp40-hl-prod
+
+# Job to deploy to the live environment
+Live:Web:HX:
+  extends: .deploy
+  variables:
+    BASE: k8s/overlays/webteam/hx
+  rules:
+    - !reference [.web-rules]
+    - !reference [.rules]
+  environment:
+    name: wp41-hx-prod
+
+# Job to deploy to staging (web)
+Staging:Web:HL:
+  extends: .deploy
+  variables:
+    BASE: k8s/overlays/webteam/hl
+  rules:
+    - !reference [.web-rules]
+    - !reference [.rules]
+  environment:
+    name: wp40-hl-staging
+
+Internal:Web:HL:
+  extends: .deploy
+  variables:
+    BASE: k8s/overlays/webteam/hl
+  rules:
+    - !reference [.web-rules]
+    - !reference [.rules]
+  environment:
+    name: wp40-hl-internal
+
+Dev:Web:HL:
+  extends: .deploy
+  variables:
+    BASE: k8s/overlays/webteam/hl
+  rules:
+    - !reference [.web-rules]
+    - !reference [.rules]
+  environment:
+    name: wp40-hl-development
+
+Dev:Web:HX:
+  extends: .deploy
+  variables:
+    BASE: k8s/overlays/webteam/hx
+  rules:
+    - !reference [.web-rules]
+    - !reference [.rules]
+  environment:
+    name: wp41-hx-development
