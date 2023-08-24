@@ -1,5 +1,7 @@
 from typing import Any, Mapping, List, Union
 import re
+import os
+import json
 import operator
 from functools import reduce
 
@@ -9,6 +11,7 @@ def reduce_allele_length(allele_list: List):
         if len(allele.value) > allele_length:
             allele_length = len(allele.value)
     return allele_length
+
 
 class Variant ():
     def __init__(self, record: Any, header: Any) -> None:
@@ -26,7 +29,7 @@ class Variant ():
         source = self.header.get_lines("source")[0].value
         if re.search("^dbSNP", source):
             source_id = "dbSNP"
-            source_name = "dnSNP"
+            source_name = "dbSNP"
             source_description = "NCBI db of human variants"
             source_url = "https://www.ncbi.nlm.nih.gov/snp/"
             source_release =154
@@ -140,23 +143,177 @@ class Variant ():
     
     def get_alleles(self) -> List:
         variant_allele_list = []
-        for alt in self.alts:
-            variant_allele = self.create_variant_allele(alt.value)
-            variant_allele_list.append(variant_allele)
-        reference_allele = self.create_variant_allele(self.ref)
+        info_map = self.traverse_csq_info()
+        frequency_key, frequency_list = self.format_frequency(self.info["FREQ"])
+        for index,alt in enumerate(self.alts):
+            if index+1 < len(self.alts):
+                variant_allele = self.create_variant_allele(info_map, [frequency_key, frequency_list[index+1]] , alt.value)
+                variant_allele_list.append(variant_allele)
+        reference_allele = self.create_variant_allele(info_map, [frequency_key, frequency_list[0]], self.ref)
         variant_allele_list.append(reference_allele)
         return variant_allele_list
 
-    def create_variant_allele(self, alt: str) -> Mapping:
+    def create_variant_allele(self, info_map: Mapping, frequency: List, alt: str) -> Mapping:
         name = f"{self.chromosome}:{self.position}:{self.ref}:{alt}"
+        min_alt = self.minimise_allele(alt)
+        population_allele_frequencies = [{
+            "population" : frequency[0],
+            "allele_frequency": frequency[1],
+            "is_minor_allele": False,
+            "is_hpmaf": False
+        }]
         return {
             "name": name,
             "allele_sequence": alt,
             "reference_sequence": self.ref,
             "type": "VariantAllele",
             "allele_type": self.get_allele_type(alt),
-            "slice": self.get_slice(alt)
+            "slice": self.get_slice(alt),
+            "phenotype_assertions": info_map[min_alt]["phenotype_assertions"] if min_alt in info_map else [],
+            "predicted_molecular_consequences": info_map[min_alt]["predicted_molecular_consequences"] if min_alt in info_map else [],
+            "population_frequencies": population_allele_frequencies
         }
+    
+
+    def format_frequency(self, raw_frequency_list: List) -> Mapping:
+        key, ref_freq = raw_frequency_list[0].split(":")
+        freq_list = [ref_freq]
+        for freq in raw_frequency_list[1:]:
+            freq_list.append(freq)
+        return key, freq_list
+    
+    def get_info_key_index(self, key: str, info_id: str ="CSQ") -> int:
+        info_field = self.header.get_info_field_info(info_id).description
+        csq_list = info_field.split("Format: ")[1].split("|")
+        for index, value in enumerate(csq_list):
+            if value == key:
+                return index
+            
+    def get_most_severe_consequence(self) -> Mapping:
+        consequence_index = self.get_info_key_index("Consequence")
+        consequence_map = {}
+        directory = os.path.dirname(__file__)
+        with open(os.path.join(directory,'variation_consequence_rank.json')) as rank_file:
+            consequence_rank = json.load(rank_file)
+        for csq_record in self.info["CSQ"]:
+            csq_record_list = csq_record.split("|")
+            for cons in csq_record_list[consequence_index].split("&"):
+                rank = consequence_rank[cons]
+                consequence_map[rank] = cons
+        return{
+                    "result": consequence_map[min(consequence_map.keys())]  ,
+                    "analysis_method": {
+                        "tool": "Ensembl VEP"
+                    }
+        } 
+        
+    def minimise_allele(self, alt: str):
+        if len(alt) >= len(self.ref):
+            minimised_allele = alt[1:] 
+        else:
+            minimised_allele = "-"
+        return minimised_allele
+        
+
+    def traverse_csq_info(self) -> Mapping:
+        allele_index = self.get_info_key_index("Allele")
+        phenotypes_index = self.get_info_key_index("VAR_SYNONYMS")
+        feature_type_index = self.get_info_key_index("Feature_type")
+        feature_index = self.get_info_key_index("Feature")
+        sift_index = self.get_info_key_index("SIFT")
+        polyphen_index = self.get_info_key_index("PolyPhen")
+        consequence_index = self.get_info_key_index("Consequence")
+        spdi_index = self.get_info_key_index("SPDI")
+        info_map = {}
+        for csq_record in self.info["CSQ"]:
+            csq_record_list = csq_record.split("|")
+            phenotype = None
+            if re.search("--OMIM",csq_record_list[phenotypes_index]):
+                phenotype = csq_record_list[phenotypes_index].split("--")[1]
+            if csq_record_list[allele_index] in info_map.keys():
+                if phenotype:
+                    info_map[csq_record_list[allele_index]]["phenotype_assertions"].append(self.create_allele_phenotype_assertion(csq_record_list[feature_index], csq_record_list[feature_type_index], phenotype ))
+                info_map[csq_record_list[allele_index]]["predicted_molecular_consequences"].append(self.create_allele_predicted_molecular_consequence(csq_record_list[spdi_index], 
+                                                                                                                                               csq_record_list[feature_index], 
+                                                                                                                                               csq_record_list[feature_type_index], 
+                                                                                                                                               csq_record_list[consequence_index],
+                                                                                                                                               csq_record_list[sift_index], 
+                                                                                                                                               csq_record_list[polyphen_index]
+                                                                                                                                   ))
+            else:
+                info_map[csq_record_list[allele_index]] = {"phenotype_assertions": [], "predicted_molecular_consequences": []} 
+                if phenotype:
+                    info_map[csq_record_list[allele_index]]["phenotype_assertions"].append(self.create_allele_phenotype_assertion(csq_record_list[feature_index], csq_record_list[feature_type_index], phenotype))
+                info_map[csq_record_list[allele_index]]["predicted_molecular_consequences"].append(self.create_allele_predicted_molecular_consequence(csq_record_list[spdi_index], 
+                                                                                                                                               csq_record_list[feature_index], 
+                                                                                                                                               csq_record_list[feature_type_index], 
+                                                                                                                                               csq_record_list[consequence_index],
+                                                                                                                                               csq_record_list[sift_index], 
+                                                                                                                                               csq_record_list[polyphen_index]
+                                                                                                                                               ))
+        return info_map
+    
+    def create_allele_phenotype_assertion(self, feature: str, feature_type: str , phenotype: str) -> Mapping:
+        return {
+            "feature": feature,
+            "feature_type": {
+                "accession_id": feature_type                
+            } ,
+            "phenotype": {
+                "name": phenotype
+            },
+            "evidence": []
+
+        }
+    
+    def create_allele_predicted_molecular_consequence(self, allele: str, feature: str, feature_type: str, consequences: str, sift_score: str, polyphen_score: str ) -> Mapping:
+        consequences_list = []
+        for cons in consequences.split("&"):
+            consequences_list.append(
+                {
+                    "accession_id": cons
+                }
+            )
+        prediction_results = []
+        if sift_score:
+            sift_prediction_result = {
+                    "result": sift_score ,
+                    "analysis_method": {
+                        "tool": "SIFT"
+                    }
+                }
+            prediction_results.append(sift_prediction_result)
+        if polyphen_score:
+            polyphen_prediction_result = {
+                    "result": polyphen_score ,
+                    "analysis_method": {
+                        "tool": "PolyPhen"
+                    }
+                }
+            prediction_results.append(polyphen_prediction_result)
+
+        
+        return {
+            "allele_name": allele,
+            "feature_stable_id": feature,
+            "feature_type": {
+                "accession_id": feature_type                
+            } ,
+            "consequences": consequences_list,
+            "prediction_results": prediction_results
+        }
+    
+
+
+
+            
+
+                
+
+            
+        
+
+
         
 
 

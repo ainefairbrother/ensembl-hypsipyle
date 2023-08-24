@@ -1,0 +1,20 @@
+
+type AnalysisMethod {
+"""
+  Analysis Method
+"""
+  tool: String
+  version: String
+  qualifier: String
+  reference_data: [ExternalDB]
+}
+
+type PredictionResult {
+"""
+  Prediction Result
+""" 
+  score: Float
+  result: String
+  classification: ValueSetMetadata
+  analysis_method: AnalysisMethod
+}

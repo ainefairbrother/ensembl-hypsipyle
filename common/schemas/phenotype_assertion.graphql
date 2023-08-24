@@ -1,0 +1,29 @@
+type Phenotype {
+   """
+  Phenotype
+  """ 
+  name: String!
+  source: ExternalDB
+  ontology_terms: [ExternalReference]
+}
+type PhenotypeAssertionEvidence {
+  """
+  Phenotype Assertion Evidence
+  """
+  source: ExternalDB!
+  assertion: ValueSetMetadata!
+  ## Attribute
+  ## Publication
+
+}
+
+type PhenotypeAssertion {
+  """
+  Phenotype Assertion
+  """
+  feature: String!
+  feature_type: OntologyTermMetadata!
+  phenotype: Phenotype!
+  evidence: [PhenotypeAssertionEvidence]
+
+}
