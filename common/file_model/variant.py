@@ -25,6 +25,9 @@ class Variant ():
         self.info = record.INFO
         self.type = "Variant"
     
+    def get_alternative_names(self) -> List:
+        return []
+    
     def get_primary_source(self) -> Mapping:
         source = self.header.get_lines("source")[0].value
         if re.search("^dbSNP", source):
@@ -144,24 +147,18 @@ class Variant ():
     def get_alleles(self) -> List:
         variant_allele_list = []
         info_map = self.traverse_csq_info()
-        frequency_key, frequency_list = self.format_frequency(self.info["FREQ"])
+        frequency_map = self.format_frequency(",".join(self.info["FREQ"]).split("|"))
         for index,alt in enumerate(self.alts):
-            if index+1 < len(self.alts):
-                variant_allele = self.create_variant_allele(info_map, [frequency_key, frequency_list[index+1]] , alt.value)
+            if index+1 <= len(self.alts):
+                variant_allele = self.create_variant_allele(info_map, frequency_map, index+1,  alt.value)
                 variant_allele_list.append(variant_allele)
-        reference_allele = self.create_variant_allele(info_map, [frequency_key, frequency_list[0]], self.ref)
+        reference_allele = self.create_variant_allele(info_map, frequency_map, 0, self.ref)
         variant_allele_list.append(reference_allele)
         return variant_allele_list
 
-    def create_variant_allele(self, info_map: Mapping, frequency: List, alt: str) -> Mapping:
+    def create_variant_allele(self, info_map: Mapping, frequency_map: List, allele_index: str, alt: str) -> Mapping:
         name = f"{self.chromosome}:{self.position}:{self.ref}:{alt}"
         min_alt = self.minimise_allele(alt)
-        population_allele_frequencies = [{
-            "population" : frequency[0],
-            "allele_frequency": frequency[1],
-            "is_minor_allele": False,
-            "is_hpmaf": False
-        }]
         return {
             "name": name,
             "allele_sequence": alt,
@@ -171,16 +168,28 @@ class Variant ():
             "slice": self.get_slice(alt),
             "phenotype_assertions": info_map[min_alt]["phenotype_assertions"] if min_alt in info_map else [],
             "predicted_molecular_consequences": info_map[min_alt]["predicted_molecular_consequences"] if min_alt in info_map else [],
-            "population_frequencies": population_allele_frequencies
+            "population_frequencies": self.get_population_allele_frequencies(frequency_map, allele_index)
         }
     
 
     def format_frequency(self, raw_frequency_list: List) -> Mapping:
-        key, ref_freq = raw_frequency_list[0].split(":")
-        freq_list = [ref_freq]
-        for freq in raw_frequency_list[1:]:
-            freq_list.append(freq)
-        return key, freq_list
+        freq_map = {}
+        for freq in raw_frequency_list:
+            key = freq.split(":")[0]
+            freq_list = freq.split(":")[1].split(",")
+            freq_map[key] = freq_list
+        return freq_map
+    
+    def get_population_allele_frequencies(self, population_map: Mapping, allele_index: int) -> List:
+        population_allele_frequencies = []
+        for key, pop_list in population_map.items():
+            population_allele_frequencies.append({
+            "population" : key,
+            "allele_frequency": pop_list[allele_index]
+        })
+        return population_allele_frequencies
+            
+
     
     def get_info_key_index(self, key: str, info_id: str ="CSQ") -> int:
         info_field = self.header.get_info_field_info(info_id).description
@@ -203,14 +212,16 @@ class Variant ():
         return{
                     "result": consequence_map[min(consequence_map.keys())]  ,
                     "analysis_method": {
-                        "tool": "Ensembl VEP"
+                        "tool": "Ensembl VEP",
+                        "qualifier": "most severe consequence"
                     }
         } 
         
     def minimise_allele(self, alt: str):
-        if len(alt) >= len(self.ref):
+        minimised_allele = alt
+        if len(alt) > len(self.ref):
             minimised_allele = alt[1:] 
-        else:
+        elif len(alt) < len(self.ref):
             minimised_allele = "-"
         return minimised_allele
         
