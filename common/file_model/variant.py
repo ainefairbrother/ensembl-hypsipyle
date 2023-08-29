@@ -26,7 +26,7 @@ class Variant ():
         source = self.header.get_lines("source")[0].value
         if re.search("^dbSNP", source):
             source_id = "dbSNP"
-            source_name = "dnSNP"
+            source_name = "dbSNP"
             source_description = "NCBI db of human variants"
             source_url = "https://www.ncbi.nlm.nih.gov/snp/"
             source_release =154

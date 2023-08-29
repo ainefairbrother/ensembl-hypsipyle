@@ -1,22 +1,18 @@
 [
     {
         "genome_uuid": "a7335667-93e7-11ec-a39d-005056b38ce3",
-        "assembly": "homo_sapiens_grch38",
         "data_folder": "/app/data/homo_sapiens_grch38/dbSNP/vcfs/"
     },
     {
         "genome_uuid": "b7335667-93e7-11ec-a39d-005056b38ce3",
-        "assembly": "homo_sapiens_grch37",
         "data_folder": "/app/data/homo_sapiens_grch37/dbSNP/vcfs/"  
     },
     {
         "genome_uuid": "c7335667-93e7-11ec-a39d-005056b38ce3",
-        "assembly": "saccharomyces_cerevisiae_R64_1_1",
         "data_folder": "/app/data/saccharomyces_cerevisiae_R64_1_1/SGRP/vcfs/"
     },
     {
         "genome_uuid": "d7335667-93e7-11ec-a39d-005056b38ce3",
-        "assembly": "triticum_aestivum_IWGSC",
         "data_folder": "/app/data/triticum_aestivum_IWGSC/EVA/vcfs/"
     }
 ]
