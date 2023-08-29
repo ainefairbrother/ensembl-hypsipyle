@@ -62,6 +62,13 @@ def allele_type(variant: Dict, info: GraphQLResolveInfo) -> Dict:
     """
     return variant.get_allele_type(variant.alts)
 
+@VARIANT_TYPE.field("alternative_names")
+def alternative_names(variant: Dict, info: GraphQLResolveInfo) -> Dict:
+    """
+    Load alternative names for variant
+    """
+    return variant.get_alternative_names()
+
 @VARIANT_TYPE.field("slice")
 def slice(variant: Dict, info: GraphQLResolveInfo) -> Dict:
     """

@@ -50,7 +50,7 @@ class Variant ():
             source_description = "test db of human variants"
             source_url = "https://www.ncbi.nlm.nih.gov/test/variation/"
             source_release = ""
-        ### TODO: This is not elegant, need to serialise?
+
         return {
             "accession_id": self.name,
             "name": self.name,
@@ -147,16 +147,23 @@ class Variant ():
     def get_alleles(self) -> List:
         variant_allele_list = []
         info_map = self.traverse_csq_info()
-        frequency_map = self.format_frequency(",".join(self.info["FREQ"]).split("|"))
+
+        frequency_map = self.format_frequency(",".join(map(str,self.info["FREQ"])).split("|")) if self.info["FREQ"] else {}
         for index,alt in enumerate(self.alts):
             if index+1 <= len(self.alts):
                 variant_allele = self.create_variant_allele(info_map, frequency_map, index+1,  alt.value)
                 variant_allele_list.append(variant_allele)
         reference_allele = self.create_variant_allele(info_map, frequency_map, 0, self.ref)
         variant_allele_list.append(reference_allele)
+        self.set_frequency_flags(variant_allele_list)
         return variant_allele_list
 
     def create_variant_allele(self, info_map: Mapping, frequency_map: List, allele_index: str, alt: str) -> Mapping:
+        """
+        The function currently does not include parent-child resolvers.
+        Ideally, each field should be a function called upon demand and does lazy loading
+        This needs to be rewritten similar to Variant
+        """
         name = f"{self.chromosome}:{self.position}:{self.ref}:{alt}"
         min_alt = self.minimise_allele(alt)
         return {
@@ -183,14 +190,54 @@ class Variant ():
     def get_population_allele_frequencies(self, population_map: Mapping, allele_index: int) -> List:
         population_allele_frequencies = []
         for key, pop_list in population_map.items():
-            population_allele_frequencies.append({
-            "population" : key,
-            "allele_frequency": pop_list[allele_index]
-        })
+            ## Adding only GnomAD population
+            if key == "GnomAD":
+                if pop_list[allele_index] != "None":
+                    allele_frequency = pop_list[allele_index]
+                else:
+                    allele_frequency = None
+                population_allele_frequencies.append({
+                "population": key,
+                "allele_frequency": pop_list[allele_index],
+                "is_minor_allele": False,
+                "is_hpmaf": False
+            })
         return population_allele_frequencies
             
 
-    
+    def set_frequency_flags(self, allele_list: List):
+        """
+        Calculates minor allele frequency by iterating through each allele 
+        Assumption: Considers that population is only gnomAD (genomes) for now
+        Sets the maf as hpmaf as gnomAD is the only population at the moment
+        """
+        maf_frequency = -1
+        maf_index = -1
+        highest_frequency = -1
+        highest_frequency_index = -1
+        highest_maf_frequency = -1
+        highest_maf_frequency_index = -1
+        maf_map = {}
+        for allele_index, allele in enumerate(allele_list):
+            if(len(allele["population_frequencies"]) > 0 ):
+                pop = allele["population_frequencies"][0]   
+                pop_allele_frequency = float(pop["allele_frequency"])
+                if ( pop_allele_frequency > maf_frequency and pop_allele_frequency < highest_frequency ):
+                    maf_frequency = pop_allele_frequency
+                    maf_index = allele_index
+                elif ( pop_allele_frequency > highest_frequency ):
+                    maf_frequency = highest_frequency
+                    maf_index = highest_frequency_index
+                    highest_frequency = pop_allele_frequency
+                    highest_frequency_index = allele_index
+
+        if maf_frequency>=0:
+            allele_list[maf_index]["population_frequencies"][0]["is_minor_allele"]  = True
+            allele_list[maf_index]["population_frequencies"][0]["is_hpmaf"]  = True    
+                    
+                         
+
+
     def get_info_key_index(self, key: str, info_id: str ="CSQ") -> int:
         info_field = self.header.get_info_field_info(info_id).description
         csq_list = info_field.split("Format: ")[1].split("|")
@@ -218,6 +265,11 @@ class Variant ():
         } 
         
     def minimise_allele(self, alt: str):
+        """
+        VCF file has the representation without anchoring bases
+        for prediction scores in INFO column. This function is useful
+        in matching the SPDI format in VCF with the allele in memory
+        """
         minimised_allele = alt
         if len(alt) > len(self.ref):
             minimised_allele = alt[1:] 
@@ -227,6 +279,10 @@ class Variant ():
         
 
     def traverse_csq_info(self) -> Mapping:
+        """
+        This function is to traverse the CSQ record and extract columns
+        corresponding to Consequence, SIFT, PolyPhen, CADD
+        """
         allele_index = self.get_info_key_index("Allele")
         phenotypes_index = self.get_info_key_index("VAR_SYNONYMS")
         feature_type_index = self.get_info_key_index("Feature_type")
@@ -235,6 +291,7 @@ class Variant ():
         polyphen_index = self.get_info_key_index("PolyPhen")
         consequence_index = self.get_info_key_index("Consequence")
         spdi_index = self.get_info_key_index("SPDI")
+        cadd_index = self.get_info_key_index("CADD_PHRED")
         info_map = {}
         for csq_record in self.info["CSQ"]:
             csq_record_list = csq_record.split("|")
@@ -249,7 +306,8 @@ class Variant ():
                                                                                                                                                csq_record_list[feature_type_index], 
                                                                                                                                                csq_record_list[consequence_index],
                                                                                                                                                csq_record_list[sift_index], 
-                                                                                                                                               csq_record_list[polyphen_index]
+                                                                                                                                               csq_record_list[polyphen_index],
+                                                                                                                                               csq_record_list[cadd_index]
                                                                                                                                    ))
             else:
                 info_map[csq_record_list[allele_index]] = {"phenotype_assertions": [], "predicted_molecular_consequences": []} 
@@ -260,7 +318,8 @@ class Variant ():
                                                                                                                                                csq_record_list[feature_type_index], 
                                                                                                                                                csq_record_list[consequence_index],
                                                                                                                                                csq_record_list[sift_index], 
-                                                                                                                                               csq_record_list[polyphen_index]
+                                                                                                                                               csq_record_list[polyphen_index],
+                                                                                                                                               csq_record_list[cadd_index]
                                                                                                                                                ))
         return info_map
     
@@ -277,7 +336,12 @@ class Variant ():
 
         }
     
-    def create_allele_predicted_molecular_consequence(self, allele: str, feature: str, feature_type: str, consequences: str, sift_score: str, polyphen_score: str ) -> Mapping:
+    def create_allele_predicted_molecular_consequence(self, allele: str, feature: str, feature_type: str, consequences: str, sift_score: str, polyphen_score: str, cadd_score: str ) -> Mapping:
+        """
+        This needs to be designed better, currently all the scores come as args
+        Steve suggested that we add prediction results per Gene instead of transcript
+        Currently, CADD returns empty
+        """
         consequences_list = []
         for cons in consequences.split("&"):
             consequences_list.append(
@@ -286,11 +350,23 @@ class Variant ():
                 }
             )
         prediction_results = []
+
+        if cadd_score: 
+            cadd_prediction_result = {
+                    "result": cadd_score ,
+                        "analysis_method": {
+                            "tool": "CADD",
+                            "qualifier": "CADD"
+                        }
+
+            }
+            prediction_results.append(cadd_prediction_result)
         if sift_score:
             sift_prediction_result = {
                     "result": sift_score ,
                     "analysis_method": {
-                        "tool": "SIFT"
+                        "tool": "SIFT",
+                        "qualifier": "SIFT"
                     }
                 }
             prediction_results.append(sift_prediction_result)
@@ -298,7 +374,8 @@ class Variant ():
             polyphen_prediction_result = {
                     "result": polyphen_score ,
                     "analysis_method": {
-                        "tool": "PolyPhen"
+                        "tool": "PolyPhen",
+                        "qualifier": "PolyPhen"
                     }
                 }
             prediction_results.append(polyphen_prediction_result)
