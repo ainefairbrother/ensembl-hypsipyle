@@ -17,15 +17,18 @@ To install dependencies, run:
 `pip install -r requirements-dev.txt` installs everything including dev dependencies like pytest, mypy etc.
 
 ## Running the API locally
-Add path to the datafile in `./connections.conf`. This setup currently can only handle a single species
+
+Map the data folders to the correspoding genome_uuids for different species in `./genome_mapping.json`. This is a temporary feature and involves hardcoding between species and data folders. The code currently matches for a vcf file within the folder. In the future, we plan to fetch data from multiple VCFs for a single species.
+
+Add path to the datafile in `./connections.conf`. 
 
 The file follows the following template:
 ```
-datafile=DATAFILE
+mapping_file = MAPPING_FILE
 ```
 Quick setup of API can be done using some test files available
 ```
-datafile=/app/data/test_dbsnp.vcf.gz
+mapping_file = /app/genome_mapping.json
 ```
 
 This command will start the server:
