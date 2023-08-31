@@ -1,0 +1,12 @@
+type PredictedMolecularConsequence{
+"""
+  PredictedMolecularConsequence
+"""
+  allele_name: String!
+  feature_stable_id: String!
+  feature_type: OntologyTermMetadata!
+  consequences: [OntologyTermMetadata]!
+  prediction_results: [PredictionResult]
+  ## variant_representation
+  ## relative_locations
+}

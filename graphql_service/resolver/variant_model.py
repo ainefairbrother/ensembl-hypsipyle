@@ -62,12 +62,30 @@ def allele_type(variant: Dict, info: GraphQLResolveInfo) -> Dict:
     """
     return variant.get_allele_type(variant.alts)
 
+@VARIANT_TYPE.field("alternative_names")
+def alternative_names(variant: Dict, info: GraphQLResolveInfo) -> Dict:
+    """
+    Load alternative names for variant
+    """
+    return variant.get_alternative_names()
+
 @VARIANT_TYPE.field("slice")
 def slice(variant: Dict, info: GraphQLResolveInfo) -> Dict:
     """
     Load slice for variant
     """
     return variant.get_slice(variant.alts)
+
+@VARIANT_TYPE.field("prediction_results")
+def prediction_results(variant: Dict, info: GraphQLResolveInfo) -> Dict:
+    """
+    Load prediction result for variant
+    """
+    prediction_results = []
+    prediction_results.append(variant.get_most_severe_consequence())
+    return prediction_results
+
+
 
 @VARIANT_TYPE.field("alleles")
 def alleles(variant: Dict, info: GraphQLResolveInfo) -> Dict:

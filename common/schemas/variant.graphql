@@ -9,4 +9,5 @@ type Variant {
   allele_type: OntologyTermMetadata!
   slice: Slice!
   alleles: [VariantAllele]!
+  prediction_results: [PredictionResult]
 }

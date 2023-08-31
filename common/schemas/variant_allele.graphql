@@ -9,5 +9,9 @@ type VariantAllele {
   type: String!
   allele_type: OntologyTermMetadata!
   slice: Slice!
+  phenotype_assertions: [PhenotypeAssertion]
+  prediction_results: [PredictionResult]
+  population_frequencies: [PopulationAlleleFrequency]
+  predicted_molecular_consequences: [PredictedMolecularConsequence]
 
 }
