@@ -148,7 +148,10 @@ class Variant ():
         variant_allele_list = []
         info_map = self.traverse_csq_info()
 
-        frequency_map = self.format_frequency(",".join(map(str,self.info["FREQ"])).split("|")) if self.info["FREQ"] else {}
+        frequency_map = {}
+        if "FREQ" in self.info:
+            frequency_map = self.format_frequency(",".join(map(str,self.info["FREQ"])).split("|"))
+
         for index,alt in enumerate(self.alts):
             if index+1 <= len(self.alts):
                 variant_allele = self.create_variant_allele(info_map, frequency_map, index+1,  alt.value)
