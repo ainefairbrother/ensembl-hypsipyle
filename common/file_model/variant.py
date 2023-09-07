@@ -192,15 +192,13 @@ class Variant ():
         for key, pop_list in population_map.items():
             ## Adding only GnomAD population
             if key == "GnomAD":
-                if pop_list[allele_index] != "None":
-                    allele_frequency = pop_list[allele_index]
-                else:
-                    allele_frequency = None
-                population_allele_frequencies.append({
-                "population": key,
-                "allele_frequency": pop_list[allele_index],
-                "is_minor_allele": False,
-                "is_hpmaf": False
+                if pop_list[allele_index] not in ["None", "."]:
+                    population_allele_frequencies.append({
+                        "population": key,
+                        "allele_frequency": pop_list[allele_index],
+                        "is_minor_allele": False,
+                        "is_hpmaf": False
+                    })
             })
         return population_allele_frequencies
             
