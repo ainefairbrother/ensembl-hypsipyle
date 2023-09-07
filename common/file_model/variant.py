@@ -199,7 +199,6 @@ class Variant ():
                         "is_minor_allele": False,
                         "is_hpmaf": False
                     })
-            })
         return population_allele_frequencies
             
 
