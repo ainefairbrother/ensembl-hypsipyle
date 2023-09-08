@@ -5,13 +5,12 @@ type VariantAllele {
   name: String!
   allele_sequence: String!
   reference_sequence: String!
-  alternative_names: [ExternalReference]
+  alternative_names: [ExternalReference]!
   type: String!
   allele_type: OntologyTermMetadata!
   slice: Slice!
-  phenotype_assertions: [PhenotypeAssertion]
-  prediction_results: [PredictionResult]
-  population_frequencies: [PopulationAlleleFrequency]
-  predicted_molecular_consequences: [PredictedMolecularConsequence]
-
+  phenotype_assertions: [PhenotypeAssertion]!
+  prediction_results: [PredictionResult]!
+  population_frequencies: [PopulationAlleleFrequency]!
+  predicted_molecular_consequences: [PredictedMolecularConsequence]!
 }
