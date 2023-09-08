@@ -29,22 +29,23 @@ class Variant ():
         return []
     
     def get_primary_source(self) -> Mapping:
-        source = self.header.get_lines("source")[0].value
-        if re.search("^dbSNP", source):
-            source_id = "dbSNP"
-            source_name = "dbSNP"
-            source_description = "NCBI db of human variants"
-            source_url = "https://www.ncbi.nlm.nih.gov/snp/"
-            source_release =154
-            
-        elif re.search("^ClinVar", source):
-            source_id = "ClinVar"
-            source_name = "ClinVar"
-            source_description = "ClinVar db of human variants"
-            source_url = "https://www.ncbi.nlm.nih.gov/clinvar/variation/"
-            source_release = ""
+        try:
+            source = self.header.get_lines("source")[0].value
+            if re.search("^dbSNP", source):
+                source_id = "dbSNP"
+                source_name = "dbSNP"
+                source_description = "NCBI db of human variants"
+                source_url = "https://www.ncbi.nlm.nih.gov/snp/"
+                source_release =154
 
-        else:
+            elif re.search("^ClinVar", source):
+                source_id = "ClinVar"
+                source_name = "ClinVar"
+                source_description = "ClinVar db of human variants"
+                source_url = "https://www.ncbi.nlm.nih.gov/clinvar/variation/"
+                source_release = ""
+
+        except:
             source_id = "test"
             source_name = "test"
             source_description = "test db of human variants"
