@@ -173,12 +173,13 @@ class Variant ():
             "name": name,
             "allele_sequence": alt,
             "reference_sequence": self.ref,
+            "alternative_names": self.get_alternative_names(),
             "type": "VariantAllele",
             "allele_type": self.get_allele_type(alt),
             "slice": self.get_slice(alt),
             "phenotype_assertions": info_map[min_alt]["phenotype_assertions"] if min_alt in info_map else [],
-            "prediction_results": info_map[min_alt]["prediction_results"] if min_alt in info_map else [],
             "predicted_molecular_consequences": info_map[min_alt]["predicted_molecular_consequences"] if min_alt in info_map else [],
+            "prediction_results": info_map[min_alt]["prediction_results"] if min_alt in info_map else [],
             "population_frequencies": self.get_population_allele_frequencies(frequency_map, allele_index)
         }
 
