@@ -16,23 +16,20 @@ import json
 import os
 import glob
 from common.file_model.variant import Variant
-   
+
 class FileClient:
     """
     Client to load file in-memory
     """
-    def __init__(self, config, datafile=None):
-        mapping_file = config.get("mapping_file")
+    def __init__(self, config):
         self.data_root = config.get("data_root")
-        with open(mapping_file) as f:
-            self.mapping = json.load(f)
+        
     
     def get_variant_record(self, genome_uuid: str, variant_id: str):
         """
         Get a variant entry from variant_id
         """
-        genome_metadata = next(d for d in self.mapping if d['genome_uuid'] == genome_uuid)
-        datafile = glob.glob(os.path.join(self.data_root,genome_metadata["data_folder"],"*.vcf.gz"))[0]
+        datafile = os.path.join(self.data_root, genome_uuid, "variation.vcf.gz")
         if datafile:
             self.collection = vcfpy.Reader.from_path(datafile)
             self.header = self.collection.header
