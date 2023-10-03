@@ -18,27 +18,20 @@ To install dependencies, run:
 
 ## Running the API locally
 
-Map the data folders to the correspoding genome_uuids for different species in `./genome_mapping.json`. This is a temporary feature and involves hardcoding between species and data folders. The code currently matches for a vcf file within the folder. In the future, we plan to fetch data from multiple VCFs for a single species.
+The deployment assumes that we have a directory mounted with the convention `<data_root>/<genome_uuid>/variation.vcf.gz`
+The code currently fetches a single vcf file within the genome_uuid folder. In the future, we plan to fetch data from multiple VCFs for a single genome_uuid.
 
 Add path to the datafile in `./connections.conf`. 
 
 The file follows the following template:
 ```
-mapping_file = MAPPING_FILE
-```
-Quick setup of API can be done using some test files available
-```
-mapping_file = /app/genome_mapping.json
+data_root = /usr/data/variation_vcfs
 ```
 
 This command will start the server:
 
 ```uvicorn --workers 1 --host=0.0.0.0 graphql_service.server:APP```
 
-
-If you're developing in PyCharm, you will probably find it useful to create a run 
-configuration so that you can use the debugger.  Create a run configuration that 
-looks like this:
 
 
 ## Containerisation for dev
