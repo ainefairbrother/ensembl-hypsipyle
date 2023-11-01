@@ -46,11 +46,7 @@ class Variant ():
                 source_release = ""
 
         except:
-            source_id = "test"
-            source_name = "test"
-            source_description = "test db of human variants"
-            source_url = "https://www.ncbi.nlm.nih.gov/test/variation/"
-            source_release = ""
+            return None
 
         return {
             "accession_id": self.name,
@@ -163,11 +159,7 @@ class Variant ():
         return variant_allele_list
 
     def create_variant_allele(self, info_map: Mapping, frequency_map: List, allele_index: str, alt: str) -> Mapping:
-        """
-        The function currently does not include parent-child resolvers.
-        Ideally, each field should be a function called upon demand and does lazy loading
-        This needs to be rewritten similar to Variant
-        """
+        
         name = f"{self.chromosome}:{self.position}:{self.ref}:{alt}"
         min_alt = self.minimise_allele(alt)
         return {
@@ -372,10 +364,7 @@ class Variant ():
 
 
     def create_allele_predicted_molecular_consequence(self, allele: str, feature: str, feature_type: str, consequences: str, sift_score: str, polyphen_score: str) -> Mapping:
-        """
-        This needs to be designed better, currently all the scores come as args
-        Steve suggested that we add prediction results per Gene instead of transcript
-        """
+
         consequences_list = []
         for cons in consequences.split("&"):
             consequences_list.append(
