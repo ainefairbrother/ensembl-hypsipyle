@@ -32,12 +32,13 @@ class Variant ():
     
     def get_primary_source(self) -> Mapping:
         try:
-            source = self.header.get_lines("source")[0].value
+            source = self.info["SOURCE"]
             if re.search("^dbSNP", source):
                 source_id = "dbSNP"
                 source_name = "dbSNP"
                 source_description = "NCBI db of human variants"
                 source_url = "https://www.ncbi.nlm.nih.gov/snp/"
+                source_url_id = "https://www.ncbi.nlm.nih.gov/snp/"
                 source_release =154
 
             elif re.search("^ClinVar", source):
@@ -45,7 +46,17 @@ class Variant ():
                 source_name = "ClinVar"
                 source_description = "ClinVar db of human variants"
                 source_url = "https://www.ncbi.nlm.nih.gov/clinvar/variation/"
+                source_url_id = "https://www.ncbi.nlm.nih.gov/clinvar/variation/"
                 source_release = ""
+            
+            elif re.search("^EVA", source):
+                source_id = "EVA"
+                source_name = "EVA"
+                source_description = "European Variation Archive"
+                source_url = "https://www.ebi.ac.uk/eva"
+                source_url_id = "https://www.ebi.ac.uk/eva/?variant&accessionID="
+                source_release = ""
+            
 
         except:
             return None 
@@ -53,12 +64,12 @@ class Variant ():
         return {
             "accession_id": self.name,
             "name": self.name,
-            "description": "",
+            "description": f"{source_description}",
             "assignment_method": {
                                 "type": "DIRECT",
                                 "description": "A reference made by an external resource of annotation to an Ensembl feature that Ensembl imports without modification"
                             },
-            "url": f"{source_url}{self.name}",
+            "url": f"{source_url_id}{self.name}",
             "source": {
                         "id" : f"{source_id}",
                         "name": f"{source_name}",
@@ -147,8 +158,8 @@ class Variant ():
     
     def get_alleles(self) -> List:
         variant_allele_list = []
-        
 
+        
         for index,alt in enumerate(self.alts):
             if index+1 <= len(self.alts):
                 variant_allele = VariantAllele(index+1,  alt.value, self)
@@ -214,5 +225,4 @@ class Variant ():
         if maf_frequency>=0:
             allele_list[maf_index]["population_frequencies"][0]["is_minor_allele"]  = True
             allele_list[maf_index]["population_frequencies"][0]["is_hpmaf"]  = True  
-
 

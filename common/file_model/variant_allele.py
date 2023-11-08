@@ -46,63 +46,40 @@ class VariantAllele():
         This function is to traverse the CSQ record and extract columns
         corresponding to Consequence, SIFT, PolyPhen, CADD
         """
-        allele_index = self.variant.get_info_key_index("Allele")
-        phenotypes_index = self.variant.get_info_key_index("VAR_SYNONYMS")
-        feature_type_index = self.variant.get_info_key_index("Feature_type")
-        feature_index = self.variant.get_info_key_index("Feature")
-        sift_index = self.variant.get_info_key_index("SIFT")
-        polyphen_index = self.variant.get_info_key_index("PolyPhen")
-        consequence_index = self.variant.get_info_key_index("Consequence")
-        spdi_index = self.variant.get_info_key_index("SPDI")
-        cadd_index = self.variant.get_info_key_index("CADD_PHRED")
-        gerp_index = self.variant.get_info_key_index("Conservation")
+        column_list = ["Allele", "PHENOTYPES", "Feature_type", "Feature", "Consequence", "SIFT", "PolyPhen", "SPDI", "CADD_PHRED,","Conservation" ]
+        prediction_index_map = {}
+        for col in column_list:
+                if self.variant.get_info_key_index(col) is not None:
+                    prediction_index_map[col.lower()] = self.variant.get_info_key_index(col) 
+
         info_map = {}
         for csq_record in self.variant.info["CSQ"]:
             csq_record_list = csq_record.split("|")
             phenotype = None
-            if re.search("--OMIM",csq_record_list[phenotypes_index]):
-                phenotype = csq_record_list[phenotypes_index].split("--")[1]
-            if csq_record_list[allele_index] in info_map.keys():
-                if phenotype:
-                    info_map[csq_record_list[allele_index]]["phenotype_assertions"].append(self.create_allele_phenotype_assertion(csq_record_list[feature_index], csq_record_list[feature_type_index], phenotype ))
-                info_map[csq_record_list[allele_index]]["predicted_molecular_consequences"].append(self.create_allele_predicted_molecular_consequence(csq_record_list[spdi_index], 
-                                                                                                                                               csq_record_list[feature_index], 
-                                                                                                                                               csq_record_list[feature_type_index], 
-                                                                                                                                               csq_record_list[consequence_index],
-                                                                                                                                               csq_record_list[sift_index], 
-                                                                                                                                               csq_record_list[polyphen_index]
-                                                                                                                                   ))
-                current_prediction_results = info_map[csq_record_list[allele_index]]["prediction_results"]
-                info_map[csq_record_list[allele_index]]["prediction_results"] += self.create_allele_prediction_results(current_prediction_results, 
-                                                                                                                                               csq_record_list[spdi_index], 
-                                                                                                                                               csq_record_list[cadd_index],
-                                                                                                                                               csq_record_list[gerp_index]
-                                                                                                                                               )
+            phenotypes = csq_record_list[prediction_index_map["phenotypes"]].split("&")
+            if "allele" in info_map.keys():
+                for phenotype in phenotypes:
+                    info_map[csq_record_list[prediction_index_map["allele"]]]["phenotype_assertions"].append(self.create_allele_phenotype_assertion(csq_record_list[prediction_index_map["feature"]], csq_record_list[prediction_index_map["feature_type"]], phenotype ))
+                info_map[csq_record_list[prediction_index_map["allele"]]]["predicted_molecular_consequences"].append(self.create_allele_predicted_molecular_consequence(csq_record_list,prediction_index_map))
+                current_prediction_results = info_map[csq_record_list[prediction_index_map["allele"]]["prediction_results"]]
+                info_map[csq_record_list[prediction_index_map["allele"]]]["prediction_results"] += self.create_allele_prediction_results(current_prediction_results, 
+                                                                                                                                               csq_record_list, prediction_index_map)
                 
             else:
-                info_map[csq_record_list[allele_index]] = {"phenotype_assertions": [], "predicted_molecular_consequences": [], "prediction_results": []} 
-                if phenotype:
-                    info_map[csq_record_list[allele_index]]["phenotype_assertions"].append(self.create_allele_phenotype_assertion(csq_record_list[feature_index], csq_record_list[feature_type_index], phenotype))
-                info_map[csq_record_list[allele_index]]["predicted_molecular_consequences"].append(self.create_allele_predicted_molecular_consequence(csq_record_list[spdi_index], 
-                                                                                                                                               csq_record_list[feature_index], 
-                                                                                                                                               csq_record_list[feature_type_index], 
-                                                                                                                                               csq_record_list[consequence_index],
-                                                                                                                                               csq_record_list[sift_index], 
-                                                                                                                                               csq_record_list[polyphen_index]
-                                                                                                                                               ))
-                info_map[csq_record_list[allele_index]]["prediction_results"] += self.create_allele_prediction_results([], csq_record_list[spdi_index],
-                                                                                                                                               csq_record_list[cadd_index],
-                                                                                                                                               csq_record_list[gerp_index]
-                                                                                                                                               )
+                info_map[csq_record_list[prediction_index_map["allele"]]] = {"phenotype_assertions": [], "predicted_molecular_consequences": [], "prediction_results": []} 
+                for phenotype in phenotypes:
+                    info_map[csq_record_list[prediction_index_map["allele"]]]["phenotype_assertions"].append(self.create_allele_phenotype_assertion(csq_record_list[prediction_index_map["feature"]], csq_record_list[prediction_index_map["feature_type"]], phenotype))
+                info_map[csq_record_list[prediction_index_map["allele"]]]["predicted_molecular_consequences"].append(self.create_allele_predicted_molecular_consequence(csq_record_list, prediction_index_map))
+                info_map[csq_record_list[prediction_index_map["allele"]]]["prediction_results"] += self.create_allele_prediction_results([], csq_record_list, prediction_index_map)
 
         return info_map
     
-    def create_allele_prediction_results(self, current_prediction_results: Mapping, allele: str, cadd_score: str, gerp_score: str) -> list:
+    def create_allele_prediction_results(self, current_prediction_results: Mapping, csq_record: List, prediction_index_map: dict) -> list:
         prediction_results = []
-        if cadd_score:
+        if "cadd" in prediction_index_map.keys():
             if not self.prediction_result_already_exists(current_prediction_results, "CADD"):
                 cadd_prediction_result = {
-                        "result": cadd_score ,
+                        "result": csq_record[prediction_index_map["cadd"]] ,
                         "analysis_method": {
                             "tool": "CADD",
                             "qualifier": "CADD"
@@ -110,10 +87,10 @@ class VariantAllele():
 
                 }
                 prediction_results.append(cadd_prediction_result)
-        if gerp_score:
+        if "gerp" in prediction_index_map.keys():
             if not self.prediction_result_already_exists(current_prediction_results, "GERP"):
                 gerp_prediction_result = {
-                        "result": gerp_score ,
+                        "result": csq_record[prediction_index_map["gerp"]] ,
                         "analysis_method": {
                             "tool": "GERP",
                             "qualifier": "GERP"
@@ -130,47 +107,52 @@ class VariantAllele():
 
         return False
     
-    def create_allele_predicted_molecular_consequence(self, allele: str, feature: str, feature_type: str, consequences: str, sift_score: str, polyphen_score: str) -> Mapping:
+    def create_allele_predicted_molecular_consequence(self, csq_record: List, prediction_index_map: dict) -> Mapping:
         consequences_list = []
-        for cons in consequences.split("&"):
-            consequences_list.append(
-                {
-                    "accession_id": cons
-                }
-            )
+        if "consequence" in prediction_index_map.keys():
+            for cons in csq_record[prediction_index_map["consequence"]].split("&"):
+                consequences_list.append(
+                    {
+                        "accession_id": cons
+                    }
+                )
 
         prediction_results = []
-        if sift_score:
-            (result, score) = self.format_sift_polyphen_output(sift_score)
-            if result is not None and score is not None:
-                sift_prediction_result = {
-                        "result": result,
-                        "score": score,
-                        "analysis_method": {
-                            "tool": "SIFT",
-                            "qualifier": "SIFT"
+        if "sift" in prediction_index_map.keys():
+            sift_score = csq_record[prediction_index_map["sift"]]
+            if sift_score:
+                (result, score) = self.format_sift_polyphen_output(sift_score)
+                if result is not None and score is not None:
+                    sift_prediction_result = {
+                            "result": result,
+                            "score": score,
+                            "analysis_method": {
+                                "tool": "SIFT",
+                                "qualifier": "SIFT"
+                            }
                         }
-                    }
-                prediction_results.append(sift_prediction_result)
-        if polyphen_score:
-            (result, score) = self.format_sift_polyphen_output(polyphen_score)
-            if result is not None and score is not None:
-                polyphen_prediction_result = {
-                        "result": result,
-                        "score": score,
-                        "analysis_method": {
-                            "tool": "PolyPhen",
-                            "qualifier": "PolyPhen"
+                    prediction_results.append(sift_prediction_result)
+        if "polyphen" in prediction_index_map.keys():
+            polyphen_score = csq_record[prediction_index_map["polyphen"]]
+            if polyphen_score:
+                (result, score) = self.format_sift_polyphen_output(polyphen_score)
+                if result is not None and score is not None:
+                    polyphen_prediction_result = {
+                            "result": result,
+                            "score": score,
+                            "analysis_method": {
+                                "tool": "PolyPhen",
+                                "qualifier": "PolyPhen"
+                            }
                         }
-                    }
-                prediction_results.append(polyphen_prediction_result)
+                    prediction_results.append(polyphen_prediction_result)
 
         
         return {
-            "allele_name": allele,
-            "feature_stable_id": feature,
+            "allele_name": csq_record[prediction_index_map["allele"]],
+            "feature_stable_id": csq_record[prediction_index_map["feature"]],
             "feature_type": {
-                "accession_id": feature_type                
+                "accession_id": csq_record[prediction_index_map["feature_type"]]               
             } ,
             "consequences": consequences_list,
             "prediction_results": prediction_results
@@ -203,6 +185,7 @@ class VariantAllele():
         return (result, score)
     
     def create_allele_phenotype_assertion(self, feature: str, feature_type: str , phenotype: str) -> Mapping:
+        phenotype = phenotype.split("+")[0]
         return {
             "feature": feature,
             "feature_type": {
