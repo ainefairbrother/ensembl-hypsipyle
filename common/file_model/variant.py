@@ -68,13 +68,25 @@ class Variant ():
             return None 
 
         return {
-            
+            "accession_id": self.name,
+            "name": self.name,
+            "description": "",
+            "assignment_method": {
+                                "type": "DIRECT",
+                                "description": "A reference made by an external resource of annotation to an Ensembl feature that Ensembl imports without modification"
+                            },
+            "url": f"{source_url}{self.name}",
+            "source": {
+
                         "id" : f"{source_id}",
                         "name": f"{source_name}",
                         "description": f"{source_description}",
                         "url":  f"{source_url}",
                         "release": f"{source_release}"
-                }
+                        }
+        }
+
+
         
 
     def set_allele_type(self, alt_one_bp: bool, ref_one_bp: bool, ref_alt_equal_bp: bool):         
