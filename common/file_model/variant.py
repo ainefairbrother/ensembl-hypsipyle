@@ -65,8 +65,7 @@ class Variant ():
                 source_name = "Ensembl"
                 source_description = "Ensembl"
                 source_url = "https://beta.ensembl.org"
-                assembly = "" # to be fetched from the file
-                source_url_id = f"https://beta.ensembl.org/genome-browser/{assembly}?focus=variant:"
+                source_url_id = ""
                 source_release = "110" # to be fetched from the file
                 variant_id = f"{self.chromosome}:{self.position}:{self.name}"
             
