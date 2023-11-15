@@ -48,7 +48,7 @@ class Variant ():
                 source_description = "NCBI db of human variants"
                 source_url = "https://www.ncbi.nlm.nih.gov/snp/"
                 source_url_id = source_url
-                source_release = 154
+                source_release = 156
                 variant_id = self.name
             
             elif re.search("^EVA", source):
@@ -65,10 +65,11 @@ class Variant ():
                 source_name = "Ensembl"
                 source_description = "Ensembl"
                 source_url = "https://beta.ensembl.org"
-                assembly = "" #to be fetched from the file
+                assembly = "" # to be fetched from the file
                 source_url_id = f"https://beta.ensembl.org/genome-browser/{assembly}?focus=variant:"
-                source_release = "110" #to be fetched from the file
+                source_release = "110" # to be fetched from the file
                 variant_id = f"{self.chromosome}:{self.position}:{self.name}"
+            
             
 
         except Exception as e:
