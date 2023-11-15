@@ -47,14 +47,9 @@ class Variant ():
                 source_name = "dbSNP"
                 source_description = "NCBI db of human variants"
                 source_url = "https://www.ncbi.nlm.nih.gov/snp/"
-                source_release =154
-
-            elif re.search("^ClinVar", source):
-                source_id = "ClinVar"
-                source_name = "ClinVar"
-                source_description = "ClinVar db of human variants"
-                source_url = "https://www.ncbi.nlm.nih.gov/clinvar/variation/"
-                source_release = ""
+                source_url_id = source_url
+                source_release = 154
+                variant_id = self.name
             
             elif re.search("^EVA", source):
                 source_id = "EVA"
@@ -62,7 +57,19 @@ class Variant ():
                 source_description = "European Variation Archive"
                 source_url = "https://www.ebi.ac.uk/eva"
                 source_url_id = "https://www.ebi.ac.uk/eva/?variant&accessionID="
-                source_release = ""
+                source_release = "release_5"
+                variant_id = self.name
+
+            elif re.search("^Ensembl", source):
+                source_id = "Ensembl"
+                source_name = "Ensembl"
+                source_description = "Ensembl"
+                source_url = "https://beta.ensembl.org"
+                assembly = "" #to be fetched from the file
+                source_url_id = f"https://beta.ensembl.org/genome-browser/{assembly}?focus=variant:"
+                source_release = "110" #to be fetched from the file
+                variant_id = f"{self.chromosome}:{self.position}:{self.name}"
+            
 
         except Exception as e:
             return None 
@@ -75,7 +82,7 @@ class Variant ():
                                 "type": "DIRECT",
                                 "description": "A reference made by an external resource of annotation to an Ensembl feature that Ensembl imports without modification"
                             },
-            "url": f"{source_url}{self.name}",
+            "url": f"{source_url_id}{variant_id}",
             "source": {
 
                         "id" : f"{source_id}",
