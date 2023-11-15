@@ -31,8 +31,17 @@ class Variant ():
         return []
     
     def get_primary_source(self) -> Mapping:
+        """
+        Fetches source from variant INFO columns
+        Fallsback to fetching from the header
+        """
+        
         try:
-            source = self.header.get_lines("source")[0].value
+            if "SOURCE" in self.info:
+                source = self.info["SOURCE"]
+            else:
+                source = self.header.get_lines("source")[0].value
+
             if re.search("^dbSNP", source):
                 source_id = "dbSNP"
                 source_name = "dbSNP"
@@ -46,27 +55,27 @@ class Variant ():
                 source_description = "ClinVar db of human variants"
                 source_url = "https://www.ncbi.nlm.nih.gov/clinvar/variation/"
                 source_release = ""
+            
+            elif re.search("^EVA", source):
+                source_id = "EVA"
+                source_name = "EVA"
+                source_description = "European Variation Archive"
+                source_url = "https://www.ebi.ac.uk/eva"
+                source_url_id = "https://www.ebi.ac.uk/eva/?variant&accessionID="
+                source_release = ""
 
-        except:
+        except Exception as e:
             return None 
 
         return {
-            "accession_id": self.name,
-            "name": self.name,
-            "description": "",
-            "assignment_method": {
-                                "type": "DIRECT",
-                                "description": "A reference made by an external resource of annotation to an Ensembl feature that Ensembl imports without modification"
-                            },
-            "url": f"{source_url}{self.name}",
-            "source": {
+            
                         "id" : f"{source_id}",
                         "name": f"{source_name}",
                         "description": f"{source_description}",
                         "url":  f"{source_url}",
                         "release": f"{source_release}"
-                        }
-        }
+                }
+        
 
     def set_allele_type(self, alt_one_bp: bool, ref_one_bp: bool, ref_alt_equal_bp: bool):         
         match [alt_one_bp, ref_one_bp, ref_alt_equal_bp]:
