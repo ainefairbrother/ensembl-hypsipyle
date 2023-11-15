@@ -18,12 +18,14 @@ class VariantAllele():
         self.info_map = self.traverse_csq_info()
 
     def get_allele_type(self):
+        #TODO: change this to VariantAllele level
         return self.variant.get_allele_type(self.alt)
 
     def get_alternative_names(self):
         return self.variant.get_alternative_names()
 
     def get_slice(self):
+        #TODO: review this to change to VariantAllele level
         return self.variant.get_slice(self.alt)
     
     def get_phenotype_assertions(self):
@@ -40,7 +42,6 @@ class VariantAllele():
         return self.info_map[min_alt]["prediction_results"] if min_alt in self.info_map else []
     
     
-            
     def traverse_csq_info(self) -> Mapping:
         """
         This function is to traverse the CSQ record and extract columns
@@ -132,6 +133,7 @@ class VariantAllele():
                             }
                         }
                     prediction_results.append(sift_prediction_result)
+
         if "polyphen" in prediction_index_map.keys():
             polyphen_score = csq_record[prediction_index_map["polyphen"]]
             if polyphen_score:

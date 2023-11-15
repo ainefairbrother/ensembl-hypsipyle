@@ -32,7 +32,7 @@ class Variant ():
     
     def get_primary_source(self) -> Mapping:
         try:
-            source = self.info["SOURCE"]
+            source = self.info["SOURCE"] or self.header.get_lines("source")[0].value
             if re.search("^dbSNP", source):
                 source_id = "dbSNP"
                 source_name = "dbSNP"
@@ -166,7 +166,6 @@ class Variant ():
                 variant_allele_list.append(variant_allele)
         reference_allele = VariantAllele(0, self.ref, self)
         variant_allele_list.append(reference_allele)
-        # self.set_frequency_flags(variant_allele_list)
         return variant_allele_list
     
     def get_most_severe_consequence(self) -> Mapping:
