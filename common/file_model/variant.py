@@ -65,7 +65,7 @@ class Variant ():
                 source_name = "Ensembl"
                 source_description = "Ensembl"
                 source_url = "https://beta.ensembl.org"
-                source_url_id = ""
+                source_url_id = "https://beta.ensembl.org"
                 source_release = "110" # to be fetched from the file
                 variant_id = f"{self.chromosome}:{self.position}:{self.name}"
             
