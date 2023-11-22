@@ -58,23 +58,22 @@ class VariantAllele():
             csq_record_list = csq_record.split("|")
             phenotype = None
             phenotypes = csq_record_list[prediction_index_map["phenotypes"]].split("&")
-            if "allele" in info_map.keys():
-                for phenotype in phenotypes:
-                    info_map[csq_record_list[prediction_index_map["allele"]]]["phenotype_assertions"].append(self.create_allele_phenotype_assertion(csq_record_list[prediction_index_map["feature"]], csq_record_list[prediction_index_map["feature_type"]], phenotype ))
-                info_map[csq_record_list[prediction_index_map["allele"]]]["predicted_molecular_consequences"].append(self.create_allele_predicted_molecular_consequence(csq_record_list,prediction_index_map))
-                current_prediction_results = info_map[csq_record_list[prediction_index_map["allele"]]["prediction_results"]]
-                info_map[csq_record_list[prediction_index_map["allele"]]]["prediction_results"] += self.create_allele_prediction_results(current_prediction_results, 
-                                                                                                                                               csq_record_list, prediction_index_map)
-                
-            else:
+            if "allele" not in info_map.keys():
                 info_map[csq_record_list[prediction_index_map["allele"]]] = {"phenotype_assertions": [], "predicted_molecular_consequences": [], "prediction_results": []} 
-                for phenotype in phenotypes:
-                    info_map[csq_record_list[prediction_index_map["allele"]]]["phenotype_assertions"].append(self.create_allele_phenotype_assertion(csq_record_list[prediction_index_map["feature"]], csq_record_list[prediction_index_map["feature_type"]], phenotype))
-                info_map[csq_record_list[prediction_index_map["allele"]]]["predicted_molecular_consequences"].append(self.create_allele_predicted_molecular_consequence(csq_record_list, prediction_index_map))
-                info_map[csq_record_list[prediction_index_map["allele"]]]["prediction_results"] += self.create_allele_prediction_results([], csq_record_list, prediction_index_map)
+                
+            for phenotype in phenotypes:
+                phenotype_assertions = self.create_allele_phenotype_assertion(csq_record_list[prediction_index_map["feature"]], csq_record_list[prediction_index_map["feature_type"]], phenotype)
+                if (phenotype_assertions):
+                    info_map[csq_record_list[prediction_index_map["allele"]]]["phenotype_assertions"].append(phenotype_assertions)
+            predicted_molecular_consequences =self.create_allele_predicted_molecular_consequence(csq_record_list, prediction_index_map)
+            if (predicted_molecular_consequences):
+                info_map[csq_record_list[prediction_index_map["allele"]]]["predicted_molecular_consequences"].append(predicted_molecular_consequences)
+            prediction_results = self.create_allele_prediction_results([], csq_record_list, prediction_index_map)
+            if (prediction_results):
+                info_map[csq_record_list[prediction_index_map["allele"]]]["prediction_results"] += prediction_results
 
         return info_map
-    
+
     def create_allele_prediction_results(self, current_prediction_results: Mapping, csq_record: List, prediction_index_map: dict) -> list:
         prediction_results = []
         if "cadd" in prediction_index_map.keys():
@@ -148,17 +147,18 @@ class VariantAllele():
                             }
                         }
                     prediction_results.append(polyphen_prediction_result)
+        if consequences_list:
+            return {
+                "allele_name": csq_record[prediction_index_map["allele"]],
+                "feature_stable_id": csq_record[prediction_index_map["feature"]],
+                "feature_type": {
+                    "accession_id": csq_record[prediction_index_map["feature_type"]]               
+                } ,
+                "consequences": consequences_list,
+                "prediction_results": prediction_results
+            }
+        return
 
-        
-        return {
-            "allele_name": csq_record[prediction_index_map["allele"]],
-            "feature_stable_id": csq_record[prediction_index_map["feature"]],
-            "feature_type": {
-                "accession_id": csq_record[prediction_index_map["feature_type"]]               
-            } ,
-            "consequences": consequences_list,
-            "prediction_results": prediction_results
-        }
     
     def format_sift_polyphen_output(self, output: str) -> tuple:
         try:
@@ -188,17 +188,19 @@ class VariantAllele():
     
     def create_allele_phenotype_assertion(self, feature: str, feature_type: str , phenotype: str) -> Mapping:
         phenotype = phenotype.split("+")[0]
-        return {
-            "feature": feature,
-            "feature_type": {
-                "accession_id": feature_type                
-            } ,
-            "phenotype": {
-                "name": phenotype
-            },
-            "evidence": []
+        if phenotype:
+            return {
+                "feature": feature,
+                "feature_type": {
+                    "accession_id": feature_type                
+                } ,
+                "phenotype": {
+                    "name": phenotype
+                },
+                "evidence": []
+            }
 
-        }
+        return
     
     
     def minimise_allele(self, alt: str):
