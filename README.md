@@ -2,7 +2,7 @@
 
 A [GraphQL trial](https://graphql.org/) for [Ensembl](https://www.ensembl.org) to reduce the need for RESTful web services.
 
-This application is implemented with [Ariadne](https://ariadnegraphql.org/), a schema-first graphql framework for Python
+This application is implemented with [Ariadne](https://ariadnegraphql.org/), a schema-first graphql framework for Python.
 
 GraphQL requires a schema (in /common) and implementation of resolver functions that know how to interpret specific parts of a GraphQL query. Resolvers are found in /resolver, and may also make use of "data loaders" to overcome inherent deficiencies in GraphQL implementations.
 
@@ -28,7 +28,7 @@ The file follows the following template:
 data_root = /usr/data/variation_vcfs
 ```
 
-This command will start the server:
+The command below will start the server:
 
 ```uvicorn --workers 1 --host=0.0.0.0 graphql_service.server:APP```
 
