@@ -26,6 +26,7 @@ class Variant ():
         self.ref = record.REF
         self.info = record.INFO
         self.type = "Variant"
+        self.vep_version = source = self.header.get_lines("VEP")[0].value
     
     def get_alternative_names(self) -> List:
         return []

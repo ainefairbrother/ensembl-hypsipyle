@@ -47,7 +47,7 @@ class VariantAllele():
         This function is to traverse the CSQ record and extract columns
         corresponding to Consequence, SIFT, PolyPhen, CADD
         """
-        column_list = ["Allele", "PHENOTYPES", "Feature_type", "Feature", "Consequence", "SIFT", "PolyPhen", "SPDI", "CADD_PHRED,","Conservation" ]
+        column_list = ["Allele", "PHENOTYPES", "Feature_type", "Feature", "Consequence", "SIFT", "PolyPhen", "SPDI", "CADD_PHRED","Conservation", "AA" ]
         prediction_index_map = {}
         for col in column_list:
                 if self.variant.get_info_key_index(col) is not None:
@@ -56,8 +56,7 @@ class VariantAllele():
         info_map = {}
         for csq_record in self.variant.info["CSQ"]:
             csq_record_list = csq_record.split("|")
-            phenotype = None
-            phenotypes = csq_record_list[prediction_index_map["phenotypes"]].split("&")
+            phenotypes = csq_record_list[prediction_index_map["phenotypes"]].split("&") if "phenotypes" in prediction_index_map.keys() else []
             if "allele" not in info_map.keys():
                 info_map[csq_record_list[prediction_index_map["allele"]]] = {"phenotype_assertions": [], "predicted_molecular_consequences": [], "prediction_results": []} 
                 
@@ -65,7 +64,7 @@ class VariantAllele():
                 phenotype_assertions = self.create_allele_phenotype_assertion(csq_record_list[prediction_index_map["feature"]], csq_record_list[prediction_index_map["feature_type"]], phenotype)
                 if (phenotype_assertions):
                     info_map[csq_record_list[prediction_index_map["allele"]]]["phenotype_assertions"].append(phenotype_assertions)
-            predicted_molecular_consequences =self.create_allele_predicted_molecular_consequence(csq_record_list, prediction_index_map)
+            predicted_molecular_consequences = self.create_allele_predicted_molecular_consequence(csq_record_list, prediction_index_map)
             if (predicted_molecular_consequences):
                 info_map[csq_record_list[prediction_index_map["allele"]]]["predicted_molecular_consequences"].append(predicted_molecular_consequences)
             prediction_results = self.create_allele_prediction_results([], csq_record_list, prediction_index_map)
@@ -76,10 +75,10 @@ class VariantAllele():
 
     def create_allele_prediction_results(self, current_prediction_results: Mapping, csq_record: List, prediction_index_map: dict) -> list:
         prediction_results = []
-        if "cadd" in prediction_index_map.keys():
+        if "cadd_phred" in prediction_index_map.keys():
             if not self.prediction_result_already_exists(current_prediction_results, "CADD"):
                 cadd_prediction_result = {
-                        "result": csq_record[prediction_index_map["cadd"]] ,
+                        "result": csq_record[prediction_index_map["cadd_phred"]] ,
                         "analysis_method": {
                             "tool": "CADD",
                             "qualifier": "CADD"
@@ -87,6 +86,7 @@ class VariantAllele():
 
                 }
                 prediction_results.append(cadd_prediction_result)
+
         if "gerp" in prediction_index_map.keys():
             if not self.prediction_result_already_exists(current_prediction_results, "GERP"):
                 gerp_prediction_result = {
@@ -97,6 +97,18 @@ class VariantAllele():
                         }
                     }
                 prediction_results.append(gerp_prediction_result)
+        
+        if "aa" in prediction_index_map.keys():
+            if not self.prediction_result_already_exists(current_prediction_results, "AncestralAllele"):
+                aa_prediction_result = {
+                        "result": csq_record[prediction_index_map["aa"]] ,
+                        "analysis_method": {
+                            "tool": "AncestralAllele",
+                            "qualifier": "",
+                            "version": self.variant.vep_version
+                        }
+                    }
+                prediction_results.append(aa_prediction_result)
         
         return prediction_results
     
@@ -157,7 +169,6 @@ class VariantAllele():
                 "consequences": consequences_list,
                 "prediction_results": prediction_results
             }
-        return
 
     
     def format_sift_polyphen_output(self, output: str) -> tuple:
@@ -200,8 +211,6 @@ class VariantAllele():
                 "evidence": []
             }
 
-        return
-    
     
     def minimise_allele(self, alt: str):
         """
