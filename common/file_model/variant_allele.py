@@ -88,17 +88,7 @@ class VariantAllele():
                 }
                 prediction_results.append(cadd_prediction_result)
 
-        # if "conservation" in prediction_index_map.keys():
-        #     if not self.prediction_result_already_exists(current_prediction_results, "GERP"):
-        #         gerp_prediction_result = {
-        #                 "result": csq_record[prediction_index_map["conservation"]] ,
-        #                 "analysis_method": {
-        #                     "tool": "GERP",
-        #                     "qualifier": "GERP"
-        #                 }
-        #             }
-        #         prediction_results.append(gerp_prediction_result)
-
+        
         if "aa" in prediction_index_map.keys():
             if not self.prediction_result_already_exists(current_prediction_results, "AncestralAllele"):
                 aa_prediction_result = {
