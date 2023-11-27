@@ -83,6 +83,8 @@ def prediction_results(variant: Dict, info: GraphQLResolveInfo) -> Dict:
     """
     prediction_results = []
     prediction_results.append(variant.get_most_severe_consequence())
+    if (variant.get_gerp_score()):
+        prediction_results.append(variant.get_gerp_score()) 
     return prediction_results
 
 

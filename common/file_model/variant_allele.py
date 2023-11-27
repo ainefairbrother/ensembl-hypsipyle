@@ -57,20 +57,21 @@ class VariantAllele():
         for csq_record in self.variant.info["CSQ"]:
             csq_record_list = csq_record.split("|")
             phenotypes = csq_record_list[prediction_index_map["phenotypes"]].split("&") if "phenotypes" in prediction_index_map.keys() else []
-            if "allele" not in info_map.keys():
+            if csq_record_list[prediction_index_map["allele"]] not in info_map.keys():
                 info_map[csq_record_list[prediction_index_map["allele"]]] = {"phenotype_assertions": [], "predicted_molecular_consequences": [], "prediction_results": []} 
                 
             for phenotype in phenotypes:
-                phenotype_assertions = self.create_allele_phenotype_assertion(csq_record_list[prediction_index_map["feature"]], csq_record_list[prediction_index_map["feature_type"]], phenotype)
+                phenotype_assertions = self.create_allele_phenotype_assertion(phenotype) if phenotype else []
                 if (phenotype_assertions):
                     info_map[csq_record_list[prediction_index_map["allele"]]]["phenotype_assertions"].append(phenotype_assertions)
             predicted_molecular_consequences = self.create_allele_predicted_molecular_consequence(csq_record_list, prediction_index_map)
             if (predicted_molecular_consequences):
                 info_map[csq_record_list[prediction_index_map["allele"]]]["predicted_molecular_consequences"].append(predicted_molecular_consequences)
-            prediction_results = self.create_allele_prediction_results([], csq_record_list, prediction_index_map)
-            if (prediction_results):
+            if (info_map[csq_record_list[prediction_index_map["allele"]]]["prediction_results"]):
+                info_map[csq_record_list[prediction_index_map["allele"]]]["prediction_results"] += self.create_allele_prediction_results(prediction_results, csq_record_list, prediction_index_map)
+            else:
+                prediction_results = self.create_allele_prediction_results([], csq_record_list, prediction_index_map)
                 info_map[csq_record_list[prediction_index_map["allele"]]]["prediction_results"] += prediction_results
-
         return info_map
 
     def create_allele_prediction_results(self, current_prediction_results: Mapping, csq_record: List, prediction_index_map: dict) -> list:
@@ -87,17 +88,17 @@ class VariantAllele():
                 }
                 prediction_results.append(cadd_prediction_result)
 
-        if "gerp" in prediction_index_map.keys():
-            if not self.prediction_result_already_exists(current_prediction_results, "GERP"):
-                gerp_prediction_result = {
-                        "result": csq_record[prediction_index_map["gerp"]] ,
-                        "analysis_method": {
-                            "tool": "GERP",
-                            "qualifier": "GERP"
-                        }
-                    }
-                prediction_results.append(gerp_prediction_result)
-        
+        # if "conservation" in prediction_index_map.keys():
+        #     if not self.prediction_result_already_exists(current_prediction_results, "GERP"):
+        #         gerp_prediction_result = {
+        #                 "result": csq_record[prediction_index_map["conservation"]] ,
+        #                 "analysis_method": {
+        #                     "tool": "GERP",
+        #                     "qualifier": "GERP"
+        #                 }
+        #             }
+        #         prediction_results.append(gerp_prediction_result)
+
         if "aa" in prediction_index_map.keys():
             if not self.prediction_result_already_exists(current_prediction_results, "AncestralAllele"):
                 aa_prediction_result = {
@@ -197,8 +198,24 @@ class VariantAllele():
 
         return (result, score)
     
-    def create_allele_phenotype_assertion(self, feature: str, feature_type: str , phenotype: str) -> Mapping:
-        phenotype = phenotype.split("+")[0]
+    def create_allele_phenotype_assertion(self, phenotype: str) -> Mapping:
+        phenotype_name,source,feature = phenotype.split("+")
+        evidence_list = []
+        if re.search("^ENS.*G", feature):
+            feature_type = "Gene"
+        if re.search("^ENS.*T", feature):
+            feature_type = "Transcript"
+        if re.search("^rs", feature):
+            feature_type = "Variant"   
+        if source:
+            evidence =  {
+                "source": {
+                    "id": source,
+                    "name": source.replace("_"," ") 
+                }
+            }
+            evidence_list.append(evidence)
+        
         if phenotype:
             return {
                 "feature": feature,
@@ -206,9 +223,9 @@ class VariantAllele():
                     "accession_id": feature_type                
                 } ,
                 "phenotype": {
-                    "name": phenotype
+                    "name": phenotype_name
                 },
-                "evidence": []
+                "evidence": evidence_list
             }
 
     

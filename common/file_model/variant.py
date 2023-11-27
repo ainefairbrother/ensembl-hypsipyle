@@ -203,8 +203,22 @@ class Variant ():
                         "tool": "Ensembl VEP",
                         "qualifier": "most severe consequence"
                     }
-        }  
+        } 
 
+    def get_gerp_score(self) -> Mapping:
+        csq_record = self.info["CSQ"]
+        csq_record_list = csq_record[0].split("|")
+        if self.get_info_key_index("Conservation") is not None:
+            gerp_index = self.get_info_key_index("Conservation") 
+            gerp_prediction_result = {
+                    "result": csq_record_list[gerp_index] ,
+                    "analysis_method": {
+                        "tool": "GERP",
+                        "qualifier": "GERP"
+                    }
+                }
+            return gerp_prediction_result
+        
     
     def get_info_key_index(self, key: str, info_id: str ="CSQ") -> int:
             info_field = self.header.get_info_field_info(info_id).description
