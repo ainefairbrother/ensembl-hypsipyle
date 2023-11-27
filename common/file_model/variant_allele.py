@@ -191,9 +191,9 @@ class VariantAllele():
     def create_allele_phenotype_assertion(self, phenotype: str) -> Mapping:
         phenotype_name,source,feature = phenotype.split("+")
         evidence_list = []
-        if re.search("^ENS.*G", feature):
+        if re.search("^ENS.*G\d+", feature):
             feature_type = "Gene"
-        if re.search("^ENS.*T", feature):
+        if re.search("^ENS.*T\d+", feature):
             feature_type = "Transcript"
         if re.search("^rs", feature):
             feature_type = "Variant"   
