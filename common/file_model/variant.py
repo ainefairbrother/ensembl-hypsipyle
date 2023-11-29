@@ -26,7 +26,7 @@ class Variant ():
         self.ref = record.REF
         self.info = record.INFO
         self.type = "Variant"
-        self.vep_version = source = self.header.get_lines("VEP")[0].value
+        self.vep_version = re.search("v\d+", self.header.get_lines("VEP")[0].value).group()
     
     def get_alternative_names(self) -> List:
         return []
@@ -66,7 +66,7 @@ class Variant ():
                 source_name = "Ensembl"
                 source_description = "Ensembl"
                 source_url = "https://beta.ensembl.org"
-                source_url_id = "https://beta.ensembl.org"
+                source_url_id = "https://beta.ensembl.org/"
                 source_release = "110" # to be fetched from the file
                 variant_id = f"{self.chromosome}:{self.position}:{self.name}"
             
@@ -211,14 +211,28 @@ class Variant ():
         if self.get_info_key_index("Conservation") is not None:
             gerp_index = self.get_info_key_index("Conservation") 
             gerp_prediction_result = {
-                    "result": csq_record_list[gerp_index] ,
+                    "result": csq_record_list[gerp_index]  ,
                     "analysis_method": {
                         "tool": "GERP",
                         "qualifier": "GERP"
                     }
-                }
+                } if csq_record_list[gerp_index] else {}
             return gerp_prediction_result
-        
+    
+    def get_ancestral_allele(self) -> Mapping:
+        csq_record = self.info["CSQ"]
+        csq_record_list = csq_record[0].split("|")
+        if self.get_info_key_index("AA") is not None:
+            aa_index = self.get_info_key_index("AA")
+            aa_prediction_result = {
+                    "result": csq_record_list[aa_index] ,
+                    "analysis_method": {
+                        "tool": "AncestralAllele",
+                        "qualifier": "",
+                        "version": 110 #self.vep_version
+                    }
+                } if csq_record_list[aa_index] else {}
+            return aa_prediction_result
     
     def get_info_key_index(self, key: str, info_id: str ="CSQ") -> int:
             info_field = self.header.get_info_field_info(info_id).description
