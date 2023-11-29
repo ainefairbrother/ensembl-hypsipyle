@@ -82,8 +82,9 @@ class VariantAllele():
                             "qualifier": "CADD"
                         }
 
-                } if csq_record[prediction_index_map["cadd_phred"]] else {}
-                prediction_results.append(cadd_prediction_result)
+                } if csq_record[prediction_index_map["cadd_phred"]] else None
+                if cadd_prediction_result:
+                    prediction_results.append(cadd_prediction_result)
 
         
         return prediction_results

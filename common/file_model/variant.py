@@ -231,7 +231,7 @@ class Variant ():
                         "qualifier": "",
                         "version": "110" #self.vep_version
                     }
-                } if csq_record_list[aa_index] else {}
+                } if csq_record_list[aa_index] and csq_record_list[aa_index]!="."  else {}
             return aa_prediction_result
     
     def get_info_key_index(self, key: str, info_id: str ="CSQ") -> int:
