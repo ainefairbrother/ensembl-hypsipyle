@@ -229,7 +229,7 @@ class Variant ():
                     "analysis_method": {
                         "tool": "AncestralAllele",
                         "qualifier": "",
-                        "version": 110 #self.vep_version
+                        "version": "110" #self.vep_version
                     }
                 } if csq_record_list[aa_index] else {}
             return aa_prediction_result
