@@ -211,7 +211,7 @@ class Variant ():
         if self.get_info_key_index("Conservation") is not None:
             gerp_index = self.get_info_key_index("Conservation") 
             gerp_prediction_result = {
-                    "result": csq_record_list[gerp_index]  ,
+                    "score": csq_record_list[gerp_index]  ,
                     "analysis_method": {
                         "tool": "GERP",
                         "qualifier": "GERP"

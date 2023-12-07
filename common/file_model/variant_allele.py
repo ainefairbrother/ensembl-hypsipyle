@@ -76,7 +76,7 @@ class VariantAllele():
         if "cadd_phred" in prediction_index_map.keys():
             if not self.prediction_result_already_exists(current_prediction_results, "CADD"):
                 cadd_prediction_result = {
-                        "result": csq_record[prediction_index_map["cadd_phred"]] ,
+                        "score": csq_record[prediction_index_map["cadd_phred"]] ,
                         "analysis_method": {
                             "tool": "CADD",
                             "qualifier": "CADD"
