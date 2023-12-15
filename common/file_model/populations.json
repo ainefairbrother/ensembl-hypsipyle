@@ -1,0 +1,35 @@
+{
+   "1000_genomes": {
+   "AF": "1000GENOMES:phase_3:ALL",
+   "AFR_AF": "1000GENOMES:phase_3:AFR",
+   "AMR_AF": "1000GENOMES:phase_3:AMR",
+   "EAS_AF": "1000GENOMES:phase_3:EAS",
+   "EUR_AF": "1000GENOMES:phase_3:EUR",
+   "SAS_AF": "1000GENOMES:phase_3:SAS"
+   },
+   "gnomAD_exomes": {
+        "ALL": "gnomADe:ALL",
+        "afr": "gnomADe:afr",
+        "amr": "gnomADe:amr",
+        "asj": "gnomADe:asj",
+        "eas": "gnomADe:eas",
+        "fin": "gnomADe:fin",
+        "nfe": "gnomADe:nfe",
+        "oth": "gnomADe:oth",
+        "sas": "gnomADe:sas"
+         },
+    "gnomAD_genomes": {
+        "ALL": "gnomADg:ALL",
+        "afr": "gnomADg:afr",
+        "ami": "gnomADg:ami",
+        "amr": "gnomADg:amr",
+        "asj": "gnomADg:asj",
+        "eas": "gnomADg:eas",
+        "fin": "gnomADg:fin",
+        "mid": "gnomADg:mid",
+        "nfe": "gnomADg:nfe",
+        "oth": "gnomADg:oth",
+        "sas": "gnomADg:sas"
+
+    }
+}

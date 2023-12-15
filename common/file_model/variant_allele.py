@@ -41,7 +41,12 @@ class VariantAllele():
         min_alt = self.minimise_allele(self.alt)
         return self.info_map[min_alt]["prediction_results"] if min_alt in self.info_map else []
     
-    
+    def get_population_allele_frequencies(self):
+        min_alt = self.minimise_allele(self.alt)
+        print("Hi")
+        population_map = self.traverse_population_info()
+        return population_map[min_alt] if min_alt in population_map else []
+
     def traverse_csq_info(self) -> Mapping:
         """
         This function is to traverse the CSQ record and extract columns
@@ -70,7 +75,127 @@ class VariantAllele():
             current_prediction_results = info_map[csq_record_list[prediction_index_map["allele"]]]["prediction_results"] 
             info_map[csq_record_list[prediction_index_map["allele"]]]["prediction_results"] += self.create_allele_prediction_results(current_prediction_results, csq_record_list, prediction_index_map)
         return info_map
+    
+    def traverse_population_info(self) -> Mapping:
+        directory = os.path.dirname(__file__)
+        with open(os.path.join(directory,'populations.json')) as pop_file:
+            pop_names = json.load(pop_file)
+    
+        kg_column_list = ["AF","AFR_AF","AMR_AF","EAS_AF","EUR_AF","SAS_AF"]
 
+        gnomADe_column_map = { 
+                       "ALL": ["gnomAD_exomes_AF","gnomAD_exomes_AC","gnomAD_exomes_AN"],
+                       "afr": ["gnomAD_exomes_AF_afr","gnomAD_exomes_AC_afr","gnomAD_exomes_AN_afr"],
+                       "amr": ["gnomAD_exomes_AF_amr","gnomAD_exomes_AC_amr","gnomAD_exomes_AN_amr"],
+                       "asj": ["gnomAD_exomes_AF_asj","gnomAD_exomes_AC_asj","gnomAD_exomes_AN_asj"],
+                       "eas": ["gnomAD_exomes_AF_eas","gnomAD_exomes_AC_eas","gnomAD_exomes_AN_eas"],
+                       "fin": ["gnomAD_exomes_AF_fin","gnomAD_exomes_AC_fin","gnomAD_exomes_AN_fin"],
+                       "nfe": ["gnomAD_exomes_AF_nfe","gnomAD_exomes_AC_nfe","gnomAD_exomes_AN_nfe"],
+                       "oth": ["gnomAD_exomes_AF_oth","gnomAD_exomes_AC_oth","gnomAD_exomes_AN_oth"],
+                       "sas": ["gnomAD_exomes_AF_sas","gnomAD_exomes_AC_sas","gnomAD_exomes_AN_sas"] 
+                       }
+        
+        gnomADg_column_map = { 
+                       "ALL": ["gnomAD_genomes_AF","gnomAD_genomes_AC","gnomAD_genomes_AN"],
+                       "afr": ["gnomAD_genomes_AF_afr","gnomAD_genomes_AC_afr","gnomAD_genomes_AN_afr"],
+                       "ami": ["gnomAD_genomes_AF_ami","gnomAD_genomes_AC_ami","gnomAD_genomes_AN_ami"],
+                       "amr": ["gnomAD_genomes_AF_amr","gnomAD_genomes_AC_amr","gnomAD_genomes_AN_amr"],
+                       "asj": ["gnomAD_genomes_AF_asj","gnomAD_genomes_AC_asj","gnomAD_genomes_AN_asj"],
+                       "eas": ["gnomAD_genomes_AF_eas","gnomAD_genomes_AC_eas,gnomAD_genomes_AN_eas"],
+                       "fin": ["gnomAD_genomes_AF_fin","gnomAD_genomes_AC_fin","gnomAD_genomes_AN_fin"],
+                       "mid": ["gnomAD_genomes_AF_mid","gnomAD_genomes_AC_mid","gnomAD_genomes_AN_mid"],
+                       "nfe": ["gnomAD_genomes_AF_nfe","gnomAD_genomes_AC_nfe","gnomAD_genomes_AN_nfe"],
+                       "oth": ["gnomAD_genomes_AF_oth","gnomAD_genomes_AC_oth","gnomAD_genomes_AN_oth"],
+                       "sas": ["gnomAD_genomes_AF_sas","gnomAD_genomes_AC_sas","gnomAD_genomes_AN_sas"]
+        }
+        
+        population_frequency_map = {}
+        frequency_stats = {}
+        
+        for csq_record in self.variant.info["CSQ"]:
+            csq_record_list = csq_record.split("|")
+            allele_index = self.variant.get_info_key_index("Allele") 
+            if allele_index is not None and csq_record_list[allele_index] is not None:
+                if csq_record_list[allele_index] not in population_frequency_map.keys():
+                    population_frequency_map[csq_record_list[allele_index]] = []
+                for col in kg_column_list:
+                    col_index = self.variant.get_info_key_index(col)
+                    if col_index is not None and csq_record_list[col_index] is not None:
+                            if pop_names[col] not in frequency_stats.keys():
+                                frequency_stats[pop_names[col]] = {}
+                            frequency_stats[pop_names[col]][csq_record_list[allele_index]] = csq_record_list[col_index]  
+                            print(csq_record_list[col_index])  
+                            if csq_record_list[col_index]: 
+                                print(csq_record_list[col_index])  
+                                population_frequency = {
+                                                "population": pop_names[col],
+                                                "allele_frequency": csq_record_list[col_index],
+                                                "is_minor_allele": False,
+                                                "is_hpmaf": False
+                                            }
+                                if population_frequency_map[csq_record_list[allele_index]]
+                                population_frequency_map[csq_record_list[allele_index]].append(population_frequency)
+
+                for key,gnomADe_column_list in gnomADe_column_map.items():
+                    for col in gnomADe_column_list:
+                        population_frequency_key = col.split("_")[2]
+                        allele_count = allele_number = allele_frequency = None
+                        col_index = self.variant.get_info_key_index(col)
+                        if col_index and csq_record_list[col_index]:
+                            if population_frequency_key == "AF":
+                                allele_frequency = csq_record_list[col_index] 
+                            elif population_frequency_key == "AN":
+                                allele_number = csq_record_list[col_index]
+                            elif population_frequency_key == "AC":
+                                allele_count = csq_record_list[col_index]
+                            else:
+                                raise Exception('gnomAD exomes column is not recognised')
+
+                    if allele_frequency is not None:
+                        if pop_names["gnomAD_exomes"][key] not in frequency_stats.keys():
+                            frequency_stats[pop_names["gnomAD_exomes"][key]] = {}
+                        frequency_stats[pop_names["gnomAD_exomes"][key]][csq_record_list[allele_index]] = allele_frequency     
+                        population_frequency = {
+                                        "population": pop_names["gnomAD_exomes"][key],
+                                        "allele_frequency": allele_frequency,
+                                        "allele_count": allele_count,
+                                        "allele_number": allele_number,
+                                        "is_minor_allele": False,
+                                        "is_hpmaf": False
+                                    }
+                        population_frequency_map[csq_record_list[allele_index]].append(population_frequency)
+            
+                for key,gnomADg_column_list in gnomADg_column_map.items():
+                    for col in gnomADg_column_list:
+                        allele_count = allele_number = allele_frequency = None
+                        population_frequency_key = col.split("_")[2]
+                        col_index = self.variant.get_info_key_index(col)
+                        if col_index is not None:
+                            if population_frequency_key == "AF":
+                                allele_frequency = csq_record_list[col_index] or None
+                            elif population_frequency_key == "AN":
+                                allele_number = csq_record_list[col_index] or None
+                            elif population_frequency_key == "AC":
+                                allele_count = csq_record_list[col_index] or None
+                            else:
+                                raise Exception('gnomAD genomes column is not recognised')
+
+                    if allele_frequency is not None:
+                        if pop_names["gnomAD_genomes"][key] not in frequency_stats.keys():
+                            frequency_stats[pop_names["gnomAD_genomes"][key]] = {}
+                        frequency_stats[pop_names["gnomAD_genomes"][key]][csq_record_list[allele_index]] = allele_frequency    
+                        population_frequency = {
+                                        "population": pop_names["gnomAD_genomes"][key],
+                                        "allele_frequency": allele_frequency,
+                                        "allele_count": allele_count,
+                                        "allele_number": allele_number,
+                                        "is_minor_allele": False,
+                                        "is_hpmaf": False
+                                    }
+                        population_frequency_map[csq_record_list[allele_index]].append(population_frequency)
+        print(frequency_stats)
+        return population_frequency_map
+     
     def create_allele_prediction_results(self, current_prediction_results: Mapping, csq_record: List, prediction_index_map: dict) -> list:
         prediction_results = []
         if "cadd_phred" in prediction_index_map.keys():
@@ -220,29 +345,29 @@ class VariantAllele():
             minimised_allele = "-"
         return minimised_allele
     
-    def format_frequency(self, raw_frequency_list: List) -> Mapping:
-        freq_map = {}
-        for freq in raw_frequency_list:
-            key = freq.split(":")[0]
-            freq_list = freq.split(":")[1].split(",")
-            freq_map[key] = freq_list
-        return freq_map
+    # def format_frequency(self, raw_frequency_list: List) -> Mapping:
+    #     freq_map = {}
+    #     for freq in raw_frequency_list:
+    #         key = freq.split(":")[0]
+    #         freq_list = freq.split(":")[1].split(",")
+    #         freq_map[key] = freq_list
+    #     return freq_map
     
-    def get_population_allele_frequencies(self) -> List:
-        frequency_map = {}
-        if "FREQ" in self.variant.info:
-            frequency_map = self.format_frequency(",".join(map(str,self.variant.info["FREQ"])).split("|"))
-        population_allele_frequencies = []
-        for key, pop_list in frequency_map.items():
-            ## Adding only GnomAD population
-            if key == "GnomAD":
-                if pop_list[self.allele_index] not in ["None", "."]:
-                    population_allele_frequencies.append({
-                        "population": key,
-                        "allele_frequency": pop_list[self.allele_index],
-                        "is_minor_allele": False,
-                        "is_hpmaf": False
-                    })
-        return population_allele_frequencies
+    # def get_population_allele_frequencies(self) -> List:
+    #     frequency_map = {}
+    #     if "FREQ" in self.variant.info:
+    #         frequency_map = self.format_frequency(",".join(map(str,self.variant.info["FREQ"])).split("|"))
+    #     population_allele_frequencies = []
+    #     for key, pop_list in frequency_map.items():
+    #         ## Adding only GnomAD population
+    #         if key == "GnomAD":
+    #             if pop_list[self.allele_index] not in ["None", "."]:
+    #                 population_allele_frequencies.append({
+    #                     "population": key,
+    #                     "allele_frequency": pop_list[self.allele_index],
+    #                     "is_minor_allele": False,
+    #                     "is_hpmaf": False
+    #                 })
+    #     return population_allele_frequencies
 
   
