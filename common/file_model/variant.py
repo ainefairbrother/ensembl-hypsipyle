@@ -36,7 +36,7 @@ class Variant ():
         Fetches source from variant INFO columns
         Fallsback to fetching from the header
         """
-        
+
         try:
             if "SOURCE" in self.info:
                 source = self.info["SOURCE"]
@@ -69,7 +69,21 @@ class Variant ():
                 source_url_id = "https://beta.ensembl.org/"
                 source_release = "110" # to be fetched from the file
                 variant_id = f"{self.chromosome}:{self.position}:{self.name}"
-            
+
+            else:
+                source_header_lines = self.header.get_lines("source")
+                for source_header_line in source_header_lines:
+                    if source_header_line.value.split()[0] == source:
+                        source_info = {field.split("=")[0]:field.split("=")[1] for field in source_header_line.value.split()[1:]}
+
+                        source_id = source
+                        source_name = source
+                        source_description = source_info["description"] if "description" in source_info else ""
+                        source_url = source_info["url"] if "url" in source_info else ""
+                        source_url_id = source_url
+                        source_release = source_info["version"] if "version" in source_info else ""
+                        variant_id = ""
+
             
 
         except Exception as e:
