@@ -27,10 +27,22 @@ class Variant ():
         self.info = record.INFO
         self.type = "Variant"
         self.vep_version = re.search("v\d+", self.header.get_lines("VEP")[0].value).group()
+
+        self.variant_sources = {}             ## used to cache source information
     
     def get_alternative_names(self) -> List:
         return []
     
+    def parse_source_from_header(self) -> Mapping:
+        source_header_lines = self.header.get_lines("source")
+
+        for source_header_line in source_header_lines:
+            source, source_info_line = source_header_line.value.split(" ", 1)
+            source_info = dict(re.findall('(.+?)="(.+?)"\s*', source_info_line))
+
+            ## overwrite is allowed
+            self.variant_sources[source.strip('"')] = source_info
+
     def get_primary_source(self) -> Mapping:
         """
         Fetches source from variant INFO columns
@@ -43,7 +55,23 @@ class Variant ():
             else:
                 source = self.header.get_lines("source")[0].value
 
-            if re.search("^dbSNP", source):
+            # Get source information from data file header header 
+            if source not in self.variant_sources:
+                self.parse_source_from_header()
+
+            if source in self.variant_sources:
+                source_info = self.variant_sources[source]
+
+                source_id = source
+                source_name = source.replace("_", " ")
+                source_description = source_info["description"] if "description" in source_info else ""
+                source_url = source_info["url"] if "url" in source_info else ""
+                source_url_id = source_url
+                source_release = source_info["version"] if "version" in source_info else ""
+                variant_id = ""
+            
+            # If source information not found in data file try using default value for main accessioning sources
+            elif re.search("^dbSNP", source):
                 source_id = "dbSNP"
                 source_name = "dbSNP"
                 source_description = "NCBI db of human variants"
@@ -69,21 +97,6 @@ class Variant ():
                 source_url_id = "https://beta.ensembl.org/"
                 source_release = "110" # to be fetched from the file
                 variant_id = f"{self.chromosome}:{self.position}:{self.name}"
-
-            else:
-                source_header_lines = self.header.get_lines("source")
-                for source_header_line in source_header_lines:
-                    if source_header_line.value.split()[0] == source:
-                        source_info = {field.split("=")[0]:field.split("=")[1] for field in source_header_line.value.split()[1:]}
-
-                        source_id = source
-                        source_name = source
-                        source_description = source_info["description"] if "description" in source_info else ""
-                        source_url = source_info["url"] if "url" in source_info else ""
-                        source_url_id = source_url
-                        source_release = source_info["version"] if "version" in source_info else ""
-                        variant_id = ""
-
             
 
         except Exception as e:
