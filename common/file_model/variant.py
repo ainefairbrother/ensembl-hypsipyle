@@ -66,9 +66,17 @@ class Variant ():
                 source_name = source.replace("_", " ")
                 source_description = source_info["description"] if "description" in source_info else ""
                 source_url = source_info["url"] if "url" in source_info else ""
-                source_url_id = source_url
                 source_release = source_info["version"] if "version" in source_info else ""
-                variant_id = ""
+
+                if "accession_url" in source_info:
+                    source_url_id = source_info["accession_url"]
+                    if re.search("^Ensembl", source):
+                        variant_id = f"{self.chromosome}:{self.position}:{self.name}"
+                    else:
+                        variant_id = self.name
+                else:
+                    source_url_id = source_url
+                    variant_id = ""
             
             # If source information not found in data file try using default value for main accessioning sources
             elif re.search("^dbSNP", source):
