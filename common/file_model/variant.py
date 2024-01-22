@@ -16,7 +16,10 @@ def reduce_allele_length(allele_list: List):
 
 
 class Variant ():
-    def __init__(self, record: Any, header: Any) -> None:
+    variant_sources = {}       ## used to cache source information, class attribute
+
+    def __init__(self, record: Any, header: Any, genome_uuid: str) -> None:
+        self.genome_uuid = genome_uuid
         self.name = record.ID[0]
         self.record = record 
         self.header = header
@@ -27,21 +30,22 @@ class Variant ():
         self.info = record.INFO
         self.type = "Variant"
         self.vep_version = re.search("v\d+", self.header.get_lines("VEP")[0].value).group()
-
-        self.variant_sources = {}             ## used to cache source information
     
     def get_alternative_names(self) -> List:
         return []
     
     def parse_source_from_header(self) -> Mapping:
-        source_header_lines = self.header.get_lines("source")
+        genome_uuid = self.genome_uuid
+        if genome_uuid not in self.variant_sources:
+            self.variant_sources[genome_uuid] = {}
 
+        source_header_lines = self.header.get_lines("source")
         for source_header_line in source_header_lines:
             source, source_info_line = source_header_line.value.split(" ", 1)
             source_info = dict(re.findall('(.+?)="(.+?)"\s*', source_info_line))
 
             ## overwrite is allowed
-            self.variant_sources[source.strip('"')] = source_info
+            self.variant_sources[genome_uuid][source.strip('"')] = source_info
 
     def get_primary_source(self) -> Mapping:
         """
@@ -55,12 +59,14 @@ class Variant ():
             else:
                 source = self.header.get_lines("source")[0].value
 
-            # Get source information from data file header header 
-            if source not in self.variant_sources:
+            # Get source information from data file header header
+            genome_uuid = self.genome_uuid
+            if genome_uuid not in self.variant_sources or source not in self.variant_sources[genome_uuid]:     
                 self.parse_source_from_header()
+            variant_sources = self.variant_sources[genome_uuid]
 
-            if source in self.variant_sources:
-                source_info = self.variant_sources[source]
+            if source in variant_sources:
+                source_info = variant_sources[source]
 
                 source_id = source
                 source_name = source.replace("_", " ")
