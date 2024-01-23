@@ -1,0 +1,14 @@
+type Population{
+"""
+  Population
+"""
+    name: String!
+    size: Int!
+    description: String!
+    type: String
+    is_global: Boolean
+    is_from_genotypes: Boolean
+    display_group_name: String
+    super_population: Population
+    sub_populations: [Population]
+}
