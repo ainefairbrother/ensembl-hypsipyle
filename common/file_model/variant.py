@@ -270,7 +270,7 @@ class Variant ():
                             else:
                                 raise Exception('Frequency metric is not recognised')
                             population_frequency = {
-                                                "population": sub_pop["name"],
+                                                "population_name": sub_pop["name"],
                                                 "allele_frequency": allele_frequency or -1,
                                                 "allele_count": allele_count,
                                                 "allele_number": allele_number,
@@ -305,7 +305,7 @@ class Variant ():
                      allele_frequency_ref = 1 - sum(list(zip(*by_population))[0])
                      if allele_frequency_ref <= 1 and allele_frequency_ref >= 0:
                         population_frequency_ref = {
-                                                "population": pop_name,
+                                                "population_name": pop_name,
                                                 "allele_frequency": allele_frequency_ref ,
                                                 "allele_count": None,
                                                 "allele_number": None,
@@ -320,7 +320,7 @@ class Variant ():
                 
                 else:       
                     for pop_freq in pop_freqs:
-                        if pop_name == pop_freq["population"] and float(pop_freq["allele_frequency"]) > -1:
+                        if pop_name == pop_freq["population_name"] and float(pop_freq["allele_frequency"]) > -1:
                             minimised_allele = allele.minimise_allele(allele.alt)
                             by_population.append([float(pop_freq["allele_frequency"]),minimised_allele, pop_name])
             
