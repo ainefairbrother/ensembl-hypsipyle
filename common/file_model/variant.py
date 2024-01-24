@@ -262,7 +262,7 @@ class Variant ():
                             col_index = self.get_info_key_index(freq_val)
                             if col_index and csq_record_list[col_index] is not None:
                                 if freq_key == "af":
-                                    allele_frequency = csq_record_list[col_index] 
+                                    allele_frequency = csq_record_list[col_index] or None
                                 elif freq_key == "an":
                                     allele_number = csq_record_list[col_index] or None
                                 elif freq_key == "ac":
@@ -271,7 +271,7 @@ class Variant ():
                                     raise Exception('Frequency metric is not recognised')
                                 population_frequency = {
                                                     "population_name": sub_pop["name"],
-                                                    "allele_frequency": allele_frequency or -1,
+                                                    "allele_frequency": allele_frequency,
                                                     "allele_count": allele_count,
                                                     "allele_number": allele_number,
                                                     "is_minor_allele": False,
@@ -320,7 +320,7 @@ class Variant ():
                 
                 else:       
                     for pop_freq in pop_freqs:
-                        if pop_name == pop_freq["population_name"] and float(pop_freq["allele_frequency"]) > -1:
+                        if pop_name == pop_freq["population_name"] and pop_freq["allele_frequency"]:
                             minimised_allele = allele.minimise_allele(allele.alt)
                             by_population.append([float(pop_freq["allele_frequency"]),minimised_allele, pop_name])
             
