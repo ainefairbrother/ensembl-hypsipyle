@@ -483,7 +483,7 @@
         },
         {
         "name": "gnomADg:ALL",
-        "description": "All gnomAD genomes individuals",
+        "description": "All gnomAD genomes individuals v3.1.2",
         "type": "regional",
         "is_global": true,
         "super_population": 
@@ -657,7 +657,7 @@
         },
         {
             "name": "gnomADe:ALL",
-            "description": "All gnomAD exomes individuals",
+            "description": "All gnomAD exomes individuals r2.1.1",
             "type": "regional",
             "is_global": true,
             "super_population": 
