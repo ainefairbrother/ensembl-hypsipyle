@@ -4,6 +4,10 @@ query pop_example {
     
     name
     description
+    is_global
+    super_population {
+      name
+    }
     sub_populations
     {
       name
@@ -11,3 +15,4 @@ query pop_example {
     
   }
 }
+
