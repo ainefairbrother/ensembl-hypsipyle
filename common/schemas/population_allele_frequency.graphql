@@ -3,7 +3,7 @@ type PopulationAlleleFrequency{
   Population Allele Frequency
 """
     population_name: String!
-    allele_frequency: Float
+    allele_frequency: Float!
     allele_count: Int
     allele_number: Int
     is_minor_allele: Boolean!
