@@ -1,0 +1,21 @@
+query variant_example {
+  variant(
+    by_id: {genome_id: "a7335667-93e7-11ec-a39d-005056b38ce3", variant_id: "13:32379902:rs202155613"}
+  ) {
+  name
+  alleles
+    {
+      name
+      population_frequencies
+      {
+        population_name
+        allele_frequency
+        allele_number
+        allele_count
+        is_hpmaf
+        is_minor_allele
+      }
+    }
+}
+}
+
