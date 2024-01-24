@@ -1,0 +1,260 @@
+{
+  "data": {
+    "population": [
+      {
+        "name": "1000GENOMES:phase_3:ALL",
+        "description": "All phase 3 individuals",
+        "sub_populations": [
+          {
+            "name": "1000GENOMES:phase_3:AFR"
+          },
+          {
+            "name": "1000GENOMES:phase_3:AMR"
+          },
+          {
+            "name": "1000GENOMES:phase_3:EAS"
+          },
+          {
+            "name": "1000GENOMES:phase_3:EUR"
+          },
+          {
+            "name": "1000GENOMES:phase_3:SAS"
+          }
+        ]
+      },
+      {
+        "name": "1000GENOMES:phase_3:AFR",
+        "description": "African",
+        "sub_populations": [
+          {
+            "name": "1000GENOMES:phase_3:ACB"
+          },
+          {
+            "name": "1000GENOMES:phase_3:ASW"
+          },
+          {
+            "name": "1000GENOMES:phase_3:ESN"
+          },
+          {
+            "name": "1000GENOMES:phase_3:GWD"
+          },
+          {
+            "name": "1000GENOMES:phase_3:LWK"
+          },
+          {
+            "name": "1000GENOMES:phase_3:MSL"
+          }
+        ]
+      },
+      {
+        "name": "1000GENOMES:phase_3:AMR",
+        "description": "American",
+        "sub_populations": [
+          {
+            "name": "1000GENOMES:phase_3:CLM"
+          },
+          {
+            "name": "1000GENOMES:phase_3:MXL"
+          },
+          {
+            "name": "1000GENOMES:phase_3:PEL"
+          },
+          {
+            "name": "1000GENOMES:phase_3:PUR"
+          }
+        ]
+      },
+      {
+        "name": "1000GENOMES:phase_3:EAS",
+        "description": "East Asian",
+        "sub_populations": [
+          {
+            "name": "1000GENOMES:phase_3:CDX"
+          },
+          {
+            "name": "1000GENOMES:phase_3:CHB"
+          },
+          {
+            "name": "1000GENOMES:phase_3:CHS"
+          },
+          {
+            "name": "1000GENOMES:phase_3:JPT"
+          },
+          {
+            "name": "1000GENOMES:phase_3:KHV"
+          }
+        ]
+      },
+      {
+        "name": "1000GENOMES:phase_3:EUR",
+        "description": "European",
+        "sub_populations": [
+          {
+            "name": "1000GENOMES:phase_3:CEU"
+          },
+          {
+            "name": "1000GENOMES:phase_3:FIN"
+          },
+          {
+            "name": "1000GENOMES:phase_3:GBR"
+          },
+          {
+            "name": "1000GENOMES:phase_3:IBS"
+          },
+          {
+            "name": "1000GENOMES:phase_3:TSI"
+          }
+        ]
+      },
+      {
+        "name": "1000GENOMES:phase_3:SAS",
+        "description": "South Asian",
+        "sub_populations": [
+          {
+            "name": "1000GENOMES:phase_3:BEB"
+          },
+          {
+            "name": "1000GENOMES:phase_3:GIH"
+          },
+          {
+            "name": "1000GENOMES:phase_3:ITU"
+          },
+          {
+            "name": "1000GENOMES:phase_3:PJL"
+          },
+          {
+            "name": "1000GENOMES:phase_3:STU"
+          }
+        ]
+      },
+      {
+        "name": "1000GENOMES:phase_3:ACB",
+        "description": "African Caribbean in Barbados",
+        "sub_populations": []
+      },
+      {
+        "name": "1000GENOMES:phase_3:ASW",
+        "description": "African Ancestry in Southwest US",
+        "sub_populations": []
+      },
+      {
+        "name": "1000GENOMES:phase_3:ESN",
+        "description": "Esan in Nigeria",
+        "sub_populations": []
+      },
+      {
+        "name": "1000GENOMES:phase_3:GWD",
+        "description": "Gambian in Western Division, The Gambia",
+        "sub_populations": []
+      },
+      {
+        "name": "1000GENOMES:phase_3:LWK",
+        "description": "Luhya in Webuye, Kenya",
+        "sub_populations": []
+      },
+      {
+        "name": "1000GENOMES:phase_3:MSL",
+        "description": "Mende in Sierra Leone",
+        "sub_populations": []
+      },
+      {
+        "name": "1000GENOMES:phase_3:CLM",
+        "description": "Colombian in Medellin, Colombia",
+        "sub_populations": []
+      },
+      {
+        "name": "1000GENOMES:phase_3:MXL",
+        "description": "Colombian in Medellin, Colombia",
+        "sub_populations": []
+      },
+      {
+        "name": "1000GENOMES:phase_3:PEL",
+        "description": "Peruvian in Lima, Peru",
+        "sub_populations": []
+      },
+      {
+        "name": "1000GENOMES:phase_3:PUR",
+        "description": "Puerto Rican in Puerto Rico",
+        "sub_populations": []
+      },
+      {
+        "name": "1000GENOMES:phase_3:CDX",
+        "description": "Chinese Dai in Xishuangbanna, China",
+        "sub_populations": []
+      },
+      {
+        "name": "1000GENOMES:phase_3:CHB",
+        "description": "Han Chinese in Bejing, China",
+        "sub_populations": []
+      },
+      {
+        "name": "1000GENOMES:phase_3:CHS",
+        "description": "Southern Han Chinese, China",
+        "sub_populations": []
+      },
+      {
+        "name": "1000GENOMES:phase_3:JPT",
+        "description": "Japanese in Tokyo, Japan",
+        "sub_populations": []
+      },
+      {
+        "name": "1000GENOMES:phase_3:KHV",
+        "description": "Kinh in Ho Chi Minh City, Vietnam",
+        "sub_populations": []
+      },
+      {
+        "name": "1000GENOMES:phase_3:CEU",
+        "description": " Utah residents with Northern and Western European ancestry",
+        "sub_populations": []
+      },
+      {
+        "name": "1000GENOMES:phase_3:FIN",
+        "description": "Finnish in Finland",
+        "sub_populations": []
+      },
+      {
+        "name": "1000GENOMES:phase_3:GBR",
+        "description": "British in England and Scotland",
+        "sub_populations": []
+      },
+      {
+        "name": "1000GENOMES:phase_3:IBS",
+        "description": "Iberian populations in Spain",
+        "sub_populations": []
+      },
+      {
+        "name": "1000GENOMES:phase_3:TSI",
+        "description": "Toscani in Italy",
+        "sub_populations": []
+      },
+      {
+        "name": "1000GENOMES:phase_3:BEB",
+        "description": "Bengali in Bangladesh",
+        "sub_populations": []
+      },
+      {
+        "name": "1000GENOMES:phase_3:GIH",
+        "description": "Gujarati Indian in Houston, TX",
+        "sub_populations": []
+      },
+      {
+        "name": "1000GENOMES:phase_3:ITU",
+        "description": "Indian Telugu in the UK",
+        "sub_populations": []
+      },
+      {
+        "name": "1000GENOMES:phase_3:PJL",
+        "description": "Punjabi in Lahore, Pakistan",
+        "sub_populations": []
+      },
+      {
+        "name": "1000GENOMES:phase_3:STU",
+        "description": "Sri Lankan Tamil in the UK",
+        "sub_populations": []
+      }
+    ]
+  },
+  "extensions": {
+    "execution_time_in_seconds": 0.03
+  }
+}
