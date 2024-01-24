@@ -2,7 +2,7 @@ type Population{
 """
   Population
 """
-    name: String!
+    name: String ## Requires to be nullable as super-population can be a null field
     size: Int!
     description: String!
     type: String
