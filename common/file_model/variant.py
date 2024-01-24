@@ -260,25 +260,25 @@ class Variant ():
                         allele_count = allele_number = allele_frequency = None
                         for freq_key, freq_val in sub_pop["frequencies"].items():
                             col_index = self.get_info_key_index(freq_val)
-                        if col_index is not None and csq_record_list[col_index] is not None:
-                            if freq_key == "af":
-                                allele_frequency = csq_record_list[col_index] 
-                            elif freq_key == "an":
-                                allele_number = csq_record_list[col_index] or None
-                            elif freq_key == "ac":
-                                allele_count = csq_record_list[col_index] or None
-                            else:
-                                raise Exception('Frequency metric is not recognised')
-                            population_frequency = {
-                                                "population_name": sub_pop["name"],
-                                                "allele_frequency": allele_frequency or -1,
-                                                "allele_count": allele_count,
-                                                "allele_number": allele_number,
-                                                "is_minor_allele": False,
-                                                "is_hpmaf": False
-                                            }
+                            if col_index and csq_record_list[col_index] is not None:
+                                if freq_key == "af":
+                                    allele_frequency = csq_record_list[col_index] 
+                                elif freq_key == "an":
+                                    allele_number = csq_record_list[col_index] or None
+                                elif freq_key == "ac":
+                                    allele_count = csq_record_list[col_index] or None
+                                else:
+                                    raise Exception('Frequency metric is not recognised')
+                                population_frequency = {
+                                                    "population_name": sub_pop["name"],
+                                                    "allele_frequency": allele_frequency or -1,
+                                                    "allele_count": allele_count,
+                                                    "allele_number": allele_number,
+                                                    "is_minor_allele": False,
+                                                    "is_hpmaf": False
+                                                }
 
-                            population_frequency_map[csq_record_list[allele_index]][sub_pop["name"]] = population_frequency
+                                population_frequency_map[csq_record_list[allele_index]][sub_pop["name"]] = population_frequency
         return population_frequency_map
     
     def set_frequency_flags(self):
