@@ -61,6 +61,17 @@ Dev:Web:HL:
   environment:
     name: wp40-hl-development
 
+Dev:Web:HL51:
+  extends: .deploy
+  variables:
+    BASE: k8s/overlays/webteam/hl
+  rules:
+    - !reference [.web-rules]
+    - if: '$CI_COMMIT_BRANCH == "review-on-k8s"'
+      when: always
+  environment:
+    name: wp51-hl-development
+
 Dev:Web:HX:
   extends: .deploy
   variables:
