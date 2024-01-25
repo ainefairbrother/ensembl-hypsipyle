@@ -277,8 +277,8 @@ class Variant ():
                                                     "is_minor_allele": False,
                                                     "is_hpmaf": False
                                                 }
-
-                                population_frequency_map[csq_record_list[allele_index]][sub_pop["name"]] = population_frequency
+                                if allele_frequency:
+                                    population_frequency_map[csq_record_list[allele_index]][sub_pop["name"]] = population_frequency
         return population_frequency_map
     
     def set_frequency_flags(self):
