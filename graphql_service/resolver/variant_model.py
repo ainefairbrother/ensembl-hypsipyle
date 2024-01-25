@@ -163,8 +163,8 @@ def resolve_api(
     return {"api": {"major": "0", "minor": "1", "patch": "0-beta"}}
 
 
-@QUERY_TYPE.field("population")
-def resolve_population(_: None, info: GraphQLResolveInfo, genome_id: str = None) -> List: 
+@QUERY_TYPE.field("populations")
+def resolve_populations(_: None, info: GraphQLResolveInfo, genome_id: str = None) -> List: 
     current_directory = os.path.dirname(__file__)
     population_metadata_file = f"{current_directory}/../../common/file_model/population_metadata.json"
     with open(population_metadata_file) as pop_file:
