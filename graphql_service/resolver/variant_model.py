@@ -29,6 +29,7 @@ from graphql_service.resolver.exceptions import (
 QUERY_TYPE = QueryType()
 VARIANT_TYPE = ObjectType("Variant")
 VARIANT_ALLELE_TYPE = ObjectType("VariantAllele")
+POPULATION_TYPE = ObjectType("Population")
 
 @QUERY_TYPE.field("variant")
 async def resolve_variant(
@@ -163,6 +164,9 @@ def resolve_api(
     return {"api": {"major": "0", "minor": "1", "patch": "0-beta"}}
 
 
+
+
+
 @QUERY_TYPE.field("populations")
 def resolve_populations(_: None, info: GraphQLResolveInfo, genome_id: str = None) -> List: 
     current_directory = os.path.dirname(__file__)
@@ -170,3 +174,9 @@ def resolve_populations(_: None, info: GraphQLResolveInfo, genome_id: str = None
     with open(population_metadata_file) as pop_file:
             population_metadata = json.load(pop_file)
     return population_metadata[genome_id]
+
+@POPULATION_TYPE.field("super_population")
+## This may still break when queried for other fields in super_population
+def resolve_super_population(population: Dict, info: GraphQLResolveInfo):
+    return population["super_population"] if population["super_population"] and population["super_population"]["name"] else None
+
