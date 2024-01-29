@@ -163,10 +163,6 @@ def resolve_api(
 ):  # the second argument must be named `info` to avoid a NameError
     return {"api": {"major": "0", "minor": "1", "patch": "0-beta"}}
 
-
-
-
-
 @QUERY_TYPE.field("populations")
 def resolve_populations(_: None, info: GraphQLResolveInfo, genome_id: str = None) -> List: 
     current_directory = os.path.dirname(__file__)

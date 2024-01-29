@@ -3,6 +3,7 @@ type Population{
   Population
 """
     name: String! 
+    size: Int!
     description: String!
     type: String
     is_global: Boolean
