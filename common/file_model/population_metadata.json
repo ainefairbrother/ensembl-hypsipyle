@@ -486,10 +486,7 @@
         "description": "All gnomAD genomes individuals v3.1.2",
         "type": "regional",
         "is_global": true,
-        "super_population": 
-        {
-            "name": null
-        },
+        "super_population": null,
         "sub_populations": [
             {
                 "name": "gnomADg:afr"
@@ -660,10 +657,7 @@
             "description": "All gnomAD exomes individuals r2.1.1",
             "type": "regional",
             "is_global": true,
-            "super_population": 
-            {
-                "name": null
-            },
+            "super_population": null,
             "sub_populations": [
                 {
                     "name": "gnomADe:afr"
