@@ -328,13 +328,33 @@ class Variant ():
 
             by_population_sorted = sorted(by_population, key=lambda item: item[0])
             if len(by_population_sorted) >= 2:
-                maf_frequency, maf_allele, maf_population = by_population_sorted[-2]
-                pop_frequency_map[maf_allele][maf_population]["is_minor_allele"] = True
-                hpmaf.append([maf_frequency,maf_allele,maf_population])
+                highest_frequency = by_population_sorted[-1][0]
+                maf_frequency = None
+                # When more than one allele has same maf and is not 
+                # ref allele, we mark it as is_minor_allele
+                for pop in reversed(by_population_sorted[:-1]):
+                    if pop[0] == highest_frequency:
+                        continue
+                    elif pop[0] < highest_frequency and not maf_frequency:
+                        maf_frequency, maf_allele, maf_population = pop
+                        pop_frequency_map[maf_allele][maf_population]["is_minor_allele"] = True
+                        hpmaf.append([maf_frequency,maf_allele,maf_population])
+                    elif maf_frequency and pop[0] == maf_frequency and maf_allele != allele.ref:
+                        pop_frequency_map[maf_allele][maf_population]["is_minor_allele"] = True
+                        hpmaf.append([maf_frequency,maf_allele,maf_population])
+                    elif maf_frequency and pop[0] < maf_frequency:
+                        break
         if len(hpmaf) > 0:
             hpmaf_sorted = sorted(hpmaf, key=lambda item: item[0])
-            _, hpmaf_allele, hpmaf_population = hpmaf_sorted[-1]
+            hpmaf_frequency, hpmaf_allele, hpmaf_population = hpmaf_sorted[-1]
             pop_frequency_map[hpmaf_allele][hpmaf_population]["is_hpmaf"] = True
+            # When more than one allele has same maf, we mark it as is_hpmaf
+            for hpmaf_pop in reversed(hpmaf_sorted[:-1]):
+                if hpmaf_pop[0] == hpmaf_frequency:
+                    hpmaf_frequency, hpmaf_allele, hpmaf_population = hpmaf_pop
+                    pop_frequency_map[hpmaf_allele][hpmaf_population]["is_hpmaf"] = True
+                elif hpmaf_pop[0] < hpmaf_frequency:
+                    break
         return pop_frequency_map
     
 
