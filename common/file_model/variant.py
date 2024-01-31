@@ -27,6 +27,7 @@ class Variant ():
         self.info = record.INFO
         self.type = "Variant"
         self.vep_version = re.search("v\d+", self.header.get_lines("VEP")[0].value).group()
+        self.population_map = {}
     
     def get_alternative_names(self) -> List:
         return []
@@ -196,7 +197,7 @@ class Variant ():
             csq_record_list = csq_record.split("|")
             for cons in csq_record_list[consequence_index].split("&"):
                 rank = consequence_rank[cons]
-                consequence_map[rank] = cons
+                consequence_map[int(rank)] = cons
         return{
                     "result": consequence_map[min(consequence_map.keys())]  ,
                     "analysis_method": {
@@ -240,34 +241,121 @@ class Variant ():
             for index, value in enumerate(csq_list):
                 if value == key:
                     return index   
+                
+    def traverse_population_info(self) -> Mapping:
+        directory = os.path.dirname(__file__)
+        with open(os.path.join(directory,'populations.json')) as pop_file:
+            pop_mapping = json.load(pop_file)
+        population_frequency_map = {}
+        for csq_record in self.info["CSQ"]:
+            csq_record_list = csq_record.split("|")
+            allele_index = self.get_info_key_index("Allele") 
+            if csq_record_list[allele_index] is not None:
+                if csq_record_list[allele_index] not in population_frequency_map.keys():
+                    population_frequency_map[csq_record_list[allele_index]] = {}
+                for pop_key, pop in pop_mapping.items():
+                    for sub_pop in pop:
+                        if sub_pop["name"] in population_frequency_map[csq_record_list[allele_index]]:
+                            continue
+                        allele_count = allele_number = allele_frequency = None
+                        for freq_key, freq_val in sub_pop["frequencies"].items():
+                            col_index = self.get_info_key_index(freq_val)
+                            if col_index and csq_record_list[col_index] is not None:
+                                if freq_key == "af":
+                                    allele_frequency = csq_record_list[col_index] or None
+                                elif freq_key == "an":
+                                    allele_number = csq_record_list[col_index] or None
+                                elif freq_key == "ac":
+                                    allele_count = csq_record_list[col_index] or None
+                                else:
+                                    raise Exception('Frequency metric is not recognised')
+                                population_frequency = {
+                                                    "population_name": sub_pop["name"],
+                                                    "allele_frequency": allele_frequency,
+                                                    "allele_count": allele_count,
+                                                    "allele_number": allele_number,
+                                                    "is_minor_allele": False,
+                                                    "is_hpmaf": False
+                                                }
+                                if allele_frequency:
+                                    population_frequency_map[csq_record_list[allele_index]][sub_pop["name"]] = population_frequency
+        return population_frequency_map
     
-    def set_frequency_flags(self, allele_list: List):
+    def set_frequency_flags(self):
         """
-        Calculates minor allele frequency by iterating through each allele 
-        Assumption: Considers that population is only gnomAD (genomes) for now
-        Sets the maf as hpmaf as gnomAD is the only population at the moment
+        Calculates MAF (minor allele frequency) and  HPMAF by iterating through each allele 
         """
-        maf_frequency = -1
-        maf_index = -1
-        highest_frequency = -1
-        highest_frequency_index = -1
-        highest_maf_frequency = -1
-        highest_maf_frequency_index = -1
-        maf_map = {}
-        for allele_index, allele in enumerate(allele_list):
-            if(len(allele["population_frequencies"]) > 0):
-                pop = allele["population_frequencies"][0]
-                pop_allele_frequency = float(pop["allele_frequency"])
-                if ( pop_allele_frequency > maf_frequency and pop_allele_frequency < highest_frequency ):
-                    maf_frequency = pop_allele_frequency
-                    maf_index = allele_index
-                elif ( pop_allele_frequency > highest_frequency ):
-                    maf_frequency = highest_frequency
-                    maf_index = highest_frequency_index
-                    highest_frequency = pop_allele_frequency
-                    highest_frequency_index = allele_index
+        allele_list = self.get_alleles()
+        directory = os.path.dirname(__file__)
+        with open(os.path.join(directory,'populations.json')) as pop_file:
+            pop_mapping = json.load(pop_file)
+        pop_names = []
+        for pop in pop_mapping.values():
+            pop_names.extend([sub_pop["name"] for sub_pop in pop])
+        hpmaf = []
+        pop_frequency_map = self.traverse_population_info()
 
-        if maf_frequency>=0:
-            allele_list[maf_index]["population_frequencies"][0]["is_minor_allele"]  = True
-            allele_list[maf_index]["population_frequencies"][0]["is_hpmaf"]  = True  
+        for pop_name in pop_names:
+            by_population = []
+            for allele in allele_list:
+                if allele.minimise_allele(allele.alt) in pop_frequency_map:
+                    pop_freqs = pop_frequency_map[allele.minimise_allele(allele.alt)].values()
+                # Calculate reference allele from parsed frequency info of all alleles
+                if allele.get_allele_type()["accession_id"] == "biological_region" and len(by_population)>0 :
+                     allele_frequency_ref = 1 - sum(list(zip(*by_population))[0])
+                     if allele_frequency_ref <= 1 and allele_frequency_ref >= 0:
+                        population_frequency_ref = {
+                                                "population_name": pop_name,
+                                                "allele_frequency": allele_frequency_ref ,
+                                                "allele_count": None,
+                                                "allele_number": None,
+                                                "is_minor_allele": False,
+                                                "is_hpmaf": False
+                                            }
+                        minimised_allele = allele.minimise_allele(allele.alt)
+                        if minimised_allele not in pop_frequency_map:
+                            pop_frequency_map[minimised_allele] = {}
+                        pop_frequency_map[minimised_allele][pop_name] = population_frequency_ref
+                        by_population.append([allele_frequency_ref,minimised_allele,pop_name])
+                
+                else:       
+                    for pop_freq in pop_freqs:
+                        if pop_name == pop_freq["population_name"] and pop_freq["allele_frequency"]:
+                            minimised_allele = allele.minimise_allele(allele.alt)
+                            by_population.append([float(pop_freq["allele_frequency"]),minimised_allele, pop_name])
+            
+                
+
+            by_population_sorted = sorted(by_population, key=lambda item: item[0])
+            if len(by_population_sorted) >= 2:
+                highest_frequency = by_population_sorted[-1][0]
+                maf_frequency = None
+                # When more than one allele has same maf and is not 
+                # ref allele, we mark it as is_minor_allele
+                for pop in reversed(by_population_sorted[:-1]):
+                    if pop[0] == highest_frequency:
+                        continue
+                    elif pop[0] < highest_frequency and not maf_frequency:
+                        maf_frequency, maf_allele, maf_population = pop
+                        pop_frequency_map[maf_allele][maf_population]["is_minor_allele"] = True
+                        hpmaf.append([maf_frequency,maf_allele,maf_population])
+                    elif maf_frequency and pop[0] == maf_frequency and maf_allele != allele.ref:
+                        pop_frequency_map[maf_allele][maf_population]["is_minor_allele"] = True
+                        hpmaf.append([maf_frequency,maf_allele,maf_population])
+                    elif maf_frequency and pop[0] < maf_frequency:
+                        break
+        if len(hpmaf) > 0:
+            hpmaf_sorted = sorted(hpmaf, key=lambda item: item[0])
+            hpmaf_frequency, hpmaf_allele, hpmaf_population = hpmaf_sorted[-1]
+            pop_frequency_map[hpmaf_allele][hpmaf_population]["is_hpmaf"] = True
+            # When more than one allele has same maf, we mark it as is_hpmaf
+            for hpmaf_pop in reversed(hpmaf_sorted[:-1]):
+                if hpmaf_pop[0] == hpmaf_frequency:
+                    hpmaf_frequency, hpmaf_allele, hpmaf_population = hpmaf_pop
+                    pop_frequency_map[hpmaf_allele][hpmaf_population]["is_hpmaf"] = True
+                elif hpmaf_pop[0] < hpmaf_frequency:
+                    break
+        return pop_frequency_map
+    
+
 

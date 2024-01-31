@@ -2,8 +2,10 @@ type PopulationAlleleFrequency{
 """
   Population Allele Frequency
 """
-    population: String
-    allele_frequency: Float
-    is_minor_allele: Boolean
-    is_hpmaf: Boolean
+    population_name: String!
+    allele_frequency: Float!
+    allele_count: Int
+    allele_number: Int
+    is_minor_allele: Boolean!
+    is_hpmaf: Boolean!
 }

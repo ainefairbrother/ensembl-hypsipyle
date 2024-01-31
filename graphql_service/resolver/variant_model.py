@@ -13,10 +13,11 @@
 """
 
 from typing import Dict, Optional, List, Any
-import json
+import json, os
 from ariadne import QueryType, ObjectType
 from graphql import GraphQLResolveInfo
 import subprocess
+import json
 
 from graphql_service.resolver.exceptions import (
     VariantNotFoundError
@@ -28,6 +29,7 @@ from graphql_service.resolver.exceptions import (
 QUERY_TYPE = QueryType()
 VARIANT_TYPE = ObjectType("Variant")
 VARIANT_ALLELE_TYPE = ObjectType("VariantAllele")
+POPULATION_TYPE = ObjectType("Population")
 
 @QUERY_TYPE.field("variant")
 async def resolve_variant(
@@ -160,4 +162,13 @@ def resolve_api(
     _: None, info: GraphQLResolveInfo
 ):  # the second argument must be named `info` to avoid a NameError
     return {"api": {"major": "0", "minor": "1", "patch": "0-beta"}}
+
+@QUERY_TYPE.field("populations")
+def resolve_populations(_: None, info: GraphQLResolveInfo, genome_id: str = None) -> List: 
+    current_directory = os.path.dirname(__file__)
+    population_metadata_file = f"{current_directory}/../../common/file_model/population_metadata.json"
+    with open(population_metadata_file) as pop_file:
+            population_metadata = json.load(pop_file)
+    return population_metadata[genome_id]
+
 

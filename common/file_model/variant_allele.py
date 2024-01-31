@@ -15,6 +15,7 @@ class VariantAllele():
         self.type = "VariantAllele"
         self.allele_sequence = alt
         self.reference_sequence = variant.ref
+        self.population_map = []
         self.info_map = self.traverse_csq_info()
 
     def get_allele_type(self):
@@ -41,7 +42,12 @@ class VariantAllele():
         min_alt = self.minimise_allele(self.alt)
         return self.info_map[min_alt]["prediction_results"] if min_alt in self.info_map else []
     
-    
+    def get_population_allele_frequencies(self):
+        min_alt = self.minimise_allele(self.alt)
+        population_map = self.variant.set_frequency_flags()
+        return population_map[min_alt].values() if min_alt in population_map else []
+
+
     def traverse_csq_info(self) -> Mapping:
         """
         This function is to traverse the CSQ record and extract columns
@@ -70,7 +76,47 @@ class VariantAllele():
             current_prediction_results = info_map[csq_record_list[prediction_index_map["allele"]]]["prediction_results"] 
             info_map[csq_record_list[prediction_index_map["allele"]]]["prediction_results"] += self.create_allele_prediction_results(current_prediction_results, csq_record_list, prediction_index_map)
         return info_map
+    
+    # def traverse_population_info(self) -> Mapping:
+    #     directory = os.path.dirname(__file__)
+    #     with open(os.path.join(directory,'populations.json')) as pop_file:
+    #         pop_mapping = json.load(pop_file)
+    #     population_frequency_map = {}
+    #     for csq_record in self.variant.info["CSQ"]:
+    #         csq_record_list = csq_record.split("|")
+    #         allele_index = self.variant.get_info_key_index("Allele") 
+    #         if csq_record_list[allele_index] is not None:
+    #             if csq_record_list[allele_index] not in population_frequency_map.keys():
+    #                 population_frequency_map[csq_record_list[allele_index]] = {}
+    #             for pop_key, pop in pop_mapping.items():
+    #                 for sub_pop in pop:
+    #                     if sub_pop["name"] in population_frequency_map[csq_record_list[allele_index]]:
+    #                         continue
+    #                     allele_count = allele_number = allele_frequency = None
+    #                     for freq_key, freq_val in sub_pop["frequencies"].items():
+    #                         col_index = self.variant.get_info_key_index(freq_val)
+    #                     if col_index is not None and csq_record_list[col_index] is not None:
+    #                         if freq_key == "af":
+    #                             allele_frequency = csq_record_list[col_index] 
+    #                         elif freq_key == "an":
+    #                             allele_number = csq_record_list[col_index] or None
+    #                         elif freq_key == "ac":
+    #                             allele_count = csq_record_list[col_index] or None
+    #                         else:
+    #                             raise Exception('Frequency metric is not recognised')
+    #                         population_frequency = {
+    #                                             "population": sub_pop["name"],
+    #                                             "allele_frequency": allele_frequency or -1,
+    #                                             "allele_count": allele_count,
+    #                                             "allele_number": allele_number,
+    #                                             "is_minor_allele": False,
+    #                                             "is_hpmaf": False
+    #                                         }
 
+    #                         population_frequency_map[csq_record_list[allele_index]][sub_pop["name"]] = population_frequency
+    #     return population_frequency_map
+
+     
     def create_allele_prediction_results(self, current_prediction_results: Mapping, csq_record: List, prediction_index_map: dict) -> list:
         prediction_results = []
         if "cadd_phred" in prediction_index_map.keys():
@@ -220,29 +266,3 @@ class VariantAllele():
             minimised_allele = "-"
         return minimised_allele
     
-    def format_frequency(self, raw_frequency_list: List) -> Mapping:
-        freq_map = {}
-        for freq in raw_frequency_list:
-            key = freq.split(":")[0]
-            freq_list = freq.split(":")[1].split(",")
-            freq_map[key] = freq_list
-        return freq_map
-    
-    def get_population_allele_frequencies(self) -> List:
-        frequency_map = {}
-        if "FREQ" in self.variant.info:
-            frequency_map = self.format_frequency(",".join(map(str,self.variant.info["FREQ"])).split("|"))
-        population_allele_frequencies = []
-        for key, pop_list in frequency_map.items():
-            ## Adding only GnomAD population
-            if key == "GnomAD":
-                if pop_list[self.allele_index] not in ["None", "."]:
-                    population_allele_frequencies.append({
-                        "population": key,
-                        "allele_frequency": pop_list[self.allele_index],
-                        "is_minor_allele": False,
-                        "is_hpmaf": False
-                    })
-        return population_allele_frequencies
-
-  
