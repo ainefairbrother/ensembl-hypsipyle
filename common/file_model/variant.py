@@ -322,11 +322,7 @@ class Variant ():
                         for pop_freq in pop_freqs:
                             if pop_name == pop_freq["population_name"] and pop_freq["allele_frequency"]:
                                 minimised_allele = allele.minimise_allele(allele.alt)
-                                by_population.append([float(pop_freq["allele_frequency"]),minimised_allele, pop_name])
-                else:
-                    return {}
-            
-                
+                                by_population.append([float(pop_freq["allele_frequency"]),minimised_allele, pop_name])               
 
             by_population_sorted = sorted(by_population, key=lambda item: item[0])
             if len(by_population_sorted) >= 2:

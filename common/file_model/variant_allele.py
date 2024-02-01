@@ -76,46 +76,6 @@ class VariantAllele():
             current_prediction_results = info_map[csq_record_list[prediction_index_map["allele"]]]["prediction_results"] 
             info_map[csq_record_list[prediction_index_map["allele"]]]["prediction_results"] += self.create_allele_prediction_results(current_prediction_results, csq_record_list, prediction_index_map)
         return info_map
-    
-    # def traverse_population_info(self) -> Mapping:
-    #     directory = os.path.dirname(__file__)
-    #     with open(os.path.join(directory,'populations.json')) as pop_file:
-    #         pop_mapping = json.load(pop_file)
-    #     population_frequency_map = {}
-    #     for csq_record in self.variant.info["CSQ"]:
-    #         csq_record_list = csq_record.split("|")
-    #         allele_index = self.variant.get_info_key_index("Allele") 
-    #         if csq_record_list[allele_index] is not None:
-    #             if csq_record_list[allele_index] not in population_frequency_map.keys():
-    #                 population_frequency_map[csq_record_list[allele_index]] = {}
-    #             for pop_key, pop in pop_mapping.items():
-    #                 for sub_pop in pop:
-    #                     if sub_pop["name"] in population_frequency_map[csq_record_list[allele_index]]:
-    #                         continue
-    #                     allele_count = allele_number = allele_frequency = None
-    #                     for freq_key, freq_val in sub_pop["frequencies"].items():
-    #                         col_index = self.variant.get_info_key_index(freq_val)
-    #                     if col_index is not None and csq_record_list[col_index] is not None:
-    #                         if freq_key == "af":
-    #                             allele_frequency = csq_record_list[col_index] 
-    #                         elif freq_key == "an":
-    #                             allele_number = csq_record_list[col_index] or None
-    #                         elif freq_key == "ac":
-    #                             allele_count = csq_record_list[col_index] or None
-    #                         else:
-    #                             raise Exception('Frequency metric is not recognised')
-    #                         population_frequency = {
-    #                                             "population": sub_pop["name"],
-    #                                             "allele_frequency": allele_frequency or -1,
-    #                                             "allele_count": allele_count,
-    #                                             "allele_number": allele_number,
-    #                                             "is_minor_allele": False,
-    #                                             "is_hpmaf": False
-    #                                         }
-
-    #                         population_frequency_map[csq_record_list[allele_index]][sub_pop["name"]] = population_frequency
-    #     return population_frequency_map
-
      
     def create_allele_prediction_results(self, current_prediction_results: Mapping, csq_record: List, prediction_index_map: dict) -> list:
         prediction_results = []
@@ -253,16 +213,16 @@ class VariantAllele():
             }
 
     
-    def minimise_allele(self, alt: str):
+    def minimise_allele(self, alt: str) -> str:
         """
         VCF file has the representation without anchoring bases
         for prediction scores in INFO column. This function is useful
         in matching the SPDI format in VCF with the allele in memory
         """
-        minimised_allele = alt
+        minimised_allele_string = alt
         if len(alt) > len(self.variant.ref):
-            minimised_allele = alt[1:] 
+            minimised_allele_string = alt[1:] 
         elif len(alt) < len(self.variant.ref):
-            minimised_allele = "-"
-        return minimised_allele
+            minimised_allele_string = "-"
+        return minimised_allele_string
     
