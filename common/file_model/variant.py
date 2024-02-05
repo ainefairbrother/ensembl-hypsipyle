@@ -41,11 +41,13 @@ class Variant ():
 
         source_header_lines = self.header.get_lines("source")
         for source_header_line in source_header_lines:
-            source, source_info_line = source_header_line.value.split(" ", 1)
+            source, source_info_line = source_header_line.value.split("\" ", 1)
+            
+            source = source.strip('"').replace(" ", "_")
             source_info = dict(re.findall('(.+?)="(.+?)"\s*', source_info_line))
 
             ## overwrite is allowed
-            self.variant_sources[genome_uuid][source.strip('"')] = source_info
+            self.variant_sources[genome_uuid][source] = source_info
 
     def get_primary_source(self) -> Mapping:
         """
