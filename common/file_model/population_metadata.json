@@ -265,7 +265,7 @@
         },
         {
         "name": "1000GENOMES:phase_3:MXL",
-        "description": "Colombian in Medellin, Colombia",
+        "description": "Mexican Ancestry in Los Angeles, California",
         "type": "regional",
         "is_global": false,
         "display_group_name": "1000 Genomes Project Phase 3",

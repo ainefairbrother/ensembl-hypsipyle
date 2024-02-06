@@ -294,38 +294,36 @@ class Variant ():
             pop_names.extend([sub_pop["name"] for sub_pop in pop])
         hpmaf = []
         pop_frequency_map = self.traverse_population_info()
-
+        if not pop_frequency_map:
+            return pop_frequency_map 
         for pop_name in pop_names:
             by_population = []
             for allele in allele_list:
                 if allele.minimise_allele(allele.alt) in pop_frequency_map:
                     pop_freqs = pop_frequency_map[allele.minimise_allele(allele.alt)].values()
-                # Calculate reference allele from parsed frequency info of all alleles
-                if allele.get_allele_type()["accession_id"] == "biological_region" and len(by_population)>0 :
-                     allele_frequency_ref = 1 - sum(list(zip(*by_population))[0])
-                     if allele_frequency_ref <= 1 and allele_frequency_ref >= 0:
-                        population_frequency_ref = {
-                                                "population_name": pop_name,
-                                                "allele_frequency": allele_frequency_ref ,
-                                                "allele_count": None,
-                                                "allele_number": None,
-                                                "is_minor_allele": False,
-                                                "is_hpmaf": False
-                                            }
-                        minimised_allele = allele.minimise_allele(allele.alt)
-                        if minimised_allele not in pop_frequency_map:
-                            pop_frequency_map[minimised_allele] = {}
-                        pop_frequency_map[minimised_allele][pop_name] = population_frequency_ref
-                        by_population.append([allele_frequency_ref,minimised_allele,pop_name])
-                
-                else:       
-                    for pop_freq in pop_freqs:
-                        if pop_name == pop_freq["population_name"] and pop_freq["allele_frequency"]:
+                    # Calculate reference allele from parsed frequency info of all alleles
+                    if allele.get_allele_type()["accession_id"] == "biological_region" and len(by_population)>0 :
+                        allele_frequency_ref = 1 - sum(list(zip(*by_population))[0])
+                        if allele_frequency_ref <= 1 and allele_frequency_ref >= 0:
+                            population_frequency_ref = {
+                                                    "population_name": pop_name,
+                                                    "allele_frequency": allele_frequency_ref ,
+                                                    "allele_count": None,
+                                                    "allele_number": None,
+                                                    "is_minor_allele": False,
+                                                    "is_hpmaf": False
+                                                }
                             minimised_allele = allele.minimise_allele(allele.alt)
-                            by_population.append([float(pop_freq["allele_frequency"]),minimised_allele, pop_name])
-            
-                
-
+                            if minimised_allele not in pop_frequency_map:
+                                pop_frequency_map[minimised_allele] = {}
+                            pop_frequency_map[minimised_allele][pop_name] = population_frequency_ref
+                            by_population.append([allele_frequency_ref,minimised_allele,pop_name])
+                    
+                    else:       
+                        for pop_freq in pop_freqs:
+                            if pop_name == pop_freq["population_name"] and pop_freq["allele_frequency"]:
+                                minimised_allele = allele.minimise_allele(allele.alt)
+                                by_population.append([float(pop_freq["allele_frequency"]),minimised_allele, pop_name])               
             by_population_sorted = sorted(by_population, key=lambda item: item[0])
             if len(by_population_sorted) >= 2:
                 highest_frequency = by_population_sorted[-1][0]

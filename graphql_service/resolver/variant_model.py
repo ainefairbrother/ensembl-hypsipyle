@@ -169,6 +169,6 @@ def resolve_populations(_: None, info: GraphQLResolveInfo, genome_id: str = None
     population_metadata_file = f"{current_directory}/../../common/file_model/population_metadata.json"
     with open(population_metadata_file) as pop_file:
             population_metadata = json.load(pop_file)
-    return population_metadata[genome_id]
+    return population_metadata.get(genome_id,[]) 
 
 
