@@ -294,7 +294,8 @@ class Variant ():
             pop_names.extend([sub_pop["name"] for sub_pop in pop])
         hpmaf = []
         pop_frequency_map = self.traverse_population_info()
-
+        if not pop_frequency_map:
+            return pop_frequency_map 
         for pop_name in pop_names:
             by_population = []
             for allele in allele_list:
@@ -323,7 +324,6 @@ class Variant ():
                             if pop_name == pop_freq["population_name"] and pop_freq["allele_frequency"]:
                                 minimised_allele = allele.minimise_allele(allele.alt)
                                 by_population.append([float(pop_freq["allele_frequency"]),minimised_allele, pop_name])               
-
             by_population_sorted = sorted(by_population, key=lambda item: item[0])
             if len(by_population_sorted) >= 2:
                 highest_frequency = by_population_sorted[-1][0]
