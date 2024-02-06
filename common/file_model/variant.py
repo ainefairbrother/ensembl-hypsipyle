@@ -16,7 +16,10 @@ def reduce_allele_length(allele_list: List):
 
 
 class Variant ():
-    def __init__(self, record: Any, header: Any) -> None:
+    variant_sources = {}       ## used to cache source information, class attribute
+
+    def __init__(self, record: Any, header: Any, genome_uuid: str) -> None:
+        self.genome_uuid = genome_uuid
         self.name = record.ID[0]
         self.record = record 
         self.header = header
@@ -32,19 +35,60 @@ class Variant ():
     def get_alternative_names(self) -> List:
         return []
     
+    def parse_source_from_header(self) -> Mapping:
+        genome_uuid = self.genome_uuid
+        if genome_uuid not in self.variant_sources:
+            self.variant_sources[genome_uuid] = {}
+
+        source_header_lines = self.header.get_lines("source")
+        for source_header_line in source_header_lines:
+            source, source_info_line = source_header_line.value.split("\" ", 1)
+            
+            source = source.strip('"').replace(" ", "_")
+            source_info = dict(re.findall('(.+?)="(.+?)"\s*', source_info_line))
+
+            ## overwrite is allowed
+            self.variant_sources[genome_uuid][source] = source_info
+
     def get_primary_source(self) -> Mapping:
         """
         Fetches source from variant INFO columns
         Fallsback to fetching from the header
         """
-        
+
         try:
             if "SOURCE" in self.info:
                 source = self.info["SOURCE"]
             else:
                 source = self.header.get_lines("source")[0].value
 
-            if re.search("^dbSNP", source):
+            # Get source information from data file header header
+            genome_uuid = self.genome_uuid
+            if genome_uuid not in self.variant_sources or source not in self.variant_sources[genome_uuid]:     
+                self.parse_source_from_header()
+            variant_sources = self.variant_sources[genome_uuid]
+
+            if source in variant_sources:
+                source_info = variant_sources[source]
+
+                source_id = source
+                source_name = source.replace("_", " ")
+                source_description = source_info["description"] if "description" in source_info else ""
+                source_url = source_info["url"] if "url" in source_info else ""
+                source_release = source_info["version"] if "version" in source_info else ""
+
+                if "accession_url" in source_info:
+                    source_url_id = source_info["accession_url"]
+                    if re.search("^Ensembl", source):
+                        variant_id = f"{self.chromosome}:{self.position}:{self.name}"
+                    else:
+                        variant_id = self.name
+                else:
+                    source_url_id = source_url
+                    variant_id = ""
+            
+            # If source information not found in data file try using default value for main accessioning sources
+            elif re.search("^dbSNP", source):
                 source_id = "dbSNP"
                 source_name = "dbSNP"
                 source_description = "NCBI db of human variants"
@@ -70,7 +114,6 @@ class Variant ():
                 source_url_id = "https://beta.ensembl.org/"
                 source_release = "110" # to be fetched from the file
                 variant_id = f"{self.chromosome}:{self.position}:{self.name}"
-            
             
 
         except Exception as e:
