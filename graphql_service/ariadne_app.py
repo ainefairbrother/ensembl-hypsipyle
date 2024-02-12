@@ -16,6 +16,13 @@ from typing import Dict, Callable
 import ariadne
 from graphql import GraphQLSchema
 from starlette.requests import Request
+from ariadne import ScalarType
+
+# Serializing float to return exponent notation
+float_scalar = ScalarType("Float")
+@float_scalar.serializer
+def serialize_float(value):
+    return f"{value:.3e}"
 
 from graphql_service.resolver.variant_model import (
     QUERY_TYPE,
@@ -33,7 +40,8 @@ def prepare_executable_schema() -> GraphQLSchema:
         schema,
         QUERY_TYPE,
         VARIANT_TYPE,
-        VARIANT_ALLELE_TYPE
+        VARIANT_ALLELE_TYPE,
+        float_scalar
     )
 
 

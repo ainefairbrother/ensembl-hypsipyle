@@ -312,15 +312,16 @@ class Variant ():
                                     allele_count = csq_record_list[col_index] or None
                                 else:
                                     raise Exception('Frequency metric is not recognised')
-                                population_frequency = {
+                                
+                                if allele_frequency is not None:
+                                    population_frequency = {
                                                     "population_name": sub_pop["name"],
-                                                    "allele_frequency": allele_frequency,
+                                                    "allele_frequency": float(allele_frequency),
                                                     "allele_count": allele_count,
                                                     "allele_number": allele_number,
                                                     "is_minor_allele": False,
                                                     "is_hpmaf": False
                                                 }
-                                if allele_frequency:
                                     population_frequency_map[csq_record_list[allele_index]][sub_pop["name"]] = population_frequency
         return population_frequency_map
     
@@ -345,7 +346,7 @@ class Variant ():
                 if allele.minimise_allele(allele.alt) in pop_frequency_map:
                     pop_freqs = pop_frequency_map[allele.minimise_allele(allele.alt)].values()
                     for pop_freq in pop_freqs:
-                        if pop_name == pop_freq["population_name"] and pop_freq["allele_frequency"]:
+                        if pop_name == pop_freq["population_name"] and pop_freq["allele_frequency"] is not None:
                             minimised_allele = allele.minimise_allele(allele.alt)
                             by_population.append([float(pop_freq["allele_frequency"]),minimised_allele, pop_name]) 
 
@@ -364,9 +365,9 @@ class Variant ():
                         minimised_allele = allele.minimise_allele(allele.alt)
                         if minimised_allele not in pop_frequency_map:
                             pop_frequency_map[minimised_allele] = {}
-                        pop_frequency_map[minimised_allele][pop_name] = population_frequency_ref
-                        by_population.append([allele_frequency_ref,minimised_allele,pop_name])
                             
+                        pop_frequency_map[minimised_allele][pop_name] = population_frequency_ref
+                        by_population.append([allele_frequency_ref,minimised_allele,pop_name])             
             by_population_sorted = sorted(by_population, key=lambda item: item[0])
             if len(by_population_sorted) >= 2:
                 highest_frequency = by_population_sorted[-1][0]
