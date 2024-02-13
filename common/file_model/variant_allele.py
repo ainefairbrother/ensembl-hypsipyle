@@ -67,7 +67,7 @@ class VariantAllele():
             if allele not in info_map.keys():
                 info_map[allele] = {"phenotype_assertions": [], "predicted_molecular_consequences": [], "prediction_results": []} 
 
-            # parse and form phenotypes
+            # parse and form phenotypes - adding phenotype from any of the csq record would be enough for adding only variant-linked phenotypes
             if not info_map[allele]["phenotype_assertions"]:
                 phenotypes = csq_record_list[prediction_index_map["phenotypes"]].split("&") if "phenotypes" in prediction_index_map.keys() else []   
                 for phenotype in phenotypes:
