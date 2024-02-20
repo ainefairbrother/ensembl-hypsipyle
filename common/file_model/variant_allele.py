@@ -129,10 +129,14 @@ class VariantAllele():
         if "sift" in prediction_index_map.keys():
             sift_score = csq_record[prediction_index_map["sift"]]
             if sift_score:
-                (result, score) = self.format_sift_polyphen_output(sift_score)
-                if result is not None and score is not None:
+                (label, score) = self.format_sift_polyphen_output(sift_score)
+                if label is not None and score is not None:
+                    classification = {
+                        "label": label,
+                        "definition": ""
+                    }
                     sift_prediction_result = {
-                            "result": result,
+                            "classification": classification,
                             "score": score,
                             "analysis_method": {
                                 "tool": "SIFT",
@@ -144,10 +148,14 @@ class VariantAllele():
         if "polyphen" in prediction_index_map.keys():
             polyphen_score = csq_record[prediction_index_map["polyphen"]]
             if polyphen_score:
-                (result, score) = self.format_sift_polyphen_output(polyphen_score)
-                if result is not None and score is not None:
+                (label, score) = self.format_sift_polyphen_output(polyphen_score)
+                if label is not None and score is not None:
+                    classification = {
+                        "label": label,
+                        "definition": ""
+                    }
                     polyphen_prediction_result = {
-                            "result": result,
+                            "classification": classification,
                             "score": score,
                             "analysis_method": {
                                 "tool": "PolyPhen",
@@ -165,7 +173,11 @@ class VariantAllele():
             cdna_start = cdna_position_list[0]
             cdna_end = cdna_start if len(cdna_position_list) < 2 else cdna_position_list[0]
             cdna_length = int(cdna_end) - int(cdna_start) + 1
-            relation = "overlaps"
+            relation = {
+                "label": "overlaps",
+                "definition": "Overlaps with the feature"
+
+            }
             percentage_overlap = 100
             ref_sequence = self.reference_sequence
             alt_sequence = csq_record[prediction_index_map["allele"]]
@@ -213,7 +225,11 @@ class VariantAllele():
             protein_start = protein_position_list[0]
             protein_end = protein_start if len(protein_position_list) < 2 else protein_position_list[0]
             protein_length = int(protein_end) - int(protein_start) + 1
-            relation = "overlaps"
+            relation = {
+                "label": "overlaps",
+                "definition": "Overlaps with the feature"
+
+            }
             percentage_overlap = 100
             ref_sequence = amino_acids.split("/")[0]
             alt_sequence = amino_acids.split("/")[1]
@@ -222,7 +238,7 @@ class VariantAllele():
                 "start": protein_start,
                 "end": protein_end, 
                 "length": protein_length, 
-                "percentage_overlap": percentage_overlap ,
+                "percentage_overlap": percentage_overlap,
                 "ref_sequence": ref_sequence,
                 "alt_sequence": alt_sequence
             }
@@ -242,7 +258,7 @@ class VariantAllele():
                 "prediction_results": prediction_results,
                 "cdna_location": cdna_location,
                 "cds_location": cds_location,
-                "protein_position": protein_location
+                "protein_location": protein_location
             }
             
 

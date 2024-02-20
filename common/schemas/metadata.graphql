@@ -13,6 +13,15 @@ interface XrefMetadata {
 }
 
 
+type ValueSet implements ValueSetMetadata {
+	accession_id: String
+	label: String!
+	value: String
+	is_current: Boolean
+	definition: String!
+	description: String
+}
+
 type OntologyTermMetadata {
     # Temp solution: Nullable because some xrefs doesnt have xref accession id eg: PF3D7_1314600
 	accession_id: String
