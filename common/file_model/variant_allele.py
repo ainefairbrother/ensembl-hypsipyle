@@ -62,19 +62,27 @@ class VariantAllele():
         info_map = {}
         for csq_record in self.variant.info["CSQ"]:
             csq_record_list = csq_record.split("|")
-            if csq_record_list[prediction_index_map["allele"]] not in info_map.keys():
-                info_map[csq_record_list[prediction_index_map["allele"]]] = {"phenotype_assertions": [], "predicted_molecular_consequences": [], "prediction_results": []} 
+            allele = csq_record_list[prediction_index_map["allele"]]
 
-            phenotypes = csq_record_list[prediction_index_map["phenotypes"]].split("&") if "phenotypes" in prediction_index_map.keys() else []   
-            for phenotype in phenotypes:
-                phenotype_assertions = self.create_allele_phenotype_assertion(phenotype) if phenotype else []
-                if (phenotype_assertions):
-                    info_map[csq_record_list[prediction_index_map["allele"]]]["phenotype_assertions"].append(phenotype_assertions)
+            if allele not in info_map.keys():
+                info_map[allele] = {"phenotype_assertions": [], "predicted_molecular_consequences": [], "prediction_results": []} 
+
+            # parse and form phenotypes - adding phenotype from any of the csq record would be enough for adding only variant-linked phenotypes
+            if not info_map[allele]["phenotype_assertions"]:
+                phenotypes = csq_record_list[prediction_index_map["phenotypes"]].split("&") if "phenotypes" in prediction_index_map.keys() else []   
+                for phenotype in phenotypes:
+                    phenotype_assertions = self.create_allele_phenotype_assertion(phenotype) if phenotype else []
+                    if (phenotype_assertions):
+                        info_map[allele]["phenotype_assertions"].append(phenotype_assertions)
+            
+            # parse and form molecular consequences
             predicted_molecular_consequences = self.create_allele_predicted_molecular_consequence(csq_record_list, prediction_index_map)
             if (predicted_molecular_consequences):
-                info_map[csq_record_list[prediction_index_map["allele"]]]["predicted_molecular_consequences"].append(predicted_molecular_consequences)
-            current_prediction_results = info_map[csq_record_list[prediction_index_map["allele"]]]["prediction_results"] 
-            info_map[csq_record_list[prediction_index_map["allele"]]]["prediction_results"] += self.create_allele_prediction_results(current_prediction_results, csq_record_list, prediction_index_map)
+                info_map[allele]["predicted_molecular_consequences"].append(predicted_molecular_consequences)
+            
+            # parse and form prediction results
+            current_prediction_results = info_map[allele]["prediction_results"] 
+            info_map[allele]["prediction_results"] += self.create_allele_prediction_results(current_prediction_results, csq_record_list, prediction_index_map)
         return info_map
      
     def create_allele_prediction_results(self, current_prediction_results: Mapping, csq_record: List, prediction_index_map: dict) -> list:
@@ -181,7 +189,11 @@ class VariantAllele():
         return (result, score)
     
     def create_allele_phenotype_assertion(self, phenotype: str) -> Mapping:
-        phenotype_name,source,feature = phenotype.split("+")
+        splits = phenotype.split("+")
+        if len(splits) != 3 or splits[2].startswith("ENS"):
+            return None
+
+        phenotype_name,source,feature = splits
         evidence_list = []
         if re.search("^ENS.*G\d+", feature):
             feature_type = "Gene"
@@ -190,15 +202,7 @@ class VariantAllele():
         elif re.search("^rs", feature):
             feature_type = "Variant"  
         else:
-            feature_type = None 
-        # if source:
-        #     evidence =  {
-        #         "source": {
-        #             "id": source,
-        #             "name": source.replace("_"," ") 
-        #         }
-        #     }
-        #     evidence_list.append(evidence)
+            feature_type = None
         
         if phenotype:
             return {
