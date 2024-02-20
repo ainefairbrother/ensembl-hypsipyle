@@ -3,10 +3,29 @@ type PredictedMolecularConsequence{
   PredictedMolecularConsequence
 """
   allele_name: String!
-  feature_stable_id: String!
+  stable_id: String!
   feature_type: OntologyTermMetadata!
   consequences: [OntologyTermMetadata]!
   prediction_results: [PredictionResult]
-  ## variant_representation
-  ## relative_locations
+  gene_stable_id: String!
+  gene_symbol: String!
+  protein_stable_id: String!
+  transcript_biotype: String!
+  cdna_location: VariantRelativeLocation
+  cds_location: VariantRelativeLocation
+  protein_location: VariantRelativeLocation 
+}
+
+type VariantRelativeLocation{
+"""
+  VariantRelativeLocation
+"""
+  relation: ValueSetMetadata!
+  start: Int!
+  end: Int!
+  length: Int!
+  percentage_overlap: Float!
+  ref_sequence: String!
+  alt_sequence: String!
+  
 }

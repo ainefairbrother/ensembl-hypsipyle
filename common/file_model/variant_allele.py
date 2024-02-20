@@ -53,7 +53,9 @@ class VariantAllele():
         This function is to traverse the CSQ record and extract columns
         corresponding to Consequence, SIFT, PolyPhen, CADD
         """
-        column_list = ["Allele", "PHENOTYPES", "Feature_type", "Feature", "Consequence", "SIFT", "PolyPhen", "SPDI", "CADD_PHRED","Conservation"]
+        column_list = ["Allele", "PHENOTYPES", "Feature_type", "Feature", "Consequence",
+                        "SIFT", "PolyPhen", "SPDI", "CADD_PHRED","Conservation", "Gene", "SYMBOL",
+                        "BIOTYPE","cDNA_position", "CDS_position", "Protein_position", "Amino_acids", "Codons"]
         prediction_index_map = {}
         for col in column_list:
                 if self.variant.get_info_key_index(col) is not None:
@@ -150,16 +152,96 @@ class VariantAllele():
                             }
                         }
                     prediction_results.append(polyphen_prediction_result)
+        
+        cdna_location = cds_location = protein_location = None
+
+        ###parse cdna location
+        cdna_position = csq_record[prediction_index_map["cdna_position"]]
+        if cdna_position:
+            cdna_position_list  = cdna_position.split("-")
+            cdna_start = cdna_position_list[0]
+            cdna_end = cdna_start if len(cdna_position_list) < 2 else cdna_position_list[0]
+            cdna_length = int(cdna_end) - int(cdna_start) + 1
+            relation = "overlaps"
+            percentage_overlap = 100
+            ref_sequence = self.reference_sequence
+            alt_sequence = csq_record[prediction_index_map["allele"]]
+            cdna_location = {
+                "relation": relation,
+                "start": cdna_start,
+                "end": cdna_end, 
+                "length": cdna_length, 
+                "percentage_overlap": percentage_overlap ,
+                "ref_sequence": ref_sequence,
+                "alt_sequence": alt_sequence
+            }
+
+        ###parse cds location
+        cds_position = csq_record[prediction_index_map["cds_position"]]
+        codons = csq_record[prediction_index_map["codons"]]
+        if cds_position:
+            cds_position_list  = cds_position.split("-")
+            cds_start = cds_position_list[0]
+            cds_end = cds_start if len(cds_position_list) < 2 else cds_position_list[0]
+            cds_length = int(cds_end) - int(cds_start) + 1
+            relation = {
+                "label": "overlaps",
+                "definition": "Overlaps with the feature"
+
+            }
+            percentage_overlap = 100
+            ref_sequence = codons.split("/")[0]
+            alt_sequence = codons.split("/")[1]
+            cds_location = {
+                "relation": relation,
+                "start": cds_start,
+                "end": cds_end, 
+                "length": cds_length, 
+                "percentage_overlap": percentage_overlap ,
+                "ref_sequence": ref_sequence,
+                "alt_sequence": alt_sequence
+            }
+
+        ###parse protein location
+        protein_position = csq_record[prediction_index_map["protein_position"]]
+        amino_acids = csq_record[prediction_index_map["amino_acids"]]
+        if protein_position:
+            protein_position_list  = protein_position.split("-")
+            protein_start = protein_position_list[0]
+            protein_end = protein_start if len(protein_position_list) < 2 else protein_position_list[0]
+            protein_length = int(protein_end) - int(protein_start) + 1
+            relation = "overlaps"
+            percentage_overlap = 100
+            ref_sequence = amino_acids.split("/")[0]
+            alt_sequence = amino_acids.split("/")[1]
+            protein_location = {
+                "relation": relation,
+                "start": protein_start,
+                "end": protein_end, 
+                "length": protein_length, 
+                "percentage_overlap": percentage_overlap ,
+                "ref_sequence": ref_sequence,
+                "alt_sequence": alt_sequence
+            }
+        
         if consequences_list:
             return {
                 "allele_name": csq_record[prediction_index_map["allele"]],
-                "feature_stable_id": csq_record[prediction_index_map["feature"]],
+                "stable_id": csq_record[prediction_index_map["feature"]],
                 "feature_type": {
                     "accession_id": csq_record[prediction_index_map["feature_type"]]               
                 } ,
                 "consequences": consequences_list,
-                "prediction_results": prediction_results
+                "gene_stable_id" : csq_record[prediction_index_map["gene"]], 
+                "gene_symbol": csq_record[prediction_index_map["symbol"]], 
+                "transcript_biotype": csq_record[prediction_index_map["biotype"]], 
+                "protein_stable_id": "protein_id_placeholder",
+                "prediction_results": prediction_results,
+                "cdna_location": cdna_location,
+                "cds_location": cds_location,
+                "protein_position": protein_location
             }
+            
 
     
     def format_sift_polyphen_output(self, output: str) -> tuple:
