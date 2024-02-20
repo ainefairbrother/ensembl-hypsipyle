@@ -34,7 +34,7 @@ def prepare_executable_schema() -> GraphQLSchema:
         schema,
         QUERY_TYPE,
         VARIANT_TYPE,
-        VARIANT_ALLELE_TYPE,
+        VARIANT_ALLELE_TYPE
     )
 
 
