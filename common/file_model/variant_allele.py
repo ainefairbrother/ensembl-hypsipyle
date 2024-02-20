@@ -116,6 +116,9 @@ class VariantAllele():
         consequences_list = []
         if "consequence" in prediction_index_map.keys():
             for cons in csq_record[prediction_index_map["consequence"]].split("&"):
+                if cons in ["downstream_gene_variant", "upstream_gene_variant", "intergenic_variant"]:
+                    consequences_list = []
+                    break
                 consequences_list.append(
                     {
                         "accession_id": cons

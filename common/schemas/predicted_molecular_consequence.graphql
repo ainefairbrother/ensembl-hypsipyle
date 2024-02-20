@@ -11,7 +11,7 @@ type PredictedMolecularConsequence{
   gene_symbol: String!
   protein_stable_id: String!
   transcript_biotype: String!
-  cdna_location: VariantRelativeLocation
+  cdna_location: VariantRelativeLocation!
   cds_location: VariantRelativeLocation
   protein_location: VariantRelativeLocation 
 }
