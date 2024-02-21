@@ -15,11 +15,11 @@
               "allele_name": "G",
               "stable_id": "ENST00000366667",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "missense_variant"
+                  "value": "missense_variant"
                 }
               ],
               "gene_symbol": "AGT",
@@ -73,11 +73,11 @@
               "allele_name": "G",
               "stable_id": "ENST00000679684",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "missense_variant"
+                  "value": "missense_variant"
                 }
               ],
               "gene_symbol": "AGT",
@@ -131,14 +131,14 @@
               "allele_name": "G",
               "stable_id": "ENST00000679738",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "missense_variant"
+                  "value": "missense_variant"
                 },
                 {
-                  "accession_id": "NMD_transcript_variant"
+                  "value": "NMD_transcript_variant"
                 }
               ],
               "gene_symbol": "AGT",
@@ -192,14 +192,14 @@
               "allele_name": "G",
               "stable_id": "ENST00000679802",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "missense_variant"
+                  "value": "missense_variant"
                 },
                 {
-                  "accession_id": "NMD_transcript_variant"
+                  "value": "NMD_transcript_variant"
                 }
               ],
               "gene_symbol": "AGT",
@@ -253,11 +253,11 @@
               "allele_name": "G",
               "stable_id": "ENST00000679854",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "non_coding_transcript_exon_variant"
+                  "value": "non_coding_transcript_exon_variant"
                 }
               ],
               "gene_symbol": "AGT",
@@ -278,11 +278,11 @@
               "allele_name": "G",
               "stable_id": "ENST00000679957",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "missense_variant"
+                  "value": "missense_variant"
                 }
               ],
               "gene_symbol": "AGT",
@@ -336,11 +336,11 @@
               "allele_name": "G",
               "stable_id": "ENST00000680041",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "missense_variant"
+                  "value": "missense_variant"
                 }
               ],
               "gene_symbol": "AGT",
@@ -394,11 +394,11 @@
               "allele_name": "G",
               "stable_id": "ENST00000680783",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "missense_variant"
+                  "value": "missense_variant"
                 }
               ],
               "gene_symbol": "AGT",
@@ -452,11 +452,11 @@
               "allele_name": "G",
               "stable_id": "ENST00000681269",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "missense_variant"
+                  "value": "missense_variant"
                 }
               ],
               "gene_symbol": "AGT",
@@ -510,11 +510,11 @@
               "allele_name": "G",
               "stable_id": "ENST00000681347",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "non_coding_transcript_exon_variant"
+                  "value": "non_coding_transcript_exon_variant"
                 }
               ],
               "gene_symbol": "AGT",
@@ -535,11 +535,11 @@
               "allele_name": "G",
               "stable_id": "ENST00000681514",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "missense_variant"
+                  "value": "missense_variant"
                 }
               ],
               "gene_symbol": "AGT",
@@ -593,14 +593,14 @@
               "allele_name": "G",
               "stable_id": "ENST00000681772",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "missense_variant"
+                  "value": "missense_variant"
                 },
                 {
-                  "accession_id": "NMD_transcript_variant"
+                  "value": "NMD_transcript_variant"
                 }
               ],
               "gene_symbol": "AGT",
