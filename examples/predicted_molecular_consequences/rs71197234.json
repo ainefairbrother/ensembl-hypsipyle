@@ -1,0 +1,413 @@
+{
+  "data": {
+    "variant": {
+      "name": "rs71197234",
+      "allele_type": {
+        "accession_id": "insertion",
+        "value": "insertion",
+        "url": "http://sequenceontology.org/browser/current_release/term/SO:0000667"
+      },
+      "alleles": [
+        {
+          "name": "13:57932508:T:TATATATATATATATACACACACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATACACACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATACACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATACACATATATATATATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATACATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATACATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATACATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATACATATATATATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATACATATATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATACATATATATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATACACACACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATACACACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATACACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATACACATATATATATATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATACATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATACATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATACATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATACATATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATACATATATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATACACACACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATACACACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATACACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATACACATATATATATATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATACACATATATATATATATATATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATACATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATACATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATACATATATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATACATATATATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATACACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATACACATATATATATATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATACATACACACACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATACATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATACATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATACATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATACACACACACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATACACACACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATACACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATACACATATATATATATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATACATACACACACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATACATATATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATACACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATACACACATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATACATACACACACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATACATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATACATATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATACACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATACACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATACACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATACACATATATATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATACATATATATATATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATACATATATATATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATATACACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATATACATATATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATATACATATATATATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATATATACATATATATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATATATATACATATATATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATATATATATATATATATACACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATATATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATATATATATATATATATATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATATATATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATATATATATATATATATATATATATATATATATATATACAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:TATATATATATATATATATGTATAC",
+          "predicted_molecular_consequences": []
+        },
+        {
+          "name": "13:57932508:T:T",
+          "predicted_molecular_consequences": []
+        }
+      ]
+    }
+  },
+  "extensions": {
+    "execution_time_in_seconds": 0.24
+  }
+}

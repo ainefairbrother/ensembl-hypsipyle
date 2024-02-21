@@ -1,0 +1,1254 @@
+{
+  "data": {
+    "variant": {
+      "name": "rs202155613",
+      "allele_type": {
+        "accession_id": "SNV",
+        "value": "SNV",
+        "url": "http://sequenceontology.org/browser/current_release/term/SO:0001483"
+      },
+      "alleles": [
+        {
+          "name": "13:32379902:C:A",
+          "predicted_molecular_consequences": [
+            {
+              "allele_name": "A",
+              "stable_id": "ENST00000380152",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "missense_variant"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "protein_coding",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [
+                {
+                  "score": 0,
+                  "result": null,
+                  "classification": {
+                    "label": "deleterious",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "SIFT"
+                  }
+                },
+                {
+                  "score": 0.157,
+                  "result": null,
+                  "classification": {
+                    "label": "benign",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "PolyPhen"
+                  }
+                }
+              ],
+              "cdna_location": {
+                "start": 9305,
+                "end": 9305,
+                "ref_sequence": "C",
+                "alt_sequence": "A"
+              },
+              "cds_location": {
+                "start": 9106,
+                "end": 9106,
+                "ref_sequence": "Caa",
+                "alt_sequence": "Aaa"
+              },
+              "protein_location": {
+                "start": 3036,
+                "end": 3036,
+                "ref_sequence": "Q",
+                "alt_sequence": "K"
+              }
+            },
+            {
+              "allele_name": "A",
+              "stable_id": "ENST00000470094",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "missense_variant"
+                },
+                {
+                  "accession_id": "NMD_transcript_variant"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "nonsense_mediated_decay",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 9305,
+                "end": 9305,
+                "ref_sequence": "C",
+                "alt_sequence": "A"
+              },
+              "cds_location": {
+                "start": 9106,
+                "end": 9106,
+                "ref_sequence": "Caa",
+                "alt_sequence": "Aaa"
+              },
+              "protein_location": {
+                "start": 3036,
+                "end": 3036,
+                "ref_sequence": "Q",
+                "alt_sequence": "K"
+              }
+            },
+            {
+              "allele_name": "A",
+              "stable_id": "ENST00000528762",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "3_prime_UTR_variant"
+                },
+                {
+                  "accession_id": "NMD_transcript_variant"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "nonsense_mediated_decay",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 9369,
+                "end": 9369,
+                "ref_sequence": "C",
+                "alt_sequence": "A"
+              },
+              "cds_location": null,
+              "protein_location": null
+            },
+            {
+              "allele_name": "A",
+              "stable_id": "ENST00000530893",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "missense_variant"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "protein_coding",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 9304,
+                "end": 9304,
+                "ref_sequence": "C",
+                "alt_sequence": "A"
+              },
+              "cds_location": {
+                "start": 8737,
+                "end": 8737,
+                "ref_sequence": "Caa",
+                "alt_sequence": "Aaa"
+              },
+              "protein_location": {
+                "start": 2913,
+                "end": 2913,
+                "ref_sequence": "Q",
+                "alt_sequence": "K"
+              }
+            },
+            {
+              "allele_name": "A",
+              "stable_id": "ENST00000544455",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "missense_variant"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "protein_coding",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [
+                {
+                  "score": 0,
+                  "result": null,
+                  "classification": {
+                    "label": "deleterious",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "SIFT"
+                  }
+                },
+                {
+                  "score": 0.157,
+                  "result": null,
+                  "classification": {
+                    "label": "benign",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "PolyPhen"
+                  }
+                }
+              ],
+              "cdna_location": {
+                "start": 9205,
+                "end": 9205,
+                "ref_sequence": "C",
+                "alt_sequence": "A"
+              },
+              "cds_location": {
+                "start": 9106,
+                "end": 9106,
+                "ref_sequence": "Caa",
+                "alt_sequence": "Aaa"
+              },
+              "protein_location": {
+                "start": 3036,
+                "end": 3036,
+                "ref_sequence": "Q",
+                "alt_sequence": "K"
+              }
+            },
+            {
+              "allele_name": "A",
+              "stable_id": "ENST00000614259",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "3_prime_UTR_variant"
+                },
+                {
+                  "accession_id": "NMD_transcript_variant"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "nonsense_mediated_decay",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 9114,
+                "end": 9114,
+                "ref_sequence": "C",
+                "alt_sequence": "A"
+              },
+              "cds_location": null,
+              "protein_location": null
+            },
+            {
+              "allele_name": "A",
+              "stable_id": "ENST00000665585",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "3_prime_UTR_variant"
+                },
+                {
+                  "accession_id": "NMD_transcript_variant"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "nonsense_mediated_decay",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 9618,
+                "end": 9618,
+                "ref_sequence": "C",
+                "alt_sequence": "A"
+              },
+              "cds_location": null,
+              "protein_location": null
+            },
+            {
+              "allele_name": "A",
+              "stable_id": "ENST00000666593",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "missense_variant"
+                },
+                {
+                  "accession_id": "NMD_transcript_variant"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "nonsense_mediated_decay",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 9305,
+                "end": 9305,
+                "ref_sequence": "C",
+                "alt_sequence": "A"
+              },
+              "cds_location": {
+                "start": 9106,
+                "end": 9106,
+                "ref_sequence": "Caa",
+                "alt_sequence": "Aaa"
+              },
+              "protein_location": {
+                "start": 3036,
+                "end": 3036,
+                "ref_sequence": "Q",
+                "alt_sequence": "K"
+              }
+            },
+            {
+              "allele_name": "A",
+              "stable_id": "ENST00000680887",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "missense_variant"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "protein_coding",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [
+                {
+                  "score": 0,
+                  "result": null,
+                  "classification": {
+                    "label": "deleterious",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "SIFT"
+                  }
+                },
+                {
+                  "score": 0.157,
+                  "result": null,
+                  "classification": {
+                    "label": "benign",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "PolyPhen"
+                  }
+                }
+              ],
+              "cdna_location": {
+                "start": 9231,
+                "end": 9231,
+                "ref_sequence": "C",
+                "alt_sequence": "A"
+              },
+              "cds_location": {
+                "start": 9106,
+                "end": 9106,
+                "ref_sequence": "Caa",
+                "alt_sequence": "Aaa"
+              },
+              "protein_location": {
+                "start": 3036,
+                "end": 3036,
+                "ref_sequence": "Q",
+                "alt_sequence": "K"
+              }
+            },
+            {
+              "allele_name": "A",
+              "stable_id": "ENST00000700202",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "missense_variant"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "protein_coding",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 9254,
+                "end": 9254,
+                "ref_sequence": "C",
+                "alt_sequence": "A"
+              },
+              "cds_location": {
+                "start": 9055,
+                "end": 9055,
+                "ref_sequence": "Caa",
+                "alt_sequence": "Aaa"
+              },
+              "protein_location": {
+                "start": 3019,
+                "end": 3019,
+                "ref_sequence": "Q",
+                "alt_sequence": "K"
+              }
+            },
+            {
+              "allele_name": "A",
+              "stable_id": "ENST00000700203",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "non_coding_transcript_exon_variant"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "retained_intron",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 1233,
+                "end": 1233,
+                "ref_sequence": "C",
+                "alt_sequence": "A"
+              },
+              "cds_location": null,
+              "protein_location": null
+            }
+          ]
+        },
+        {
+          "name": "13:32379902:C:G",
+          "predicted_molecular_consequences": [
+            {
+              "allele_name": "G",
+              "stable_id": "ENST00000380152",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "missense_variant"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "protein_coding",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [
+                {
+                  "score": 0,
+                  "result": null,
+                  "classification": {
+                    "label": "deleterious",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "SIFT"
+                  }
+                },
+                {
+                  "score": 0.343,
+                  "result": null,
+                  "classification": {
+                    "label": "benign",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "PolyPhen"
+                  }
+                }
+              ],
+              "cdna_location": {
+                "start": 9305,
+                "end": 9305,
+                "ref_sequence": "C",
+                "alt_sequence": "G"
+              },
+              "cds_location": {
+                "start": 9106,
+                "end": 9106,
+                "ref_sequence": "Caa",
+                "alt_sequence": "Gaa"
+              },
+              "protein_location": {
+                "start": 3036,
+                "end": 3036,
+                "ref_sequence": "Q",
+                "alt_sequence": "E"
+              }
+            },
+            {
+              "allele_name": "G",
+              "stable_id": "ENST00000470094",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "missense_variant"
+                },
+                {
+                  "accession_id": "NMD_transcript_variant"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "nonsense_mediated_decay",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 9305,
+                "end": 9305,
+                "ref_sequence": "C",
+                "alt_sequence": "G"
+              },
+              "cds_location": {
+                "start": 9106,
+                "end": 9106,
+                "ref_sequence": "Caa",
+                "alt_sequence": "Gaa"
+              },
+              "protein_location": {
+                "start": 3036,
+                "end": 3036,
+                "ref_sequence": "Q",
+                "alt_sequence": "E"
+              }
+            },
+            {
+              "allele_name": "G",
+              "stable_id": "ENST00000528762",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "3_prime_UTR_variant"
+                },
+                {
+                  "accession_id": "NMD_transcript_variant"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "nonsense_mediated_decay",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 9369,
+                "end": 9369,
+                "ref_sequence": "C",
+                "alt_sequence": "G"
+              },
+              "cds_location": null,
+              "protein_location": null
+            },
+            {
+              "allele_name": "G",
+              "stable_id": "ENST00000530893",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "missense_variant"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "protein_coding",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 9304,
+                "end": 9304,
+                "ref_sequence": "C",
+                "alt_sequence": "G"
+              },
+              "cds_location": {
+                "start": 8737,
+                "end": 8737,
+                "ref_sequence": "Caa",
+                "alt_sequence": "Gaa"
+              },
+              "protein_location": {
+                "start": 2913,
+                "end": 2913,
+                "ref_sequence": "Q",
+                "alt_sequence": "E"
+              }
+            },
+            {
+              "allele_name": "G",
+              "stable_id": "ENST00000544455",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "missense_variant"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "protein_coding",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [
+                {
+                  "score": 0,
+                  "result": null,
+                  "classification": {
+                    "label": "deleterious",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "SIFT"
+                  }
+                },
+                {
+                  "score": 0.343,
+                  "result": null,
+                  "classification": {
+                    "label": "benign",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "PolyPhen"
+                  }
+                }
+              ],
+              "cdna_location": {
+                "start": 9205,
+                "end": 9205,
+                "ref_sequence": "C",
+                "alt_sequence": "G"
+              },
+              "cds_location": {
+                "start": 9106,
+                "end": 9106,
+                "ref_sequence": "Caa",
+                "alt_sequence": "Gaa"
+              },
+              "protein_location": {
+                "start": 3036,
+                "end": 3036,
+                "ref_sequence": "Q",
+                "alt_sequence": "E"
+              }
+            },
+            {
+              "allele_name": "G",
+              "stable_id": "ENST00000614259",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "3_prime_UTR_variant"
+                },
+                {
+                  "accession_id": "NMD_transcript_variant"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "nonsense_mediated_decay",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 9114,
+                "end": 9114,
+                "ref_sequence": "C",
+                "alt_sequence": "G"
+              },
+              "cds_location": null,
+              "protein_location": null
+            },
+            {
+              "allele_name": "G",
+              "stable_id": "ENST00000665585",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "3_prime_UTR_variant"
+                },
+                {
+                  "accession_id": "NMD_transcript_variant"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "nonsense_mediated_decay",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 9618,
+                "end": 9618,
+                "ref_sequence": "C",
+                "alt_sequence": "G"
+              },
+              "cds_location": null,
+              "protein_location": null
+            },
+            {
+              "allele_name": "G",
+              "stable_id": "ENST00000666593",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "missense_variant"
+                },
+                {
+                  "accession_id": "NMD_transcript_variant"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "nonsense_mediated_decay",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 9305,
+                "end": 9305,
+                "ref_sequence": "C",
+                "alt_sequence": "G"
+              },
+              "cds_location": {
+                "start": 9106,
+                "end": 9106,
+                "ref_sequence": "Caa",
+                "alt_sequence": "Gaa"
+              },
+              "protein_location": {
+                "start": 3036,
+                "end": 3036,
+                "ref_sequence": "Q",
+                "alt_sequence": "E"
+              }
+            },
+            {
+              "allele_name": "G",
+              "stable_id": "ENST00000680887",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "missense_variant"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "protein_coding",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [
+                {
+                  "score": 0,
+                  "result": null,
+                  "classification": {
+                    "label": "deleterious",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "SIFT"
+                  }
+                },
+                {
+                  "score": 0.343,
+                  "result": null,
+                  "classification": {
+                    "label": "benign",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "PolyPhen"
+                  }
+                }
+              ],
+              "cdna_location": {
+                "start": 9231,
+                "end": 9231,
+                "ref_sequence": "C",
+                "alt_sequence": "G"
+              },
+              "cds_location": {
+                "start": 9106,
+                "end": 9106,
+                "ref_sequence": "Caa",
+                "alt_sequence": "Gaa"
+              },
+              "protein_location": {
+                "start": 3036,
+                "end": 3036,
+                "ref_sequence": "Q",
+                "alt_sequence": "E"
+              }
+            },
+            {
+              "allele_name": "G",
+              "stable_id": "ENST00000700202",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "missense_variant"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "protein_coding",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 9254,
+                "end": 9254,
+                "ref_sequence": "C",
+                "alt_sequence": "G"
+              },
+              "cds_location": {
+                "start": 9055,
+                "end": 9055,
+                "ref_sequence": "Caa",
+                "alt_sequence": "Gaa"
+              },
+              "protein_location": {
+                "start": 3019,
+                "end": 3019,
+                "ref_sequence": "Q",
+                "alt_sequence": "E"
+              }
+            },
+            {
+              "allele_name": "G",
+              "stable_id": "ENST00000700203",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "non_coding_transcript_exon_variant"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "retained_intron",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 1233,
+                "end": 1233,
+                "ref_sequence": "C",
+                "alt_sequence": "G"
+              },
+              "cds_location": null,
+              "protein_location": null
+            }
+          ]
+        },
+        {
+          "name": "13:32379902:C:T",
+          "predicted_molecular_consequences": [
+            {
+              "allele_name": "T",
+              "stable_id": "ENST00000380152",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "stop_gained"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "protein_coding",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 9305,
+                "end": 9305,
+                "ref_sequence": "C",
+                "alt_sequence": "T"
+              },
+              "cds_location": {
+                "start": 9106,
+                "end": 9106,
+                "ref_sequence": "Caa",
+                "alt_sequence": "Taa"
+              },
+              "protein_location": {
+                "start": 3036,
+                "end": 3036,
+                "ref_sequence": "Q",
+                "alt_sequence": "*"
+              }
+            },
+            {
+              "allele_name": "T",
+              "stable_id": "ENST00000470094",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "stop_gained"
+                },
+                {
+                  "accession_id": "NMD_transcript_variant"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "nonsense_mediated_decay",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 9305,
+                "end": 9305,
+                "ref_sequence": "C",
+                "alt_sequence": "T"
+              },
+              "cds_location": {
+                "start": 9106,
+                "end": 9106,
+                "ref_sequence": "Caa",
+                "alt_sequence": "Taa"
+              },
+              "protein_location": {
+                "start": 3036,
+                "end": 3036,
+                "ref_sequence": "Q",
+                "alt_sequence": "*"
+              }
+            },
+            {
+              "allele_name": "T",
+              "stable_id": "ENST00000528762",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "3_prime_UTR_variant"
+                },
+                {
+                  "accession_id": "NMD_transcript_variant"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "nonsense_mediated_decay",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 9369,
+                "end": 9369,
+                "ref_sequence": "C",
+                "alt_sequence": "T"
+              },
+              "cds_location": null,
+              "protein_location": null
+            },
+            {
+              "allele_name": "T",
+              "stable_id": "ENST00000530893",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "stop_gained"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "protein_coding",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 9304,
+                "end": 9304,
+                "ref_sequence": "C",
+                "alt_sequence": "T"
+              },
+              "cds_location": {
+                "start": 8737,
+                "end": 8737,
+                "ref_sequence": "Caa",
+                "alt_sequence": "Taa"
+              },
+              "protein_location": {
+                "start": 2913,
+                "end": 2913,
+                "ref_sequence": "Q",
+                "alt_sequence": "*"
+              }
+            },
+            {
+              "allele_name": "T",
+              "stable_id": "ENST00000544455",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "stop_gained"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "protein_coding",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 9205,
+                "end": 9205,
+                "ref_sequence": "C",
+                "alt_sequence": "T"
+              },
+              "cds_location": {
+                "start": 9106,
+                "end": 9106,
+                "ref_sequence": "Caa",
+                "alt_sequence": "Taa"
+              },
+              "protein_location": {
+                "start": 3036,
+                "end": 3036,
+                "ref_sequence": "Q",
+                "alt_sequence": "*"
+              }
+            },
+            {
+              "allele_name": "T",
+              "stable_id": "ENST00000614259",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "3_prime_UTR_variant"
+                },
+                {
+                  "accession_id": "NMD_transcript_variant"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "nonsense_mediated_decay",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 9114,
+                "end": 9114,
+                "ref_sequence": "C",
+                "alt_sequence": "T"
+              },
+              "cds_location": null,
+              "protein_location": null
+            },
+            {
+              "allele_name": "T",
+              "stable_id": "ENST00000665585",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "3_prime_UTR_variant"
+                },
+                {
+                  "accession_id": "NMD_transcript_variant"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "nonsense_mediated_decay",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 9618,
+                "end": 9618,
+                "ref_sequence": "C",
+                "alt_sequence": "T"
+              },
+              "cds_location": null,
+              "protein_location": null
+            },
+            {
+              "allele_name": "T",
+              "stable_id": "ENST00000666593",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "stop_gained"
+                },
+                {
+                  "accession_id": "NMD_transcript_variant"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "nonsense_mediated_decay",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 9305,
+                "end": 9305,
+                "ref_sequence": "C",
+                "alt_sequence": "T"
+              },
+              "cds_location": {
+                "start": 9106,
+                "end": 9106,
+                "ref_sequence": "Caa",
+                "alt_sequence": "Taa"
+              },
+              "protein_location": {
+                "start": 3036,
+                "end": 3036,
+                "ref_sequence": "Q",
+                "alt_sequence": "*"
+              }
+            },
+            {
+              "allele_name": "T",
+              "stable_id": "ENST00000680887",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "stop_gained"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "protein_coding",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 9231,
+                "end": 9231,
+                "ref_sequence": "C",
+                "alt_sequence": "T"
+              },
+              "cds_location": {
+                "start": 9106,
+                "end": 9106,
+                "ref_sequence": "Caa",
+                "alt_sequence": "Taa"
+              },
+              "protein_location": {
+                "start": 3036,
+                "end": 3036,
+                "ref_sequence": "Q",
+                "alt_sequence": "*"
+              }
+            },
+            {
+              "allele_name": "T",
+              "stable_id": "ENST00000700202",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "stop_gained"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "protein_coding",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 9254,
+                "end": 9254,
+                "ref_sequence": "C",
+                "alt_sequence": "T"
+              },
+              "cds_location": {
+                "start": 9055,
+                "end": 9055,
+                "ref_sequence": "Caa",
+                "alt_sequence": "Taa"
+              },
+              "protein_location": {
+                "start": 3019,
+                "end": 3019,
+                "ref_sequence": "Q",
+                "alt_sequence": "*"
+              }
+            },
+            {
+              "allele_name": "T",
+              "stable_id": "ENST00000700203",
+              "feature_type": {
+                "accession_id": "Transcript"
+              },
+              "consequences": [
+                {
+                  "accession_id": "non_coding_transcript_exon_variant"
+                }
+              ],
+              "gene_symbol": "BRCA2",
+              "gene_stable_id": "ENSG00000139618",
+              "transcript_biotype": "retained_intron",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 1233,
+                "end": 1233,
+                "ref_sequence": "C",
+                "alt_sequence": "T"
+              },
+              "cds_location": null,
+              "protein_location": null
+            }
+          ]
+        },
+        {
+          "name": "13:32379902:C:C",
+          "predicted_molecular_consequences": []
+        }
+      ]
+    }
+  },
+  "extensions": {
+    "execution_time_in_seconds": 0.11
+  }
+}
