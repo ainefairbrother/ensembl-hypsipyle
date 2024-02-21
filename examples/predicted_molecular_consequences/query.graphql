@@ -15,10 +15,10 @@ query variant_molecular_consequences {
         stable_id
         feature_type
         {
-          accession_id
+          value
         }
         consequences{
-          accession_id
+          value
         }
         gene_symbol
         gene_stable_id

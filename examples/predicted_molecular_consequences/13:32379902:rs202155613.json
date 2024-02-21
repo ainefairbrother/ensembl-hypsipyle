@@ -15,11 +15,11 @@
               "allele_name": "A",
               "stable_id": "ENST00000380152",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "missense_variant"
+                  "value": "missense_variant"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -73,14 +73,14 @@
               "allele_name": "A",
               "stable_id": "ENST00000470094",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "missense_variant"
+                  "value": "missense_variant"
                 },
                 {
-                  "accession_id": "NMD_transcript_variant"
+                  "value": "NMD_transcript_variant"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -111,14 +111,14 @@
               "allele_name": "A",
               "stable_id": "ENST00000528762",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "3_prime_UTR_variant"
+                  "value": "3_prime_UTR_variant"
                 },
                 {
-                  "accession_id": "NMD_transcript_variant"
+                  "value": "NMD_transcript_variant"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -139,11 +139,11 @@
               "allele_name": "A",
               "stable_id": "ENST00000530893",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "missense_variant"
+                  "value": "missense_variant"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -174,11 +174,11 @@
               "allele_name": "A",
               "stable_id": "ENST00000544455",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "missense_variant"
+                  "value": "missense_variant"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -232,14 +232,14 @@
               "allele_name": "A",
               "stable_id": "ENST00000614259",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "3_prime_UTR_variant"
+                  "value": "3_prime_UTR_variant"
                 },
                 {
-                  "accession_id": "NMD_transcript_variant"
+                  "value": "NMD_transcript_variant"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -260,14 +260,14 @@
               "allele_name": "A",
               "stable_id": "ENST00000665585",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "3_prime_UTR_variant"
+                  "value": "3_prime_UTR_variant"
                 },
                 {
-                  "accession_id": "NMD_transcript_variant"
+                  "value": "NMD_transcript_variant"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -288,14 +288,14 @@
               "allele_name": "A",
               "stable_id": "ENST00000666593",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "missense_variant"
+                  "value": "missense_variant"
                 },
                 {
-                  "accession_id": "NMD_transcript_variant"
+                  "value": "NMD_transcript_variant"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -326,11 +326,11 @@
               "allele_name": "A",
               "stable_id": "ENST00000680887",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "missense_variant"
+                  "value": "missense_variant"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -384,11 +384,11 @@
               "allele_name": "A",
               "stable_id": "ENST00000700202",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "missense_variant"
+                  "value": "missense_variant"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -419,11 +419,11 @@
               "allele_name": "A",
               "stable_id": "ENST00000700203",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "non_coding_transcript_exon_variant"
+                  "value": "non_coding_transcript_exon_variant"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -449,11 +449,11 @@
               "allele_name": "G",
               "stable_id": "ENST00000380152",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "missense_variant"
+                  "value": "missense_variant"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -507,14 +507,14 @@
               "allele_name": "G",
               "stable_id": "ENST00000470094",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "missense_variant"
+                  "value": "missense_variant"
                 },
                 {
-                  "accession_id": "NMD_transcript_variant"
+                  "value": "NMD_transcript_variant"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -545,14 +545,14 @@
               "allele_name": "G",
               "stable_id": "ENST00000528762",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "3_prime_UTR_variant"
+                  "value": "3_prime_UTR_variant"
                 },
                 {
-                  "accession_id": "NMD_transcript_variant"
+                  "value": "NMD_transcript_variant"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -573,11 +573,11 @@
               "allele_name": "G",
               "stable_id": "ENST00000530893",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "missense_variant"
+                  "value": "missense_variant"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -608,11 +608,11 @@
               "allele_name": "G",
               "stable_id": "ENST00000544455",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "missense_variant"
+                  "value": "missense_variant"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -666,14 +666,14 @@
               "allele_name": "G",
               "stable_id": "ENST00000614259",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "3_prime_UTR_variant"
+                  "value": "3_prime_UTR_variant"
                 },
                 {
-                  "accession_id": "NMD_transcript_variant"
+                  "value": "NMD_transcript_variant"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -694,14 +694,14 @@
               "allele_name": "G",
               "stable_id": "ENST00000665585",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "3_prime_UTR_variant"
+                  "value": "3_prime_UTR_variant"
                 },
                 {
-                  "accession_id": "NMD_transcript_variant"
+                  "value": "NMD_transcript_variant"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -722,14 +722,14 @@
               "allele_name": "G",
               "stable_id": "ENST00000666593",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "missense_variant"
+                  "value": "missense_variant"
                 },
                 {
-                  "accession_id": "NMD_transcript_variant"
+                  "value": "NMD_transcript_variant"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -760,11 +760,11 @@
               "allele_name": "G",
               "stable_id": "ENST00000680887",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "missense_variant"
+                  "value": "missense_variant"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -818,11 +818,11 @@
               "allele_name": "G",
               "stable_id": "ENST00000700202",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "missense_variant"
+                  "value": "missense_variant"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -853,11 +853,11 @@
               "allele_name": "G",
               "stable_id": "ENST00000700203",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "non_coding_transcript_exon_variant"
+                  "value": "non_coding_transcript_exon_variant"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -883,11 +883,11 @@
               "allele_name": "T",
               "stable_id": "ENST00000380152",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "stop_gained"
+                  "value": "stop_gained"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -918,14 +918,14 @@
               "allele_name": "T",
               "stable_id": "ENST00000470094",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "stop_gained"
+                  "value": "stop_gained"
                 },
                 {
-                  "accession_id": "NMD_transcript_variant"
+                  "value": "NMD_transcript_variant"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -956,14 +956,14 @@
               "allele_name": "T",
               "stable_id": "ENST00000528762",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "3_prime_UTR_variant"
+                  "value": "3_prime_UTR_variant"
                 },
                 {
-                  "accession_id": "NMD_transcript_variant"
+                  "value": "NMD_transcript_variant"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -984,11 +984,11 @@
               "allele_name": "T",
               "stable_id": "ENST00000530893",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "stop_gained"
+                  "value": "stop_gained"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -1019,11 +1019,11 @@
               "allele_name": "T",
               "stable_id": "ENST00000544455",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "stop_gained"
+                  "value": "stop_gained"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -1054,14 +1054,14 @@
               "allele_name": "T",
               "stable_id": "ENST00000614259",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "3_prime_UTR_variant"
+                  "value": "3_prime_UTR_variant"
                 },
                 {
-                  "accession_id": "NMD_transcript_variant"
+                  "value": "NMD_transcript_variant"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -1082,14 +1082,14 @@
               "allele_name": "T",
               "stable_id": "ENST00000665585",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "3_prime_UTR_variant"
+                  "value": "3_prime_UTR_variant"
                 },
                 {
-                  "accession_id": "NMD_transcript_variant"
+                  "value": "NMD_transcript_variant"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -1110,14 +1110,14 @@
               "allele_name": "T",
               "stable_id": "ENST00000666593",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "stop_gained"
+                  "value": "stop_gained"
                 },
                 {
-                  "accession_id": "NMD_transcript_variant"
+                  "value": "NMD_transcript_variant"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -1148,11 +1148,11 @@
               "allele_name": "T",
               "stable_id": "ENST00000680887",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "stop_gained"
+                  "value": "stop_gained"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -1183,11 +1183,11 @@
               "allele_name": "T",
               "stable_id": "ENST00000700202",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "stop_gained"
+                  "value": "stop_gained"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -1218,11 +1218,11 @@
               "allele_name": "T",
               "stable_id": "ENST00000700203",
               "feature_type": {
-                "accession_id": "Transcript"
+                "value": "Transcript"
               },
               "consequences": [
                 {
-                  "accession_id": "non_coding_transcript_exon_variant"
+                  "value": "non_coding_transcript_exon_variant"
                 }
               ],
               "gene_symbol": "BRCA2",
@@ -1249,6 +1249,6 @@
     }
   },
   "extensions": {
-    "execution_time_in_seconds": 0.11
+    "execution_time_in_seconds": 0.13
   }
 }
