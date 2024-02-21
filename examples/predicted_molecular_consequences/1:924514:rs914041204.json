@@ -1,0 +1,171 @@
+{
+    "data": {
+      "variant": {
+        "name": "rs914041204",
+        "allele_type": {
+          "accession_id": "indel",
+          "value": "indel",
+          "url": "http://sequenceontology.org/browser/current_release/term/SO:1000032"
+        },
+        "alleles": [
+          {
+            "name": "1:924514:TGCCGCTGCC:T",
+            "predicted_molecular_consequences": [
+              {
+                "allele_name": "-",
+                "stable_id": "ENST00000616016",
+                "feature_type": {
+                  "value": "Transcript"
+                },
+                "consequences": [
+                  {
+                    "value": "inframe_deletion"
+                  }
+                ],
+                "gene_symbol": "SAMD11",
+                "gene_stable_id": "ENSG00000187634",
+                "transcript_biotype": "protein_coding",
+                "protein_stable_id": "protein_id_placeholder",
+                "prediction_results": [],
+                "cdna_location": {
+                  "start": 593,
+                  "end": 593,
+                  "ref_sequence": "TGCCGCTGCC",
+                  "alt_sequence": "-"
+                },
+                "cds_location": {
+                  "start": 84,
+                  "end": 84,
+                  "ref_sequence": "ctGCCGCTGCCg",
+                  "alt_sequence": "ctg"
+                },
+                "protein_location": {
+                  "start": 28,
+                  "end": 28,
+                  "ref_sequence": "LPLP",
+                  "alt_sequence": "L"
+                }
+              },
+              {
+                "allele_name": "-",
+                "stable_id": "ENST00000618323",
+                "feature_type": {
+                  "value": "Transcript"
+                },
+                "consequences": [
+                  {
+                    "value": "inframe_deletion"
+                  }
+                ],
+                "gene_symbol": "SAMD11",
+                "gene_stable_id": "ENSG00000187634",
+                "transcript_biotype": "protein_coding",
+                "protein_stable_id": "protein_id_placeholder",
+                "prediction_results": [],
+                "cdna_location": {
+                  "start": 593,
+                  "end": 593,
+                  "ref_sequence": "TGCCGCTGCC",
+                  "alt_sequence": "-"
+                },
+                "cds_location": {
+                  "start": 84,
+                  "end": 84,
+                  "ref_sequence": "ctGCCGCTGCCg",
+                  "alt_sequence": "ctg"
+                },
+                "protein_location": {
+                  "start": 28,
+                  "end": 28,
+                  "ref_sequence": "LPLP",
+                  "alt_sequence": "L"
+                }
+              }
+            ]
+          },
+          {
+            "name": "1:924514:TGCCGCTGCC:TGCCGCTGCCGCCGCTGCC",
+            "predicted_molecular_consequences": [
+              {
+                "allele_name": "GCCGCTGCCGCCGCTGCC",
+                "stable_id": "ENST00000616016",
+                "feature_type": {
+                  "value": "Transcript"
+                },
+                "consequences": [
+                  {
+                    "value": "inframe_insertion"
+                  }
+                ],
+                "gene_symbol": "SAMD11",
+                "gene_stable_id": "ENSG00000187634",
+                "transcript_biotype": "protein_coding",
+                "protein_stable_id": "protein_id_placeholder",
+                "prediction_results": [],
+                "cdna_location": {
+                  "start": 593,
+                  "end": 593,
+                  "ref_sequence": "TGCCGCTGCC",
+                  "alt_sequence": "GCCGCTGCCGCCGCTGCC"
+                },
+                "cds_location": {
+                  "start": 84,
+                  "end": 84,
+                  "ref_sequence": "ctGCCGCTGCCg",
+                  "alt_sequence": "ctGCCGCTGCCGCCGCTGCCg"
+                },
+                "protein_location": {
+                  "start": 28,
+                  "end": 28,
+                  "ref_sequence": "LPLP",
+                  "alt_sequence": "LPLPPLP"
+                }
+              },
+              {
+                "allele_name": "GCCGCTGCCGCCGCTGCC",
+                "stable_id": "ENST00000618323",
+                "feature_type": {
+                  "value": "Transcript"
+                },
+                "consequences": [
+                  {
+                    "value": "inframe_insertion"
+                  }
+                ],
+                "gene_symbol": "SAMD11",
+                "gene_stable_id": "ENSG00000187634",
+                "transcript_biotype": "protein_coding",
+                "protein_stable_id": "protein_id_placeholder",
+                "prediction_results": [],
+                "cdna_location": {
+                  "start": 593,
+                  "end": 593,
+                  "ref_sequence": "TGCCGCTGCC",
+                  "alt_sequence": "GCCGCTGCCGCCGCTGCC"
+                },
+                "cds_location": {
+                  "start": 84,
+                  "end": 84,
+                  "ref_sequence": "ctGCCGCTGCCg",
+                  "alt_sequence": "ctGCCGCTGCCGCCGCTGCCg"
+                },
+                "protein_location": {
+                  "start": 28,
+                  "end": 28,
+                  "ref_sequence": "LPLP",
+                  "alt_sequence": "LPLPPLP"
+                }
+              }
+            ]
+          },
+          {
+            "name": "1:924514:TGCCGCTGCC:TGCCGCTGCC",
+            "predicted_molecular_consequences": []
+          }
+        ]
+      }
+    },
+    "extensions": {
+      "execution_time_in_seconds": 0.06
+    }
+  }
