@@ -11,7 +11,7 @@ type PredictedMolecularConsequence{
   gene_symbol: String!
   protein_stable_id: String!
   transcript_biotype: String!
-  cdna_location: VariantRelativeLocation!
+  cdna_location: VariantRelativeLocation
   cds_location: VariantRelativeLocation
   protein_location: VariantRelativeLocation 
 }
@@ -20,11 +20,11 @@ type VariantRelativeLocation{
 """
   VariantRelativeLocation
 """
-  relation: ValueSet!
+  relation: ValueSet
   start: Int!
   end: Int!
   length: Int!
-  percentage_overlap: Float!
+  percentage_overlap: Float
   ref_sequence: String!
   alt_sequence: String!
   
