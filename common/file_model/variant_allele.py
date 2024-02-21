@@ -173,7 +173,6 @@ class VariantAllele():
             cdna_start = cdna_position_list[0]
             cdna_end = cdna_start if len(cdna_position_list) < 2 else cdna_position_list[0]
             cdna_length = int(cdna_end) - int(cdna_start) + 1
-            percentage_overlap = 100
             ref_sequence = self.reference_sequence
             alt_sequence = csq_record[prediction_index_map["allele"]]
             cdna_location = {
@@ -192,7 +191,6 @@ class VariantAllele():
             cds_start = cds_position_list[0]
             cds_end = cds_start if len(cds_position_list) < 2 else cds_position_list[0]
             cds_length = int(cds_end) - int(cds_start) + 1
-            percentage_overlap = 100
             ref_sequence = codons.split("/")[0]
             alt_sequence = codons.split("/")[1]
             cds_location = {
@@ -211,7 +209,6 @@ class VariantAllele():
             protein_start = protein_position_list[0]
             protein_end = protein_start if len(protein_position_list) < 2 else protein_position_list[0]
             protein_length = int(protein_end) - int(protein_start) + 1
-            percentage_overlap = 100
             ref_sequence = amino_acids.split("/")[0]
             alt_sequence = amino_acids.split("/")[1]
             protein_location = {
