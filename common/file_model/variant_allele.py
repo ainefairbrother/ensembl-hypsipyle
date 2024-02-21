@@ -121,7 +121,7 @@ class VariantAllele():
                     break
                 consequences_list.append(
                     {
-                        "accession_id": cons
+                        "value": cons
                     }
                 )
 
@@ -223,8 +223,8 @@ class VariantAllele():
             return {
                 "allele_name": csq_record[prediction_index_map["allele"]],
                 "stable_id": csq_record[prediction_index_map["feature"]],
-                "feature_type": {
-                    "accession_id": csq_record[prediction_index_map["feature_type"]]               
+                "feature_type": {  
+                    "value": csq_record[prediction_index_map["feature_type"]]     
                 } ,
                 "consequences": consequences_list,
                 "gene_stable_id" : csq_record[prediction_index_map["gene"]], 
@@ -285,7 +285,8 @@ class VariantAllele():
             return {
                 "feature": feature,
                 "feature_type": {
-                    "accession_id": feature_type                
+                    "value": feature_type   
+
                 } ,
                 "phenotype": {
                     "name": phenotype_name
