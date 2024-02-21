@@ -1,6 +1,6 @@
 {
   "data": {
-    "population": [
+    "populations": [
       {
         "name": "1000GENOMES:phase_3:ALL",
         "description": "All phase 3 individuals",
@@ -27,7 +27,7 @@
       {
         "name": "1000GENOMES:phase_3:AFR",
         "description": "African",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:ALL"
         },
@@ -55,7 +55,7 @@
       {
         "name": "1000GENOMES:phase_3:AMR",
         "description": "American",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:ALL"
         },
@@ -77,7 +77,7 @@
       {
         "name": "1000GENOMES:phase_3:EAS",
         "description": "East Asian",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:ALL"
         },
@@ -102,7 +102,7 @@
       {
         "name": "1000GENOMES:phase_3:EUR",
         "description": "European",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:ALL"
         },
@@ -127,7 +127,7 @@
       {
         "name": "1000GENOMES:phase_3:SAS",
         "description": "South Asian",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:ALL"
         },
@@ -152,7 +152,7 @@
       {
         "name": "1000GENOMES:phase_3:ACB",
         "description": "African Caribbean in Barbados",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:AFR"
         },
@@ -161,7 +161,7 @@
       {
         "name": "1000GENOMES:phase_3:ASW",
         "description": "African Ancestry in Southwest US",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:AFR"
         },
@@ -170,7 +170,7 @@
       {
         "name": "1000GENOMES:phase_3:ESN",
         "description": "Esan in Nigeria",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:AFR"
         },
@@ -179,7 +179,7 @@
       {
         "name": "1000GENOMES:phase_3:GWD",
         "description": "Gambian in Western Division, The Gambia",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:AFR"
         },
@@ -188,7 +188,7 @@
       {
         "name": "1000GENOMES:phase_3:LWK",
         "description": "Luhya in Webuye, Kenya",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:AFR"
         },
@@ -197,7 +197,7 @@
       {
         "name": "1000GENOMES:phase_3:MSL",
         "description": "Mende in Sierra Leone",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:AFR"
         },
@@ -206,7 +206,7 @@
       {
         "name": "1000GENOMES:phase_3:CLM",
         "description": "Colombian in Medellin, Colombia",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:AMR"
         },
@@ -215,7 +215,7 @@
       {
         "name": "1000GENOMES:phase_3:MXL",
         "description": "Colombian in Medellin, Colombia",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:AMR"
         },
@@ -224,7 +224,7 @@
       {
         "name": "1000GENOMES:phase_3:PEL",
         "description": "Peruvian in Lima, Peru",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:AMR"
         },
@@ -233,7 +233,7 @@
       {
         "name": "1000GENOMES:phase_3:PUR",
         "description": "Puerto Rican in Puerto Rico",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:AMR"
         },
@@ -242,7 +242,7 @@
       {
         "name": "1000GENOMES:phase_3:CDX",
         "description": "Chinese Dai in Xishuangbanna, China",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:EAS"
         },
@@ -251,7 +251,7 @@
       {
         "name": "1000GENOMES:phase_3:CHB",
         "description": "Han Chinese in Bejing, China",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:EAS"
         },
@@ -260,7 +260,7 @@
       {
         "name": "1000GENOMES:phase_3:CHS",
         "description": "Southern Han Chinese, China",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:EAS"
         },
@@ -269,7 +269,7 @@
       {
         "name": "1000GENOMES:phase_3:JPT",
         "description": "Japanese in Tokyo, Japan",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:EAS"
         },
@@ -278,7 +278,7 @@
       {
         "name": "1000GENOMES:phase_3:KHV",
         "description": "Kinh in Ho Chi Minh City, Vietnam",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:EAS"
         },
@@ -287,7 +287,7 @@
       {
         "name": "1000GENOMES:phase_3:CEU",
         "description": " Utah residents with Northern and Western European ancestry",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:EUR"
         },
@@ -296,7 +296,7 @@
       {
         "name": "1000GENOMES:phase_3:FIN",
         "description": "Finnish in Finland",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:EUR"
         },
@@ -305,7 +305,7 @@
       {
         "name": "1000GENOMES:phase_3:GBR",
         "description": "British in England and Scotland",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:EUR"
         },
@@ -314,7 +314,7 @@
       {
         "name": "1000GENOMES:phase_3:IBS",
         "description": "Iberian populations in Spain",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:EUR"
         },
@@ -323,7 +323,7 @@
       {
         "name": "1000GENOMES:phase_3:TSI",
         "description": "Toscani in Italy",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:EUR"
         },
@@ -332,7 +332,7 @@
       {
         "name": "1000GENOMES:phase_3:BEB",
         "description": "Bengali in Bangladesh",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:SAS"
         },
@@ -341,7 +341,7 @@
       {
         "name": "1000GENOMES:phase_3:GIH",
         "description": "Gujarati Indian in Houston, TX",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:SAS"
         },
@@ -350,7 +350,7 @@
       {
         "name": "1000GENOMES:phase_3:ITU",
         "description": "Indian Telugu in the UK",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:SAS"
         },
@@ -359,7 +359,7 @@
       {
         "name": "1000GENOMES:phase_3:PJL",
         "description": "Punjabi in Lahore, Pakistan",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:SAS"
         },
@@ -368,7 +368,7 @@
       {
         "name": "1000GENOMES:phase_3:STU",
         "description": "Sri Lankan Tamil in the UK",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "1000GENOMES:phase_3:SAS"
         },
@@ -376,11 +376,9 @@
       },
       {
         "name": "gnomADg:ALL",
-        "description": "All gnomAD genomes individuals",
+        "description": "All gnomAD genomes individuals v3.1.2",
         "is_global": true,
-        "super_population": {
-          "name": null
-        },
+        "super_population": null,
         "sub_populations": [
           {
             "name": "gnomADg:afr"
@@ -417,7 +415,7 @@
       {
         "name": "gnomADg:afr",
         "description": "African/African American",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "gnomADg:ALL"
         },
@@ -426,7 +424,7 @@
       {
         "name": "gnomADg:ami",
         "description": "Amish",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "gnomADg:ALL"
         },
@@ -435,7 +433,7 @@
       {
         "name": "gnomADg:amr",
         "description": "Latino",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "gnomADg:ALL"
         },
@@ -444,7 +442,7 @@
       {
         "name": "gnomADg:asj",
         "description": "Ashkenazi Jewish",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "gnomADg:ALL"
         },
@@ -453,7 +451,7 @@
       {
         "name": "gnomADg:eas",
         "description": "East Asian",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "gnomADg:ALL"
         },
@@ -462,7 +460,7 @@
       {
         "name": "gnomADg:fin",
         "description": "Finnish",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "gnomADg:ALL"
         },
@@ -471,7 +469,7 @@
       {
         "name": "gnomADg:mid",
         "description": "Middle Eastern",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "gnomADg:ALL"
         },
@@ -480,7 +478,7 @@
       {
         "name": "gnomADg:nfe",
         "description": "Non-Finnish European",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "gnomADg:ALL"
         },
@@ -489,7 +487,7 @@
       {
         "name": "gnomADg:oth",
         "description": "Other",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "gnomADg:ALL"
         },
@@ -498,7 +496,7 @@
       {
         "name": "gnomADg:sas",
         "description": "South Asian",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "gnomADg:ALL"
         },
@@ -506,11 +504,9 @@
       },
       {
         "name": "gnomADe:ALL",
-        "description": "All gnomAD exomes individuals",
+        "description": "All gnomAD exomes individuals r2.1.1",
         "is_global": true,
-        "super_population": {
-          "name": null
-        },
+        "super_population": null,
         "sub_populations": [
           {
             "name": "gnomADe:afr"
@@ -541,7 +537,7 @@
       {
         "name": "gnomADe:afr",
         "description": "African/African American",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "gnomADe:ALL"
         },
@@ -550,7 +546,7 @@
       {
         "name": "gnomADe:amr",
         "description": "Latino",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "gnomADe:ALL"
         },
@@ -559,7 +555,7 @@
       {
         "name": "gnomADe:asj",
         "description": "Ashkenazi Jewish",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "gnomADe:ALL"
         },
@@ -568,7 +564,7 @@
       {
         "name": "gnomADe:eas",
         "description": "East Asian",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "gnomADe:ALL"
         },
@@ -577,7 +573,7 @@
       {
         "name": "gnomADe:fin",
         "description": "Finnish",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "gnomADe:ALL"
         },
@@ -586,7 +582,7 @@
       {
         "name": "gnomADe:nfe",
         "description": "Non-Finnish European",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "gnomADe:ALL"
         },
@@ -595,7 +591,7 @@
       {
         "name": "gnomADe:oth",
         "description": "Other",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "gnomADe:ALL"
         },
@@ -604,7 +600,7 @@
       {
         "name": "gnomADe:sas",
         "description": "South Asian",
-        "is_global": true,
+        "is_global": false,
         "super_population": {
           "name": "gnomADe:ALL"
         },
@@ -613,6 +609,6 @@
     ]
   },
   "extensions": {
-    "execution_time_in_seconds": 0.04
+    "execution_time_in_seconds": 0.07
   }
 }

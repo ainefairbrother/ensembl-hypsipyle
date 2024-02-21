@@ -15,6 +15,7 @@ class VariantAllele():
         self.type = "VariantAllele"
         self.allele_sequence = alt
         self.reference_sequence = variant.ref
+        self.population_map = []
         self.info_map = self.traverse_csq_info()
 
     def get_allele_type(self):
@@ -41,7 +42,12 @@ class VariantAllele():
         min_alt = self.minimise_allele(self.alt)
         return self.info_map[min_alt]["prediction_results"] if min_alt in self.info_map else []
     
-    
+    def get_population_allele_frequencies(self):
+        min_alt = self.minimise_allele(self.alt)
+        population_map = self.variant.set_frequency_flags()
+        return population_map[min_alt].values() if min_alt in population_map else []
+
+
     def traverse_csq_info(self) -> Mapping:
         """
         This function is to traverse the CSQ record and extract columns
@@ -56,21 +62,29 @@ class VariantAllele():
         info_map = {}
         for csq_record in self.variant.info["CSQ"]:
             csq_record_list = csq_record.split("|")
-            if csq_record_list[prediction_index_map["allele"]] not in info_map.keys():
-                info_map[csq_record_list[prediction_index_map["allele"]]] = {"phenotype_assertions": [], "predicted_molecular_consequences": [], "prediction_results": []} 
+            allele = csq_record_list[prediction_index_map["allele"]]
 
-            phenotypes = csq_record_list[prediction_index_map["phenotypes"]].split("&") if "phenotypes" in prediction_index_map.keys() else []   
-            for phenotype in phenotypes:
-                phenotype_assertions = self.create_allele_phenotype_assertion(phenotype) if phenotype else []
-                if (phenotype_assertions):
-                    info_map[csq_record_list[prediction_index_map["allele"]]]["phenotype_assertions"].append(phenotype_assertions)
+            if allele not in info_map.keys():
+                info_map[allele] = {"phenotype_assertions": [], "predicted_molecular_consequences": [], "prediction_results": []} 
+
+            # parse and form phenotypes - adding phenotype from any of the csq record would be enough for adding only variant-linked phenotypes
+            if not info_map[allele]["phenotype_assertions"]:
+                phenotypes = csq_record_list[prediction_index_map["phenotypes"]].split("&") if "phenotypes" in prediction_index_map.keys() else []   
+                for phenotype in phenotypes:
+                    phenotype_assertions = self.create_allele_phenotype_assertion(phenotype) if phenotype else []
+                    if (phenotype_assertions):
+                        info_map[allele]["phenotype_assertions"].append(phenotype_assertions)
+            
+            # parse and form molecular consequences
             predicted_molecular_consequences = self.create_allele_predicted_molecular_consequence(csq_record_list, prediction_index_map)
             if (predicted_molecular_consequences):
-                info_map[csq_record_list[prediction_index_map["allele"]]]["predicted_molecular_consequences"].append(predicted_molecular_consequences)
-            current_prediction_results = info_map[csq_record_list[prediction_index_map["allele"]]]["prediction_results"] 
-            info_map[csq_record_list[prediction_index_map["allele"]]]["prediction_results"] += self.create_allele_prediction_results(current_prediction_results, csq_record_list, prediction_index_map)
+                info_map[allele]["predicted_molecular_consequences"].append(predicted_molecular_consequences)
+            
+            # parse and form prediction results
+            current_prediction_results = info_map[allele]["prediction_results"] 
+            info_map[allele]["prediction_results"] += self.create_allele_prediction_results(current_prediction_results, csq_record_list, prediction_index_map)
         return info_map
-
+     
     def create_allele_prediction_results(self, current_prediction_results: Mapping, csq_record: List, prediction_index_map: dict) -> list:
         prediction_results = []
         if "cadd_phred" in prediction_index_map.keys():
@@ -175,7 +189,11 @@ class VariantAllele():
         return (result, score)
     
     def create_allele_phenotype_assertion(self, phenotype: str) -> Mapping:
-        phenotype_name,source,feature = phenotype.split("+")
+        splits = phenotype.split("+")
+        if len(splits) != 3 or splits[2].startswith("ENS"):
+            return None
+
+        phenotype_name,source,feature = splits
         evidence_list = []
         if re.search("^ENS.*G\d+", feature):
             feature_type = "Gene"
@@ -184,15 +202,7 @@ class VariantAllele():
         elif re.search("^rs", feature):
             feature_type = "Variant"  
         else:
-            feature_type = None 
-        # if source:
-        #     evidence =  {
-        #         "source": {
-        #             "id": source,
-        #             "name": source.replace("_"," ") 
-        #         }
-        #     }
-        #     evidence_list.append(evidence)
+            feature_type = None
         
         if phenotype:
             return {
@@ -207,42 +217,16 @@ class VariantAllele():
             }
 
     
-    def minimise_allele(self, alt: str):
+    def minimise_allele(self, alt: str) -> str:
         """
         VCF file has the representation without anchoring bases
         for prediction scores in INFO column. This function is useful
         in matching the SPDI format in VCF with the allele in memory
         """
-        minimised_allele = alt
+        minimised_allele_string = alt
         if len(alt) > len(self.variant.ref):
-            minimised_allele = alt[1:] 
+            minimised_allele_string = alt[1:] 
         elif len(alt) < len(self.variant.ref):
-            minimised_allele = "-"
-        return minimised_allele
+            minimised_allele_string = "-"
+        return minimised_allele_string
     
-    def format_frequency(self, raw_frequency_list: List) -> Mapping:
-        freq_map = {}
-        for freq in raw_frequency_list:
-            key = freq.split(":")[0]
-            freq_list = freq.split(":")[1].split(",")
-            freq_map[key] = freq_list
-        return freq_map
-    
-    def get_population_allele_frequencies(self) -> List:
-        frequency_map = {}
-        if "FREQ" in self.variant.info:
-            frequency_map = self.format_frequency(",".join(map(str,self.variant.info["FREQ"])).split("|"))
-        population_allele_frequencies = []
-        for key, pop_list in frequency_map.items():
-            ## Adding only GnomAD population
-            if key == "GnomAD":
-                if pop_list[self.allele_index] not in ["None", "."]:
-                    population_allele_frequencies.append({
-                        "population": key,
-                        "allele_frequency": pop_list[self.allele_index],
-                        "is_minor_allele": False,
-                        "is_hpmaf": False
-                    })
-        return population_allele_frequencies
-
-  

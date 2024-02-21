@@ -1,4 +1,3 @@
-
 # stages for the pipeline
 stages:
   - build_docker
@@ -18,7 +17,11 @@ variables:
 
 # Deploy to webteam k8s cluster
 .web-rules:
-  - if: '$CI_DEPLOY_FREEZE == null && $CI_PROJECT_NAMESPACE== "ensembl-web"'
+  - if: '$CI_DEPLOY_FREEZE == null && $CI_PROJECT_NAMESPACE== "ensembl-web" && $CI_COMMIT_BRANCH == "main"'
+
+# Deploy to webteam k8s cluster
+.web-branch-rules:
+  - if: '$CI_DEPLOY_FREEZE == null && $CI_PROJECT_NAMESPACE== "ensembl-web" && $CI_COMMIT_BRANCH != "main"'
 
 # Deploy to variation team k8s cluster
 .variation-rules:

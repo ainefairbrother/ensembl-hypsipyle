@@ -48,7 +48,7 @@ class FileClient:
         try:
             for rec in self.collection.fetch(contig, pos-1, pos):
                 if rec.ID[0] == id:
-                    variant = Variant(rec, self.header)
+                    variant = Variant(rec, self.header, genome_uuid)
                     break
             return variant
         except:

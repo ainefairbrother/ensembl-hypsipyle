@@ -4,6 +4,8 @@ include: '/gitlab-ci-templates/.templates.yml'
 # Job to build docker image
 Build:Docker-Image:
   extends: .build
+  rules:
+    - !reference [.web-rules]
 
 # Job to deploy to the live environment
 Live:Web:HL:
@@ -12,7 +14,6 @@ Live:Web:HL:
     BASE: k8s/overlays/webteam/hl
   rules:
     - !reference [.web-rules]
-    - !reference [.rules]
   environment:
     name: wp40-hl-prod
 
@@ -23,7 +24,6 @@ Live:Web:HX:
     BASE: k8s/overlays/webteam/hx
   rules:
     - !reference [.web-rules]
-    - !reference [.rules]
   environment:
     name: wp41-hx-prod
 
@@ -34,7 +34,6 @@ Staging:Web:HL:
     BASE: k8s/overlays/webteam/hl
   rules:
     - !reference [.web-rules]
-    - !reference [.rules]
   environment:
     name: wp40-hl-staging
 
@@ -45,7 +44,6 @@ Internal:Web:HL:
     BASE: k8s/overlays/webteam/hl
   rules:
     - !reference [.web-rules]
-    - !reference [.rules]
   environment:
     name: wp40-hl-internal
 
@@ -56,6 +54,6 @@ Dev:Web:HL51:
     BASE: k8s/overlays/webteam/hl
   rules:
     - !reference [.web-rules]
-    - !reference [.rules]
   environment:
     name: wp51-hl-development
+
