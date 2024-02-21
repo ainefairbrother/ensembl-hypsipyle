@@ -116,7 +116,7 @@ class VariantAllele():
         consequences_list = []
         if "consequence" in prediction_index_map.keys():
             for cons in csq_record[prediction_index_map["consequence"]].split("&"):
-                if cons in ["downstream_gene_variant", "upstream_gene_variant", "intergenic_variant"]:
+                if cons in ["downstream_gene_variant", "upstream_gene_variant", "intergenic_variant", "regulatory_region_variant"]:
                     consequences_list = []
                     break
                 consequences_list.append(
@@ -173,20 +173,13 @@ class VariantAllele():
             cdna_start = cdna_position_list[0]
             cdna_end = cdna_start if len(cdna_position_list) < 2 else cdna_position_list[0]
             cdna_length = int(cdna_end) - int(cdna_start) + 1
-            relation = {
-                "label": "overlaps",
-                "definition": "Overlaps with the feature"
-
-            }
             percentage_overlap = 100
             ref_sequence = self.reference_sequence
             alt_sequence = csq_record[prediction_index_map["allele"]]
             cdna_location = {
-                "relation": relation,
                 "start": cdna_start,
                 "end": cdna_end, 
                 "length": cdna_length, 
-                "percentage_overlap": percentage_overlap ,
                 "ref_sequence": ref_sequence,
                 "alt_sequence": alt_sequence
             }
@@ -199,20 +192,13 @@ class VariantAllele():
             cds_start = cds_position_list[0]
             cds_end = cds_start if len(cds_position_list) < 2 else cds_position_list[0]
             cds_length = int(cds_end) - int(cds_start) + 1
-            relation = {
-                "label": "overlaps",
-                "definition": "Overlaps with the feature"
-
-            }
             percentage_overlap = 100
             ref_sequence = codons.split("/")[0]
             alt_sequence = codons.split("/")[1]
             cds_location = {
-                "relation": relation,
                 "start": cds_start,
                 "end": cds_end, 
                 "length": cds_length, 
-                "percentage_overlap": percentage_overlap ,
                 "ref_sequence": ref_sequence,
                 "alt_sequence": alt_sequence
             }
@@ -225,20 +211,13 @@ class VariantAllele():
             protein_start = protein_position_list[0]
             protein_end = protein_start if len(protein_position_list) < 2 else protein_position_list[0]
             protein_length = int(protein_end) - int(protein_start) + 1
-            relation = {
-                "label": "overlaps",
-                "definition": "Overlaps with the feature"
-
-            }
             percentage_overlap = 100
             ref_sequence = amino_acids.split("/")[0]
             alt_sequence = amino_acids.split("/")[1]
             protein_location = {
-                "relation": relation,
                 "start": protein_start,
                 "end": protein_end, 
                 "length": protein_length, 
-                "percentage_overlap": percentage_overlap,
                 "ref_sequence": ref_sequence,
                 "alt_sequence": alt_sequence
             }
