@@ -173,7 +173,7 @@ class VariantAllele():
             cdna_start = cdna_position_list[0]
             cdna_end = cdna_start if len(cdna_position_list) < 2 else cdna_position_list[1]
             cdna_length = int(cdna_end) - int(cdna_start) + 1
-            ref_sequence = self.reference_sequence
+            ref_sequence = self.minimise_allele(self.reference_sequence)
             alt_sequence = csq_record[prediction_index_map["allele"]]
             cdna_location = {
                 "start": cdna_start,
@@ -302,9 +302,11 @@ class VariantAllele():
         in matching the SPDI format in VCF with the allele in memory
         """
         minimised_allele_string = alt
-        if len(alt) > len(self.variant.ref):
+        if len(alt) > len(self.reference_sequence):
             minimised_allele_string = alt[1:] 
-        elif len(alt) < len(self.variant.ref):
+        elif len(alt) < len(self.reference_sequence):
             minimised_allele_string = "-"
+        elif alt == self.reference_sequence:
+            minimised_allele_string = alt[1:]
         return minimised_allele_string
     
