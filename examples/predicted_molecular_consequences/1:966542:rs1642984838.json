@@ -160,46 +160,6 @@
                   "ref_sequence": "S",
                   "alt_sequence": "K"
                 }
-              },
-              {
-                "allele_name": "AA",
-                "stable_id": "ENSM00521891316",
-                "feature_type": {
-                  "value": "MotifFeature"
-                },
-                "consequences": [
-                  {
-                    "value": "TF_binding_site_variant"
-                  }
-                ],
-                "gene_symbol": "",
-                "gene_stable_id": "",
-                "transcript_biotype": "",
-                "protein_stable_id": "protein_id_placeholder",
-                "prediction_results": [],
-                "cdna_location": null,
-                "cds_location": null,
-                "protein_location": null
-              },
-              {
-                "allele_name": "AA",
-                "stable_id": "ENSM00205804516",
-                "feature_type": {
-                  "value": "MotifFeature"
-                },
-                "consequences": [
-                  {
-                    "value": "TF_binding_site_variant"
-                  }
-                ],
-                "gene_symbol": "",
-                "gene_stable_id": "",
-                "transcript_biotype": "",
-                "protein_stable_id": "protein_id_placeholder",
-                "prediction_results": [],
-                "cdna_location": null,
-                "cds_location": null,
-                "protein_location": null
               }
             ]
           },
