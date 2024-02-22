@@ -42,6 +42,7 @@ query variant_molecular_consequences {
         {
           start
           end
+          length
           ref_sequence
           alt_sequence
         }
@@ -49,6 +50,7 @@ query variant_molecular_consequences {
         {
           start
           end
+          length
           ref_sequence
           alt_sequence
         }
@@ -56,6 +58,7 @@ query variant_molecular_consequences {
         {
           start
           end
+          length
           ref_sequence
           alt_sequence
         }

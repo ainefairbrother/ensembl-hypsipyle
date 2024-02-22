@@ -29,19 +29,22 @@
                 "prediction_results": [],
                 "cdna_location": {
                   "start": 593,
-                  "end": 593,
-                  "ref_sequence": "TGCCGCTGCC",
+                  "end": 601,
+                  "length": 9,
+                  "ref_sequence": "GCCGCTGCC",
                   "alt_sequence": "-"
                 },
                 "cds_location": {
                   "start": 84,
-                  "end": 84,
+                  "end": 92,
+                  "length": 9,
                   "ref_sequence": "ctGCCGCTGCCg",
                   "alt_sequence": "ctg"
                 },
                 "protein_location": {
                   "start": 28,
-                  "end": 28,
+                  "end": 31,
+                  "length": 4,
                   "ref_sequence": "LPLP",
                   "alt_sequence": "L"
                 }
@@ -64,19 +67,22 @@
                 "prediction_results": [],
                 "cdna_location": {
                   "start": 593,
-                  "end": 593,
-                  "ref_sequence": "TGCCGCTGCC",
+                  "end": 601,
+                  "length": 9,
+                  "ref_sequence": "GCCGCTGCC",
                   "alt_sequence": "-"
                 },
                 "cds_location": {
                   "start": 84,
-                  "end": 84,
+                  "end": 92,
+                  "length": 9,
                   "ref_sequence": "ctGCCGCTGCCg",
                   "alt_sequence": "ctg"
                 },
                 "protein_location": {
                   "start": 28,
-                  "end": 28,
+                  "end": 31,
+                  "length": 4,
                   "ref_sequence": "LPLP",
                   "alt_sequence": "L"
                 }
@@ -104,19 +110,22 @@
                 "prediction_results": [],
                 "cdna_location": {
                   "start": 593,
-                  "end": 593,
-                  "ref_sequence": "TGCCGCTGCC",
+                  "end": 601,
+                  "length": 9,
+                  "ref_sequence": "GCCGCTGCC",
                   "alt_sequence": "GCCGCTGCCGCCGCTGCC"
                 },
                 "cds_location": {
                   "start": 84,
-                  "end": 84,
+                  "end": 92,
+                  "length": 9,
                   "ref_sequence": "ctGCCGCTGCCg",
                   "alt_sequence": "ctGCCGCTGCCGCCGCTGCCg"
                 },
                 "protein_location": {
                   "start": 28,
-                  "end": 28,
+                  "end": 31,
+                  "length": 4,
                   "ref_sequence": "LPLP",
                   "alt_sequence": "LPLPPLP"
                 }
@@ -139,19 +148,22 @@
                 "prediction_results": [],
                 "cdna_location": {
                   "start": 593,
-                  "end": 593,
-                  "ref_sequence": "TGCCGCTGCC",
+                  "end": 601,
+                  "length": 9,
+                  "ref_sequence": "GCCGCTGCC",
                   "alt_sequence": "GCCGCTGCCGCCGCTGCC"
                 },
                 "cds_location": {
                   "start": 84,
-                  "end": 84,
+                  "end": 92,
+                  "length": 9,
                   "ref_sequence": "ctGCCGCTGCCg",
                   "alt_sequence": "ctGCCGCTGCCGCCGCTGCCg"
                 },
                 "protein_location": {
                   "start": 28,
-                  "end": 28,
+                  "end": 31,
+                  "length": 4,
                   "ref_sequence": "LPLP",
                   "alt_sequence": "LPLPPLP"
                 }

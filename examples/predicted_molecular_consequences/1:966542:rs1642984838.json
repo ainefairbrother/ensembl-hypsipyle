@@ -41,19 +41,22 @@
                 ],
                 "cdna_location": {
                   "start": 41,
-                  "end": 41,
+                  "end": 42,
+                  "length": 2,
                   "ref_sequence": "GC",
                   "alt_sequence": "AA"
                 },
                 "cds_location": {
                   "start": 11,
-                  "end": 11,
+                  "end": 12,
+                  "length": 2,
                   "ref_sequence": "aGC",
                   "alt_sequence": "aAA"
                 },
                 "protein_location": {
                   "start": 4,
                   "end": 4,
+                  "length": 1,
                   "ref_sequence": "S",
                   "alt_sequence": "K"
                 }
@@ -88,19 +91,22 @@
                 ],
                 "cdna_location": {
                   "start": 41,
-                  "end": 41,
+                  "end": 42,
+                  "length": 2,
                   "ref_sequence": "GC",
                   "alt_sequence": "AA"
                 },
                 "cds_location": {
                   "start": 11,
-                  "end": 11,
+                  "end": 12,
+                  "length": 2,
                   "ref_sequence": "aGC",
                   "alt_sequence": "aAA"
                 },
                 "protein_location": {
                   "start": 4,
                   "end": 4,
+                  "length": 1,
                   "ref_sequence": "S",
                   "alt_sequence": "K"
                 }
@@ -135,19 +141,22 @@
                 ],
                 "cdna_location": {
                   "start": 61,
-                  "end": 61,
+                  "end": 62,
+                  "length": 2,
                   "ref_sequence": "GC",
                   "alt_sequence": "AA"
                 },
                 "cds_location": {
                   "start": 11,
-                  "end": 11,
+                  "end": 12,
+                  "length": 2,
                   "ref_sequence": "aGC",
                   "alt_sequence": "aAA"
                 },
                 "protein_location": {
                   "start": 4,
                   "end": 4,
+                  "length": 1,
                   "ref_sequence": "S",
                   "alt_sequence": "K"
                 }

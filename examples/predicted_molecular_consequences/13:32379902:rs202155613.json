@@ -53,18 +53,21 @@
               "cdna_location": {
                 "start": 9305,
                 "end": 9305,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "A"
               },
               "cds_location": {
                 "start": 9106,
                 "end": 9106,
+                "length": 1,
                 "ref_sequence": "Caa",
                 "alt_sequence": "Aaa"
               },
               "protein_location": {
                 "start": 3036,
                 "end": 3036,
+                "length": 1,
                 "ref_sequence": "Q",
                 "alt_sequence": "K"
               }
@@ -91,18 +94,21 @@
               "cdna_location": {
                 "start": 9305,
                 "end": 9305,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "A"
               },
               "cds_location": {
                 "start": 9106,
                 "end": 9106,
+                "length": 1,
                 "ref_sequence": "Caa",
                 "alt_sequence": "Aaa"
               },
               "protein_location": {
                 "start": 3036,
                 "end": 3036,
+                "length": 1,
                 "ref_sequence": "Q",
                 "alt_sequence": "K"
               }
@@ -154,18 +160,21 @@
               "cdna_location": {
                 "start": 9304,
                 "end": 9304,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "A"
               },
               "cds_location": {
                 "start": 8737,
                 "end": 8737,
+                "length": 1,
                 "ref_sequence": "Caa",
                 "alt_sequence": "Aaa"
               },
               "protein_location": {
                 "start": 2913,
                 "end": 2913,
+                "length": 1,
                 "ref_sequence": "Q",
                 "alt_sequence": "K"
               }
@@ -212,18 +221,21 @@
               "cdna_location": {
                 "start": 9205,
                 "end": 9205,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "A"
               },
               "cds_location": {
                 "start": 9106,
                 "end": 9106,
+                "length": 1,
                 "ref_sequence": "Caa",
                 "alt_sequence": "Aaa"
               },
               "protein_location": {
                 "start": 3036,
                 "end": 3036,
+                "length": 1,
                 "ref_sequence": "Q",
                 "alt_sequence": "K"
               }
@@ -250,6 +262,7 @@
               "cdna_location": {
                 "start": 9114,
                 "end": 9114,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "A"
               },
@@ -278,6 +291,7 @@
               "cdna_location": {
                 "start": 9618,
                 "end": 9618,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "A"
               },
@@ -306,18 +320,21 @@
               "cdna_location": {
                 "start": 9305,
                 "end": 9305,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "A"
               },
               "cds_location": {
                 "start": 9106,
                 "end": 9106,
+                "length": 1,
                 "ref_sequence": "Caa",
                 "alt_sequence": "Aaa"
               },
               "protein_location": {
                 "start": 3036,
                 "end": 3036,
+                "length": 1,
                 "ref_sequence": "Q",
                 "alt_sequence": "K"
               }
@@ -364,18 +381,21 @@
               "cdna_location": {
                 "start": 9231,
                 "end": 9231,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "A"
               },
               "cds_location": {
                 "start": 9106,
                 "end": 9106,
+                "length": 1,
                 "ref_sequence": "Caa",
                 "alt_sequence": "Aaa"
               },
               "protein_location": {
                 "start": 3036,
                 "end": 3036,
+                "length": 1,
                 "ref_sequence": "Q",
                 "alt_sequence": "K"
               }
@@ -399,18 +419,21 @@
               "cdna_location": {
                 "start": 9254,
                 "end": 9254,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "A"
               },
               "cds_location": {
                 "start": 9055,
                 "end": 9055,
+                "length": 1,
                 "ref_sequence": "Caa",
                 "alt_sequence": "Aaa"
               },
               "protein_location": {
                 "start": 3019,
                 "end": 3019,
+                "length": 1,
                 "ref_sequence": "Q",
                 "alt_sequence": "K"
               }
@@ -434,6 +457,7 @@
               "cdna_location": {
                 "start": 1233,
                 "end": 1233,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "A"
               },
@@ -487,18 +511,21 @@
               "cdna_location": {
                 "start": 9305,
                 "end": 9305,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "G"
               },
               "cds_location": {
                 "start": 9106,
                 "end": 9106,
+                "length": 1,
                 "ref_sequence": "Caa",
                 "alt_sequence": "Gaa"
               },
               "protein_location": {
                 "start": 3036,
                 "end": 3036,
+                "length": 1,
                 "ref_sequence": "Q",
                 "alt_sequence": "E"
               }
@@ -525,18 +552,21 @@
               "cdna_location": {
                 "start": 9305,
                 "end": 9305,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "G"
               },
               "cds_location": {
                 "start": 9106,
                 "end": 9106,
+                "length": 1,
                 "ref_sequence": "Caa",
                 "alt_sequence": "Gaa"
               },
               "protein_location": {
                 "start": 3036,
                 "end": 3036,
+                "length": 1,
                 "ref_sequence": "Q",
                 "alt_sequence": "E"
               }
@@ -563,6 +593,7 @@
               "cdna_location": {
                 "start": 9369,
                 "end": 9369,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "G"
               },
@@ -588,18 +619,21 @@
               "cdna_location": {
                 "start": 9304,
                 "end": 9304,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "G"
               },
               "cds_location": {
                 "start": 8737,
                 "end": 8737,
+                "length": 1,
                 "ref_sequence": "Caa",
                 "alt_sequence": "Gaa"
               },
               "protein_location": {
                 "start": 2913,
                 "end": 2913,
+                "length": 1,
                 "ref_sequence": "Q",
                 "alt_sequence": "E"
               }
@@ -646,18 +680,21 @@
               "cdna_location": {
                 "start": 9205,
                 "end": 9205,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "G"
               },
               "cds_location": {
                 "start": 9106,
                 "end": 9106,
+                "length": 1,
                 "ref_sequence": "Caa",
                 "alt_sequence": "Gaa"
               },
               "protein_location": {
                 "start": 3036,
                 "end": 3036,
+                "length": 1,
                 "ref_sequence": "Q",
                 "alt_sequence": "E"
               }
@@ -684,6 +721,7 @@
               "cdna_location": {
                 "start": 9114,
                 "end": 9114,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "G"
               },
@@ -712,6 +750,7 @@
               "cdna_location": {
                 "start": 9618,
                 "end": 9618,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "G"
               },
@@ -740,18 +779,21 @@
               "cdna_location": {
                 "start": 9305,
                 "end": 9305,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "G"
               },
               "cds_location": {
                 "start": 9106,
                 "end": 9106,
+                "length": 1,
                 "ref_sequence": "Caa",
                 "alt_sequence": "Gaa"
               },
               "protein_location": {
                 "start": 3036,
                 "end": 3036,
+                "length": 1,
                 "ref_sequence": "Q",
                 "alt_sequence": "E"
               }
@@ -798,18 +840,21 @@
               "cdna_location": {
                 "start": 9231,
                 "end": 9231,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "G"
               },
               "cds_location": {
                 "start": 9106,
                 "end": 9106,
+                "length": 1,
                 "ref_sequence": "Caa",
                 "alt_sequence": "Gaa"
               },
               "protein_location": {
                 "start": 3036,
                 "end": 3036,
+                "length": 1,
                 "ref_sequence": "Q",
                 "alt_sequence": "E"
               }
@@ -833,18 +878,21 @@
               "cdna_location": {
                 "start": 9254,
                 "end": 9254,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "G"
               },
               "cds_location": {
                 "start": 9055,
                 "end": 9055,
+                "length": 1,
                 "ref_sequence": "Caa",
                 "alt_sequence": "Gaa"
               },
               "protein_location": {
                 "start": 3019,
                 "end": 3019,
+                "length": 1,
                 "ref_sequence": "Q",
                 "alt_sequence": "E"
               }
@@ -868,6 +916,7 @@
               "cdna_location": {
                 "start": 1233,
                 "end": 1233,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "G"
               },
@@ -898,18 +947,21 @@
               "cdna_location": {
                 "start": 9305,
                 "end": 9305,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "T"
               },
               "cds_location": {
                 "start": 9106,
                 "end": 9106,
+                "length": 1,
                 "ref_sequence": "Caa",
                 "alt_sequence": "Taa"
               },
               "protein_location": {
                 "start": 3036,
                 "end": 3036,
+                "length": 1,
                 "ref_sequence": "Q",
                 "alt_sequence": "*"
               }
@@ -936,18 +988,21 @@
               "cdna_location": {
                 "start": 9305,
                 "end": 9305,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "T"
               },
               "cds_location": {
                 "start": 9106,
                 "end": 9106,
+                "length": 1,
                 "ref_sequence": "Caa",
                 "alt_sequence": "Taa"
               },
               "protein_location": {
                 "start": 3036,
                 "end": 3036,
+                "length": 1,
                 "ref_sequence": "Q",
                 "alt_sequence": "*"
               }
@@ -974,6 +1029,7 @@
               "cdna_location": {
                 "start": 9369,
                 "end": 9369,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "T"
               },
@@ -999,18 +1055,21 @@
               "cdna_location": {
                 "start": 9304,
                 "end": 9304,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "T"
               },
               "cds_location": {
                 "start": 8737,
                 "end": 8737,
+                "length": 1,
                 "ref_sequence": "Caa",
                 "alt_sequence": "Taa"
               },
               "protein_location": {
                 "start": 2913,
                 "end": 2913,
+                "length": 1,
                 "ref_sequence": "Q",
                 "alt_sequence": "*"
               }
@@ -1034,18 +1093,21 @@
               "cdna_location": {
                 "start": 9205,
                 "end": 9205,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "T"
               },
               "cds_location": {
                 "start": 9106,
                 "end": 9106,
+                "length": 1,
                 "ref_sequence": "Caa",
                 "alt_sequence": "Taa"
               },
               "protein_location": {
                 "start": 3036,
                 "end": 3036,
+                "length": 1,
                 "ref_sequence": "Q",
                 "alt_sequence": "*"
               }
@@ -1072,6 +1134,7 @@
               "cdna_location": {
                 "start": 9114,
                 "end": 9114,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "T"
               },
@@ -1100,6 +1163,7 @@
               "cdna_location": {
                 "start": 9618,
                 "end": 9618,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "T"
               },
@@ -1128,18 +1192,21 @@
               "cdna_location": {
                 "start": 9305,
                 "end": 9305,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "T"
               },
               "cds_location": {
                 "start": 9106,
                 "end": 9106,
+                "length": 1,
                 "ref_sequence": "Caa",
                 "alt_sequence": "Taa"
               },
               "protein_location": {
                 "start": 3036,
                 "end": 3036,
+                "length": 1,
                 "ref_sequence": "Q",
                 "alt_sequence": "*"
               }
@@ -1163,18 +1230,21 @@
               "cdna_location": {
                 "start": 9231,
                 "end": 9231,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "T"
               },
               "cds_location": {
                 "start": 9106,
                 "end": 9106,
+                "length": 1,
                 "ref_sequence": "Caa",
                 "alt_sequence": "Taa"
               },
               "protein_location": {
                 "start": 3036,
                 "end": 3036,
+                "length": 1,
                 "ref_sequence": "Q",
                 "alt_sequence": "*"
               }
@@ -1198,18 +1268,21 @@
               "cdna_location": {
                 "start": 9254,
                 "end": 9254,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "T"
               },
               "cds_location": {
                 "start": 9055,
                 "end": 9055,
+                "length": 1,
                 "ref_sequence": "Caa",
                 "alt_sequence": "Taa"
               },
               "protein_location": {
                 "start": 3019,
                 "end": 3019,
+                "length": 1,
                 "ref_sequence": "Q",
                 "alt_sequence": "*"
               }
@@ -1233,6 +1306,7 @@
               "cdna_location": {
                 "start": 1233,
                 "end": 1233,
+                "length": 1,
                 "ref_sequence": "C",
                 "alt_sequence": "T"
               },

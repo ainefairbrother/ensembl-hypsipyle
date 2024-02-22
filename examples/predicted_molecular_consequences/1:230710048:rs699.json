@@ -53,18 +53,21 @@
               "cdna_location": {
                 "start": 843,
                 "end": 843,
+                "length": 1,
                 "ref_sequence": "A",
                 "alt_sequence": "G"
               },
               "cds_location": {
                 "start": 776,
                 "end": 776,
+                "length": 1,
                 "ref_sequence": "aTg",
                 "alt_sequence": "aCg"
               },
               "protein_location": {
                 "start": 259,
                 "end": 259,
+                "length": 1,
                 "ref_sequence": "M",
                 "alt_sequence": "T"
               }
@@ -111,18 +114,21 @@
               "cdna_location": {
                 "start": 1287,
                 "end": 1287,
+                "length": 1,
                 "ref_sequence": "A",
                 "alt_sequence": "G"
               },
               "cds_location": {
                 "start": 776,
                 "end": 776,
+                "length": 1,
                 "ref_sequence": "aTg",
                 "alt_sequence": "aCg"
               },
               "protein_location": {
                 "start": 259,
                 "end": 259,
+                "length": 1,
                 "ref_sequence": "M",
                 "alt_sequence": "T"
               }
@@ -172,18 +178,21 @@
               "cdna_location": {
                 "start": 1366,
                 "end": 1366,
+                "length": 1,
                 "ref_sequence": "A",
                 "alt_sequence": "G"
               },
               "cds_location": {
                 "start": 776,
                 "end": 776,
+                "length": 1,
                 "ref_sequence": "aTg",
                 "alt_sequence": "aCg"
               },
               "protein_location": {
                 "start": 259,
                 "end": 259,
+                "length": 1,
                 "ref_sequence": "M",
                 "alt_sequence": "T"
               }
@@ -233,18 +242,21 @@
               "cdna_location": {
                 "start": 1287,
                 "end": 1287,
+                "length": 1,
                 "ref_sequence": "A",
                 "alt_sequence": "G"
               },
               "cds_location": {
                 "start": 776,
                 "end": 776,
+                "length": 1,
                 "ref_sequence": "aTg",
                 "alt_sequence": "aCg"
               },
               "protein_location": {
                 "start": 259,
                 "end": 259,
+                "length": 1,
                 "ref_sequence": "M",
                 "alt_sequence": "T"
               }
@@ -268,6 +280,7 @@
               "cdna_location": {
                 "start": 1287,
                 "end": 1287,
+                "length": 1,
                 "ref_sequence": "A",
                 "alt_sequence": "G"
               },
@@ -316,18 +329,21 @@
               "cdna_location": {
                 "start": 1287,
                 "end": 1287,
+                "length": 1,
                 "ref_sequence": "A",
                 "alt_sequence": "G"
               },
               "cds_location": {
                 "start": 776,
                 "end": 776,
+                "length": 1,
                 "ref_sequence": "aTg",
                 "alt_sequence": "aCg"
               },
               "protein_location": {
                 "start": 259,
                 "end": 259,
+                "length": 1,
                 "ref_sequence": "M",
                 "alt_sequence": "T"
               }
@@ -374,18 +390,21 @@
               "cdna_location": {
                 "start": 991,
                 "end": 991,
+                "length": 1,
                 "ref_sequence": "A",
                 "alt_sequence": "G"
               },
               "cds_location": {
                 "start": 776,
                 "end": 776,
+                "length": 1,
                 "ref_sequence": "aTg",
                 "alt_sequence": "aCg"
               },
               "protein_location": {
                 "start": 259,
                 "end": 259,
+                "length": 1,
                 "ref_sequence": "M",
                 "alt_sequence": "T"
               }
@@ -432,18 +451,21 @@
               "cdna_location": {
                 "start": 1287,
                 "end": 1287,
+                "length": 1,
                 "ref_sequence": "A",
                 "alt_sequence": "G"
               },
               "cds_location": {
                 "start": 776,
                 "end": 776,
+                "length": 1,
                 "ref_sequence": "aTg",
                 "alt_sequence": "aCg"
               },
               "protein_location": {
                 "start": 259,
                 "end": 259,
+                "length": 1,
                 "ref_sequence": "M",
                 "alt_sequence": "T"
               }
@@ -490,18 +512,21 @@
               "cdna_location": {
                 "start": 868,
                 "end": 868,
+                "length": 1,
                 "ref_sequence": "A",
                 "alt_sequence": "G"
               },
               "cds_location": {
                 "start": 776,
                 "end": 776,
+                "length": 1,
                 "ref_sequence": "aTg",
                 "alt_sequence": "aCg"
               },
               "protein_location": {
                 "start": 259,
                 "end": 259,
+                "length": 1,
                 "ref_sequence": "M",
                 "alt_sequence": "T"
               }
@@ -525,6 +550,7 @@
               "cdna_location": {
                 "start": 1287,
                 "end": 1287,
+                "length": 1,
                 "ref_sequence": "A",
                 "alt_sequence": "G"
               },
@@ -573,18 +599,21 @@
               "cdna_location": {
                 "start": 930,
                 "end": 930,
+                "length": 1,
                 "ref_sequence": "A",
                 "alt_sequence": "G"
               },
               "cds_location": {
                 "start": 776,
                 "end": 776,
+                "length": 1,
                 "ref_sequence": "aTg",
                 "alt_sequence": "aCg"
               },
               "protein_location": {
                 "start": 259,
                 "end": 259,
+                "length": 1,
                 "ref_sequence": "M",
                 "alt_sequence": "T"
               }
@@ -634,18 +663,21 @@
               "cdna_location": {
                 "start": 1287,
                 "end": 1287,
+                "length": 1,
                 "ref_sequence": "A",
                 "alt_sequence": "G"
               },
               "cds_location": {
                 "start": 776,
                 "end": 776,
+                "length": 1,
                 "ref_sequence": "aTg",
                 "alt_sequence": "aCg"
               },
               "protein_location": {
                 "start": 259,
                 "end": 259,
+                "length": 1,
                 "ref_sequence": "M",
                 "alt_sequence": "T"
               }
