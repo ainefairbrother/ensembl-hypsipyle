@@ -307,6 +307,6 @@ class VariantAllele():
         elif len(alt) < len(self.reference_sequence):
             minimised_allele_string = "-"
         elif alt == self.reference_sequence:
-            minimised_allele_string = alt[1:]
+            minimised_allele_string = alt[1:] if len(alt) > 1 else "-"
         return minimised_allele_string
     
