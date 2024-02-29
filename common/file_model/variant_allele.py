@@ -128,6 +128,7 @@ class VariantAllele():
         return (position_start,position_end,position_length)
     
     def create_allele_predicted_molecular_consequence(self, csq_record: List, prediction_index_map: dict) -> Mapping:
+        feature_type = csq_record[prediction_index_map["feature_type"]]
         consequences_list = []
         if "consequence" in prediction_index_map.keys():
             for cons in csq_record[prediction_index_map["consequence"]].split("&"):
@@ -239,13 +240,13 @@ class VariantAllele():
                 "ref_sequence": ref_protein_sequence,
                 "alt_sequence": alt_protein_sequence
             }
-        
-        if consequences_list:
+
+        if consequences_list and feature_type == "Transcript":
             return {
                 "allele_name": csq_record[prediction_index_map["allele"]],
                 "stable_id": csq_record[prediction_index_map["feature"]],
                 "feature_type": {  
-                    "value": csq_record[prediction_index_map["feature_type"]]     
+                    "value":    feature_type  
                 } ,
                 "consequences": consequences_list,
                 "gene_stable_id" : csq_record[prediction_index_map["gene"]], 
