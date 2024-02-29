@@ -30,21 +30,21 @@
                 "cdna_location": {
                   "start": 588,
                   "end": 589,
-                  "length": 2,
+                  "length": 0,
                   "ref_sequence": "-",
                   "alt_sequence": "CGCTGC"
                 },
                 "cds_location": {
                   "start": 79,
                   "end": 80,
-                  "length": 2,
+                  "length": 0,
                   "ref_sequence": "gcg",
                   "alt_sequence": "gCGCTGCcg"
                 },
                 "protein_location": {
                   "start": 27,
                   "end": 27,
-                  "length": 1,
+                  "length": 0,
                   "ref_sequence": "A",
                   "alt_sequence": "ALP"
                 }
@@ -68,21 +68,21 @@
                 "cdna_location": {
                   "start": 588,
                   "end": 589,
-                  "length": 2,
+                  "length": 0,
                   "ref_sequence": "-",
                   "alt_sequence": "CGCTGC"
                 },
                 "cds_location": {
                   "start": 79,
                   "end": 80,
-                  "length": 2,
+                  "length": 0,
                   "ref_sequence": "gcg",
                   "alt_sequence": "gCGCTGCcg"
                 },
                 "protein_location": {
                   "start": 27,
                   "end": 27,
-                  "length": 1,
+                  "length": 0,
                   "ref_sequence": "A",
                   "alt_sequence": "ALP"
                 }

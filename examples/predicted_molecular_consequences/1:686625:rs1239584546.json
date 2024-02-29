@@ -30,21 +30,21 @@
                 "cdna_location": {
                   "start": 29,
                   "end": 30,
-                  "length": 2,
+                  "length": 0,
                   "ref_sequence": "-",
                   "alt_sequence": "G"
                 },
                 "cds_location": {
                   "start": 29,
                   "end": 30,
-                  "length": 2,
+                  "length": 0,
                   "ref_sequence": "tct",
                   "alt_sequence": "tcCt"
                 },
                 "protein_location": {
                   "start": 10,
                   "end": 10,
-                  "length": 1,
+                  "length": 0,
                   "ref_sequence": "S",
                   "alt_sequence": "SX"
                 }

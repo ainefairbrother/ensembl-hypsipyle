@@ -67,19 +67,22 @@
                 "prediction_results": [],
                 "cdna_location": {
                   "start": 522,
-                  "end": 522,
-                  "ref_sequence": "CAAG",
+                  "end": 524,
+                  "length": 3,
+                  "ref_sequence": "AAG",
                   "alt_sequence": "-"
                 },
                 "cds_location": {
                   "start": 13,
-                  "end": 13,
+                  "end": 15,
+                  "length": 3,
                   "ref_sequence": "AAG",
                   "alt_sequence": "-"
                 },
                 "protein_location": {
                   "start": 5,
                   "end": 5,
+                  "length": 1,
                   "ref_sequence": "K",
                   "alt_sequence": "-"
                 }

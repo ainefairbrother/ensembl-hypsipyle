@@ -30,21 +30,21 @@
                 "cdna_location": {
                   "start": 489,
                   "end": 490,
-                  "length": 2,
+                  "length": 0,
                   "ref_sequence": "-",
                   "alt_sequence": "CTACA"
                 },
                 "cds_location": {
                   "start": 429,
                   "end": 430,
-                  "length": 2,
+                  "length": 0,
                   "ref_sequence": "-",
                   "alt_sequence": "CTACA"
                 },
                 "protein_location": {
                   "start": 143,
                   "end": 144,
-                  "length": 2,
+                  "length": 0,
                   "ref_sequence": "-",
                   "alt_sequence": "LX"
                 }
