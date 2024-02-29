@@ -21,11 +21,11 @@ type VariantRelativeLocation{
   VariantRelativeLocation
 """
   relation: ValueSet
-  start: Int!
-  end: Int!
-  length: Int!
+  start: Int
+  end: Int
+  length: Int
   percentage_overlap: Float
-  ref_sequence: String!
-  alt_sequence: String!
+  ref_sequence: String
+  alt_sequence: String
   
 }

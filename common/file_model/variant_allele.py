@@ -1,4 +1,4 @@
-from typing import Any, Mapping, List, Union
+from typing import Any, Mapping, List, Union, Tuple
 import re
 import os
 import json
@@ -112,6 +112,21 @@ class VariantAllele():
 
         return False
     
+    def parse_position(self, position: str)->Tuple:
+        position_list  = position.split("-")
+        position_start = position_list[0]
+        position_end = position_start if len(position_list) < 2 else position_list[1]
+        allele_type = self.get_allele_type()["accession_id"]
+        if (position_start == "?" or position_end == "?"):
+            position_start = position_start if position_start !="?" else None
+            position_end = position_end if position_end !="?" else None
+            position_length = None
+        elif (allele_type == "insertion"):
+            position_length = 0  # consistent logic for insertion
+        else:
+            position_length = int(position_end) - int(position_start) + 1
+        return (position_start,position_end,position_length)
+    
     def create_allele_predicted_molecular_consequence(self, csq_record: List, prediction_index_map: dict) -> Mapping:
         consequences_list = []
         if "consequence" in prediction_index_map.keys():
@@ -168,55 +183,61 @@ class VariantAllele():
 
         ###parse cdna location
         cdna_position = csq_record[prediction_index_map["cdna_position"]]
+        codons = csq_record[prediction_index_map["codons"]]
+        ref_cdna_sequence = alt_cdna_sequence = None
         if cdna_position:
-            cdna_position_list  = cdna_position.split("-")
-            cdna_start = cdna_position_list[0]
-            cdna_end = cdna_start if len(cdna_position_list) < 2 else cdna_position_list[1]
-            cdna_length = int(cdna_end) - int(cdna_start) + 1
-            ref_sequence = self.minimise_allele(self.reference_sequence)
-            alt_sequence = csq_record[prediction_index_map["allele"]]
+            cdna_start, cdna_end, cdna_length = self.parse_position(cdna_position)
+            if (cdna_start != None and cdna_end != None):
+                if codons:
+                    ref_cdna_sequence = re.sub('([a-z])','',codons.split("/")[0]) 
+                    alt_cdna_sequence = re.sub('([a-z])','',codons.split("/")[1])
+                    
+                else:
+                    # TODO: Handle when strand is reverse
+                    ref_cdna_sequence = self.minimise_allele(self.reference_sequence)
+                    alt_cdna_sequence = csq_record[prediction_index_map["allele"]]
+                ref_cdna_sequence = ref_cdna_sequence if ref_cdna_sequence else "-"
+                alt_cdna_sequence = alt_cdna_sequence if alt_cdna_sequence else "-"
             cdna_location = {
                 "start": cdna_start,
                 "end": cdna_end, 
                 "length": cdna_length, 
-                "ref_sequence": ref_sequence,
-                "alt_sequence": alt_sequence
+                "ref_sequence": ref_cdna_sequence,
+                "alt_sequence": alt_cdna_sequence
             }
 
         ###parse cds location
         cds_position = csq_record[prediction_index_map["cds_position"]]
         codons = csq_record[prediction_index_map["codons"]]
+        ref_cds_sequence = alt_cds_sequence = None
         if cds_position:
-            cds_position_list  = cds_position.split("-")
-            cds_start = cds_position_list[0]
-            cds_end = cds_start if len(cds_position_list) < 2 else cds_position_list[1]
-            cds_length = int(cds_end) - int(cds_start) + 1
-            ref_sequence = codons.split("/")[0]
-            alt_sequence = codons.split("/")[1]
+            cds_start, cds_end, cds_length = self.parse_position(cds_position)
+            if (cds_start != None and cds_end != None):
+                ref_cds_sequence = codons.split("/")[0]
+                alt_cds_sequence = codons.split("/")[1]
             cds_location = {
                 "start": cds_start,
                 "end": cds_end, 
                 "length": cds_length, 
-                "ref_sequence": ref_sequence,
-                "alt_sequence": alt_sequence
+                "ref_sequence": ref_cds_sequence,
+                "alt_sequence": alt_cds_sequence
             }
 
         ###parse protein location
         protein_position = csq_record[prediction_index_map["protein_position"]]
         amino_acids = csq_record[prediction_index_map["amino_acids"]]
+        ref_protein_sequence = alt_protein_sequence = None
         if protein_position:
-            protein_position_list  = protein_position.split("-")
-            protein_start = protein_position_list[0]
-            protein_end = protein_start if len(protein_position_list) < 2 else protein_position_list[1]
-            protein_length = int(protein_end) - int(protein_start) + 1
-            ref_sequence = amino_acids.split("/")[0]
-            alt_sequence = amino_acids.split("/")[1]
+            protein_start, protein_end, protein_length = self.parse_position(protein_position)
+            if (protein_start != None and protein_end != None):
+                ref_protein_sequence = amino_acids.split("/")[0]
+                alt_protein_sequence = amino_acids.split("/")[1]
             protein_location = {
                 "start": protein_start,
                 "end": protein_end, 
                 "length": protein_length, 
-                "ref_sequence": ref_sequence,
-                "alt_sequence": alt_sequence
+                "ref_sequence": ref_protein_sequence,
+                "alt_sequence": alt_protein_sequence
             }
         
         if consequences_list:
