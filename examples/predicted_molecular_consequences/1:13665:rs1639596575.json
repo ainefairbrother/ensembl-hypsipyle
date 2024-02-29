@@ -31,9 +31,9 @@
                 "protein_stable_id": "protein_id_placeholder",
                 "prediction_results": [],
                 "cdna_location": {
-                  "start": "628",
-                  "end": "?",
-                  "length": -1,
+                  "start": 628,
+                  "end": null,
+                  "length": null,
                   "ref_sequence": null,
                   "alt_sequence": null
                 },
