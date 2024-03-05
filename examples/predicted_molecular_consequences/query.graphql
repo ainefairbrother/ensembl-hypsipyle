@@ -1,0 +1,69 @@
+query variant_molecular_consequences {
+  variant(
+    by_id: {genome_id: "a7335667-93e7-11ec-a39d-005056b38ce3", variant_id: "13:32379902:rs202155613"}
+  ) {
+    name
+    allele_type {
+      accession_id
+      value
+      url
+    }
+    alleles {
+      name
+      predicted_molecular_consequences{
+        allele_name
+        stable_id
+        feature_type
+        {
+          value
+        }
+        consequences{
+          value
+        }
+        gene_symbol
+        gene_stable_id
+        transcript_biotype
+        protein_stable_id
+        prediction_results
+        {
+          score
+          result
+          classification
+          {
+            label
+            definition
+          }
+          analysis_method
+          {
+            tool
+          }
+        }
+        cdna_location
+        {
+          start
+          end
+          length
+          ref_sequence
+          alt_sequence
+        }
+        cds_location
+        {
+          start
+          end
+          length
+          ref_sequence
+          alt_sequence
+        }
+        protein_location
+        {
+          start
+          end
+          length
+          ref_sequence
+          alt_sequence
+        }
+        
+      }
+    }
+  }
+}

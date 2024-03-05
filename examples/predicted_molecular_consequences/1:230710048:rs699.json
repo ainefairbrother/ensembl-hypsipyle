@@ -1,0 +1,697 @@
+{
+  "data": {
+    "variant": {
+      "name": "rs699",
+      "allele_type": {
+        "accession_id": "SNV",
+        "value": "SNV",
+        "url": "http://sequenceontology.org/browser/current_release/term/SO:0001483"
+      },
+      "alleles": [
+        {
+          "name": "1:230710048:A:G",
+          "predicted_molecular_consequences": [
+            {
+              "allele_name": "G",
+              "stable_id": "ENST00000366667",
+              "feature_type": {
+                "value": "Transcript"
+              },
+              "consequences": [
+                {
+                  "value": "missense_variant"
+                }
+              ],
+              "gene_symbol": "AGT",
+              "gene_stable_id": "ENSG00000135744",
+              "transcript_biotype": "protein_coding",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [
+                {
+                  "score": 1,
+                  "result": null,
+                  "classification": {
+                    "label": "tolerated",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "SIFT"
+                  }
+                },
+                {
+                  "score": 0,
+                  "result": null,
+                  "classification": {
+                    "label": "benign",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "PolyPhen"
+                  }
+                }
+              ],
+              "cdna_location": {
+                "start": 843,
+                "end": 843,
+                "length": 1,
+                "ref_sequence": "T",
+                "alt_sequence": "C"
+              },
+              "cds_location": {
+                "start": 776,
+                "end": 776,
+                "length": 1,
+                "ref_sequence": "aTg",
+                "alt_sequence": "aCg"
+              },
+              "protein_location": {
+                "start": 259,
+                "end": 259,
+                "length": 1,
+                "ref_sequence": "M",
+                "alt_sequence": "T"
+              }
+            },
+            {
+              "allele_name": "G",
+              "stable_id": "ENST00000679684",
+              "feature_type": {
+                "value": "Transcript"
+              },
+              "consequences": [
+                {
+                  "value": "missense_variant"
+                }
+              ],
+              "gene_symbol": "AGT",
+              "gene_stable_id": "ENSG00000135744",
+              "transcript_biotype": "protein_coding",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [
+                {
+                  "score": 1,
+                  "result": null,
+                  "classification": {
+                    "label": "tolerated",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "SIFT"
+                  }
+                },
+                {
+                  "score": 0,
+                  "result": null,
+                  "classification": {
+                    "label": "benign",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "PolyPhen"
+                  }
+                }
+              ],
+              "cdna_location": {
+                "start": 1287,
+                "end": 1287,
+                "length": 1,
+                "ref_sequence": "T",
+                "alt_sequence": "C"
+              },
+              "cds_location": {
+                "start": 776,
+                "end": 776,
+                "length": 1,
+                "ref_sequence": "aTg",
+                "alt_sequence": "aCg"
+              },
+              "protein_location": {
+                "start": 259,
+                "end": 259,
+                "length": 1,
+                "ref_sequence": "M",
+                "alt_sequence": "T"
+              }
+            },
+            {
+              "allele_name": "G",
+              "stable_id": "ENST00000679738",
+              "feature_type": {
+                "value": "Transcript"
+              },
+              "consequences": [
+                {
+                  "value": "missense_variant"
+                },
+                {
+                  "value": "NMD_transcript_variant"
+                }
+              ],
+              "gene_symbol": "AGT",
+              "gene_stable_id": "ENSG00000135744",
+              "transcript_biotype": "nonsense_mediated_decay",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [
+                {
+                  "score": 1,
+                  "result": null,
+                  "classification": {
+                    "label": "tolerated",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "SIFT"
+                  }
+                },
+                {
+                  "score": 0,
+                  "result": null,
+                  "classification": {
+                    "label": "benign",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "PolyPhen"
+                  }
+                }
+              ],
+              "cdna_location": {
+                "start": 1366,
+                "end": 1366,
+                "length": 1,
+                "ref_sequence": "T",
+                "alt_sequence": "C"
+              },
+              "cds_location": {
+                "start": 776,
+                "end": 776,
+                "length": 1,
+                "ref_sequence": "aTg",
+                "alt_sequence": "aCg"
+              },
+              "protein_location": {
+                "start": 259,
+                "end": 259,
+                "length": 1,
+                "ref_sequence": "M",
+                "alt_sequence": "T"
+              }
+            },
+            {
+              "allele_name": "G",
+              "stable_id": "ENST00000679802",
+              "feature_type": {
+                "value": "Transcript"
+              },
+              "consequences": [
+                {
+                  "value": "missense_variant"
+                },
+                {
+                  "value": "NMD_transcript_variant"
+                }
+              ],
+              "gene_symbol": "AGT",
+              "gene_stable_id": "ENSG00000135744",
+              "transcript_biotype": "nonsense_mediated_decay",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [
+                {
+                  "score": 1,
+                  "result": null,
+                  "classification": {
+                    "label": "tolerated",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "SIFT"
+                  }
+                },
+                {
+                  "score": 0,
+                  "result": null,
+                  "classification": {
+                    "label": "benign",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "PolyPhen"
+                  }
+                }
+              ],
+              "cdna_location": {
+                "start": 1287,
+                "end": 1287,
+                "length": 1,
+                "ref_sequence": "T",
+                "alt_sequence": "C"
+              },
+              "cds_location": {
+                "start": 776,
+                "end": 776,
+                "length": 1,
+                "ref_sequence": "aTg",
+                "alt_sequence": "aCg"
+              },
+              "protein_location": {
+                "start": 259,
+                "end": 259,
+                "length": 1,
+                "ref_sequence": "M",
+                "alt_sequence": "T"
+              }
+            },
+            {
+              "allele_name": "G",
+              "stable_id": "ENST00000679854",
+              "feature_type": {
+                "value": "Transcript"
+              },
+              "consequences": [
+                {
+                  "value": "non_coding_transcript_exon_variant"
+                }
+              ],
+              "gene_symbol": "AGT",
+              "gene_stable_id": "ENSG00000135744",
+              "transcript_biotype": "retained_intron",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 1287,
+                "end": 1287,
+                "length": 1,
+                "ref_sequence": "A",
+                "alt_sequence": "G"
+              },
+              "cds_location": null,
+              "protein_location": null
+            },
+            {
+              "allele_name": "G",
+              "stable_id": "ENST00000679957",
+              "feature_type": {
+                "value": "Transcript"
+              },
+              "consequences": [
+                {
+                  "value": "missense_variant"
+                }
+              ],
+              "gene_symbol": "AGT",
+              "gene_stable_id": "ENSG00000135744",
+              "transcript_biotype": "protein_coding",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [
+                {
+                  "score": 1,
+                  "result": null,
+                  "classification": {
+                    "label": "tolerated",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "SIFT"
+                  }
+                },
+                {
+                  "score": 0,
+                  "result": null,
+                  "classification": {
+                    "label": "benign",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "PolyPhen"
+                  }
+                }
+              ],
+              "cdna_location": {
+                "start": 1287,
+                "end": 1287,
+                "length": 1,
+                "ref_sequence": "T",
+                "alt_sequence": "C"
+              },
+              "cds_location": {
+                "start": 776,
+                "end": 776,
+                "length": 1,
+                "ref_sequence": "aTg",
+                "alt_sequence": "aCg"
+              },
+              "protein_location": {
+                "start": 259,
+                "end": 259,
+                "length": 1,
+                "ref_sequence": "M",
+                "alt_sequence": "T"
+              }
+            },
+            {
+              "allele_name": "G",
+              "stable_id": "ENST00000680041",
+              "feature_type": {
+                "value": "Transcript"
+              },
+              "consequences": [
+                {
+                  "value": "missense_variant"
+                }
+              ],
+              "gene_symbol": "AGT",
+              "gene_stable_id": "ENSG00000135744",
+              "transcript_biotype": "protein_coding",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [
+                {
+                  "score": 1,
+                  "result": null,
+                  "classification": {
+                    "label": "tolerated",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "SIFT"
+                  }
+                },
+                {
+                  "score": 0,
+                  "result": null,
+                  "classification": {
+                    "label": "benign",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "PolyPhen"
+                  }
+                }
+              ],
+              "cdna_location": {
+                "start": 991,
+                "end": 991,
+                "length": 1,
+                "ref_sequence": "T",
+                "alt_sequence": "C"
+              },
+              "cds_location": {
+                "start": 776,
+                "end": 776,
+                "length": 1,
+                "ref_sequence": "aTg",
+                "alt_sequence": "aCg"
+              },
+              "protein_location": {
+                "start": 259,
+                "end": 259,
+                "length": 1,
+                "ref_sequence": "M",
+                "alt_sequence": "T"
+              }
+            },
+            {
+              "allele_name": "G",
+              "stable_id": "ENST00000680783",
+              "feature_type": {
+                "value": "Transcript"
+              },
+              "consequences": [
+                {
+                  "value": "missense_variant"
+                }
+              ],
+              "gene_symbol": "AGT",
+              "gene_stable_id": "ENSG00000135744",
+              "transcript_biotype": "protein_coding",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [
+                {
+                  "score": 1,
+                  "result": null,
+                  "classification": {
+                    "label": "tolerated",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "SIFT"
+                  }
+                },
+                {
+                  "score": 0,
+                  "result": null,
+                  "classification": {
+                    "label": "benign",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "PolyPhen"
+                  }
+                }
+              ],
+              "cdna_location": {
+                "start": 1287,
+                "end": 1287,
+                "length": 1,
+                "ref_sequence": "T",
+                "alt_sequence": "C"
+              },
+              "cds_location": {
+                "start": 776,
+                "end": 776,
+                "length": 1,
+                "ref_sequence": "aTg",
+                "alt_sequence": "aCg"
+              },
+              "protein_location": {
+                "start": 259,
+                "end": 259,
+                "length": 1,
+                "ref_sequence": "M",
+                "alt_sequence": "T"
+              }
+            },
+            {
+              "allele_name": "G",
+              "stable_id": "ENST00000681269",
+              "feature_type": {
+                "value": "Transcript"
+              },
+              "consequences": [
+                {
+                  "value": "missense_variant"
+                }
+              ],
+              "gene_symbol": "AGT",
+              "gene_stable_id": "ENSG00000135744",
+              "transcript_biotype": "protein_coding",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [
+                {
+                  "score": 1,
+                  "result": null,
+                  "classification": {
+                    "label": "tolerated",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "SIFT"
+                  }
+                },
+                {
+                  "score": 0,
+                  "result": null,
+                  "classification": {
+                    "label": "benign",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "PolyPhen"
+                  }
+                }
+              ],
+              "cdna_location": {
+                "start": 868,
+                "end": 868,
+                "length": 1,
+                "ref_sequence": "T",
+                "alt_sequence": "C"
+              },
+              "cds_location": {
+                "start": 776,
+                "end": 776,
+                "length": 1,
+                "ref_sequence": "aTg",
+                "alt_sequence": "aCg"
+              },
+              "protein_location": {
+                "start": 259,
+                "end": 259,
+                "length": 1,
+                "ref_sequence": "M",
+                "alt_sequence": "T"
+              }
+            },
+            {
+              "allele_name": "G",
+              "stable_id": "ENST00000681347",
+              "feature_type": {
+                "value": "Transcript"
+              },
+              "consequences": [
+                {
+                  "value": "non_coding_transcript_exon_variant"
+                }
+              ],
+              "gene_symbol": "AGT",
+              "gene_stable_id": "ENSG00000135744",
+              "transcript_biotype": "retained_intron",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [],
+              "cdna_location": {
+                "start": 1287,
+                "end": 1287,
+                "length": 1,
+                "ref_sequence": "A",
+                "alt_sequence": "G"
+              },
+              "cds_location": null,
+              "protein_location": null
+            },
+            {
+              "allele_name": "G",
+              "stable_id": "ENST00000681514",
+              "feature_type": {
+                "value": "Transcript"
+              },
+              "consequences": [
+                {
+                  "value": "missense_variant"
+                }
+              ],
+              "gene_symbol": "AGT",
+              "gene_stable_id": "ENSG00000135744",
+              "transcript_biotype": "protein_coding",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [
+                {
+                  "score": 1,
+                  "result": null,
+                  "classification": {
+                    "label": "tolerated",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "SIFT"
+                  }
+                },
+                {
+                  "score": 0,
+                  "result": null,
+                  "classification": {
+                    "label": "benign",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "PolyPhen"
+                  }
+                }
+              ],
+              "cdna_location": {
+                "start": 930,
+                "end": 930,
+                "length": 1,
+                "ref_sequence": "T",
+                "alt_sequence": "C"
+              },
+              "cds_location": {
+                "start": 776,
+                "end": 776,
+                "length": 1,
+                "ref_sequence": "aTg",
+                "alt_sequence": "aCg"
+              },
+              "protein_location": {
+                "start": 259,
+                "end": 259,
+                "length": 1,
+                "ref_sequence": "M",
+                "alt_sequence": "T"
+              }
+            },
+            {
+              "allele_name": "G",
+              "stable_id": "ENST00000681772",
+              "feature_type": {
+                "value": "Transcript"
+              },
+              "consequences": [
+                {
+                  "value": "missense_variant"
+                },
+                {
+                  "value": "NMD_transcript_variant"
+                }
+              ],
+              "gene_symbol": "AGT",
+              "gene_stable_id": "ENSG00000135744",
+              "transcript_biotype": "nonsense_mediated_decay",
+              "protein_stable_id": "protein_id_placeholder",
+              "prediction_results": [
+                {
+                  "score": 1,
+                  "result": null,
+                  "classification": {
+                    "label": "tolerated",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "SIFT"
+                  }
+                },
+                {
+                  "score": 0,
+                  "result": null,
+                  "classification": {
+                    "label": "benign",
+                    "definition": ""
+                  },
+                  "analysis_method": {
+                    "tool": "PolyPhen"
+                  }
+                }
+              ],
+              "cdna_location": {
+                "start": 1287,
+                "end": 1287,
+                "length": 1,
+                "ref_sequence": "T",
+                "alt_sequence": "C"
+              },
+              "cds_location": {
+                "start": 776,
+                "end": 776,
+                "length": 1,
+                "ref_sequence": "aTg",
+                "alt_sequence": "aCg"
+              },
+              "protein_location": {
+                "start": 259,
+                "end": 259,
+                "length": 1,
+                "ref_sequence": "M",
+                "alt_sequence": "T"
+              }
+            }
+          ]
+        },
+        {
+          "name": "1:230710048:A:A",
+          "predicted_molecular_consequences": []
+        }
+      ]
+    }
+  },
+  "extensions": {
+    "execution_time_in_seconds": 0.09
+  }
+}
