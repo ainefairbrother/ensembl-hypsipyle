@@ -1,4 +1,4 @@
-from typing import Any, Mapping, List, Union
+from typing import Any, Mapping, List, Union, Tuple
 import re
 import os
 import json
@@ -53,7 +53,9 @@ class VariantAllele():
         This function is to traverse the CSQ record and extract columns
         corresponding to Consequence, SIFT, PolyPhen, CADD
         """
-        column_list = ["Allele", "PHENOTYPES", "Feature_type", "Feature", "Consequence", "SIFT", "PolyPhen", "SPDI", "CADD_PHRED","Conservation"]
+        column_list = ["Allele", "PHENOTYPES", "Feature_type", "Feature", "Consequence",
+                        "SIFT", "PolyPhen", "SPDI", "CADD_PHRED","Conservation", "Gene", "SYMBOL",
+                        "BIOTYPE","cDNA_position", "CDS_position", "Protein_position", "Amino_acids", "Codons"]
         prediction_index_map = {}
         for col in column_list:
                 if self.variant.get_info_key_index(col) is not None:
@@ -110,13 +112,32 @@ class VariantAllele():
 
         return False
     
+    def parse_position(self, position: str)->Tuple:
+        position_list  = position.split("-")
+        position_start = position_list[0]
+        position_end = position_start if len(position_list) < 2 else position_list[1]
+        allele_type = self.get_allele_type()["accession_id"]
+        if (position_start == "?" or position_end == "?"):
+            position_start = position_start if position_start !="?" else None
+            position_end = position_end if position_end !="?" else None
+            position_length = None
+        elif (allele_type == "insertion"):
+            position_length = 0  # consistent logic for insertion
+        else:
+            position_length = int(position_end) - int(position_start) + 1
+        return (position_start,position_end,position_length)
+    
     def create_allele_predicted_molecular_consequence(self, csq_record: List, prediction_index_map: dict) -> Mapping:
+        feature_type = csq_record[prediction_index_map["feature_type"]]
         consequences_list = []
         if "consequence" in prediction_index_map.keys():
             for cons in csq_record[prediction_index_map["consequence"]].split("&"):
+                if cons in ["downstream_gene_variant", "upstream_gene_variant", "intergenic_variant", "regulatory_region_variant", "TF_binding_site_variant"]:
+                    consequences_list = []
+                    break
                 consequences_list.append(
                     {
-                        "accession_id": cons
+                        "value": cons
                     }
                 )
 
@@ -124,10 +145,14 @@ class VariantAllele():
         if "sift" in prediction_index_map.keys():
             sift_score = csq_record[prediction_index_map["sift"]]
             if sift_score:
-                (result, score) = self.format_sift_polyphen_output(sift_score)
-                if result is not None and score is not None:
+                (label, score) = self.format_sift_polyphen_output(sift_score)
+                if label is not None and score is not None:
+                    classification = {
+                        "label": label,
+                        "definition": ""
+                    }
                     sift_prediction_result = {
-                            "result": result,
+                            "classification": classification,
                             "score": score,
                             "analysis_method": {
                                 "tool": "SIFT",
@@ -139,10 +164,14 @@ class VariantAllele():
         if "polyphen" in prediction_index_map.keys():
             polyphen_score = csq_record[prediction_index_map["polyphen"]]
             if polyphen_score:
-                (result, score) = self.format_sift_polyphen_output(polyphen_score)
-                if result is not None and score is not None:
+                (label, score) = self.format_sift_polyphen_output(polyphen_score)
+                if label is not None and score is not None:
+                    classification = {
+                        "label": label,
+                        "definition": ""
+                    }
                     polyphen_prediction_result = {
-                            "result": result,
+                            "classification": classification,
                             "score": score,
                             "analysis_method": {
                                 "tool": "PolyPhen",
@@ -150,16 +179,85 @@ class VariantAllele():
                             }
                         }
                     prediction_results.append(polyphen_prediction_result)
-        if consequences_list:
+        
+        cdna_location = cds_location = protein_location = None
+
+        ###parse cdna location
+        cdna_position = csq_record[prediction_index_map["cdna_position"]]
+        codons = csq_record[prediction_index_map["codons"]]
+        ref_cdna_sequence = alt_cdna_sequence = None
+        if cdna_position:
+            cdna_start, cdna_end, cdna_length = self.parse_position(cdna_position)
+            if (cdna_start != None and cdna_end != None):
+                if codons:
+                    ref_cdna_sequence = re.sub('([a-z])','',codons.split("/")[0]) 
+                    alt_cdna_sequence = re.sub('([a-z])','',codons.split("/")[1])
+                    
+                else:
+                    # TODO: Handle when strand is reverse
+                    ref_cdna_sequence = self.minimise_allele(self.reference_sequence)
+                    alt_cdna_sequence = csq_record[prediction_index_map["allele"]]
+                ref_cdna_sequence = ref_cdna_sequence if ref_cdna_sequence else "-"
+                alt_cdna_sequence = alt_cdna_sequence if alt_cdna_sequence else "-"
+            cdna_location = {
+                "start": cdna_start,
+                "end": cdna_end, 
+                "length": cdna_length, 
+                "ref_sequence": ref_cdna_sequence,
+                "alt_sequence": alt_cdna_sequence
+            }
+
+        ###parse cds location
+        cds_position = csq_record[prediction_index_map["cds_position"]]
+        codons = csq_record[prediction_index_map["codons"]]
+        ref_cds_sequence = alt_cds_sequence = None
+        if cds_position:
+            cds_start, cds_end, cds_length = self.parse_position(cds_position)
+            if (cds_start != None and cds_end != None):
+                ref_cds_sequence = codons.split("/")[0]
+                alt_cds_sequence = codons.split("/")[1]
+            cds_location = {
+                "start": cds_start,
+                "end": cds_end, 
+                "length": cds_length, 
+                "ref_sequence": ref_cds_sequence,
+                "alt_sequence": alt_cds_sequence
+            }
+
+        ###parse protein location
+        protein_position = csq_record[prediction_index_map["protein_position"]]
+        amino_acids = csq_record[prediction_index_map["amino_acids"]]
+        ref_protein_sequence = alt_protein_sequence = None
+        if protein_position:
+            protein_start, protein_end, protein_length = self.parse_position(protein_position)
+            if (protein_start != None and protein_end != None):
+                ref_protein_sequence = amino_acids.split("/")[0]
+                alt_protein_sequence = amino_acids.split("/")[1]
+            protein_location = {
+                "start": protein_start,
+                "end": protein_end, 
+                "length": protein_length, 
+                "ref_sequence": ref_protein_sequence,
+                "alt_sequence": alt_protein_sequence
+            }
+
+        if consequences_list and feature_type == "Transcript":
             return {
                 "allele_name": csq_record[prediction_index_map["allele"]],
-                "feature_stable_id": csq_record[prediction_index_map["feature"]],
-                "feature_type": {
-                    "accession_id": csq_record[prediction_index_map["feature_type"]]               
+                "stable_id": csq_record[prediction_index_map["feature"]],
+                "feature_type": {  
+                    "value":    feature_type  
                 } ,
                 "consequences": consequences_list,
-                "prediction_results": prediction_results
+                "gene_stable_id" : csq_record[prediction_index_map["gene"]], 
+                "gene_symbol": csq_record[prediction_index_map["symbol"]], 
+                "transcript_biotype": csq_record[prediction_index_map["biotype"]], 
+                "prediction_results": prediction_results,
+                "cdna_location": cdna_location,
+                "cds_location": cds_location,
+                "protein_location": protein_location
             }
+            
 
     
     def format_sift_polyphen_output(self, output: str) -> tuple:
@@ -208,7 +306,8 @@ class VariantAllele():
             return {
                 "feature": feature,
                 "feature_type": {
-                    "accession_id": feature_type                
+                    "value": feature_type   
+
                 } ,
                 "phenotype": {
                     "name": phenotype_name
@@ -224,9 +323,7 @@ class VariantAllele():
         in matching the SPDI format in VCF with the allele in memory
         """
         minimised_allele_string = alt
-        if len(alt) > len(self.variant.ref):
-            minimised_allele_string = alt[1:] 
-        elif len(alt) < len(self.variant.ref):
-            minimised_allele_string = "-"
+        if self.reference_sequence[0] == alt[0]:
+            minimised_allele_string = alt[1:] if len(alt) > 1 else "-"
         return minimised_allele_string
     
