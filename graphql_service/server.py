@@ -68,13 +68,6 @@ CONTEXT_PROVIDER = prepare_context_provider(
 )
 EXECUTABLE_SCHEMA = prepare_executable_schema()
 
-# RESOLVER = XrefResolver(internal_mapping_file="docs/xref_LOD_mapping.json")
-
-# CONTEXT_PROVIDER = prepare_context_provider(
-#     {
-#         "XrefResolver": RESOLVER,
-#     }
-# )
 
 starlette_middleware = [
     Middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["GET", "POST"])
