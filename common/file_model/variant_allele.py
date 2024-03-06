@@ -132,7 +132,7 @@ class VariantAllele():
         consequences_list = []
         if "consequence" in prediction_index_map.keys():
             for cons in csq_record[prediction_index_map["consequence"]].split("&"):
-                if cons in ["downstream_gene_variant", "upstream_gene_variant", "intergenic_variant", "regulatory_region_variant"]:
+                if cons in ["downstream_gene_variant", "upstream_gene_variant", "intergenic_variant", "regulatory_region_variant", "TF_binding_site_variant"]:
                     consequences_list = []
                     break
                 consequences_list.append(
@@ -252,7 +252,6 @@ class VariantAllele():
                 "gene_stable_id" : csq_record[prediction_index_map["gene"]], 
                 "gene_symbol": csq_record[prediction_index_map["symbol"]], 
                 "transcript_biotype": csq_record[prediction_index_map["biotype"]], 
-                "protein_stable_id": "protein_id_placeholder",
                 "prediction_results": prediction_results,
                 "cdna_location": cdna_location,
                 "cds_location": cds_location,
@@ -324,11 +323,7 @@ class VariantAllele():
         in matching the SPDI format in VCF with the allele in memory
         """
         minimised_allele_string = alt
-        if len(alt) > len(self.reference_sequence):
-            minimised_allele_string = alt[1:] 
-        elif len(alt) < len(self.reference_sequence):
-            minimised_allele_string = "-"
-        elif alt == self.reference_sequence and len(self.alt) != len(self.reference_sequence):
+        if self.reference_sequence[0] == alt[0]:
             minimised_allele_string = alt[1:] if len(alt) > 1 else "-"
         return minimised_allele_string
     

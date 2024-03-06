@@ -9,7 +9,7 @@ type PredictedMolecularConsequence{
   prediction_results: [PredictionResult]
   gene_stable_id: String!
   gene_symbol: String!
-  protein_stable_id: String!
+  protein_stable_id: String
   transcript_biotype: String!
   cdna_location: VariantRelativeLocation
   cds_location: VariantRelativeLocation
