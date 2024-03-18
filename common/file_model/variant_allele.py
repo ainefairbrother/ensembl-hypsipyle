@@ -245,8 +245,9 @@ class VariantAllele():
         if protein_position:
             protein_start, protein_end, protein_length = self.parse_position(protein_position)
             if (protein_start != None and protein_end != None):
-                ref_protein_sequence = amino_acids.split("/")[0]
-                alt_protein_sequence = amino_acids.split("/")[1]
+                amino_acids_array = amino_acids.split("/")
+                ref_protein_sequence = amino_acids_array[0]
+                alt_protein_sequence = amino_acids_array[1] if len(amino_acids_array)>1 else amino_acids_array[0]
             protein_location = {
                 "start": protein_start,
                 "end": protein_end, 
