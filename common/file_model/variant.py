@@ -19,6 +19,7 @@ import json
 import operator
 from functools import reduce
 from common.file_model.variant_allele import VariantAllele
+from common.file_model.utils import minimise_allele
 
 def reduce_allele_length(allele_list: List):
     allele_length = -1
@@ -329,7 +330,7 @@ class Variant ():
                                 if allele_frequency is not None:
                                     population_frequency = {
                                                     "population_name": sub_pop["name"],
-                                                    "allele_frequency": float('%.3g' % float(allele_frequency)),
+                                                    "allele_frequency": float(allele_frequency),
                                                     "allele_count": allele_count,
                                                     "allele_number": allele_number,
                                                     "is_minor_allele": False,
@@ -366,12 +367,12 @@ class Variant ():
             if not len(by_population):
                 continue
             ## Add population frequency for reference allele
-            ref_allele = self.ref
-            allele_frequency_ref = 1 - sum(list(zip(*by_population))[0])
+            ref_allele = minimise_allele(self.ref,self.ref)
+            allele_frequency_ref = 1 - float(sum(list(zip(*by_population))[0]))
             if allele_frequency_ref <= 1 and allele_frequency_ref >= 0:
                 population_frequency_ref = {
                                                 "population_name": pop_name,
-                                                "allele_frequency": float('%.3g' % float(allele_frequency_ref)) ,
+                                                "allele_frequency": allele_frequency_ref ,
                                                 "allele_count": None,
                                                 "allele_number": None,
                                                 "is_minor_allele": False,
@@ -395,7 +396,7 @@ class Variant ():
                         maf_frequency, maf_allele, maf_population = pop
                         pop_frequency_map[maf_allele][maf_population]["is_minor_allele"] = True
                         hpmaf.append([maf_frequency,maf_allele,maf_population])
-                    elif maf_frequency and pop[0] == maf_frequency and maf_allele != allele.ref:
+                    elif maf_frequency and pop[0] == maf_frequency and maf_allele != ref_allele:
                         pop_frequency_map[maf_allele][maf_population]["is_minor_allele"] = True
                         hpmaf.append([maf_frequency,maf_allele,maf_population])
                     elif maf_frequency and pop[0] < maf_frequency:
@@ -413,5 +414,3 @@ class Variant ():
                     break
         return pop_frequency_map
     
-
-
