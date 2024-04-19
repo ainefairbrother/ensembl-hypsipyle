@@ -37,7 +37,7 @@ Staging:Web:HL:
   variables:
     BASE: k8s/overlays/webteam/hl
     AGENT: ${STAGING_AGENT}
-    NS: ${STAGIN_NS}
+    NS: ${STAGING_NS}
   rules:
     - !reference [.web-rules]
   environment:
