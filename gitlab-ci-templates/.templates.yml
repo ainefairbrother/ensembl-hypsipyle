@@ -47,8 +47,10 @@ variables:
 .deploy:
   stage: deploy
   image: dockerhub.ebi.ac.uk/${CI_PROJECT_NAMESPACE}/deploy-tools:latest
+  before_script:
+    - kubectl config use-context ${AGENT}
+    - kubectl config set-context --current --namespace=${NS}
   script:
-    - echo "Deploying to ${CI_PROJECT_NAMESPACE}"
     - cd ${BASE}
     - kustomize edit set image DOCKER_IMAGE=${DOCKER_IMAGE}
     - kustomize build . | kubectl apply -f -

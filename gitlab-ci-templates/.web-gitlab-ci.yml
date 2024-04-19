@@ -12,48 +12,58 @@ Live:Web:HL:
   extends: .deploy
   variables:
     BASE: k8s/overlays/webteam/hl
+    AGENT: ${PROD_AGENT}
+    NS: ${PROD_NS}
   rules:
     - !reference [.web-rules]
   environment:
-    name: wp40-hl-prod
+    name: production
 
 # Job to deploy to the live environment
 Live:Web:HX:
   extends: .deploy
   variables:
     BASE: k8s/overlays/webteam/hx
+    AGENT: ${FALLBACK_AGENT}
+    NS: ${FALLBACK_NS}
   rules:
     - !reference [.web-rules]
   environment:
-    name: wp41-hx-prod
+    name: fallback
 
 # Job to deploy to staging (web)
 Staging:Web:HL:
   extends: .deploy
   variables:
     BASE: k8s/overlays/webteam/hl
+    AGENT: ${STAGING_AGENT}
+    NS: ${STAGING_NS}
   rules:
     - !reference [.web-rules]
   environment:
-    name: wp40-hl-staging
+    name: staging
 
 # Job to deploy to Internal (web)
 Internal:Web:HL:
   extends: .deploy
   variables:
     BASE: k8s/overlays/webteam/hl
+    AGENT: ${INTERNAL_AGENT}
+    NS: ${INTERNAL_NS}
   rules:
     - !reference [.web-rules]
   environment:
-    name: wp40-hl-internal
+    name: internal
 
 # Job to deploy to dev-2020 (web)
 Dev:Web:HL51:
   extends: .deploy
   variables:
     BASE: k8s/overlays/webteam/hl
+    AGENT: ${DEV_AGENT}
+    NS: ${DEV_NS}
   rules:
     - !reference [.web-rules]
   environment:
-    name: wp51-hl-development
+    name: development
 
