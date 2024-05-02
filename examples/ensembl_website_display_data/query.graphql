@@ -15,7 +15,7 @@ query variant_example {
         count_overlapped_genes
         count_variant_phenotypes
         count_regulatory_consequences
-        representative_population_allele_frequencies
+        representative_population_allele_frequency
       }
     }
     

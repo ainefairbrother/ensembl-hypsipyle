@@ -430,7 +430,7 @@ class Variant ():
                                         "count_regulatory_consequences": self.info["NRCSQ"][index] if "NRCSQ" in self.info else 0,
                                         "count_variant_phenotypes": self.info["NVPHN"][index] if "NVPHN" in self.info else 0,
                                         "count_gene_phenotypes": self.info["NGPHN"][index] if "NGPHN" in self.info else 0,
-                                        "representative_population_allele_frequencies": self.info["RAF"][index] if "RAF" in self.info else None
+                                        "representative_population_allele_frequency": self.info["RAF"][index] if "RAF" in self.info else None
                                     }
         
         statistics_info[self.ref] = {
@@ -439,7 +439,7 @@ class Variant ():
                                         "count_regulatory_consequences": 0,
                                         "count_variant_phenotypes": 0,
                                         "count_gene_phenotypes": 0,
-                                        "representative_population_allele_frequencies": 1-float(sum(filter(None,self.info["RAF"]))) if "RAF" in self.info else None
+                                        "representative_population_allele_frequency": 1-float(sum(filter(None,self.info["RAF"]))) if "RAF" in self.info else None
         }
         return statistics_info
 

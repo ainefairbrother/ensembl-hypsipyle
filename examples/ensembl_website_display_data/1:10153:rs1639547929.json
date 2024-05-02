@@ -19,7 +19,7 @@
               "count_overlapped_genes": 1,
               "count_variant_phenotypes": 1,
               "count_regulatory_consequences": 1,
-              "representative_population_allele_frequencies": 0.01
+              "representative_population_allele_frequency": 0.01
             }
           },
           {
@@ -31,7 +31,7 @@
               "count_overlapped_genes": 1,
               "count_variant_phenotypes": 1,
               "count_regulatory_consequences": 1,
-              "representative_population_allele_frequencies": 0.00001
+              "representative_population_allele_frequency": 0.00001
             }
           },
           {
@@ -43,7 +43,7 @@
               "count_overlapped_genes": 0,
               "count_variant_phenotypes": 0,
               "count_regulatory_consequences": 0,
-              "representative_population_allele_frequencies": 0.98999
+              "representative_population_allele_frequency": 0.98999
             }
           }
         ]

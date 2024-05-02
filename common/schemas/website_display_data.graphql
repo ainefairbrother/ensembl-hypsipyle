@@ -7,7 +7,7 @@ type VariantAlleleDisplayData {
   count_regulatory_consequences: Int!
   count_variant_phenotypes: Int!
   count_gene_phenotypes: Int!
-  representative_population_allele_frequencies: Float
+  representative_population_allele_frequency: Float
 }
 
 type VariantDisplayData {
