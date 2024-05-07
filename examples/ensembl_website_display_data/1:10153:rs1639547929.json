@@ -1,0 +1,55 @@
+{
+    "data": {
+      "variant": {
+        "name": "rs1639547929",
+        "primary_source": {
+          "description": "NCBI db of human variants",
+          "url": "https://www.ncbi.nlm.nih.gov/snp/rs1639547929"
+        },
+        "ensembl_website_display_data": {
+          "count_citations": 1
+        },
+        "alleles": [
+          {
+            "reference_sequence": "AC",
+            "allele_sequence": "A",
+            "ensembl_website_display_data": {
+              "count_transcript_consequences": 1,
+              "count_gene_phenotypes": 1,
+              "count_overlapped_genes": 1,
+              "count_variant_phenotypes": 1,
+              "count_regulatory_consequences": 1,
+              "representative_population_allele_frequency": 0.01
+            }
+          },
+          {
+            "reference_sequence": "AC",
+            "allele_sequence": "ACC",
+            "ensembl_website_display_data": {
+              "count_transcript_consequences": 1,
+              "count_gene_phenotypes": 1,
+              "count_overlapped_genes": 1,
+              "count_variant_phenotypes": 1,
+              "count_regulatory_consequences": 1,
+              "representative_population_allele_frequency": 0.00001
+            }
+          },
+          {
+            "reference_sequence": "AC",
+            "allele_sequence": "AC",
+            "ensembl_website_display_data": {
+              "count_transcript_consequences": 0,
+              "count_gene_phenotypes": 0,
+              "count_overlapped_genes": 0,
+              "count_variant_phenotypes": 0,
+              "count_regulatory_consequences": 0,
+              "representative_population_allele_frequency": 0.98999
+            }
+          }
+        ]
+      }
+    },
+    "extensions": {
+      "execution_time_in_seconds": 0.08
+    }
+  }

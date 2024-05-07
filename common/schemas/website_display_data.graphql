@@ -1,0 +1,18 @@
+type VariantAlleleDisplayData {
+  """
+  Variant Allele Display Data
+  """
+  count_transcript_consequences: Int!
+  count_overlapped_genes: Int!
+  count_regulatory_consequences: Int!
+  count_variant_phenotypes: Int!
+  count_gene_phenotypes: Int!
+  representative_population_allele_frequency: Float
+}
+
+type VariantDisplayData {
+  """
+  Variant Display Data
+  """
+  count_citations: Int!
+}

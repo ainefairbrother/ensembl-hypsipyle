@@ -1,0 +1,24 @@
+query variant_example {
+  variant(
+    by_id: {genome_id: "test-human", variant_id: "1:10153:rs1639547929"}
+  ) {
+    
+    name
+    ensembl_website_display_data {
+      count_citations
+    }
+    alleles
+    {
+      ensembl_website_display_data {
+        count_transcript_consequences
+        count_gene_phenotypes
+        count_overlapped_genes
+        count_variant_phenotypes
+        count_regulatory_consequences
+        representative_population_allele_frequency
+      }
+    }
+    
+    
+  }
+}

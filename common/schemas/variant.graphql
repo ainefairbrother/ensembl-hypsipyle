@@ -10,4 +10,5 @@ type Variant {
   slice: Slice!
   alleles: [VariantAllele]!
   prediction_results: [PredictionResult]!
+  ensembl_website_display_data: VariantDisplayData
 }

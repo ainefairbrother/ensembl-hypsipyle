@@ -413,4 +413,34 @@ class Variant ():
                 elif hpmaf_pop[0] < hpmaf_frequency:
                     break
         return pop_frequency_map
+    def get_web_display_data(self)-> Mapping:
+        n_citations = self.info["NCITE"] if "NCITE" in self.info else 0
+        return {
+            "count_citations": n_citations
+        }
     
+    def get_statistics_info(self)-> Mapping:
+        alleles = [i.value for i in self.alts]
+        statistics_info = {}
+        
+        for index,allele in enumerate(alleles):
+            statistics_info[allele] = {
+                                        "count_transcript_consequences": self.info["NTCSQ"][index]  if "NTCSQ" in self.info else 0,
+                                        "count_overlapped_genes": self.info["NGENE"][index] if "NGENE" in self.info else 0,
+                                        "count_regulatory_consequences": self.info["NRCSQ"][index] if "NRCSQ" in self.info else 0,
+                                        "count_variant_phenotypes": self.info["NVPHN"][index] if "NVPHN" in self.info else 0,
+                                        "count_gene_phenotypes": self.info["NGPHN"][index] if "NGPHN" in self.info else 0,
+                                        "representative_population_allele_frequency": self.info["RAF"][index] if "RAF" in self.info else None
+                                    }
+        
+        statistics_info[self.ref] = {
+                                        "count_transcript_consequences": 0,
+                                        "count_overlapped_genes": 0,
+                                        "count_regulatory_consequences": 0,
+                                        "count_variant_phenotypes": 0,
+                                        "count_gene_phenotypes": 0,
+                                        "representative_population_allele_frequency": 1-float(sum(filter(None,self.info["RAF"]))) if "RAF" in self.info else None
+        }
+        return statistics_info
+
+

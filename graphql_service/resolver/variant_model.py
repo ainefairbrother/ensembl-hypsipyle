@@ -91,7 +91,12 @@ def prediction_results(variant: Dict, info: GraphQLResolveInfo) -> Dict:
         prediction_results.append(variant.get_ancestral_allele()) 
     return prediction_results
 
-
+@VARIANT_TYPE.field("ensembl_website_display_data")
+def ensembl_website_display_data(variant: Dict, info: GraphQLResolveInfo) -> Dict:
+    """
+    Load ensembl website display data for variant
+    """
+    return variant.get_web_display_data()
 
 @VARIANT_TYPE.field("alleles")
 def resolve_alleles_from_variant(variant: Dict, info: GraphQLResolveInfo) -> Dict:
@@ -156,6 +161,12 @@ def resolve_population_frequencies_from_variant_allele(variant_allele: Dict, inf
     """
     return variant_allele.get_population_allele_frequencies()
 
+@VARIANT_ALLELE_TYPE.field("ensembl_website_display_data")
+def resolve_ensmebl_website_display_data_from_variant_allele(variant_allele: Dict, info: GraphQLResolveInfo) -> Dict:
+    """
+    Load ensembl website display data for variant allele
+    """
+    return variant_allele.get_web_display_data()
 
 @QUERY_TYPE.field("version")
 def resolve_api(

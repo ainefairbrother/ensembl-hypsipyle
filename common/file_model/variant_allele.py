@@ -62,7 +62,9 @@ class VariantAllele():
         population_map = self.variant.set_frequency_flags()
         return population_map[min_alt].values() if min_alt in population_map else []
 
-
+    def get_web_display_data(self) -> Mapping:
+        return self.variant.get_statistics_info()[self.allele_sequence]
+    
     def traverse_csq_info(self) -> Mapping:
         """
         This function is to traverse the CSQ record and extract columns
