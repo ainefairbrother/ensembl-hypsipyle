@@ -25,16 +25,11 @@ Add path to the datafile in `./connections.conf`.
 
 The file follows the following template:
 ```
-data_root = /usr/data/variation_vcfs
+data_root = /app/data
 ```
 
-The command below will start the server:
 
-```uvicorn --workers 1 --host=0.0.0.0 graphql_service.server:APP```
-
-
-
-## Containerisation for dev
+### Running a container for development
 
 Build the image using `./Dockerfile.dev`:
 
@@ -45,7 +40,7 @@ Run a container with the image (`--publish` below is exposing the container's po
 `docker container run --publish 0.0.0.0:80:80/tcp --publish 0.0.0.0:8000:8000/tcp -ti -v <ensembl-hysipile-dir>:/app $NAME:$VERSION`
 
 
-## Containerisation for prod
+### Running a container for production
 Build the image using `./Dockerfile.prod`:
 
 `docker build -t $NAME:$VERSION -f ./Dockerfile.prod .`
@@ -56,3 +51,22 @@ Run a container with the image (`--publish` below is exposing the container's po
 
 The connection configuration is assumed to exist in the repo as the file `./connections.conf` and gets built into the Docker 
 image. 
+
+### Querying the API
+Once the container starts running, the GraphQL server will be running at the endpoint [0.0.0.0:8000](0.0.0.0:8000)
+A simple query would look like:
+```
+query variant_example {
+    variant(
+    by_id: {genome_id: "a7335667-93e7-11ec-a39d-005056b38ce3", variant_id: "1:10153:rs1639547929"}
+    ) {
+    
+        name
+        primary_source {
+        description
+        url
+        }
+    }
+}
+```
+More example queries can be found in `examples/`
