@@ -9,7 +9,7 @@
         {"name": "gnomADg:fin", "frequencies": {"af": "gnomAD_genomes_AF_fin", "ac": "gnomAD_genomes_AC_fin", "an": "gnomAD_genomes_AN_fin"}},
         {"name": "gnomADg:mid", "frequencies": {"af": "gnomAD_genomes_AF_mid", "ac": "gnomAD_genomes_AC_mid", "an": "gnomAD_genomes_AN_mid"}},
         {"name": "gnomADg:nfe", "frequencies": {"af": "gnomAD_genomes_AF_nfe", "ac": "gnomAD_genomes_AC_nfe", "an": "gnomAD_genomes_AN_nfe"}},
-        {"name": "gnomADg:oth", "frequencies": {"af": "gnomAD_genomes_AF_oth", "ac": "gnomAD_genomes_AC_oth", "an": "gnomAD_genomes_AN_oth"}},
+        {"name": "gnomADg:remaining", "frequencies": {"af": "gnomAD_genomes_AF_remaining", "ac": "gnomAD_genomes_AC_remaining", "an": "gnomAD_genomes_AN_remaining"}},
         {"name": "gnomADg:sas", "frequencies": {"af": "gnomAD_genomes_AF_sas", "ac": "gnomAD_genomes_AC_sas", "an": "gnomAD_genomes_AN_sas"}}
         ],
    "gnomAD_exomes": [
@@ -19,8 +19,9 @@
     {"name": "gnomADe:asj", "frequencies": {"af": "gnomAD_exomes_AF_asj", "ac": "gnomAD_exomes_AC_asj", "an": "gnomAD_exomes_AN_asj"}},
     {"name": "gnomADe:eas", "frequencies": {"af": "gnomAD_exomes_AF_eas", "ac": "gnomAD_exomes_AC_eas", "an": "gnomAD_exomes_AN_eas"}},
     {"name": "gnomADe:fin", "frequencies": {"af": "gnomAD_exomes_AF_fin", "ac": "gnomAD_exomes_AC_fin", "an": "gnomAD_exomes_AN_fin"}},
+    {"name": "gnomADg:mid", "frequencies": {"af": "gnomAD_exomes_AF_mid", "ac": "gnomAD_exomes_AC_mid", "an": "gnomAD_exomes_AN_mid"}},
     {"name": "gnomADe:nfe", "frequencies": {"af": "gnomAD_exomes_AF_nfe", "ac": "gnomAD_exomes_AC_nfe", "an": "gnomAD_exomes_AN_nfe"}},
-    {"name": "gnomADe:oth", "frequencies": {"af": "gnomAD_exomes_AF_oth", "ac": "gnomAD_exomes_AC_oth", "an": "gnomAD_exomes_AN_oth"}},
+    {"name": "gnomADe:remaining", "frequencies": {"af": "gnomAD_exomes_AF_remaining", "ac": "gnomAD_exomes_AC_remaining", "an": "gnomAD_exomes_AN_remaining"}},
     {"name": "gnomADe:sas", "frequencies": {"af": "gnomAD_exomes_AF_sas", "ac": "gnomAD_exomes_AC_sas", "an": "gnomAD_exomes_AN_sas"}}
    ],
     "1000_genomes": [
