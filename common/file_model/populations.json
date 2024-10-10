@@ -19,7 +19,7 @@
     {"name": "gnomADe:asj", "frequencies": {"af": "gnomAD_exomes_AF_asj", "ac": "gnomAD_exomes_AC_asj", "an": "gnomAD_exomes_AN_asj"}},
     {"name": "gnomADe:eas", "frequencies": {"af": "gnomAD_exomes_AF_eas", "ac": "gnomAD_exomes_AC_eas", "an": "gnomAD_exomes_AN_eas"}},
     {"name": "gnomADe:fin", "frequencies": {"af": "gnomAD_exomes_AF_fin", "ac": "gnomAD_exomes_AC_fin", "an": "gnomAD_exomes_AN_fin"}},
-    {"name": "gnomADg:mid", "frequencies": {"af": "gnomAD_exomes_AF_mid", "ac": "gnomAD_exomes_AC_mid", "an": "gnomAD_exomes_AN_mid"}},
+    {"name": "gnomADe:mid", "frequencies": {"af": "gnomAD_exomes_AF_mid", "ac": "gnomAD_exomes_AC_mid", "an": "gnomAD_exomes_AN_mid"}},
     {"name": "gnomADe:nfe", "frequencies": {"af": "gnomAD_exomes_AF_nfe", "ac": "gnomAD_exomes_AC_nfe", "an": "gnomAD_exomes_AN_nfe"}},
     {"name": "gnomADe:remaining", "frequencies": {"af": "gnomAD_exomes_AF_remaining", "ac": "gnomAD_exomes_AC_remaining", "an": "gnomAD_exomes_AN_remaining"}},
     {"name": "gnomADe:sas", "frequencies": {"af": "gnomAD_exomes_AF_sas", "ac": "gnomAD_exomes_AC_sas", "an": "gnomAD_exomes_AN_sas"}}

@@ -308,7 +308,6 @@ class VariantAllele():
 
         feature_type=None
         splits = phenotype.split("+")
-        print(phenotype)
         if splits[2].startswith("ENS"):
             return None
         if len(splits)==3:
