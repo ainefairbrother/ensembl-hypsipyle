@@ -189,7 +189,7 @@
             "description": "All gnomAD exomes individuals r2.1.1",
             "type": "regional",
             "is_global": true,
-            "display_group_name": "gnomAD exomes r4.1",
+            "display_group_name": "gnomAD exomes v4.1",
             "super_population":null,
             "sub_populations": [
                 {
@@ -227,7 +227,7 @@
             "description": "African/African American",
             "type": "regional",
             "is_global": false,
-            "display_group_name": "gnomAD exomes r4.1",
+            "display_group_name": "gnomAD exomes v4.1",
             "super_population":
             {
                 "name": "gnomADe:ALL"
@@ -241,7 +241,7 @@
             "description": "Latino",
             "type": "regional",
             "is_global": false,
-            "display_group_name": "gnomAD exomes r4.1",
+            "display_group_name": "gnomAD exomes v4.1",
             "super_population":
             {
                 "name": "gnomADe:ALL"
@@ -255,7 +255,7 @@
             "description": "Ashkenazi Jewish",
             "type": "regional",
             "is_global": false,
-            "display_group_name": "gnomAD exomes r4.1",
+            "display_group_name": "gnomAD exomes v4.1",
             "super_population":
             {
                 "name": "gnomADe:ALL"
@@ -269,7 +269,7 @@
             "description": "East Asian",
             "type": "regional",
             "is_global": false,
-            "display_group_name": "gnomAD exomes r4.1",
+            "display_group_name": "gnomAD exomes v4.1",
             "super_population":
             {
                 "name": "gnomADe:ALL"
@@ -283,7 +283,7 @@
             "description": "Finnish",
             "type": "regional",
             "is_global": false,
-            "display_group_name": "gnomAD exomes r4.1",
+            "display_group_name": "gnomAD exomes v4.1",
             "super_population":
             {
                 "name": "gnomADe:ALL"
@@ -298,7 +298,7 @@
             "description": "Non-Finnish European",
             "type": "regional",
             "is_global": false,
-            "display_group_name": "gnomAD exomes r4.1",
+            "display_group_name": "gnomAD exomes v4.1",
             "super_population":
             {
                 "name": "gnomADe:ALL"
@@ -326,7 +326,7 @@
             "description": "Remaining",
             "type": "regional",
             "is_global": false,
-            "display_group_name": "gnomAD exomes r4.1",
+            "display_group_name": "gnomAD exomes v4.1",
             "super_population":
             {
                 "name": "gnomADe:ALL"
@@ -340,7 +340,7 @@
             "description": "South Asian",
             "type": "regional",
             "is_global": false,
-            "display_group_name": "gnomAD exomes r4.1",
+            "display_group_name": "gnomAD exomes v4.1",
             "super_population":
             {
                 "name": "gnomADe:ALL"
