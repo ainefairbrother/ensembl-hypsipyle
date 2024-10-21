@@ -305,30 +305,40 @@ class VariantAllele():
         return (result, score)
     
     def create_allele_phenotype_assertion(self, phenotype: str) -> Mapping:
+
+        feature_type=None
         splits = phenotype.split("+")
-        if len(splits) != 3 or splits[2].startswith("ENS"):
+        if splits[2].startswith("ENS"):
+            return None
+        if len(splits)==3:
+            phenotype_name,source_id,feature_id = splits
+        elif len(splits)==5:
+            phenotype_name,source_id,feature_id,feature_type,clinvar_clin_sig = splits
+        else:
             return None
 
-        phenotype_name,source,feature = splits
+        if not feature_type:
+            if re.search("^rs", feature_id):
+                feature_type = "Variation"  
+            else:
+                feature_type = None
+
         evidence_list = []
-        if re.search("^ENS.*G\d+", feature):
-            feature_type = "Gene"
-        elif re.search("^ENS.*T\d+", feature):
-            feature_type = "Transcript"
-        elif re.search("^rs", feature):
-            feature_type = "Variant"  
-        else:
-            feature_type = None
-        
+            
         if phenotype:
             return {
-                "feature": feature,
+                "feature": feature_id,
+
                 "feature_type": {
                     "value": feature_type   
 
                 } ,
                 "phenotype": {
-                    "name": phenotype_name
+                    "name": phenotype_name,
+                    "source": {
+                        "id": source_id,
+                        "name": source_id.replace("_"," ")
+                    }
                 },
                 "evidence": evidence_list
             }
