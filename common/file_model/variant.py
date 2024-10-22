@@ -118,7 +118,7 @@ class Variant ():
                 source_description = "European Variation Archive"
                 source_url = "https://www.ebi.ac.uk/eva"
                 source_url_id = "https://www.ebi.ac.uk/eva/?variant&accessionID="
-                source_release = "release_5"
+                source_release = "release_6"
                 variant_id = self.name
 
             elif re.search("^Ensembl", source):
