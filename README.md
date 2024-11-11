@@ -15,7 +15,7 @@ The API resolvers use VEP annotated VCF data to provide visualisations
 The API can be queried against a single endpoint specifying the payload to be returned
 
 
-![alt text](image.png)
+![alt text](assets/architecture.png)
 
 
 
