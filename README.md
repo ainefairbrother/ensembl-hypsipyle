@@ -4,7 +4,7 @@ Hypsipyle is a GraphQL API developed to provide variant visualisations on Ensemb
 
 This application is implemented with [Ariadne](https://ariadnegraphql.org/), a schema-first graphql framework for Python.
 
-GraphQL requires a schema (in `/common`) and implementation of resolver functions that know how to interpret specific parts of a GraphQL query. Resolvers are found in `/graphql_service/resolver`.
+GraphQL requires a schema (in `./common`) and implementation of resolver functions that know how to interpret specific parts of a GraphQL query. Resolvers are found in `./graphql_service/resolver`.
 
 ## Data model 
 More details about the schema are available here: https://github.com/Ensembl/ensembl-vdm-docs 
@@ -21,10 +21,11 @@ The API can be queried against a single endpoint specifying the payload to be re
 
 ## Running the API using Docker
 
-The deployment assumes that we have a directory mounted with the convention `<data_root>/<genome_uuid>/variation.vcf.gz`
+The deployment assumes that we have a directory mounted with the convention `<data_root>/<genome_uuid>/variation.vcf.gz`. This VEP annotated VCF file generated using a Nextflow VEP pipeline.
+
 The code currently fetches a single vcf file within the genome_uuid folder. In the future, we plan to fetch data from multiple VCFs for a single genome_uuid.
 
-Add path to the datafile in `./connections.conf`. 
+A template file `./example_connections.conf` is available. Copy this file and rename to `./connections.conf` and add path to the datafile.
 
 The file follows the following template:
 ```
