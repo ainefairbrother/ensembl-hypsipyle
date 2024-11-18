@@ -1,33 +1,36 @@
 # GraphQL for Ensembl Variation
 
-A [GraphQL trial](https://graphql.org/) for [Ensembl](https://www.ensembl.org) to reduce the need for RESTful web services.
+Hypsipyle is a GraphQL API developed to provide variant visualisations on Ensembl beta website which utilises VCF files produced by Ensembl Variant Effect Predictor (VEP) and enables querying and faster access of data
 
 This application is implemented with [Ariadne](https://ariadnegraphql.org/), a schema-first graphql framework for Python.
 
-GraphQL requires a schema (in /common) and implementation of resolver functions that know how to interpret specific parts of a GraphQL query. Resolvers are found in /resolver, and may also make use of "data loaders" to overcome inherent deficiencies in GraphQL implementations.
+GraphQL requires a schema (in `./common`) and implementation of resolver functions that know how to interpret specific parts of a GraphQL query. Resolvers are found in `./graphql_service/resolver`.
+
+## Data model 
+More details about the schema are available here: https://github.com/Ensembl/ensembl-vdm-docs 
+
+## Implementation details
+The API resolvers use VEP annotated VCF data to provide visualisations
+
+The API can be queried against a single endpoint specifying the payload to be returned
 
 
-## Installation
-Requires Python 3.8+.  
+![alt text](assets/architecture.png)
 
-To install dependencies, run:
 
-`pip install -r requirements.txt` for just the API.  Use this when deploying the service.
 
-`pip install -r requirements-dev.txt` installs everything including dev dependencies like pytest, mypy etc.
+## Running the API using Docker
 
-## Running the API locally
+The deployment assumes that we have a directory mounted with the convention `<data_root>/<genome_uuid>/variation.vcf.gz`. This VEP annotated VCF file generated using a Nextflow VEP pipeline.
 
-The deployment assumes that we have a directory mounted with the convention `<data_root>/<genome_uuid>/variation.vcf.gz`
 The code currently fetches a single vcf file within the genome_uuid folder. In the future, we plan to fetch data from multiple VCFs for a single genome_uuid.
 
-Add path to the datafile in `./connections.conf`. 
+A template file `./example_connections.conf` is available. Copy this file and rename to `./connections.conf` and add path to the datafile.
 
 The file follows the following template:
 ```
 data_root = /app/data
 ```
-
 
 ### Running a container for development
 
