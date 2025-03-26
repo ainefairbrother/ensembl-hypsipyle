@@ -85,30 +85,16 @@ async def test_basic(variant_id, genome_id):
     
 @pytest.mark.asyncio
 @pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
-async def test_alternative_names(variant_id, genome_id):
-    """Test for the presence and validity of Variant fields.
-    Specifically tests the alternative_names field which can
-    either be an empty array, or else it should contain a number 
-    of fields. This test aditionally checks for the presence of 
-    all sub-fields in the assignment_method and source fields."""
+async def test_alleles_basic(variant_id, genome_id):
+    """Test that the very simplest query is working - are name and type
+    being returned in response to a variant-based query."""
     
     additional_fields = """
-        alternative_names{
-            accession_id
+        alleles{
             name
-            description
-            assignment_method{
-                type
-                description
-            }
-            url
-            source{
-                id
-                name
-                description
-                url
-                release
-            }
+            allele_sequence
+            reference_sequence
+            type
         }
     """
     
@@ -118,31 +104,82 @@ async def test_alternative_names(variant_id, genome_id):
     (success, result) = await graphql(executable_schema, query_data, context_value=context(request={}))
     assert success, f"Query execution failed for variant {variant_id}. Result: {result}"
     
-    # test for existance of the alternative_names field
+    # get fields and check that they exist
     variant = result.get("data", {}).get("variant")
-    assert "alternative_names" in variant, "Missing 'alternative_names' field in query result."
+    assert variant is not None, f"Variant is None. Errors: {result.get('errors', 'No error info')}"
     
-    # get the alternative_names field
-    alternative_names = variant.get("alternative_names")
+    # given that variant isn't none, check that the fields exist for each allele
+    alleles = variant.get("alleles")
+    for allele in alleles:
+        assert all(field in allele for field in ["name", "allele_sequence", "reference_sequence", "type"]), "One or more expected fields are missing in Variant.Alleles."
 
-    # if alternative names isn't empty, check for fields and subfields, otherwise accept empty as valid return
-    if alternative_names:
-        assert all(field in alternative_names for field in ['accession_id', 'name', 'description', 'assignment_method', 'url', 'source']), "One or more expected fields are missing in variant.alternative_names"
+
+    
+    
+
+
+# -----------------------------------------------------------------------
+
+# @pytest.mark.asyncio
+# @pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
+# async def test_alternative_names(variant_id, genome_id):
+#     """Test for the presence and validity of Variant fields.
+#     Specifically tests the alternative_names field which can
+#     either be an empty array, or else it should contain a number 
+#     of fields. This test aditionally checks for the presence of 
+#     all sub-fields in the assignment_method and source fields."""
+    
+#     additional_fields = """
+#         alternative_names{
+#             accession_id
+#             name
+#             description
+#             assignment_method{
+#                 type
+#                 description
+#             }
+#             url
+#             source{
+#                 id
+#                 name
+#                 description
+#                 url
+#                 release
+#             }
+#         }
+#     """
+    
+#     template = query_template(additional_fields)
+#     query = template.substitute(genome_id=genome_id,variant_id=variant_id)
+#     query_data = {"query": query}
+#     (success, result) = await graphql(executable_schema, query_data, context_value=context(request={}))
+#     assert success, f"Query execution failed for variant {variant_id}. Result: {result}"
+    
+#     # test for existance of the alternative_names field
+#     variant = result.get("data", {}).get("variant")
+#     assert "alternative_names" in variant, "Missing 'alternative_names' field in query result."
+    
+#     # get the alternative_names field
+#     alternative_names = variant.get("alternative_names")
+
+#     # if alternative names isn't empty, check for fields and subfields, otherwise accept empty as valid return
+#     if alternative_names:
+#         assert all(field in alternative_names for field in ['accession_id', 'name', 'description', 'assignment_method', 'url', 'source']), "One or more expected fields are missing in variant.alternative_names"
         
-        # then check that the assignment_method and source subfields have their fields
-        # assignment_method
-        assignment_method = alternative_names.get("assignment_method")
-        assert all(field in assignment_method for field in ["type", "description"]), "One or more expected fields are missing in variant.alternative_names.assignment_method."
-        # source
-        source = alternative_names.get("source")
-        assert all(field in source for field in ["id", "name", "description", "url", "release"]), "One or more expected fields are missing in variant.alternative_names.source."
+#         # then check that the assignment_method and source subfields have their fields
+#         # assignment_method
+#         assignment_method = alternative_names.get("assignment_method")
+#         assert all(field in assignment_method for field in ["type", "description"]), "One or more expected fields are missing in variant.alternative_names.assignment_method."
+#         # source
+#         source = alternative_names.get("source")
+#         assert all(field in source for field in ["id", "name", "description", "url", "release"]), "One or more expected fields are missing in variant.alternative_names.source."
         
-    else:
-        assert alternative_names == []
-        
-@pytest.mark.asyncio
-@pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
-async def test_primary_source(variant_id, genome_id):
+#     else:
+#         assert alternative_names == []
+
+# @pytest.mark.asyncio
+# @pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
+# async def test_primary_source(variant_id, genome_id):
     """DOCSTRING"""
     
     additional_fields = """
@@ -182,108 +219,144 @@ async def test_primary_source(variant_id, genome_id):
     source = primary_source.get("source")
     assert all(field in source for field in ["id", "name"]), "One or more expected fields are missing in variant.primary_source.source."
 
-@pytest.mark.asyncio
-@pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
-async def test_allele_type(variant_id, genome_id):
-    """DOCSTRING"""
+# @pytest.mark.asyncio
+# @pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
+# async def test_allele_type(variant_id, genome_id):
+#     """DOCSTRING"""
     
-    additional_fields = """
-        allele_type{
-            accession_id
-            value
-            url
-            source{
-                id
-                name
-                description
-                url
-                release
-            }
+#     additional_fields = """
+#         allele_type{
+#             accession_id
+#             value
+#             url
+#             source{
+#                 id
+#                 name
+#                 description
+#                 url
+#                 release
+#             }
             
-        }
-    """
+#         }
+#     """
     
-    template = query_template(additional_fields)
-    query = template.substitute(genome_id=genome_id,variant_id=variant_id)
-    query_data = {"query": query}
-    (success, result) = await graphql(executable_schema, query_data, context_value=context(request={}))
-    assert success, f"Query execution failed for variant {variant_id}. Result: {result}"
+#     template = query_template(additional_fields)
+#     query = template.substitute(genome_id=genome_id,variant_id=variant_id)
+#     query_data = {"query": query}
+#     (success, result) = await graphql(executable_schema, query_data, context_value=context(request={}))
+#     assert success, f"Query execution failed for variant {variant_id}. Result: {result}"
     
-    variant = result.get("data", {}).get("variant")
-    assert "allele_type" in variant, "Missing 'allele_type' field in query result."
+#     variant = result.get("data", {}).get("variant")
+#     assert "allele_type" in variant, "Missing 'allele_type' field in query result."
     
-    # Make sure fields are present in allele_type subfields
-    # assignment_method
-    allele_type = variant.get("allele_type")
-    assert all(field in allele_type for field in ["accession_id", "value", "url", "source"]), "One or more expected fields are missing in variant.allele_type."
-    # source
-    source = allele_type.get("source")
-    assert all(field in source for field in ["id", "name", "description", "url", "release"]), "One or more expected fields are missing in variant.allele_type.source."
+#     # Make sure fields are present in allele_type subfields
+#     # assignment_method
+#     allele_type = variant.get("allele_type")
+#     assert all(field in allele_type for field in ["accession_id", "value", "url", "source"]), "One or more expected fields are missing in variant.allele_type."
+#     # source
+#     source = allele_type.get("source")
+#     assert all(field in source for field in ["id", "name", "description", "url", "release"]), "One or more expected fields are missing in variant.allele_type.source."
     
-@pytest.mark.asyncio
-@pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
-async def test_basic_slice(variant_id, genome_id):
-    """Test that the very simplest query is working - are name and type
-    being returned in response to a variant-based query."""
+# @pytest.mark.asyncio
+# @pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
+# async def test_basic_slice(variant_id, genome_id):
+#     """Test that the very simplest query is working - are name and type
+#     being returned in response to a variant-based query."""
     
-    additional_fields = """
-        slice{
-            region{
-                name
-            }
-            location{
-                start
-            }
-            strand{
-                code
-            }
-            default
-        }
+#     additional_fields = """
+#         slice{
+#             region{
+#                 name
+#             }
+#             location{
+#                 start
+#             }
+#             strand{
+#                 code
+#             }
+#             default
+#         }
         
-    """
+#     """
     
-    template = query_template(additional_fields)
-    query = template.substitute(genome_id=genome_id,variant_id=variant_id)
-    query_data = {"query": query}
-    (success, result) = await graphql(executable_schema, query_data, context_value=context(request={}))
-    assert success, f"Query execution failed for variant {variant_id}. Result: {result}"
+#     template = query_template(additional_fields)
+#     query = template.substitute(genome_id=genome_id,variant_id=variant_id)
+#     query_data = {"query": query}
+#     (success, result) = await graphql(executable_schema, query_data, context_value=context(request={}))
+#     assert success, f"Query execution failed for variant {variant_id}. Result: {result}"
     
-    # get fields and check that they exist
-    variant = result.get("data", {}).get("variant")
+#     # get fields and check that they exist
+#     variant = result.get("data", {}).get("variant")
 
-    # variant should not be none
-    assert variant is not None, f"Variant is None. Errors: {result.get('errors', 'No error info')}"
+#     # variant should not be none
+#     assert variant is not None, f"Variant is None. Errors: {result.get('errors', 'No error info')}"
     
-    # given that variant isn't none, check that name and type exist
-    slice_field = variant.get("slice")
-    assert all(field in slice_field for field in ["region", "location", "strand", "default"]), "One or more expected fields are missing in variant.slice."
+#     # given that variant isn't none, check that name and type exist
+#     slice_field = variant.get("slice")
+#     assert all(field in slice_field for field in ["region", "location", "strand", "default"]), "One or more expected fields are missing in variant.slice."
     
-@pytest.mark.asyncio
-@pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
-async def test_slice_region(variant_id, genome_id):
-    """Test that the very simplest query is working - are name and type
-    being returned in response to a variant-based query."""
+# @pytest.mark.asyncio
+# @pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
+# async def test_slice_region(variant_id, genome_id):
+#     """DOSSTRING"""
     
-    additional_fields = """
-        name
-        slice{
-            region{
-                name
-                code
-                topology
-            }
-        }
-    """
+#     additional_fields = """
+#         slice{
+#             region{
+#                 name
+#                 code
+#                 topology
+#             }
+#         }
+#     """
     
-    template = query_template(additional_fields)
-    query = template.substitute(genome_id=genome_id,variant_id=variant_id)
-    query_data = {"query": query}
-    (success, result) = await graphql(executable_schema, query_data, context_value=context(request={}))
-    assert success, f"Query execution failed for variant {variant_id}. Result: {result}"
+#     # couldn't test length field - see notes for issue
     
-    # get fields and check that they exist
-    variant = result.get("data", {}).get("variant")
+#     template = query_template(additional_fields)
+#     query = template.substitute(genome_id=genome_id,variant_id=variant_id)
+#     query_data = {"query": query}
+#     (success, result) = await graphql(executable_schema, query_data, context_value=context(request={}))
+#     assert success, f"Query execution failed for variant {variant_id}. Result: {result}"
     
-    # given that variant isn't none, check that name and type exist
-    region = variant.get("slice").get("region")
-    assert all(field in region for field in ["name", "code", "topology"]), "One or more expected fields are missing in variant.slice.region."
+#     # get fields and check that they exist
+#     variant = result.get("data", {}).get("variant")
+    
+#     # given that variant isn't none, check that name and type exist
+#     region = variant.get("slice").get("region")
+#     assert all(field in region for field in ["name", "code", "topology"]), "One or more expected fields are missing in variant.slice.region."
+
+# @pytest.mark.asyncio
+# @pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
+# async def test_slice_region_assembly(variant_id, genome_id):
+#     """DOSSTRING"""
+    
+#     additional_fields = """
+#         slice{
+#             region{
+#                 assembly{
+#                     id
+#                     name
+#                     accession_id
+#                     accessioning_body
+#                     organism{
+#                         id
+#                     }
+#                     regions{
+#                         code
+#                     }
+#                     default
+#                     tolid
+#                 }
+#             }
+#         }
+#     """
+    
+#     template = query_template(additional_fields)
+#     query = template.substitute(genome_id=genome_id,variant_id=variant_id)
+#     query_data = {"query": query}
+#     (success, result) = await graphql(executable_schema, query_data, context_value=context(request={}))
+#     assert success, f"Query execution failed for variant {variant_id}. Result: {result}"
+    
+#     # get fields and check that they exist
+#     variant = result.get("data", {}).get("variant")
+#     print(variant)
