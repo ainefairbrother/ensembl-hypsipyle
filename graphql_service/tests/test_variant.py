@@ -256,5 +256,34 @@ async def test_basic_slice(variant_id, genome_id):
     
     # given that variant isn't none, check that name and type exist
     slice_field = variant.get("slice")
-    assert all(field in slice_field for field in ["region", "location", "strand", "default"]), "One or more expected fields are missing in variant.allele_type.source."
+    assert all(field in slice_field for field in ["region", "location", "strand", "default"]), "One or more expected fields are missing in variant.slice."
     
+@pytest.mark.asyncio
+@pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
+async def test_slice_region(variant_id, genome_id):
+    """Test that the very simplest query is working - are name and type
+    being returned in response to a variant-based query."""
+    
+    additional_fields = """
+        name
+        slice{
+            region{
+                name
+                code
+                topology
+            }
+        }
+    """
+    
+    template = query_template(additional_fields)
+    query = template.substitute(genome_id=genome_id,variant_id=variant_id)
+    query_data = {"query": query}
+    (success, result) = await graphql(executable_schema, query_data, context_value=context(request={}))
+    assert success, f"Query execution failed for variant {variant_id}. Result: {result}"
+    
+    # get fields and check that they exist
+    variant = result.get("data", {}).get("variant")
+    
+    # given that variant isn't none, check that name and type exist
+    region = variant.get("slice").get("region")
+    assert all(field in region for field in ["name", "code", "topology"]), "One or more expected fields are missing in variant.slice.region."
