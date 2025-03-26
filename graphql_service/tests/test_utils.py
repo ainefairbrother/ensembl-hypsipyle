@@ -27,7 +27,7 @@ def setup_test():
     This is the one to use in other modules
     """
     config  = {
-                "data_root": "/app/data"
+                "data_root": "/app/data/" # 
             }
     executable_schema = prepare_executable_schema()
     file_client = FileClient(config)
