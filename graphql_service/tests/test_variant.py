@@ -127,7 +127,7 @@ async def test_variant_allele_fields_present(variant_id, genome_id):
     assert success, f"[Allele] Query execution failed for variant {variant_id}. Query: {query}. Result: {result}"
     
     alleles = result.get("data", {}).get("variant").get("alleles")
-    assert alleles is not None, f"[Allele] 'alleles' field is missing for variant {variant_id}. Query: {query}. Result: {result}"
+    assert alleles is not None, f"[Allele] alleles field is missing for variant {variant_id}. Query: {query}. Result: {result}"
     
     expected_fields = [
         "name", "allele_sequence", "reference_sequence", "alternative_names", "type",
@@ -156,7 +156,7 @@ async def test_variant_allele_phenotype_assertions_present(variant_id, genome_id
         }
     """
     query, success, result = await execute_query(genome_id, variant_id, additional_fields)
-    assert success, f"[Allele Phenotype Assertions] Query execution failed for variant {variant_id}. Query: {query}. Result: {result}"
+    assert success, f"[Allele: Phenotype Assertions] Query execution failed for variant {variant_id}. Query: {query}. Result: {result}"
     
     alleles = result.get("data", {}).get("variant").get("alleles", [])    
     expected_fields = [
@@ -166,12 +166,12 @@ async def test_variant_allele_phenotype_assertions_present(variant_id, genome_id
         phenotype_assertions = allele.get("phenotype_assertions", [])
         # If phenotype_assertions isn't empty, it should have expected fields
         if phenotype_assertions:
-            for assertion in phenotype_assertions:
-                missing = [field for field in expected_fields if field not in assertion]
-                assert not missing, f"[Allele Phenotype Assertions] Missing fields in allele {idx} phenotype assertion for variant {variant_id}: {missing}. Query: {query}. Result: {result}"
+            for phenotype_assertion in phenotype_assertions:
+                missing = [field for field in expected_fields if field not in phenotype_assertion]
+                assert not missing, f"[Allele: Phenotype Assertions] Missing fields in allele {idx} phenotype_assertions for variant {variant_id}: {missing}. Query: {query}. Result: {result}"
         else:
             # Accept empty phenotype_assertions
-            assert phenotype_assertions == [], f"[Allele Phenotype Assertions] Expected empty phenotype_assertions for allele {idx} in variant {variant_id}. Query: {query}"
+            assert phenotype_assertions == [], f"[Allele: Phenotype Assertions] Expected empty phenotype_assertions for allele {idx} in variant {variant_id}. Query: {query}"
 
 # -----------------------------------------------------------------------
 # Test: Variant Allele Phenotype Assertions Phenotype Fields
@@ -192,7 +192,7 @@ async def test_variant_allele_phenotype_assertions_phenotype_present(variant_id,
         }
     """
     query, success, result = await execute_query(genome_id, variant_id, additional_fields)
-    assert success, f"[Allele Phenotype Assertions Phenotype] Query execution failed for variant {variant_id}. Query: {query}. Result: {result}"
+    assert success, f"[Allele: Phenotype Assertions: Phenotype] Query execution failed for variant {variant_id}. Query: {query}. Result: {result}"
     
     alleles = result.get("data", {}).get("variant").get("alleles")
     expected_fields = [
@@ -213,14 +213,14 @@ async def test_variant_allele_phenotype_assertions_phenotype_present(variant_id,
                 phenotype = assertion.get("phenotype")
                 
                 # Phenotype should not be none and should have expected fields
-                assert phenotype is not None, (f"[Allele Phenotype Assertions Phenotype] Allele {idx} in variant {variant_id} has phenotype_assertions but is missing the 'phenotype' field. Query: {query}")
+                assert phenotype is not None, (f"[Allele: Phenotype Assertions: Phenotype] Allele {idx} in variant {variant_id} has phenotype_assertions but is missing the 'phenotype' field. Query: {query}")
                 
                 # Check for missing fields in phenotype
                 missing = [field for field in expected_fields if field not in phenotype]
-                assert not missing, f"[Allele Phenotype Assertions Phenotype] Missing fields in allele {idx} for variant {variant_id}: {missing}. Query: {query}. Result: {result}"
+                assert not missing, f"[Allele: Phenotype Assertions: Phenotype] Missing fields in allele {idx} for variant {variant_id}: {missing}. Query: {query}. Result: {result}"
         else:
             # Accept empty phenotype_assertions
-            assert phenotype_assertions == [], f"[Allele Phenotype Assertions Phenotype] Expected empty phenotype_assertions for allele {idx} in variant {variant_id}. Query: {query}"
+            assert phenotype_assertions == [], f"[Allele: Phenotype Assertions: Phenotype] Expected empty phenotype_assertions for allele {idx} in variant {variant_id}. Query: {query}"
 
 # -----------------------------------------------------------------------
 # Test: Variant Allele Phenotype Assertions Evidence Fields
@@ -240,7 +240,7 @@ async def test_variant_allele_phenotype_assertions_evidence_present(variant_id, 
         }
     """
     query, success, result = await execute_query(genome_id, variant_id, additional_fields)
-    assert success, f"[Allele Phenotype Assertions Evidence] Query execution failed for variant {variant_id}. Query: {query}. Result: {result}"
+    assert success, f"[Allele: Phenotype Assertions: Evidence] Query execution failed for variant {variant_id}. Query: {query}. Result: {result}"
     
     alleles = result.get("data", {}).get("variant").get("alleles")
     expected_fields = [
@@ -265,16 +265,47 @@ async def test_variant_allele_phenotype_assertions_evidence_present(variant_id, 
                 
                     # Check for missing fields in evidence
                     missing = [field for field in expected_fields if field not in evidence]
-                    assert not missing, f"[Allele Phenotype Assertions Evidence] Missing fields in allele {idx} for variant {variant_id}: {missing}. Query: {query}. Result: {result}"
+                    assert not missing, f"[Allele: Phenotype Assertions: Evidence] Missing fields in allele {idx} for variant {variant_id}: {missing}. Query: {query}. Result: {result}"
                 
                 # Accept empty evidence
                 else:
                     assert evidence == []
         else:
             # Accept empty phenotype_assertions
-            assert phenotype_assertions == [], f"[Allele Phenotype Assertions Evidence] Expected empty phenotype_assertions for allele {idx} in variant {variant_id}. Query: {query}"
+            assert phenotype_assertions == [], f"[Allele: Phenotype Assertions: Evidence] Expected empty phenotype_assertions for allele {idx} in variant {variant_id}. Query: {query}"
 
-
+# -----------------------------------------------------------------------
+# Test: Variant Allele Prediction Results
+@pytest.mark.asyncio
+@pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
+async def test_variant_allele_prediction_results_present(variant_id, genome_id):
+    """Test that prediction_results in each allele are either empty or contain the expected subfields."""
+    
+    additional_fields = """
+        alleles {
+            prediction_results{
+                score
+                result
+                classification{ __typename }
+                analysis_method{ __typename }
+            }
+        }
+    """
+    query, success, result = await execute_query(genome_id, variant_id, additional_fields)
+    assert success, f"[Allele: Prediction Results] Query execution failed for variant {variant_id}. Query: {query}. Result: {result}"
+    
+    alleles = result.get("data", {}).get("variant").get("alleles", [])
+    expected_fields = [
+        "score", "result", "classification", "analysis_method"
+    ]
+    for idx, allele in enumerate(alleles):
+        prediction_results = allele.get("prediction_results", [])
+        if prediction_results:
+            for prediction in prediction_results:
+                missing = [field for field in expected_fields if field not in prediction]
+                assert not missing, f"[Allele: Prediction Results] Missing fields in allele {idx} prediction_results for variant {variant_id}: {missing}. Query: {query}. Result: {result}"
+        else:
+            assert prediction_results == [], f"[Allele: Prediction Results] Expected empty prediction_results for allele {idx} in variant {variant_id}. Query: {query}"
 
 
 
