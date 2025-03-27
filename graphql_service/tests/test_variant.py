@@ -101,7 +101,7 @@ async def test_variant_root_fields_present(variant_id, genome_id):
     assert not missing_fields, f"[Variant Root] Missing fields in variant {variant_id}: {missing_fields}. Query: {query}. Result: {result}"
 
 # -----------------------------------------------------------------------
-# Test: Variant Allele-Level Fields
+# Test: Variant Allele Fields
 @pytest.mark.asyncio
 @pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
 async def test_variant_allele_fields_present(variant_id, genome_id):
@@ -275,7 +275,7 @@ async def test_variant_allele_phenotype_assertions_evidence_present(variant_id, 
             assert phenotype_assertions == [], f"[Allele: Phenotype Assertions: Evidence] Expected empty phenotype_assertions for allele {idx} in variant {variant_id}. Query: {query}"
 
 # -----------------------------------------------------------------------
-# Test: Variant Allele Prediction Results
+# Test: Variant Allele Prediction Results Fields
 @pytest.mark.asyncio
 @pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
 async def test_variant_allele_prediction_results_present(variant_id, genome_id):
@@ -307,6 +307,42 @@ async def test_variant_allele_prediction_results_present(variant_id, genome_id):
         else:
             assert prediction_results == [], f"[Allele: Prediction Results] Expected empty prediction_results for allele {idx} in variant {variant_id}. Query: {query}"
 
+# -----------------------------------------------------------------------
+# Test: Variant Allele Population Frequencies Fields
+@pytest.mark.asyncio
+@pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
+async def test_variant_allele_population_frequencies_present(variant_id, genome_id):
+    """Test that population_frequencies in each allele are either empty or contain the expected subfields."""
+    
+    additional_fields = """
+        alleles {
+            population_frequencies{
+                population_name
+                allele_frequency
+                allele_count
+                allele_number
+                is_minor_allele
+                is_hpmaf
+            }
+        }
+    """
+    query, success, result = await execute_query(genome_id, variant_id, additional_fields)
+    assert success, f"[Allele: Population Frequencies] Query execution failed for variant {variant_id}. Query: {query}. Result: {result}"
+    
+    alleles = result.get("data", {}).get("variant").get("alleles", [])
+    expected_fields = [
+        "population_name", "allele_frequency", "allele_count", "allele_number", "is_minor_allele", "is_hpmaf"
+    ]
+    for idx, allele in enumerate(alleles):
+        population_frequencies = allele.get("population_frequencies", [])
+        # If population_frequencies isn't empty, it should have expected fields
+        if population_frequencies:
+            for population_frequency in population_frequencies:
+                missing = [field for field in expected_fields if field not in population_frequency]
+                assert not missing, f"[Allele: Population Frequencies] Missing fields in allele {idx} population_frequencies for variant {variant_id}: {missing}. Query: {query}. Result: {result}"
+        else:
+            # Accept empty population_frequencies
+            assert population_frequencies == [], f"[Allele: Population Frequencies] Expected empty phenotype_aspopulation_frequenciessertions for allele {idx} in variant {variant_id}. Query: {query}"
 
 
 
