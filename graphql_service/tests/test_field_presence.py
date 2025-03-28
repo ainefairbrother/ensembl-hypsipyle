@@ -70,7 +70,7 @@ async def execute_query(genome_id, variant_id, additional_fields):
     return query, success, result
 
 # -----------------------------------------------------------------------
-# Test: Root Variant Fields
+# Test:: Root Variant Fields
 @pytest.mark.asyncio
 @pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
 async def test_variant_root_fields_present(variant_id, genome_id):
@@ -101,7 +101,7 @@ async def test_variant_root_fields_present(variant_id, genome_id):
     assert not missing_fields, f"[Variant Root] Missing fields in variant {variant_id}: {missing_fields}. Query: {query}. Result: {result}"
 
 # -----------------------------------------------------------------------
-# Test: Variant Allele Fields
+# Test:: Variant: Alleles: Fields
 @pytest.mark.asyncio
 @pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
 async def test_variant_allele_fields_present(variant_id, genome_id):
@@ -139,7 +139,7 @@ async def test_variant_allele_fields_present(variant_id, genome_id):
         assert not missing, f"[Allele] Missing fields in allele {index} for variant {variant_id}: {missing}. Query: {query}. Result: {result}"
 
 # -----------------------------------------------------------------------
-# Test: Variant Allele Phenotype Assertions Fields
+# Test:: Variant: Alleles: Phenotype Assertions Fields
 @pytest.mark.asyncio
 @pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
 async def test_variant_allele_phenotype_assertions_present(variant_id, genome_id):
@@ -174,7 +174,7 @@ async def test_variant_allele_phenotype_assertions_present(variant_id, genome_id
             assert phenotype_assertions == [], f"[Allele: Phenotype Assertions] Expected empty phenotype_assertions for allele {idx} in variant {variant_id}. Query: {query}"
 
 # -----------------------------------------------------------------------
-# Test: Variant Allele Phenotype Assertions Phenotype Fields
+# Test:: Variant Allele Phenotype Assertions Phenotype Fields
 @pytest.mark.asyncio
 @pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
 async def test_variant_allele_phenotype_assertions_phenotype_present(variant_id, genome_id):
@@ -223,11 +223,11 @@ async def test_variant_allele_phenotype_assertions_phenotype_present(variant_id,
             assert phenotype_assertions == [], f"[Allele: Phenotype Assertions: Phenotype] Expected empty phenotype_assertions for allele {idx} in variant {variant_id}. Query: {query}"
 
 # -----------------------------------------------------------------------
-# Test: Variant Allele Phenotype Assertions Evidence Fields
+# Test:: Variant: Alleles: Phenotype Assertions Evidence Fields
 @pytest.mark.asyncio
 @pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
 async def test_variant_allele_phenotype_assertions_evidence_present(variant_id, genome_id):
-    """Test that each allele's phenotype_assertions, if present, include an evidence field with relevant subfields."""
+    """Test that phenotype_assertions in each allele is either empty or contains an evidence subfield with expected subfields."""
     
     additional_fields = """
         alleles {
@@ -275,11 +275,11 @@ async def test_variant_allele_phenotype_assertions_evidence_present(variant_id, 
             assert phenotype_assertions == [], f"[Allele: Phenotype Assertions: Evidence] Expected empty phenotype_assertions for allele {idx} in variant {variant_id}. Query: {query}"
 
 # -----------------------------------------------------------------------
-# Test: Variant Allele Prediction Results Fields
+# Test:: Variant: Alleles: Prediction Results Fields
 @pytest.mark.asyncio
 @pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
 async def test_variant_allele_prediction_results_present(variant_id, genome_id):
-    """Test that prediction_results in each allele are either empty or contain the expected subfields."""
+    """Test that prediction_results in each allele is either empty or contains the expected subfields."""
     
     additional_fields = """
         alleles {
@@ -308,11 +308,11 @@ async def test_variant_allele_prediction_results_present(variant_id, genome_id):
             assert prediction_results == [], f"[Allele: Prediction Results] Expected empty prediction_results for allele {idx} in variant {variant_id}. Query: {query}"
 
 # -----------------------------------------------------------------------
-# Test: Variant Allele Population Frequencies Fields
+# Test:: Variant: Alleles: Population Frequencies Fields
 @pytest.mark.asyncio
 @pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
 async def test_variant_allele_population_frequencies_present(variant_id, genome_id):
-    """Test that population_frequencies in each allele are either empty or contain the expected subfields."""
+    """Test that population_frequencies in each allele is either empty or contains the expected subfields."""
     
     additional_fields = """
         alleles {
@@ -344,14 +344,277 @@ async def test_variant_allele_population_frequencies_present(variant_id, genome_
             # Accept empty population_frequencies
             assert population_frequencies == [], f"[Allele: Population Frequencies] Expected empty phenotype_aspopulation_frequenciessertions for allele {idx} in variant {variant_id}. Query: {query}"
 
+# -----------------------------------------------------------------------
+# Test:: Variant: Alleles: Predicted Molecular Consequences Fields
+@pytest.mark.asyncio
+@pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
+async def test_variant_allele_predicted_molecular_consequences_present(variant_id, genome_id):
+    """Test that predicted_molecular_consequences in each allele is either empty or contains the expected subfields."""
+    
+    additional_fields = """
+        alleles {
+            predicted_molecular_consequences{
+                allele_name
+                stable_id
+                feature_type{ __typename }
+                consequences{ __typename }
+                prediction_results{ __typename }
+                gene_stable_id
+                gene_symbol
+                protein_stable_id
+                transcript_biotype
+                cdna_location{ __typename }
+                cds_location{ __typename }
+                protein_location{ __typename }
+            }
+        }
+    """
+    query, success, result = await execute_query(genome_id, variant_id, additional_fields)
+    assert success, f"[Template] Query execution failed for variant {variant_id}. Query: {query}. Result: {result}"
+    
+    alleles = result.get("data", {}).get("variant").get("alleles")
+    
+    expected_fields = [ 
+        "allele_name", "stable_id", "feature_type", "consequences", 
+        "prediction_results", "gene_stable_id", "gene_symbol", 
+        "protein_stable_id", "transcript_biotype", "cdna_location", 
+        "cds_location", "protein_location"
+    ]
+    
+    for idx, allele in enumerate(alleles):
+        predicted_molecular_consequences = allele.get("predicted_molecular_consequences", [])
+        # If predicted_molecular_consequences isn't empty, it should have expected fields
+        if predicted_molecular_consequences:
+            for consequence in predicted_molecular_consequences:
+                missing = [field for field in expected_fields if field not in consequence]
+                assert not missing, f"[Allele: Predicted Molecular Consequences] Missing fields in allele {idx} for variant {variant_id}: {missing}. Query: {query}. Result: {result}"
+        else:
+            # Accept empty predicted_molecular_consequences
+            assert predicted_molecular_consequences == [], f"[Allele: Predicted Molecular Consequences] Expected empty predicted_molecular_consequences field for allele {idx} in variant {variant_id}. Query: {query}"
 
+# -----------------------------------------------------------------------
+# Test:: Variant: Alleles: Predicted Molecular Consequences: Prediction Results Fields
+@pytest.mark.asyncio
+@pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
+async def test_variant_allele_predicted_molecular_consequences_predicted_results_present(variant_id, genome_id):
+    """Test that prediction_results in predicted_molecular_consequences in each allele contains the expected subfields."""
+    
+    additional_fields = """
+        alleles {
+            predicted_molecular_consequences{
+                prediction_results{ 
+                    score
+                    result
+                    classification{ __typename }
+                    analysis_method{ __typename }
+                }
+            }
+        }
+    """
+    query, success, result = await execute_query(genome_id, variant_id, additional_fields)
+    assert success, f"[Allele: Predicted Molecular Consequences: Predicted Results] Query execution failed for variant {variant_id}. Query: {query}. Result: {result}"
+    
+    alleles = result.get("data", {}).get("variant").get("alleles")
+    
+    expected_fields = [
+        "score", "result", "classification", "analysis_method"
+    ]
+    
+    for idx, allele in enumerate(alleles):
+        predicted_molecular_consequences = allele.get("predicted_molecular_consequences", [])
+        # If predicted_molecular_consequences isn't empty, it should have expected fields
+        if predicted_molecular_consequences:
+            for predicted_molecular_consequence in predicted_molecular_consequences:
+                prediction_results = predicted_molecular_consequence.get("prediction_results", [])
+                # If prediction_results isn't empty, it should have expected fields
+                if prediction_results:
+                    for prediction_result in prediction_results:
+                        missing = [field for field in expected_fields if field not in prediction_result]
+                        assert not missing, f"[Allele: Predicted Molecular Consequences: Predicted Results] Missing fields in allele {idx} for variant {variant_id}: {missing}. Query: {query}. Result: {result}"
+                # Accept empty prediction_result
+                else:
+                    assert prediction_results == []
+        else:
+            # Accept empty predicted_molecular_consequences
+            assert predicted_molecular_consequences == [], f"[Allele: Predicted Molecular Consequences: Predicted Results] Expected empty predicted_molecular_consequences field for allele {idx} in variant {variant_id}. Query: {query}"
 
+# -----------------------------------------------------------------------
+# Test:: Variant: Alleles: Predicted Molecular Consequences: cDNA Location Fields
+@pytest.mark.asyncio
+@pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
+async def test_variant_allele_predicted_molecular_consequences_cdna_location_present(variant_id, genome_id):
+    """Test that cdna_location in predicted_molecular_consequences in each allele contains the expected subfields."""
+    
+    additional_fields = """
+        alleles {
+            predicted_molecular_consequences{
+                cdna_location{
+                    relation { __typename }
+                    start
+                    end
+                    length
+                    percentage_overlap
+                    ref_sequence
+                    alt_sequence
+                }
+            }
+        }
+    """
+    query, success, result = await execute_query(genome_id, variant_id, additional_fields)
+    assert success, f"[Allele: Predicted Molecular Consequences: cDNA Location] Query execution failed for variant {variant_id}. Query: {query}. Result: {result}"
+    
+    alleles = result.get("data", {}).get("variant").get("alleles")
+    
+    expected_fields = [
+        "relation", "start", "end", "length", "percentage_overlap", "ref_sequence", "alt_sequence"
+    ]
+    
+    for idx, allele in enumerate(alleles):
+        predicted_molecular_consequences = allele.get("predicted_molecular_consequences", [])
+        # If predicted_molecular_consequences isn't empty, it should have expected fields
+        if predicted_molecular_consequences:
+            for predicted_molecular_consequence in predicted_molecular_consequences:
+                cdna_location = predicted_molecular_consequence.get("cdna_location")
+                # If cdna_location isn't empty, it should have expected fields
+                if cdna_location:
+                    missing = [field for field in expected_fields if field not in cdna_location]
+                    assert not missing, f"[Allele: Predicted Molecular Consequences: cDNA Location] Missing fields in allele {idx} for variant {variant_id}: {missing}. Query: {query}. Result: {result}"
+                # Accept cdna_location as None
+                else:
+                    assert cdna_location is None
+        else:
+            # Accept empty predicted_molecular_consequences
+            assert predicted_molecular_consequences == [], f"[Allele: Predicted Molecular Consequences: cDNA Location] Expected empty predicted_molecular_consequences field for allele {idx} in variant {variant_id}. Query: {query}"
 
+# -----------------------------------------------------------------------
+# Test:: Variant: Alleles: Predicted Molecular Consequences: CDS Location Fields
+@pytest.mark.asyncio
+@pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
+async def test_variant_allele_predicted_molecular_consequences_cds_location_present(variant_id, genome_id):
+    """Test that cds_location in predicted_molecular_consequences in each allele contains the expected subfields."""
+    
+    additional_fields = """
+        alleles {
+            predicted_molecular_consequences{
+                cds_location{
+                    relation { __typename }
+                    start
+                    end
+                    length
+                    percentage_overlap
+                    ref_sequence
+                    alt_sequence
+                }
+            }
+        }
+    """
+    query, success, result = await execute_query(genome_id, variant_id, additional_fields)
+    assert success, f"[Allele: Predicted Molecular Consequences: CDS Location] Query execution failed for variant {variant_id}. Query: {query}. Result: {result}"
+    
+    alleles = result.get("data", {}).get("variant").get("alleles")
+    
+    expected_fields = [
+        "relation", "start", "end", "length", "percentage_overlap", "ref_sequence", "alt_sequence"
+    ]
+    
+    for idx, allele in enumerate(alleles):
+        predicted_molecular_consequences = allele.get("predicted_molecular_consequences", [])
+        # If predicted_molecular_consequences isn't empty, it should have expected fields
+        if predicted_molecular_consequences:
+            for predicted_molecular_consequence in predicted_molecular_consequences:
+                cds_location = predicted_molecular_consequence.get("cds_location")
+                # If cds_location isn't empty, it should have expected fields
+                if cds_location:
+                    missing = [field for field in expected_fields if field not in cds_location]
+                    assert not missing, f"[Allele: Predicted Molecular Consequences: CDS Location] Missing fields in allele {idx} for variant {variant_id}: {missing}. Query: {query}. Result: {result}"
+                # Accept cds_location as None
+                else:
+                    assert cds_location is None
+        else:
+            # Accept empty predicted_molecular_consequences
+            assert predicted_molecular_consequences == [], f"[Allele: Predicted Molecular Consequences: CDS Location] Expected empty predicted_molecular_consequences field for allele {idx} in variant {variant_id}. Query: {query}"
 
+# -----------------------------------------------------------------------
+# Test:: Variant: Alleles: Predicted Molecular Consequences: Protein Location Fields
+@pytest.mark.asyncio
+@pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
+async def test_variant_allele_predicted_molecular_consequences_protein_location_present(variant_id, genome_id):
+    """Test that protein_location in predicted_molecular_consequences in each allele contains the expected subfields."""
+    
+    additional_fields = """
+        alleles {
+            predicted_molecular_consequences{
+                protein_location{
+                    relation { __typename }
+                    start
+                    end
+                    length
+                    percentage_overlap
+                    ref_sequence
+                    alt_sequence
+                }
+            }
+        }
+    """
+    query, success, result = await execute_query(genome_id, variant_id, additional_fields)
+    assert success, f"[Allele: Predicted Molecular Consequences: Protein Location] Query execution failed for variant {variant_id}. Query: {query}. Result: {result}"
+    
+    alleles = result.get("data", {}).get("variant").get("alleles")
+    
+    expected_fields = [
+        "relation", "start", "end", "length", "percentage_overlap", "ref_sequence", "alt_sequence"
+    ]
+    
+    for idx, allele in enumerate(alleles):
+        predicted_molecular_consequences = allele.get("predicted_molecular_consequences", [])
+        # If predicted_molecular_consequences isn't empty, it should have expected fields
+        if predicted_molecular_consequences:
+            for predicted_molecular_consequence in predicted_molecular_consequences:
+                protein_location = predicted_molecular_consequence.get("protein_location")
+                # If protein_location isn't empty, it should have expected fields
+                if protein_location:
+                    missing = [field for field in expected_fields if field not in protein_location]
+                    assert not missing, f"[Allele: Predicted Molecular Consequences: Protein Location] Missing fields in allele {idx} for variant {variant_id}: {missing}. Query: {query}. Result: {result}"
+                # Accept protein_location as None
+                else:
+                    assert protein_location is None
+        else:
+            # Accept empty predicted_molecular_consequences
+            assert predicted_molecular_consequences == [], f"[Allele: Predicted Molecular Consequences: Protein Location] Expected empty predicted_molecular_consequences field for allele {idx} in variant {variant_id}. Query: {query}"
 
-
-
-
+# -----------------------------------------------------------------------
+# Test:: Variant: Alleles: Ensembl Website Display Data Fields
+@pytest.mark.asyncio
+@pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
+async def test_variant_allele_ensembl_website_display_data_present(variant_id, genome_id):
+    """Test that ensembl_website_display_data in each allele contains the expected subfields."""
+    
+    additional_fields = """
+        alleles {
+            ensembl_website_display_data{
+                count_transcript_consequences
+                count_overlapped_genes
+                count_regulatory_consequences
+                count_variant_phenotypes
+                count_gene_phenotypes
+                representative_population_allele_frequency
+            }
+        }
+    """
+    query, success, result = await execute_query(genome_id, variant_id, additional_fields)
+    assert success, f"[Allele: Ensembl Website Display Data] Query execution failed for variant {variant_id}. Query: {query}. Result: {result}"
+    
+    alleles = result.get("data", {}).get("variant").get("alleles")
+    
+    expected_fields = [
+        "count_transcript_consequences", "count_overlapped_genes", "count_regulatory_consequences",
+        "count_variant_phenotypes", "count_gene_phenotypes", "representative_population_allele_frequency"
+    ]
+    
+    for idx, allele in enumerate(alleles):
+        ensembl_website_display_data = allele.get("ensembl_website_display_data")
+        missing = [field for field in expected_fields if field not in ensembl_website_display_data]
+        assert not missing, f"[Allele: Ensembl Website Display Data] Missing fields in allele {idx} for variant {variant_id}: {missing}. Query: {query}. Result: {result}"
 
 
 
@@ -384,4 +647,3 @@ async def test_variant_allele_population_frequencies_present(variant_id, genome_
 #     expected_fields = [
 
 #     ]
-
