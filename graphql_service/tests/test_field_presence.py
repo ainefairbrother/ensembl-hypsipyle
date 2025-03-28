@@ -616,34 +616,57 @@ async def test_variant_allele_ensembl_website_display_data_present(variant_id, g
         missing = [field for field in expected_fields if field not in ensembl_website_display_data]
         assert not missing, f"[Allele: Ensembl Website Display Data] Missing fields in allele {idx} for variant {variant_id}: {missing}. Query: {query}. Result: {result}"
 
-
-
-
-
-
-
-
-
-
-
-# # -----------------------------------------------------------------------
-# # Test: Template 
-# @pytest.mark.asyncio
-# @pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
-# async def template(variant_id, genome_id):
-#     """Test that all allele-level fields are returned for each variant."""
+# -----------------------------------------------------------------------
+# Test:: Variant: Prediction Results Fields
+@pytest.mark.asyncio
+@pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
+async def test_variant_prediction_results_fields_present(variant_id, genome_id):
+    """Test that all prediction results fields for a variant are returned."""
     
-#     additional_fields = """
-#         template {
-
-#         }
-#     """
-#     query, success, result = await execute_query(genome_id, variant_id, additional_fields)
-#     assert success, f"[Template] Query execution failed for variant {variant_id}. Query: {query}. Result: {result}"
+    additional_fields = """
+        prediction_results {
+           score
+           result
+           classification{ __typename }
+           analysis_method{ __typename }
+        }
+    """
+    query, success, result = await execute_query(genome_id, variant_id, additional_fields)
+    assert success, f"[Variant Prediction Results] Query execution failed for variant {variant_id}. Query: {query}. Result: {result}"
     
-#     template = result.get("data", {}).get("variant")#.get...
-#     assert template is not None, f"[Template] 'template' field is missing for variant {variant_id}. Query: {query}. Result: {result}"
+    prediction_results = result.get("data", {}).get("variant").get("prediction_results", [])
     
-#     expected_fields = [
+    expected_fields = [
+        "score", "result", "classification", "analysis_method"
+    ]
+    
+    if prediction_results:
+        for prediction_result in prediction_results:
+            missing_fields = [field for field in expected_fields if field not in prediction_result]
+            assert not missing_fields, f"[Variant: Prediction Results] Missing fields in variant {variant_id}: {missing_fields}. Query: {query}. Result: {result}"
+    else:
+        assert prediction_results == []
 
-#     ]
+# -----------------------------------------------------------------------
+# Test:: Variant: Ensembl Website Display Data Fields
+@pytest.mark.asyncio
+@pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
+async def test_variant_ensembl_website_display_data_fields_present(variant_id, genome_id):
+    """Test that all ensembl website display data fields for a variant are returned."""
+    
+    additional_fields = """
+        ensembl_website_display_data {
+            count_citations
+        }
+    """
+    query, success, result = await execute_query(genome_id, variant_id, additional_fields)
+    assert success, f"[Variant: Ensembl Website Display Data] Query execution failed for variant {variant_id}. Query: {query}. Result: {result}"
+    
+    ensembl_website_display_data = result.get("data", {}).get("variant").get("ensembl_website_display_data")
+    
+    expected_fields = [
+        "count_citations"
+    ]
+
+    missing_fields = [field for field in expected_fields if field not in ensembl_website_display_data]
+    assert not missing_fields, f"[Variant: Ensembl Website Display Data] Missing fields in variant {variant_id}: {missing_fields}. Query: {query}. Result: {result}"
