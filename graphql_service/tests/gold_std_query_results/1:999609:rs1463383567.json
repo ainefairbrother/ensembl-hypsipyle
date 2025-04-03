@@ -1,0 +1,431 @@
+{
+    "data": {
+        "variant": {
+            "name": "rs1463383567",
+            "alternative_names": [],
+            "primary_source": {
+                "__typename": "ExternalReference"
+            },
+            "type": "Variant",
+            "allele_type": {
+                "__typename": "OntologyTermMetadata"
+            },
+            "slice": {
+                "__typename": "Slice"
+            },
+            "alleles": [
+                {
+                    "name": "1:999609:GAGCTCT:G",
+                    "allele_sequence": "G",
+                    "reference_sequence": "GAGCTCT",
+                    "alternative_names": [],
+                    "type": "VariantAllele",
+                    "allele_type": {
+                        "__typename": "OntologyTermMetadata"
+                    },
+                    "slice": {
+                        "__typename": "Slice"
+                    },
+                    "phenotype_assertions": [],
+                    "prediction_results": [],
+                    "population_frequencies": [
+                        {
+                            "population_name": "gnomADe:ALL",
+                            "allele_frequency": 0.0,
+                            "allele_count": 0,
+                            "allele_number": 1454654,
+                            "is_minor_allele": true,
+                            "is_hpmaf": true
+                        },
+                        {
+                            "population_name": "gnomADe:afr",
+                            "allele_frequency": 0.0,
+                            "allele_count": 0,
+                            "allele_number": 32770,
+                            "is_minor_allele": true,
+                            "is_hpmaf": true
+                        },
+                        {
+                            "population_name": "gnomADe:amr",
+                            "allele_frequency": 0.0,
+                            "allele_count": 0,
+                            "allele_number": 44208,
+                            "is_minor_allele": true,
+                            "is_hpmaf": true
+                        },
+                        {
+                            "population_name": "gnomADe:asj",
+                            "allele_frequency": 0.0,
+                            "allele_count": 0,
+                            "allele_number": 25976,
+                            "is_minor_allele": true,
+                            "is_hpmaf": true
+                        },
+                        {
+                            "population_name": "gnomADe:eas",
+                            "allele_frequency": 0.0,
+                            "allele_count": 0,
+                            "allele_number": 39074,
+                            "is_minor_allele": true,
+                            "is_hpmaf": true
+                        },
+                        {
+                            "population_name": "gnomADe:fin",
+                            "allele_frequency": 0.0,
+                            "allele_count": 0,
+                            "allele_number": 51738,
+                            "is_minor_allele": true,
+                            "is_hpmaf": true
+                        },
+                        {
+                            "population_name": "gnomADe:mid",
+                            "allele_frequency": 0.0,
+                            "allele_count": 0,
+                            "allele_number": 5758,
+                            "is_minor_allele": true,
+                            "is_hpmaf": true
+                        },
+                        {
+                            "population_name": "gnomADe:nfe",
+                            "allele_frequency": 0.0,
+                            "allele_count": 0,
+                            "allele_number": 1109538,
+                            "is_minor_allele": true,
+                            "is_hpmaf": true
+                        },
+                        {
+                            "population_name": "gnomADe:remaining",
+                            "allele_frequency": 0.0,
+                            "allele_count": 0,
+                            "allele_number": 60084,
+                            "is_minor_allele": true,
+                            "is_hpmaf": true
+                        },
+                        {
+                            "population_name": "gnomADe:sas",
+                            "allele_frequency": 0.0,
+                            "allele_count": 0,
+                            "allele_number": 85508,
+                            "is_minor_allele": true,
+                            "is_hpmaf": true
+                        }
+                    ],
+                    "predicted_molecular_consequences": [
+                        {
+                            "allele_name": "-",
+                            "stable_id": "ENST00000304952.11",
+                            "feature_type": {
+                                "__typename": "OntologyTermMetadata"
+                            },
+                            "consequences": [
+                                {
+                                    "__typename": "OntologyTermMetadata"
+                                },
+                                {
+                                    "__typename": "OntologyTermMetadata"
+                                }
+                            ],
+                            "prediction_results": [],
+                            "gene_stable_id": "ENSG00000188290",
+                            "gene_symbol": "HES4",
+                            "protein_stable_id": null,
+                            "transcript_biotype": "protein_coding",
+                            "cdna_location": {
+                                "relation": null,
+                                "start": null,
+                                "end": 332,
+                                "length": null,
+                                "percentage_overlap": null,
+                                "ref_sequence": null,
+                                "alt_sequence": null
+                            },
+                            "cds_location": {
+                                "relation": null,
+                                "start": null,
+                                "end": 208,
+                                "length": null,
+                                "percentage_overlap": null,
+                                "ref_sequence": null,
+                                "alt_sequence": null
+                            },
+                            "protein_location": {
+                                "relation": null,
+                                "start": null,
+                                "end": 70,
+                                "length": null,
+                                "percentage_overlap": null,
+                                "ref_sequence": null,
+                                "alt_sequence": null
+                            }
+                        },
+                        {
+                            "allele_name": "-",
+                            "stable_id": "ENST00000428771.6",
+                            "feature_type": {
+                                "__typename": "OntologyTermMetadata"
+                            },
+                            "consequences": [
+                                {
+                                    "__typename": "OntologyTermMetadata"
+                                },
+                                {
+                                    "__typename": "OntologyTermMetadata"
+                                }
+                            ],
+                            "prediction_results": [],
+                            "gene_stable_id": "ENSG00000188290",
+                            "gene_symbol": "HES4",
+                            "protein_stable_id": null,
+                            "transcript_biotype": "protein_coding",
+                            "cdna_location": {
+                                "relation": null,
+                                "start": null,
+                                "end": 485,
+                                "length": null,
+                                "percentage_overlap": null,
+                                "ref_sequence": null,
+                                "alt_sequence": null
+                            },
+                            "cds_location": {
+                                "relation": null,
+                                "start": null,
+                                "end": 286,
+                                "length": null,
+                                "percentage_overlap": null,
+                                "ref_sequence": null,
+                                "alt_sequence": null
+                            },
+                            "protein_location": {
+                                "relation": null,
+                                "start": null,
+                                "end": 96,
+                                "length": null,
+                                "percentage_overlap": null,
+                                "ref_sequence": null,
+                                "alt_sequence": null
+                            }
+                        },
+                        {
+                            "allele_name": "-",
+                            "stable_id": "ENST00000481869.1",
+                            "feature_type": {
+                                "__typename": "OntologyTermMetadata"
+                            },
+                            "consequences": [
+                                {
+                                    "__typename": "OntologyTermMetadata"
+                                }
+                            ],
+                            "prediction_results": [],
+                            "gene_stable_id": "ENSG00000188290",
+                            "gene_symbol": "HES4",
+                            "protein_stable_id": null,
+                            "transcript_biotype": "retained_intron",
+                            "cdna_location": {
+                                "relation": null,
+                                "start": 482,
+                                "end": 487,
+                                "length": 6,
+                                "percentage_overlap": null,
+                                "ref_sequence": "AGCTCT",
+                                "alt_sequence": "-"
+                            },
+                            "cds_location": null,
+                            "protein_location": null
+                        },
+                        {
+                            "allele_name": "-",
+                            "stable_id": "ENST00000484667.2",
+                            "feature_type": {
+                                "__typename": "OntologyTermMetadata"
+                            },
+                            "consequences": [
+                                {
+                                    "__typename": "OntologyTermMetadata"
+                                },
+                                {
+                                    "__typename": "OntologyTermMetadata"
+                                }
+                            ],
+                            "prediction_results": [],
+                            "gene_stable_id": "ENSG00000188290",
+                            "gene_symbol": "HES4",
+                            "protein_stable_id": null,
+                            "transcript_biotype": "protein_coding",
+                            "cdna_location": {
+                                "relation": null,
+                                "start": null,
+                                "end": 120,
+                                "length": null,
+                                "percentage_overlap": null,
+                                "ref_sequence": null,
+                                "alt_sequence": null
+                            },
+                            "cds_location": {
+                                "relation": null,
+                                "start": null,
+                                "end": 112,
+                                "length": null,
+                                "percentage_overlap": null,
+                                "ref_sequence": null,
+                                "alt_sequence": null
+                            },
+                            "protein_location": {
+                                "relation": null,
+                                "start": null,
+                                "end": 38,
+                                "length": null,
+                                "percentage_overlap": null,
+                                "ref_sequence": null,
+                                "alt_sequence": null
+                            }
+                        }
+                    ],
+                    "ensembl_website_display_data": {
+                        "count_transcript_consequences": 4,
+                        "count_overlapped_genes": 1,
+                        "count_regulatory_consequences": 1,
+                        "count_variant_phenotypes": 0,
+                        "count_gene_phenotypes": 0,
+                        "representative_population_allele_frequency": null
+                    }
+                },
+                {
+                    "name": "1:999609:GAGCTCT:GAGCTCT",
+                    "allele_sequence": "GAGCTCT",
+                    "reference_sequence": "GAGCTCT",
+                    "alternative_names": [],
+                    "type": "VariantAllele",
+                    "allele_type": {
+                        "__typename": "OntologyTermMetadata"
+                    },
+                    "slice": {
+                        "__typename": "Slice"
+                    },
+                    "phenotype_assertions": [],
+                    "prediction_results": [],
+                    "population_frequencies": [
+                        {
+                            "population_name": "gnomADe:ALL",
+                            "allele_frequency": 1.0,
+                            "allele_count": null,
+                            "allele_number": null,
+                            "is_minor_allele": false,
+                            "is_hpmaf": false
+                        },
+                        {
+                            "population_name": "gnomADe:afr",
+                            "allele_frequency": 1.0,
+                            "allele_count": null,
+                            "allele_number": null,
+                            "is_minor_allele": false,
+                            "is_hpmaf": false
+                        },
+                        {
+                            "population_name": "gnomADe:amr",
+                            "allele_frequency": 1.0,
+                            "allele_count": null,
+                            "allele_number": null,
+                            "is_minor_allele": false,
+                            "is_hpmaf": false
+                        },
+                        {
+                            "population_name": "gnomADe:asj",
+                            "allele_frequency": 1.0,
+                            "allele_count": null,
+                            "allele_number": null,
+                            "is_minor_allele": false,
+                            "is_hpmaf": false
+                        },
+                        {
+                            "population_name": "gnomADe:eas",
+                            "allele_frequency": 1.0,
+                            "allele_count": null,
+                            "allele_number": null,
+                            "is_minor_allele": false,
+                            "is_hpmaf": false
+                        },
+                        {
+                            "population_name": "gnomADe:fin",
+                            "allele_frequency": 1.0,
+                            "allele_count": null,
+                            "allele_number": null,
+                            "is_minor_allele": false,
+                            "is_hpmaf": false
+                        },
+                        {
+                            "population_name": "gnomADe:mid",
+                            "allele_frequency": 1.0,
+                            "allele_count": null,
+                            "allele_number": null,
+                            "is_minor_allele": false,
+                            "is_hpmaf": false
+                        },
+                        {
+                            "population_name": "gnomADe:nfe",
+                            "allele_frequency": 1.0,
+                            "allele_count": null,
+                            "allele_number": null,
+                            "is_minor_allele": false,
+                            "is_hpmaf": false
+                        },
+                        {
+                            "population_name": "gnomADe:remaining",
+                            "allele_frequency": 1.0,
+                            "allele_count": null,
+                            "allele_number": null,
+                            "is_minor_allele": false,
+                            "is_hpmaf": false
+                        },
+                        {
+                            "population_name": "gnomADe:sas",
+                            "allele_frequency": 1.0,
+                            "allele_count": null,
+                            "allele_number": null,
+                            "is_minor_allele": false,
+                            "is_hpmaf": false
+                        }
+                    ],
+                    "predicted_molecular_consequences": [],
+                    "ensembl_website_display_data": {
+                        "count_transcript_consequences": 0,
+                        "count_overlapped_genes": 0,
+                        "count_regulatory_consequences": 0,
+                        "count_variant_phenotypes": 0,
+                        "count_gene_phenotypes": 0,
+                        "representative_population_allele_frequency": null
+                    }
+                }
+            ],
+            "prediction_results": [
+                {
+                    "score": null,
+                    "result": "splice_acceptor_variant",
+                    "classification": null,
+                    "analysis_method": {
+                        "__typename": "AnalysisMethod"
+                    }
+                },
+                {
+                    "score": 1.107,
+                    "result": null,
+                    "classification": null,
+                    "analysis_method": {
+                        "__typename": "AnalysisMethod"
+                    }
+                },
+                {
+                    "score": null,
+                    "result": "AGCTCT",
+                    "classification": null,
+                    "analysis_method": {
+                        "__typename": "AnalysisMethod"
+                    }
+                }
+            ],
+            "ensembl_website_display_data": {
+                "count_citations": 0
+            }
+        }
+    }
+}
