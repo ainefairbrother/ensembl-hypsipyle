@@ -12,6 +12,9 @@
    limitations under the License.
 """
 
+# -----------------------------------------------------------------------
+# Setup
+
 from string import Template
 from ariadne import graphql
 import pytest
@@ -23,9 +26,23 @@ import difflib
 # -----------------------------------------------------------------------
 # Define helper functions
 
-VARIANT_TEST_CASES = [
-    ("1:999609:rs1463383567", "a7335667-93e7-11ec-a39d-005056b38ce3")
-]
+# Generate test cases from the gold standard JSON file names
+def get_test_case_ids():
+    """Dynamically generate test cases from gold standard JSON files.
+    
+    Expected file naming: <variant_id>_broken.json
+    Uses the same genome_id for all test cases.
+    """
+    gold_std_dir = "/app/graphql_service/tests/gold_std_query_results"
+    genome_id = "a7335667-93e7-11ec-a39d-005056b38ce3"
+    cases = []
+    for filename in os.listdir(gold_std_dir):
+        if filename.endswith(".json"):
+            variant_id = filename.replace(".json", "")
+            cases.append((variant_id, genome_id))
+    return cases
+
+TEST_CASES = get_test_case_ids()
 
 # Set up in-memory schema and context
 executable_schema, context = setup_test()
@@ -156,17 +173,19 @@ async def execute_query(genome_id, variant_id):
     return query, success, result
 
 # -----------------------------------------------------------------------
+# Run tests
 
 @pytest.mark.asyncio
-@pytest.mark.parametrize("variant_id, genome_id", VARIANT_TEST_CASES)
-async def test_retrieval_by_variant_id(variant_id, genome_id):
-    """Test that all top-level Variant fields are returned."""
+@pytest.mark.parametrize("variant_id, genome_id", TEST_CASES)
+async def test_query_results_against_gold_std(variant_id, genome_id):
+    """Test present query result for variant X against gold 
+    standard query result for variant X."""
 
     query, success, result = await execute_query(genome_id, variant_id)
     assert success, f"[Variant Root] Query execution failed for variant {variant_id}. Query: {query}. Result: {result}"
     
     # Define the path to the gold standard JSON file
-    gold_std_path = os.path.join("/app/graphql_service/tests/gold_std_query_results", f"{variant_id}_broken.json")
+    gold_std_path = os.path.join("/app/graphql_service/tests/gold_std_query_results", f"{variant_id}.json")
     
     # Load the gold standard JSON file
     with open(gold_std_path, "r") as f:
