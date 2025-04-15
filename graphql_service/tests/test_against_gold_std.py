@@ -208,7 +208,7 @@ async def test_query_results_against_gold_std(variant_id, genome_id):
     )
     
     # Log the diff if there are any differences
-    if result_str != gold_str:
+    if result_str != gold_str: # if diff?
         print(f"[Variant Root] Diff for variant {variant_id}:\n{diff}")
     
     # Compare the result with the gold standard - assert that they're identical

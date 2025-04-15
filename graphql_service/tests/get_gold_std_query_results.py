@@ -7,8 +7,11 @@ Description:
     For each variant, it executes the master GraphQL query against the in-memory schema and saves the query result 
     as a JSON file in the specified output directory.
 
-Usage:
-    python get_gold_std_query_results.py <variant_file.txt> <genome_id> <output_directory>
+Example usage:
+    python -m graphql_service.tests.get_gold_std_query_results \
+        /app/graphql_service/tests/gold_std_test_cases.txt \
+        "a7335667-93e7-11ec-a39d-005056b38ce3" \
+        /app/graphql_service/tests/gold_std_query_results
 """
 
 import argparse
