@@ -1,0 +1,23 @@
+{
+    "data": {
+        "variant": null
+    },
+    "errors": [
+        {
+            "message": "Failed to find variant_id with ids: variant_id=17:39531219:rs760014508",
+            "locations": [
+                {
+                    "line": 2,
+                    "column": 9
+                }
+            ],
+            "path": [
+                "variant"
+            ],
+            "extensions": {
+                "code": "VARIANT_ID_NOT_FOUND",
+                "variant_id": "17:39531219:rs760014508"
+            }
+        }
+    ]
+}

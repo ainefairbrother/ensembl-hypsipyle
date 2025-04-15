@@ -1,0 +1,23 @@
+{
+    "data": {
+        "variant": null
+    },
+    "errors": [
+        {
+            "message": "Failed to find variant_id with ids: variant_id=19:375859:rs1973467575",
+            "locations": [
+                {
+                    "line": 2,
+                    "column": 9
+                }
+            ],
+            "path": [
+                "variant"
+            ],
+            "extensions": {
+                "code": "VARIANT_ID_NOT_FOUND",
+                "variant_id": "19:375859:rs1973467575"
+            }
+        }
+    ]
+}
