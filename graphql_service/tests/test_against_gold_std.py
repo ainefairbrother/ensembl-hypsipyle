@@ -23,18 +23,22 @@ import os
 import json
 import difflib
 
+GOLD_STD_QUERY_RESULTS_PATH = "/app/graphql_service/tests/gold_std_query_results"
+GENOME_ID = "a7335667-93e7-11ec-a39d-005056b38ce3"
+
 # -----------------------------------------------------------------------
 # Define helper functions
 
-# Generate test cases from the gold standard JSON file names
 def get_test_case_ids():
-    """Dynamically generate test cases from gold standard JSON files.
+    """
+    Dynamically generate a list of test cases from 
+    gold standard query result JSON files in gold_std_dir.
     
-    Expected file naming: <variant_id>_broken.json
+    Expected file naming: <variant_id>.json
     Uses the same genome_id for all test cases.
     """
-    gold_std_dir = "/app/graphql_service/tests/gold_std_query_results"
-    genome_id = "a7335667-93e7-11ec-a39d-005056b38ce3"
+    gold_std_dir = GOLD_STD_QUERY_RESULTS_PATH
+    genome_id = GENOME_ID
     cases = []
     for filename in os.listdir(gold_std_dir):
         if filename.endswith(".json"):
@@ -42,14 +46,11 @@ def get_test_case_ids():
             cases.append((variant_id, genome_id))
     return cases
 
-TEST_CASES = get_test_case_ids()
 
-# Set up in-memory schema and context
-executable_schema, context = setup_test()
-
-# Define master query template
 def master_query_template():
-    """Query template"""
+    """
+    Template for the master query.
+    """
     
     query = """{
         variant(
@@ -161,9 +162,12 @@ def master_query_template():
     }"""
     return Template(query)
 
-# Define helper function to submit query and receive response
-async def execute_query(genome_id, variant_id):
-    """Execute the query with given parameters and return (query, success, result)."""
+
+async def execute_query(genome_id: str, variant_id: str):
+    """
+    Execute the query for a given variant_id and genome_id according to template
+    query, returning tne query string, success status, and result.
+    """
     template = master_query_template()
     query = template.substitute(genome_id=genome_id, variant_id=variant_id)
     query_data = {"query": query}
@@ -175,29 +179,27 @@ async def execute_query(genome_id, variant_id):
 # -----------------------------------------------------------------------
 # Run tests
 
+TEST_CASES = get_test_case_ids()
+executable_schema, context = setup_test()
+
 @pytest.mark.asyncio
 @pytest.mark.parametrize("variant_id, genome_id", TEST_CASES)
 async def test_query_results_against_gold_std(variant_id, genome_id):
-    """Test present query result for variant X against gold 
-    standard query result for variant X."""
+    """Test present query result for variant_id X, genome_id Y against 
+    stored gold standard query result for variant_id X, genome_id Y."""
 
     query, success, result = await execute_query(genome_id, variant_id)
     assert success, f"[Variant Root] Query execution failed for variant {variant_id}. Query: {query}. Result: {result}"
     
-    # Define the path to the gold standard JSON file
-    gold_std_path = os.path.join("/app/graphql_service/tests/gold_std_query_results", f"{variant_id}.json")
+    gold_std_file = os.path.join(GOLD_STD_QUERY_RESULTS_PATH, f"{variant_id}.json")
     
-    # Load the gold standard JSON file
-    with open(gold_std_path, "r") as f:
+    with open(gold_std_file, "r") as f:
         gold_standard = json.load(f)
     
-    # Convert both JSON objects to strings for diffing, ensure sorting of keys
     result_str = json.dumps(result.get("data", {}), indent=4, sort_keys=True)
     gold_str = json.dumps(gold_standard.get("data", {}), indent=4, sort_keys=True)
     
-    # Generate diff of the gold standard and actual variant
-    # The difflib module will give a git-diff-like output, showing precisely where the 
-    # differences are between the actual query result and the gold standard query result
+    # Generate diff of the gold standard and actual variant using difflib
     diff = ''.join(
         difflib.unified_diff(
             gold_str.splitlines(keepends=True),
@@ -208,8 +210,7 @@ async def test_query_results_against_gold_std(variant_id, genome_id):
     )
     
     # Log the diff if there are any differences
-    if result_str != gold_str: # if diff?
+    if result_str != gold_str:
         print(f"[Variant Root] Diff for variant {variant_id}:\n{diff}")
     
-    # Compare the result with the gold standard - assert that they're identical
     assert result_str == gold_str
