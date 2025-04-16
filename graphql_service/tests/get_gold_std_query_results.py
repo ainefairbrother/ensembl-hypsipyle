@@ -20,12 +20,12 @@ import json
 from string import Template
 from ariadne import graphql
 from .test_utils import setup_test
+import os
+
+executable_schema, context = setup_test()
 
 # -----------------------------------------------------------------------
 # Define helper functions
-
-# Set up in-memory schema and context
-executable_schema, context = setup_test()
 
 # Define master query template
 def master_query_template():
@@ -141,9 +141,11 @@ def master_query_template():
     }"""
     return Template(query)
 
-# Define helper function to submit query and receive response
 async def execute_query(genome_id, variant_id):
-    """Execute the query with given parameters and return (query, success, result)."""
+    """
+    Execute the query for a given variant_id and genome_id according to template
+    query, returning tne query string, success status, and result.
+    """
     template = master_query_template()
     query = template.substitute(genome_id=genome_id, variant_id=variant_id)
     query_data = {"query": query}
@@ -153,19 +155,19 @@ async def execute_query(genome_id, variant_id):
     return query, success, result
 
 # -----------------------------------------------------------------------
-# Run master query against schema for all test cases
+# Generate gold standard query results
 
 async def main(variant_file, genome_id, output_dir):
+    """
+    Run master query against schema for all test cases.
+    """
     
-    # Read variant IDs from the provided file
     with open(variant_file, "r") as f:
         variants = [line.strip() for line in f if line.strip()]
 
-    # Ensure output directory exists
-    import os
     os.makedirs(output_dir, exist_ok=True)
 
-    # Run master query for each variant
+    # Run master query for each test case
     for variant_id in variants:
         query, success, result = await execute_query(genome_id, variant_id)
         if success:
