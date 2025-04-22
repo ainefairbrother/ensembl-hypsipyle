@@ -1,5 +1,5 @@
 {
-    "a7335667-93e7-11ec-a39d-005056b38ce3":
+    "2b5fb047-5992-4dfb-b2fa-1fb4e18d1abb":
     [
         {
             "name": "gnomADg:ALL",
@@ -862,6 +862,18 @@
         "sub_populations": [
         
         ]
+        }
+    ],
+    "ce9c01fe-1d5c-4fea-a96a-b8eb3c3586f4":
+    [
+        {
+            "name": "",
+            "description": "Mouse Genomes Project",
+            "type": "collection",
+            "is_global": true,
+            "display_group_name": "Mouse Genomes Project",
+            "super_population":null,
+            "sub_populations": []
         }
     ]
 }
