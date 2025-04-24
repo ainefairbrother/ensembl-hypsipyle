@@ -1,7 +1,7 @@
 {
     "data": {
         "variant": {
-            "name": "rs1298621469",
+            "name": "rs747148860",
             "alternative_names": [],
             "primary_source": {
                 "__typename": "ExternalReference"
@@ -15,9 +15,9 @@
             },
             "alleles": [
                 {
-                    "name": "19:99230:G:C",
+                    "name": "19:375785:CTCTTCTGGG:C",
                     "allele_sequence": "C",
-                    "reference_sequence": "G",
+                    "reference_sequence": "CTCTTCTGGG",
                     "alternative_names": [],
                     "type": "VariantAllele",
                     "allele_type": {
@@ -31,8 +31,96 @@
                     "population_frequencies": [],
                     "predicted_molecular_consequences": [
                         {
-                            "allele_name": "C",
-                            "stable_id": "ENST00000641173",
+                            "allele_name": "-",
+                            "stable_id": "ENST00000342640",
+                            "feature_type": {
+                                "__typename": "OntologyTermMetadata"
+                            },
+                            "consequences": [
+                                {
+                                    "__typename": "OntologyTermMetadata"
+                                }
+                            ],
+                            "prediction_results": [],
+                            "gene_stable_id": "ENSG00000105549",
+                            "gene_symbol": "SPMAP2",
+                            "protein_stable_id": null,
+                            "transcript_biotype": "protein_coding",
+                            "cdna_location": {
+                                "relation": null,
+                                "start": 233,
+                                "end": 241,
+                                "length": 9,
+                                "percentage_overlap": null,
+                                "ref_sequence": "CCCAGAAGA",
+                                "alt_sequence": "-"
+                            },
+                            "cds_location": {
+                                "relation": null,
+                                "start": 177,
+                                "end": 185,
+                                "length": 9,
+                                "percentage_overlap": null,
+                                "ref_sequence": "gaCCCAGAAGAg",
+                                "alt_sequence": "gag"
+                            },
+                            "protein_location": {
+                                "relation": null,
+                                "start": 59,
+                                "end": 62,
+                                "length": 4,
+                                "percentage_overlap": null,
+                                "ref_sequence": "DPEE",
+                                "alt_sequence": "E"
+                            }
+                        },
+                        {
+                            "allele_name": "-",
+                            "stable_id": "ENST00000346878",
+                            "feature_type": {
+                                "__typename": "OntologyTermMetadata"
+                            },
+                            "consequences": [
+                                {
+                                    "__typename": "OntologyTermMetadata"
+                                }
+                            ],
+                            "prediction_results": [],
+                            "gene_stable_id": "ENSG00000105549",
+                            "gene_symbol": "SPMAP2",
+                            "protein_stable_id": null,
+                            "transcript_biotype": "protein_coding",
+                            "cdna_location": {
+                                "relation": null,
+                                "start": 177,
+                                "end": 185,
+                                "length": 9,
+                                "percentage_overlap": null,
+                                "ref_sequence": "CCCAGAAGA",
+                                "alt_sequence": "-"
+                            },
+                            "cds_location": {
+                                "relation": null,
+                                "start": 177,
+                                "end": 185,
+                                "length": 9,
+                                "percentage_overlap": null,
+                                "ref_sequence": "gaCCCAGAAGAg",
+                                "alt_sequence": "gag"
+                            },
+                            "protein_location": {
+                                "relation": null,
+                                "start": 59,
+                                "end": 62,
+                                "length": 4,
+                                "percentage_overlap": null,
+                                "ref_sequence": "DPEE",
+                                "alt_sequence": "E"
+                            }
+                        },
+                        {
+                            "allele_name": "-",
+                            "stable_id": "ENST00000797533",
                             "feature_type": {
                                 "__typename": "OntologyTermMetadata"
                             },
@@ -45,7 +133,7 @@
                                 }
                             ],
                             "prediction_results": [],
-                            "gene_stable_id": "ENSG00000290363",
+                            "gene_stable_id": "ENSG00000286667",
                             "gene_symbol": "",
                             "protein_stable_id": null,
                             "transcript_biotype": "lncRNA",
@@ -54,8 +142,8 @@
                             "protein_location": null
                         },
                         {
-                            "allele_name": "C",
-                            "stable_id": "ENST00000641984",
+                            "allele_name": "-",
+                            "stable_id": "ENST00000797534",
                             "feature_type": {
                                 "__typename": "OntologyTermMetadata"
                             },
@@ -68,7 +156,7 @@
                                 }
                             ],
                             "prediction_results": [],
-                            "gene_stable_id": "ENSG00000290363",
+                            "gene_stable_id": "ENSG00000286667",
                             "gene_symbol": "",
                             "protein_stable_id": null,
                             "transcript_biotype": "lncRNA",
@@ -77,8 +165,8 @@
                             "protein_location": null
                         },
                         {
-                            "allele_name": "C",
-                            "stable_id": "ENST00000745829",
+                            "allele_name": "-",
+                            "stable_id": "ENST00000797535",
                             "feature_type": {
                                 "__typename": "OntologyTermMetadata"
                             },
@@ -91,7 +179,7 @@
                                 }
                             ],
                             "prediction_results": [],
-                            "gene_stable_id": "ENSG00000290363",
+                            "gene_stable_id": "ENSG00000286667",
                             "gene_symbol": "",
                             "protein_stable_id": null,
                             "transcript_biotype": "lncRNA",
@@ -110,9 +198,9 @@
                     }
                 },
                 {
-                    "name": "19:99230:G:G",
-                    "allele_sequence": "G",
-                    "reference_sequence": "G",
+                    "name": "19:375785:CTCTTCTGGG:CTCTTCTGGG",
+                    "allele_sequence": "CTCTTCTGGG",
+                    "reference_sequence": "CTCTTCTGGG",
                     "alternative_names": [],
                     "type": "VariantAllele",
                     "allele_type": {
@@ -138,7 +226,7 @@
             "prediction_results": [
                 {
                     "score": null,
-                    "result": "splice_donor_variant",
+                    "result": "inframe_deletion",
                     "classification": null,
                     "analysis_method": {
                         "__typename": "AnalysisMethod"

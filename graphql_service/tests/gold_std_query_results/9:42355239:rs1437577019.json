@@ -1,7 +1,7 @@
 {
     "data": {
         "variant": {
-            "name": "rs1444086729",
+            "name": "rs1437577019",
             "alternative_names": [],
             "primary_source": {
                 "__typename": "ExternalReference"
@@ -15,61 +15,9 @@
             },
             "alleles": [
                 {
-                    "name": "19:61909:G:A",
-                    "allele_sequence": "A",
-                    "reference_sequence": "G",
-                    "alternative_names": [],
-                    "type": "VariantAllele",
-                    "allele_type": {
-                        "__typename": "OntologyTermMetadata"
-                    },
-                    "slice": {
-                        "__typename": "Slice"
-                    },
-                    "phenotype_assertions": [],
-                    "prediction_results": [],
-                    "population_frequencies": [],
-                    "predicted_molecular_consequences": [
-                        {
-                            "allele_name": "A",
-                            "stable_id": "ENST00000632506",
-                            "feature_type": {
-                                "__typename": "OntologyTermMetadata"
-                            },
-                            "consequences": [
-                                {
-                                    "__typename": "OntologyTermMetadata"
-                                },
-                                {
-                                    "__typename": "OntologyTermMetadata"
-                                },
-                                {
-                                    "__typename": "OntologyTermMetadata"
-                                }
-                            ],
-                            "prediction_results": [],
-                            "gene_stable_id": "ENSG00000292982",
-                            "gene_symbol": "WASH5P",
-                            "protein_stable_id": null,
-                            "transcript_biotype": "lncRNA",
-                            "cdna_location": null,
-                            "cds_location": null,
-                            "protein_location": null
-                        }
-                    ],
-                    "ensembl_website_display_data": {
-                        "count_transcript_consequences": 1,
-                        "count_overlapped_genes": 1,
-                        "count_regulatory_consequences": 0,
-                        "count_variant_phenotypes": 0,
-                        "count_gene_phenotypes": 0,
-                        "representative_population_allele_frequency": null
-                    }
-                },
-                {
-                    "name": "19:61909:G:G",
-                    "allele_sequence": "G",
-                    "reference_sequence": "G",
+                    "name": "9:42355239:T:C",
+                    "allele_sequence": "C",
+                    "reference_sequence": "T",
                     "alternative_names": [],
                     "type": "VariantAllele",
                     "allele_type": {
@@ -88,14 +36,39 @@
                         "count_regulatory_consequences": 0,
                         "count_variant_phenotypes": 0,
                         "count_gene_phenotypes": 0,
-                        "representative_population_allele_frequency": null
+                        "representative_population_allele_frequency": 0.000137846
+                    }
+                },
+                {
+                    "name": "9:42355239:T:T",
+                    "allele_sequence": "T",
+                    "reference_sequence": "T",
+                    "alternative_names": [],
+                    "type": "VariantAllele",
+                    "allele_type": {
+                        "__typename": "OntologyTermMetadata"
+                    },
+                    "slice": {
+                        "__typename": "Slice"
+                    },
+                    "phenotype_assertions": [],
+                    "prediction_results": [],
+                    "population_frequencies": [],
+                    "predicted_molecular_consequences": [],
+                    "ensembl_website_display_data": {
+                        "count_transcript_consequences": 0,
+                        "count_overlapped_genes": 0,
+                        "count_regulatory_consequences": 0,
+                        "count_variant_phenotypes": 0,
+                        "count_gene_phenotypes": 0,
+                        "representative_population_allele_frequency": 0.999862154
                     }
                 }
             ],
             "prediction_results": [
                 {
                     "score": null,
-                    "result": "splice_polypyrimidine_tract_variant",
+                    "result": "downstream_gene_variant",
                     "classification": null,
                     "analysis_method": {
                         "__typename": "AnalysisMethod"

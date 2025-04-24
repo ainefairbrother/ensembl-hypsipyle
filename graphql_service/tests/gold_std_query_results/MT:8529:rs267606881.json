@@ -26,28 +26,13 @@
                     "slice": {
                         "__typename": "Slice"
                     },
-                    "phenotype_assertions": [
-                        {
-                            "feature": "rs267606881",
-                            "feature_type": {
-                                "__typename": "OntologyTermMetadata"
-                            },
-                            "phenotype": {
-                                "name": "Cardiomyopathy__apical_hypertrophic__and_neuropathy",
-                                "source": {
-                                    "__typename": "ExternalDB"
-                                },
-                                "ontology_terms": null
-                            },
-                            "evidence": []
-                        }
-                    ],
+                    "phenotype_assertions": [],
                     "prediction_results": [],
                     "population_frequencies": [],
                     "predicted_molecular_consequences": [
                         {
                             "allele_name": "A",
-                            "stable_id": "ENST00000361851.1",
+                            "stable_id": "ENST00000361851",
                             "feature_type": {
                                 "__typename": "OntologyTermMetadata"
                             },
@@ -91,7 +76,7 @@
                         },
                         {
                             "allele_name": "A",
-                            "stable_id": "ENST00000361899.2",
+                            "stable_id": "ENST00000361899",
                             "feature_type": {
                                 "__typename": "OntologyTermMetadata"
                             },
@@ -173,22 +158,6 @@
                 {
                     "score": null,
                     "result": "stop_gained",
-                    "classification": null,
-                    "analysis_method": {
-                        "__typename": "AnalysisMethod"
-                    }
-                },
-                {
-                    "score": 2.55,
-                    "result": null,
-                    "classification": null,
-                    "analysis_method": {
-                        "__typename": "AnalysisMethod"
-                    }
-                },
-                {
-                    "score": null,
-                    "result": "G",
                     "classification": null,
                     "analysis_method": {
                         "__typename": "AnalysisMethod"

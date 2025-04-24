@@ -26,42 +26,13 @@
                     "slice": {
                         "__typename": "Slice"
                     },
-                    "phenotype_assertions": [
-                        {
-                            "feature": "rs1555409827",
-                            "feature_type": {
-                                "__typename": "OntologyTermMetadata"
-                            },
-                            "phenotype": {
-                                "name": "AMELOGENESIS_IMPERFECTA__HYPOMATURATION_TYPE__IIA6",
-                                "source": {
-                                    "__typename": "ExternalDB"
-                                },
-                                "ontology_terms": null
-                            },
-                            "evidence": []
-                        },
-                        {
-                            "feature": "rs1555409827",
-                            "feature_type": {
-                                "__typename": "OntologyTermMetadata"
-                            },
-                            "phenotype": {
-                                "name": "Amelogenesis_imperfecta",
-                                "source": {
-                                    "__typename": "ExternalDB"
-                                },
-                                "ontology_terms": null
-                            },
-                            "evidence": []
-                        }
-                    ],
+                    "phenotype_assertions": [],
                     "prediction_results": [],
                     "population_frequencies": [],
                     "predicted_molecular_consequences": [
                         {
                             "allele_name": "-",
-                            "stable_id": "ENST00000529102.1",
+                            "stable_id": "ENST00000529102",
                             "feature_type": {
                                 "__typename": "OntologyTermMetadata"
                             },
@@ -105,7 +76,7 @@
                         },
                         {
                             "allele_name": "-",
-                            "stable_id": "ENST00000531499.2",
+                            "stable_id": "ENST00000531499",
                             "feature_type": {
                                 "__typename": "OntologyTermMetadata"
                             },
@@ -149,7 +120,7 @@
                         },
                         {
                             "allele_name": "-",
-                            "stable_id": "ENST00000535815.5",
+                            "stable_id": "ENST00000535815",
                             "feature_type": {
                                 "__typename": "OntologyTermMetadata"
                             },
@@ -193,7 +164,7 @@
                         },
                         {
                             "allele_name": "-",
-                            "stable_id": "ENST00000650645.1",
+                            "stable_id": "ENST00000650645",
                             "feature_type": {
                                 "__typename": "OntologyTermMetadata"
                             },
@@ -275,22 +246,6 @@
                 {
                     "score": null,
                     "result": "inframe_deletion",
-                    "classification": null,
-                    "analysis_method": {
-                        "__typename": "AnalysisMethod"
-                    }
-                },
-                {
-                    "score": 0.179,
-                    "result": null,
-                    "classification": null,
-                    "analysis_method": {
-                        "__typename": "AnalysisMethod"
-                    }
-                },
-                {
-                    "score": null,
-                    "result": "AGTTGAAGCTGGTGAGCAGGAGGGAGAAGTGGTAGGCGTTGAAAACGCCCTTGGCGAAGTCGCAGCTGGCCTCCCAGACGCTGCGCACCAGCAGCAACACGTGGTAGGGCAGGAAGCAGGCCAGGAAGATGACCACGGTGCTGAGCACCAGCCGCTGGATCTGGTCCTTGCGGCTCTTCTGGGTGCCGTGGCTCCGGCGCACGGCGCGCAGGATGCCCTGGTAGGACGCCAGCAGCAGGCAGATGGGGAAGAGGAAGCCCACCAGGAAGCGGTAGTAGTTGATGGCGCGCTGCCATGCCTGGATGGGGTAGTGCTCAAAGCACACGCGGTGCTGGTTCTCGTCCTCGATGACCTCCTCGTGCATCAGGAAGTAGATGCTGGTCAGCAGCTCCTTGGCCCAGATGACCACGCTGACGCCGACGGCCGCCTTCAGGGTCCGGAACTGGTGGA",
                     "classification": null,
                     "analysis_method": {
                         "__typename": "AnalysisMethod"

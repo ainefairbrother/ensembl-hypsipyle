@@ -1,7 +1,7 @@
 {
     "data": {
         "variant": {
-            "name": "rs1298621469",
+            "name": "rs1603477814",
             "alternative_names": [],
             "primary_source": {
                 "__typename": "ExternalReference"
@@ -15,9 +15,9 @@
             },
             "alleles": [
                 {
-                    "name": "19:99230:G:C",
-                    "allele_sequence": "C",
-                    "reference_sequence": "G",
+                    "name": "X:3905097:A:G",
+                    "allele_sequence": "G",
+                    "reference_sequence": "A",
                     "alternative_names": [],
                     "type": "VariantAllele",
                     "allele_type": {
@@ -31,8 +31,8 @@
                     "population_frequencies": [],
                     "predicted_molecular_consequences": [
                         {
-                            "allele_name": "C",
-                            "stable_id": "ENST00000641173",
+                            "allele_name": "G",
+                            "stable_id": "ENST00000451781",
                             "feature_type": {
                                 "__typename": "OntologyTermMetadata"
                             },
@@ -45,7 +45,7 @@
                                 }
                             ],
                             "prediction_results": [],
-                            "gene_stable_id": "ENSG00000290363",
+                            "gene_stable_id": "ENSG00000285756",
                             "gene_symbol": "",
                             "protein_stable_id": null,
                             "transcript_biotype": "lncRNA",
@@ -54,8 +54,8 @@
                             "protein_location": null
                         },
                         {
-                            "allele_name": "C",
-                            "stable_id": "ENST00000641984",
+                            "allele_name": "G",
+                            "stable_id": "ENST00000650538",
                             "feature_type": {
                                 "__typename": "OntologyTermMetadata"
                             },
@@ -68,7 +68,7 @@
                                 }
                             ],
                             "prediction_results": [],
-                            "gene_stable_id": "ENSG00000290363",
+                            "gene_stable_id": "ENSG00000285756",
                             "gene_symbol": "",
                             "protein_stable_id": null,
                             "transcript_biotype": "lncRNA",
@@ -77,8 +77,8 @@
                             "protein_location": null
                         },
                         {
-                            "allele_name": "C",
-                            "stable_id": "ENST00000745829",
+                            "allele_name": "G",
+                            "stable_id": "ENST00000760638",
                             "feature_type": {
                                 "__typename": "OntologyTermMetadata"
                             },
@@ -91,7 +91,99 @@
                                 }
                             ],
                             "prediction_results": [],
-                            "gene_stable_id": "ENSG00000290363",
+                            "gene_stable_id": "ENSG00000285756",
+                            "gene_symbol": "",
+                            "protein_stable_id": null,
+                            "transcript_biotype": "lncRNA",
+                            "cdna_location": null,
+                            "cds_location": null,
+                            "protein_location": null
+                        },
+                        {
+                            "allele_name": "G",
+                            "stable_id": "ENST00000760646",
+                            "feature_type": {
+                                "__typename": "OntologyTermMetadata"
+                            },
+                            "consequences": [
+                                {
+                                    "__typename": "OntologyTermMetadata"
+                                },
+                                {
+                                    "__typename": "OntologyTermMetadata"
+                                }
+                            ],
+                            "prediction_results": [],
+                            "gene_stable_id": "ENSG00000285756",
+                            "gene_symbol": "",
+                            "protein_stable_id": null,
+                            "transcript_biotype": "lncRNA",
+                            "cdna_location": null,
+                            "cds_location": null,
+                            "protein_location": null
+                        },
+                        {
+                            "allele_name": "G",
+                            "stable_id": "ENST00000760672",
+                            "feature_type": {
+                                "__typename": "OntologyTermMetadata"
+                            },
+                            "consequences": [
+                                {
+                                    "__typename": "OntologyTermMetadata"
+                                },
+                                {
+                                    "__typename": "OntologyTermMetadata"
+                                }
+                            ],
+                            "prediction_results": [],
+                            "gene_stable_id": "ENSG00000285756",
+                            "gene_symbol": "",
+                            "protein_stable_id": null,
+                            "transcript_biotype": "lncRNA",
+                            "cdna_location": null,
+                            "cds_location": null,
+                            "protein_location": null
+                        },
+                        {
+                            "allele_name": "G",
+                            "stable_id": "ENST00000760675",
+                            "feature_type": {
+                                "__typename": "OntologyTermMetadata"
+                            },
+                            "consequences": [
+                                {
+                                    "__typename": "OntologyTermMetadata"
+                                },
+                                {
+                                    "__typename": "OntologyTermMetadata"
+                                }
+                            ],
+                            "prediction_results": [],
+                            "gene_stable_id": "ENSG00000285756",
+                            "gene_symbol": "",
+                            "protein_stable_id": null,
+                            "transcript_biotype": "lncRNA",
+                            "cdna_location": null,
+                            "cds_location": null,
+                            "protein_location": null
+                        },
+                        {
+                            "allele_name": "G",
+                            "stable_id": "ENST00000760697",
+                            "feature_type": {
+                                "__typename": "OntologyTermMetadata"
+                            },
+                            "consequences": [
+                                {
+                                    "__typename": "OntologyTermMetadata"
+                                },
+                                {
+                                    "__typename": "OntologyTermMetadata"
+                                }
+                            ],
+                            "prediction_results": [],
+                            "gene_stable_id": "ENSG00000285756",
                             "gene_symbol": "",
                             "protein_stable_id": null,
                             "transcript_biotype": "lncRNA",
@@ -110,9 +202,9 @@
                     }
                 },
                 {
-                    "name": "19:99230:G:G",
-                    "allele_sequence": "G",
-                    "reference_sequence": "G",
+                    "name": "X:3905097:A:A",
+                    "allele_sequence": "A",
+                    "reference_sequence": "A",
                     "alternative_names": [],
                     "type": "VariantAllele",
                     "allele_type": {
@@ -138,7 +230,7 @@
             "prediction_results": [
                 {
                     "score": null,
-                    "result": "splice_donor_variant",
+                    "result": "intron_variant",
                     "classification": null,
                     "analysis_method": {
                         "__typename": "AnalysisMethod"
