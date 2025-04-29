@@ -304,7 +304,11 @@ class Variant ():
         directory = os.path.dirname(__file__)
         with open(os.path.join(directory,'populations.json')) as pop_file:
             pop_mapping_all = json.load(pop_file)
-            pop_mapping = pop_mapping_all[self.genome_uuid]
+            try:
+                pop_mapping = pop_mapping_all[self.genome_uuid]
+            except:
+                pop_mapping = {}
+                print(f"No population mapping for - {self.genome_uuid}")
 
         population_frequency_map = {}
         for csq_record in self.info["CSQ"]:
@@ -327,7 +331,10 @@ class Variant ():
                                 elif freq_key == "ac":
                                     allele_count = csq_record_list[col_index] or None
                                 else:
-                                    raise Exception('Frequency metric is not recognised')
+                                    try:
+                                        allele_frequency = int(allele_count)/int(allele_number)
+                                    except:
+                                        print(f"Cannot calculate AF using expression - {allele_count}/{allele_number}")
                                 
                                 if allele_frequency is None:
                                     if allele_count and allele_number:    
@@ -352,7 +359,11 @@ class Variant ():
         directory = os.path.dirname(__file__)
         with open(os.path.join(directory,'populations.json')) as pop_file:
             pop_mapping_all = json.load(pop_file)
-            pop_mapping = pop_mapping_all[self.genome_uuid]
+            try:
+                pop_mapping = pop_mapping_all[self.genome_uuid]
+            except:
+                pop_mapping = {}
+                print(f"No population mapping for - {self.genome_uuid}")
         pop_names = []
         for pop in pop_mapping.values():
             pop_names.extend([sub_pop["name"] for sub_pop in pop])
