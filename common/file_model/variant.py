@@ -331,24 +331,25 @@ class Variant ():
                                 elif freq_key == "ac":
                                     allele_count = csq_record_list[col_index] or None
                                 else:
-                                    try:
-                                        allele_frequency = int(allele_count)/int(allele_number)
-                                    except:
-                                        print(f"Cannot calculate AF using expression - {allele_count}/{allele_number}")
-                                
-                                if allele_frequency is None:
-                                    if allele_count and allele_number:    
-                                        allele_frequency = allele_count/allele_number
-                                if allele_frequency is not None:
-                                    population_frequency = {
-                                                    "population_name": sub_pop["name"],
-                                                    "allele_frequency": float(allele_frequency),
-                                                    "allele_count": allele_count,
-                                                    "allele_number": allele_number,
-                                                    "is_minor_allele": False,
-                                                    "is_hpmaf": False
-                                                }
-                                    population_frequency_map[csq_record_list[allele_index]][sub_pop["name"]] = population_frequency
+                                    raise Exception('Frequency metric is not recognised')
+  
+                        if allele_frequency is None:
+                                try:  
+                                    # calculating allele frequency on fly
+                                    allele_frequency = int(allele_count)/int(allele_number)
+                                except:
+                                    print(f"Cannot calculate AF using expression - {allele_count}/{allele_number}")
+
+                        if allele_frequency is not None:
+                            population_frequency = {
+                                            "population_name": sub_pop["name"],
+                                            "allele_frequency": float(allele_frequency),
+                                            "allele_count": allele_count,
+                                            "allele_number": allele_number,
+                                            "is_minor_allele": False,
+                                            "is_hpmaf": False
+                                        }
+                            population_frequency_map[csq_record_list[allele_index]][sub_pop["name"]] = population_frequency
         return population_frequency_map
     
     def set_frequency_flags(self):
