@@ -18,7 +18,6 @@
 from string import Template
 from ariadne import graphql
 import pytest
-from .test_utils import setup_test
 import os
 import json
 import difflib
@@ -163,16 +162,18 @@ def master_query_template():
     return Template(query)
 
 
-async def execute_query(genome_id: str, variant_id: str):
+async def execute_query(schema_and_context, genome_id: str, variant_id: str):
     """
     Execute the query for a given variant_id and genome_id according to template
     query, returning tne query string, success status, and result.
     """
+    executable_schema, context = schema_and_context
     template = master_query_template()
     query = template.substitute(genome_id=genome_id, variant_id=variant_id)
-    query_data = {"query": query}
     success, result = await graphql(
-        executable_schema, query_data, context_value=context(request={})
+        executable_schema,
+        {"query": query},
+        context_value=context(request={})
     )
     return query, success, result
 
@@ -180,15 +181,14 @@ async def execute_query(genome_id: str, variant_id: str):
 # Run tests
 
 TEST_CASES = get_test_case_ids()
-executable_schema, context = setup_test()
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize("variant_id, genome_id", TEST_CASES)
-async def test_query_results_against_gold_std(variant_id, genome_id):
+async def test_query_results_against_gold_std(schema_and_context, variant_id, genome_id):
     """Test present query result for variant_id X, genome_id Y against 
     stored gold standard query result for variant_id X, genome_id Y."""
 
-    query, success, result = await execute_query(genome_id, variant_id)
+    query, success, result = await execute_query(schema_and_context, genome_id, variant_id)
     assert success, f"[Variant Root] Query execution failed for variant {variant_id}. Query: {query}. Result: {result}"
     
     gold_std_file = os.path.join(GOLD_STD_QUERY_RESULTS_PATH, f"{variant_id}.json")

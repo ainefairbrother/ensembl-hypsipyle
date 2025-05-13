@@ -13,27 +13,3 @@
 """
 
 """Base testing file for Variation API queries"""
-
-import os
-from common.file_client import FileClient
-from graphql_service.ariadne_app import (
-    prepare_executable_schema,
-    prepare_context_provider,
-)
-
-def setup_test():
-    """
-    Run setup scripts once per module
-    This is the one to use in other modules
-    """
-    config  = {
-                "data_root": "/app/data"
-            }
-    executable_schema = prepare_executable_schema()
-    file_client = FileClient(config)
-    context_provider = prepare_context_provider(
-                        {
-                            "file_client": file_client
-                        }
-                    )
-    return executable_schema, context_provider
