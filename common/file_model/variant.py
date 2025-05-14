@@ -303,7 +303,13 @@ class Variant ():
     def traverse_population_info(self) -> Mapping:
         directory = os.path.dirname(__file__)
         with open(os.path.join(directory,'populations.json')) as pop_file:
-            pop_mapping = json.load(pop_file)
+            pop_mapping_all = json.load(pop_file)
+            try:
+                pop_mapping = pop_mapping_all[self.genome_uuid]
+            except:
+                pop_mapping = {}
+                print(f"No population mapping for - {self.genome_uuid}")
+
         population_frequency_map = {}
         for csq_record in self.info["CSQ"]:
             csq_record_list = csq_record.split("|")
@@ -326,17 +332,24 @@ class Variant ():
                                     allele_count = csq_record_list[col_index] or None
                                 else:
                                     raise Exception('Frequency metric is not recognised')
-                                
-                                if allele_frequency is not None:
-                                    population_frequency = {
-                                                    "population_name": sub_pop["name"],
-                                                    "allele_frequency": float(allele_frequency),
-                                                    "allele_count": allele_count,
-                                                    "allele_number": allele_number,
-                                                    "is_minor_allele": False,
-                                                    "is_hpmaf": False
-                                                }
-                                    population_frequency_map[csq_record_list[allele_index]][sub_pop["name"]] = population_frequency
+  
+                        if allele_frequency is None:
+                                try:  
+                                    # calculating allele frequency on fly
+                                    allele_frequency = int(allele_count)/int(allele_number)
+                                except:
+                                    print(f"Cannot calculate AF using expression - {allele_count}/{allele_number}")
+
+                        if allele_frequency is not None:
+                            population_frequency = {
+                                            "population_name": sub_pop["name"],
+                                            "allele_frequency": float(allele_frequency),
+                                            "allele_count": allele_count,
+                                            "allele_number": allele_number,
+                                            "is_minor_allele": False,
+                                            "is_hpmaf": False
+                                        }
+                            population_frequency_map[csq_record_list[allele_index]][sub_pop["name"]] = population_frequency
         return population_frequency_map
     
     def set_frequency_flags(self):
@@ -346,7 +359,12 @@ class Variant ():
 
         directory = os.path.dirname(__file__)
         with open(os.path.join(directory,'populations.json')) as pop_file:
-            pop_mapping = json.load(pop_file)
+            pop_mapping_all = json.load(pop_file)
+            try:
+                pop_mapping = pop_mapping_all[self.genome_uuid]
+            except:
+                pop_mapping = {}
+                print(f"No population mapping for - {self.genome_uuid}")
         pop_names = []
         for pop in pop_mapping.values():
             pop_names.extend([sub_pop["name"] for sub_pop in pop])
