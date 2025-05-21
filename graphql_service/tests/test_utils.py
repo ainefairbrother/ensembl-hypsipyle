@@ -15,6 +15,21 @@
 from string import Template
 from ariadne import graphql
 import os
+from common.file_client import FileClient
+from graphql_service.ariadne_app import (
+    prepare_executable_schema,
+    prepare_context_provider,
+)
+
+def build_schema_context():
+    """
+    Prepare the GraphQL executable schema and context provider for tests.
+    """
+    config = { "data_root": "/app/data" }
+    schema = prepare_executable_schema()
+    file_client = FileClient(config)
+    context = prepare_context_provider({ "file_client": file_client })
+    return schema, context
 
 def get_test_case_ids(genome_id: str, gold_std_dir: str):
     """
@@ -146,12 +161,12 @@ def master_query_template():
     }"""
     return Template(query)
 
-async def execute_query(schema_and_context, genome_id: str, variant_id: str):
+async def execute_query(get_schema_context, genome_id: str, variant_id: str):
     """
     Execute the query for a given variant_id and genome_id according to template
     query, returning tne query string, success status, and result.
     """
-    executable_schema, context = schema_and_context
+    executable_schema, context = get_schema_context
     template = master_query_template()
     query = template.substitute(genome_id=genome_id, variant_id=variant_id)
     success, result = await graphql(
@@ -159,4 +174,6 @@ async def execute_query(schema_and_context, genome_id: str, variant_id: str):
         {"query": query},
         context_value=context(request={})
     )
+    
+    assert success is True, ("Query execution failed for variant {variant_id}.\nQuery: {query}\nResult: {result}")
     return query, success, result

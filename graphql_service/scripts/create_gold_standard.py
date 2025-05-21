@@ -17,23 +17,10 @@ Example usage:
 import argparse
 import asyncio
 import json
-from ..test_utils import execute_query
+from graphql_service.tests.test_utils import execute_query, build_schema_context
 import os
-from common.file_client import FileClient
-from graphql_service.ariadne_app import (
-    prepare_executable_schema,
-    prepare_context_provider,
-)
 
-def schema_and_context():
-    """
-    Prepare the GraphQL executable schema and context provider for tests.
-    """
-    config = { "data_root": "/app/data" }
-    schema = prepare_executable_schema()
-    file_client = FileClient(config)
-    context = prepare_context_provider({ "file_client": file_client })
-    return schema, context
+schema_and_context = build_schema_context()
 
 async def main(variant_file, genome_id, output_dir):
     """
@@ -63,7 +50,5 @@ if __name__ == "__main__":
     parser.add_argument("genome_id", help="Genome ID string to use in the query")
     parser.add_argument("output_dir", help="Directory to save JSON result files")
     args = parser.parse_args()
-    
-    schema_and_context = schema_and_context()
     
     asyncio.run(main(args.variant_file, args.genome_id, args.output_dir))
