@@ -20,8 +20,9 @@ from graphql_service.ariadne_app import (
     prepare_executable_schema,
     prepare_context_provider,
 )
+import functools
 
-def build_schema_context():
+def build_schema_context() -> tuple:
     """
     Prepare the GraphQL executable schema and context provider for tests.
     """
@@ -31,7 +32,7 @@ def build_schema_context():
     context = prepare_context_provider({ "file_client": file_client })
     return schema, context
 
-def get_test_case_ids(genome_id: str, gold_std_dir: str):
+def get_test_case_ids(genome_id: str, gold_std_dir: str) -> list:
     """
     Dynamically generate a list of test cases from 
     gold standard query result JSON files in gold_std_dir.
@@ -46,7 +47,8 @@ def get_test_case_ids(genome_id: str, gold_std_dir: str):
             cases.append((variant_id, genome_id))
     return cases
 
-def master_query_template():
+@functools.lru_cache(maxsize=1)
+def master_query_template() -> Template:
     """
     Template for the master query.
     """
@@ -161,12 +163,12 @@ def master_query_template():
     }"""
     return Template(query)
 
-async def execute_query(get_schema_context, genome_id: str, variant_id: str):
+async def execute_query(schema_context: tuple, genome_id: str, variant_id: str) -> tuple:
     """
     Execute the query for a given variant_id and genome_id according to template
     query, returning tne query string, success status, and result.
     """
-    executable_schema, context = get_schema_context
+    executable_schema, context = schema_context
     template = master_query_template()
     query = template.substitute(genome_id=genome_id, variant_id=variant_id)
     success, result = await graphql(
@@ -175,5 +177,5 @@ async def execute_query(get_schema_context, genome_id: str, variant_id: str):
         context_value=context(request={})
     )
     
-    assert success is True, ("Query execution failed for variant {variant_id}.\nQuery: {query}\nResult: {result}")
+    assert success is True, (f"Query execution failed for variant {variant_id}.\nQuery: {query}\nResult: {result}")
     return query, success, result

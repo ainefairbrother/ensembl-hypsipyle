@@ -17,7 +17,7 @@ from .test_utils import build_schema_context
 
 # Fixture prepares schema once per test session
 @pytest.fixture(scope="session") 
-def get_schema_context():
+def schema_context():
     """
     Session-scoped fixture reused by all tests.
     """
