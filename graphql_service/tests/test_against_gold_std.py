@@ -22,6 +22,7 @@ GOLD_STD_QUERY_RESULTS_PATH = "/app/graphql_service/tests/gold_std_query_results
 GENOME_ID = "a7335667-93e7-11ec-a39d-005056b38ce3"
 TEST_CASES = get_test_case_ids(GENOME_ID, GOLD_STD_QUERY_RESULTS_PATH)
 
+# Run query for each test case, generating a new query result and comparing it against the stored gold standard
 @pytest.mark.asyncio
 @pytest.mark.parametrize("variant_id, genome_id", TEST_CASES)
 async def test_query_results_against_gold_std(schema_and_context, variant_id, genome_id):
