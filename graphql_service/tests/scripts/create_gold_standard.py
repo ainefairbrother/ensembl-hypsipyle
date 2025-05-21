@@ -17,7 +17,7 @@ Example usage:
 import argparse
 import asyncio
 import json
-from .test_utils import execute_query
+from ..test_utils import execute_query
 import os
 from common.file_client import FileClient
 from graphql_service.ariadne_app import (

@@ -18,7 +18,7 @@ import json
 import difflib
 from .test_utils import get_test_case_ids, execute_query
 
-GOLD_STD_QUERY_RESULTS_PATH = "/app/graphql_service/tests/gold_std_query_results"
+GOLD_STD_QUERY_RESULTS_PATH = "/app/graphql_service/tests/gold_standard"
 GENOME_ID = "a7335667-93e7-11ec-a39d-005056b38ce3"
 TEST_CASES = get_test_case_ids(GENOME_ID, GOLD_STD_QUERY_RESULTS_PATH)
 
