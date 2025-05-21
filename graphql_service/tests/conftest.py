@@ -19,7 +19,8 @@ from graphql_service.ariadne_app import (
     prepare_context_provider,
 )
 
-@pytest.fixture(scope="module") # Prepare schema once per test file
+# Fixture prepares schema once per test file
+@pytest.fixture(scope="module") 
 def schema_and_context():
     """
     Prepare the GraphQL executable schema and context provider for tests.
