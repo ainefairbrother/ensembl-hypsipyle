@@ -17,29 +17,33 @@ import os
 import json
 import difflib
 from .test_utils import get_test_case_ids, execute_query
+from .conftest import gold_standard_loader
 
 GOLD_STD_QUERY_RESULTS_PATH = "/app/graphql_service/tests/gold_standard"
 GENOME_ID = "a7335667-93e7-11ec-a39d-005056b38ce3"
-TEST_CASES = get_test_case_ids(GENOME_ID, GOLD_STD_QUERY_RESULTS_PATH)
+TEST_CASES = get_test_case_ids(GOLD_STD_QUERY_RESULTS_PATH, GENOME_ID)
 
 # Run query for each test case, generating a new query result and comparing it against the stored gold standard
 @pytest.mark.asyncio
 @pytest.mark.parametrize("variant_id, genome_id", TEST_CASES)
-async def test_query_results_against_gold_std(schema_context: tuple, variant_id: str, genome_id: str):
+async def test_query_results_against_gold_std(
+    schema_context: tuple, 
+    gold_standard_loader,
+    variant_id: str, 
+    genome_id: str
+    ):
     """Test present query result for variant_id X, genome_id Y against 
     stored gold standard query result for variant_id X, genome_id Y."""
 
+    # Run live query
     query, success, result = await execute_query(schema_context, genome_id, variant_id)
     
-    gold_std_file = os.path.join(GOLD_STD_QUERY_RESULTS_PATH, f"{variant_id}.json")
+    # Load gold standard result
+    gold_standard = gold_standard_loader(GOLD_STD_QUERY_RESULTS_PATH, genome_id, variant_id)
     
-    with open(gold_std_file, "r") as f:
-        gold_standard = json.load(f)
-    
+    # Compare
     result_str = json.dumps(result.get("data", {}), indent=4, sort_keys=True)
     gold_str = json.dumps(gold_standard.get("data", {}), indent=4, sort_keys=True)
-    
-    # Generate diff of the gold standard and actual variant using difflib
     diff = ''.join(
         difflib.unified_diff(
             gold_str.splitlines(keepends=True),

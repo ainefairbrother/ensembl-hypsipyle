@@ -32,7 +32,7 @@ def build_schema_context() -> tuple:
     context = prepare_context_provider({ "file_client": file_client })
     return schema, context
 
-def get_test_case_ids(genome_id: str, gold_std_dir: str) -> list:
+def get_test_case_ids(gold_std_dir: str, genome_id: str) -> list:
     """
     Dynamically generate a list of test cases from 
     gold standard query result JSON files in gold_std_dir.
@@ -41,7 +41,7 @@ def get_test_case_ids(genome_id: str, gold_std_dir: str) -> list:
     Uses the same genome_id for all test cases.
     """
     cases = []
-    for filename in os.listdir(gold_std_dir):
+    for filename in os.listdir(os.path.join(gold_std_dir, genome_id)):
         if filename.endswith(".json"):
             variant_id = filename.replace(".json", "")
             cases.append((variant_id, genome_id))
