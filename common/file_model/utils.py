@@ -13,13 +13,13 @@
 """
 
 
-def minimise_allele(alt: str, ref:str) -> str:
-        """
-        VCF file has the representation without anchoring bases
-        for prediction scores in INFO column. This function is useful
-        in matching the SPDI format in VCF with the allele in memory
-        """
-        minimised_allele_string = alt
-        if ref[0] == alt[0]:
-            minimised_allele_string = alt[1:] if len(alt) > 1 else "-"
-        return minimised_allele_string
+def minimise_allele(alt: str, ref: str) -> str:
+    """
+    VCF file has the representation without anchoring bases
+    for prediction scores in INFO column. This function is useful
+    in matching the SPDI format in VCF with the allele in memory
+    """
+    minimised_allele_string = alt
+    if ref[0] == alt[0]:
+        minimised_allele_string = alt[1:] if len(alt) > 1 else "-"
+    return minimised_allele_string

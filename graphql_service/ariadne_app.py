@@ -11,6 +11,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 """
+
 from typing import Dict, Callable
 
 import ariadne
@@ -21,7 +22,7 @@ from ariadne import ScalarType
 from graphql_service.resolver.variant_model import (
     QUERY_TYPE,
     VARIANT_TYPE,
-    VARIANT_ALLELE_TYPE
+    VARIANT_ALLELE_TYPE,
 )
 
 
@@ -31,10 +32,7 @@ def prepare_executable_schema() -> GraphQLSchema:
     """
     schema = ariadne.load_schema_from_path("common/schemas")
     return ariadne.make_executable_schema(
-        schema,
-        QUERY_TYPE,
-        VARIANT_TYPE,
-        VARIANT_ALLELE_TYPE
+        schema, QUERY_TYPE, VARIANT_TYPE, VARIANT_ALLELE_TYPE
     )
 
 
@@ -49,9 +47,10 @@ def prepare_context_provider(context: Dict) -> Callable[[Request], Dict]:
     between requests, for example Mongo client, XrefResolver
     """
     file_client = context["file_client"]
+
     def context_provider(request: Request) -> Dict:
         """We must return a new object with every request,
-        otherwise the requests will pollute each other's state"""  
+        otherwise the requests will pollute each other's state"""
         return {
             "request": request,
             "file_client": file_client,

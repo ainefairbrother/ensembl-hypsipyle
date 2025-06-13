@@ -11,20 +11,22 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 """
+
 import vcfpy
 import json
 import os
 import glob
 from common.file_model.variant import Variant
 
+
 class FileClient:
     """
     Client to load file in-memory
     """
+
     def __init__(self, config):
         self.data_root = config.get("data_root")
-        
-    
+
     def get_variant_record(self, genome_uuid: str, variant_id: str):
         """
         Get a variant entry from variant_id
@@ -36,17 +38,19 @@ class FileClient:
         else:
             print("Please check the directory path for the given genome uuid")
 
-        try: 
+        try:
             [contig, pos, id] = self.split_variant_id(variant_id)
             pos = int(pos)
         except:
-            #TODO: This needs to go to thoas logger
-            #TODO: Exception needs to be caught appropriately
-            print("Please check that the variant_id is in the format: contig:position:identifier")
+            # TODO: This needs to go to thoas logger
+            # TODO: Exception needs to be caught appropriately
+            print(
+                "Please check that the variant_id is in the format: contig:position:identifier"
+            )
         data = {}
         variant = None
         try:
-            for rec in self.collection.fetch(contig, pos-1, pos):
+            for rec in self.collection.fetch(contig, pos - 1, pos):
                 if rec.ID[0] == id:
                     variant = Variant(rec, self.header, genome_uuid)
                     break
@@ -54,12 +58,9 @@ class FileClient:
         except:
             # Return None when variant cannot be fetched
             return
-        
-        
+
     def split_variant_id(self, variant_id: str):
         """
         Splits variant_id into separate fields
         """
         return variant_id.split(":")
-
-
